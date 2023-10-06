@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCo - Your Tech Partner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <ul>
+                    <img src="images/logo.png" alt="TechCo Logo">
+
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#CaseStudies">Case Studies</a></li>
+
+                    <li>
+                        <button class="btn" onclick="location.href='index3.html'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-shop" viewBox="0 0 16 16">
+                                <!-- Replace with your SVG icon code -->
+                                <path
+                                    d="M1 4.21v7.573c0 .114.047.224.129.305A.314.314 0 0 0 1.328 12h13.344a.309.309 0 0 0 .199-.072.318.318 0 0 0 .128-.305v-7.573l.487.486a.5.5 0 0 1-.353.854H1.868a.5.5 0 0 1-.353-.854l.485-.486zm11-.976a.5.5 0 0 1-.5-.5V1a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.734a.5.5 0 0 1-.854.353L0 2.236v-1.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.5l-.146.147a.5.5 0 0 1-.354.146zm-2 6.947h-9a.5.5 0 0 1-.47-.33l-1.5-4.5a.5.5 0 0 1 .471-.67H15a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5z" />
+                                <path
+                                    d="M4.354 15.354a.5.5 0 0 0 .708 0L8 12.707l2.938 2.647a.5.5 0 0 0 .708-.708L8.707 12l2.94-2.646a.5.5 0 0 0-.708-.708L8 11.293 5.062 8.646a.5.5 0 0 0-.708.708L7.293 12l-2.94 2.646a.5.5 0 0 0 0 .708z" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn influencer-btn" onclick="location.href='index5.html'">
+                            <svg class="custom-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16v-6h2v6h-2zm0-8v-2h2v2h-2z" />
+                                <path fill="none" d="M0 0h24v24H0z" />
+                            </svg>
+                        </button>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Welcome to Influmart</h2>
+            <p>Find Your own Influencer.</p>
+            <a href="#contact" class="btn">Contact Us</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are a leading technology company specializing in web development, app development, and digital
+                marketing.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service">
+                <h3>Web Development</h3>
+                <p>We create stunning and responsive websites tailored to your needs.</p>
+            </div>
+            <div class="service">
+                <h3>App Development</h3>
+                <p>We develop mobile apps for iOS and Android platforms.</p>
+            </div>
+            <div class="service">
+                <h3>Digital Marketing</h3>
+                <p>We help you reach your target audience through effective digital marketing strategies.</p>
+            </div>
+        </div>
+    </section>
+    <section id="CaseStudies">
+        <div class="container">
+            <h2>Case Studies</h2>
+            <h5> a glimpse into whats been working for other brands.
+
+            </h5>
+            <div class="CaseStudies">
+                <video controls>
+                    <source src="videos/web-development.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="CaseStudies">
+                <video controls>
+                    <source src="images/dc1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            <div class="CaseStudies">
+                <video controls>
+                    <source src="videos/web-development.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            <div class="CaseStudies">
+                <video controls>
+                    <source src="videos/web-development.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have a project in mind? Let's discuss how we can help you.</p>
+            <form action="submit_form.php" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 TechCo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

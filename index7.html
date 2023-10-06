@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles7.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1> <img src="images/logo.png" alt="no image" width="50px" height=" 30 px"></h1>
+
+        <h3>Signup</h3>
+        <h4> Create an account to get started with Influmart
+        </h4>
+        <form action="#" method="post" id="multi-step-form">
+            <!-- Step 1 -->
+            <div class="step-1" id="step-1">
+                <input type="text" id="name" name="name" required placeholder="Your Name">
+                <input type="text" id="email" name="email" required placeholder="Your Email">
+                <input type="password" id="password" name="password" required placeholder="Create a Password">
+                <div class="next-button"><input type="button" value="Next" onclick="showNextStep('step-1', 'step-2')">
+
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="additional-steps" id="step-2">
+                <label for="phone" style="text-align: center;">Social Profiles</label>
+                <input type="text" id="email" name="email" required placeholder="Instagram Handle">
+                <input type="text" id="name" name="name" required placeholder="Youtube Handle">
+                <input type="text" id="email" name="email" required placeholder="Snapchat Handle">
+                <input type="text" id="email" name="email" required placeholder="Tiktok Handle">
+                <input type="text" id="email" name="email" required placeholder="Twitter Handle">
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-2', 'step-1')">
+
+                    <input type="button" value="Next" onclick="showNextStep('step-2', 'step-3')">
+
+                </div>
+            </div>
+
+
+            <!-- Step 3 -->
+            <div class="additional-steps" id="step-3">
+                <label style="text-align: center" required>
+                    Is your Content Age Restricted:
+                    <input type="radio" name="agree" value="yes">
+                    <span class="custom-radio"></span>
+                    Yes
+                    <input type="radio" name="agree" value="no">
+                    <span class="custom-radio"></span>
+
+                    No
+                </label>
+
+                <input type="text" id="address" name="address" required placeholder="Content Category">
+                
+                <input type="text" id="address" name="address" required placeholder="Industry Assosciated with..">
+
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-3', 'step-2')">
+                    <input type="button" value="Next" onclick="showNextStep('step-3', 'step-4')">
+
+                </div>
+            </div>
+
+
+            <!-- Step 4 -->
+            <div class="additional-steps" id="step-4">
+                <label for="phone" style="text-align: center;">Price </label>
+                <input type="text" id="phone" name="phone" required placeholder="Price Per IG Post">
+                <input type="text" id="phone" name="phone" required placeholder="Price Per Tweet">
+                <input type="text" id="phone" name="phone" required placeholder="Price Per IG Reel">
+                <input type="text" id="phone" name="phone" required placeholder="Price Per YT Video">
+                <input type="text" id="phone" name="phone" required placeholder="Price Per YT short">
+
+                <label style="text-align: center" required>
+                    Negotiable ?:
+                    <input type="radio" name="agree" value="yes">
+                    <span class="custom-radio"></span>
+                    Yes
+                    <input type="radio" name="agree" value="no">
+                    <span class="custom-radio"></span>
+
+                    No
+                </label>
+
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-4', 'step-3')">
+                    <input type="button" value="Next" onclick="showNextStep('step-4', 'step-5')">
+
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="additional-steps" id="step-5">
+                <label for="text" style="text-align: center;">Area Based out off:</label>
+                <input type="text" id="area" name="password" required placeholder="Area Based Out off...">
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-5', 'step-4')">
+                    <input type="button" value="Next" onclick="showNextStep('step-5', 'step-6')">
+
+                </div>
+
+            </div>
+            <div class="additional-steps" id="step-6">
+                <label for="text" style="text-align: center;">Choose Subscription Plan Duration:</label>
+                <label for="basic" style="text-align: center;">3 month Plan <input type="checkbox" id="basic"
+                        name="plan" value="basic">
+                </label>
+
+                <label for="standard" style="text-align: center;">6 month Plan <input type="checkbox" id="standard"
+                        name="plan" value="standard">
+                </label>
+                <label for="premium" style="text-align: center;">9 month Plan <input type="checkbox" id="premium"
+                        name="plan" value="premium">
+                </label>
+                <label for="premium" style="text-align: center;">12 month Plan <input type="checkbox" id="special"
+                    name="plan" value="special">
+            </label>
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-6', 'step-5')">
+                    <input type="button" value="Next" onclick="showNextStep('step-6', 'step-7')">
+
+
+                </div>
+            </div>
+            <div class="additional-steps" id="step-7">
+                <label style="text-align: center" required>
+                    Want to generate your profile QR code? Make connections effortlessly!
+                    <input type="radio" name="agree" value="yes">
+                    <span class="custom-radio"></span>
+                    Yes
+                    <input type="radio" name="agree" value="no">
+                    <span class="custom-radio"></span>
+                    No
+                </label>
+                <div class="next-button">
+                    <input type="button" value="Back" onclick="showNextStep('step-7', 'step-6')">
+                    <input type="submit" value="Submit">
+
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <script>
+        function showNextStep(currentStepId, nextStepId) {
+            // Hide the current step and show the next step
+            document.getElementById(currentStepId).style.display = 'none';
+            document.getElementById(nextStepId).style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="styles4.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-output">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div id="user-input">
+            <input type="text" id="user-message" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for handling chat interactions
+        const chatOutput = document.getElementById('chat-output');
+        const userMessageInput = document.getElementById('user-message');
+        const sendButton = document.getElementById('send-button');
+
+        function addUserMessage(message) {
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.textContent = message;
+            chatOutput.appendChild(userMessage);
+            scrollToBottom();
+        }
+
+        function addBotMessage(message) {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = message;
+            chatOutput.appendChild(botMessage);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        function handleUserMessage() {
+            const userMessage = userMessageInput.value;
+            if (userMessage.trim() !== '') {
+                addUserMessage(userMessage);
+                // You can add code here to process the user's message and provide a bot response.
+                // For a real chatbot, this would involve server-side processing or using an API.
+                // For simplicity, let's assume a basic response:
+                setTimeout(() => {
+                    const botResponse = "Hello! I'm your startup chatbot.";
+                    addBotMessage(botResponse);
+                }, 1000);
+                userMessageInput.value = '';
+            }
+        }
+
+        sendButton.addEventListener('click', handleUserMessage);
+        userMessageInput.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                handleUserMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>

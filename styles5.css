@@ -1,0 +1,120 @@
+/* Center the login box vertically and horizontally */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #c5bdcc;
+    overflow-x: hidden;
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-attachment: fixed; /* Fixed background */
+    background-position: center; /* Center the background image */
+
+}
+
+/* Style the container for the login box */
+.container {
+    max-width: 25%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Style the heading */
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style labels for inputs */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Style the username and password input fields */
+input[type="text"],
+input[type="password"] {
+    width: 80%;
+    padding: 12px; /* Increased padding for better appearance */
+    margin: 0 auto 20px; /* Center horizontally and add margin at the bottom */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    outline: none; /* Remove default input outline */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
+
+/* Add focus style for username and password inputs */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #452f4f;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #9b8da4;
+}
+
+/* Rest of your CSS styles here */
+
+/* Style the "Forgot Password?" link */
+.forgot-password {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #7c6c84;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-password a {
+    color: #7c6c84;
+
+}
+.forgot-password:hover {
+    text-decoration: underline;
+    color: #7c6c84;
+
+
+}
+
+/* Style the "Sign Up" link */
+.signup-link {
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.signup-link a {
+    color: #7c6c84;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Add additional styles here */

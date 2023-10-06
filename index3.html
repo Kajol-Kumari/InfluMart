@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer database</title>
+    <link rel="stylesheet" type="text/css" href="styles3.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Influmart</h1>
+    </header>
+
+    <div class="container">
+        <div class="filter-section">
+
+            <!-- Add your filter options here -->
+            <h2>Filters</h2>
+            <input type="text" id="search-input" placeholder="Search...">
+
+            <label for="brand">Brand:</label>
+            <select id="brand">
+                <option value="all">All Brands</option>
+                <option value="brand1">Brand 1</option>
+                <option value="brand2">Brand 2</option>
+                <!-- Add more brand options as needed -->
+            </select>
+
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="all">All Categories</option>
+                <option value="Fashion">Fashion Influencers</option>
+                <option value="Health & Wellness">Health & Wellness freeks</option>
+                <option value="Beauty">Beauty</option>
+                <option value="Food">Food</option>
+                <option value="Pet">Pet Influencers</option>
+                <option value="Sports & Fitness">Sports & Fitness</option>
+                <option value="Travel">Travel</option>
+                <option value="Parenting">Parenting</option>
+                <option value="Gaming">Gaming</option>
+                <option value="Technology">Technology</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="B2B">B2B</option>
+                <option value="Vloggers">Vloggers</option>
+                <option value="Bloggers">Bloggers</option>
+                <option value="Reviewers">Reviewers</option>
+                <option value="Photographers">Photographers</option>
+                <option value="Singers">Singers</option>
+                <option value="Finance">Finance</option>
+                <option value="Stocks">Stocks Freek</option>
+                <option value="Adult">Adult Content Creators</option>
+                <option value="Designers">Designers</option>
+                <option value="Author">Author</option>
+                <option value="Standup">Standup</option>
+
+                <!-- Add more category options as needed -->
+            </select>
+
+            <label for="price-range">Price Range:</label>
+            <input type="range" id="price-range" min="0" max="100000" step="1000">
+            <p id="price-range-value">$0 - $100,000</p>
+
+            <label for="rating">Rating:</label>
+            <select id="rating">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+                <!-- Add more rating options as needed -->
+            </select>
+
+            <label for="area">Area:</label>
+            <select id="area">
+                <option value="all">Areas</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Kolkata">Kolkata </option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Bengaluru">Bengaluru</option>
+
+                <!-- Add more area options as needed -->
+            </select>
+            <label for="area">Followers:</label>
+            <select id="area">
+                <option value="all">Areas</option>
+                <option value="city1">Mumbai</option>
+                <option value="city2">Delhi</option>
+                <option value="city2">Kolkata </option>
+                <option value="city2">Hyderabad</option>
+                <option value="city2">Bengaluru</option>
+
+            </select>
+            <label for="Collaborations">Collaborations:</label>
+            <select id="Collaborations">
+                <option value="all">Areas</option>
+                <option value="city1">Mumbai</option>
+                <option value="city2">Delhi</option>
+                <option value="city2">Kolkata </option>
+                <option value="city2">Hyderabad</option>
+                <option value="city2">Bengaluru</option>
+
+            </select>
+            <label for="Offers">Offers:</label>
+            <select id="Offers">
+                <option value="all">Areas</option>
+                <option value="city1">Mumbai</option>
+                <option value="city2">Delhi</option>
+                <option value="city2">Kolkata </option>
+                <option value="city2">Hyderabad</option>
+                <option value="city2">Bengaluru</option>
+
+            </select>
+            <label for="Engagement">Engagement:</label>
+            <select id="Engagement">
+                <option value="all">Areas</option>
+                <option value="city1">Mumbai</option>
+                <option value="city2">Delhi</option>
+                <option value="city2">Kolkata </option>
+                <option value="city2">Hyderabad</option>
+                <option value="city2">Bengaluru</option>
+
+            </select>
+            <label for="Engagement">Platform:</label>
+            <select id="Engagement">
+                <option value="all">Areas</option>
+                <option value="city1">Mumbai</option>
+                <option value="city2">Delhi</option>
+                <option value="city2">Kolkata </option>
+                <option value="city2">Hyderabad</option>
+                <option value="city2">Bengaluru</option>
+
+            </select>
+
+
+            <button class="btn" id="apply-filters">Apply Filters</button>
+        </div>
+        <!-- Add a search input in the filter section -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const applyFiltersButton = document.getElementById("apply-filters");
+        const searchInput = document.getElementById("search-input");
+
+        applyFiltersButton.addEventListener("click", filterCars);
+        searchInput.addEventListener("input", filterCars); // Add event listener for input changes
+
+        function filterCars() {
+            const selectedBrand = document.getElementById("brand").value;
+            const selectedCategory = searchInput.value.toLowerCase(); // Use search bar input as category filter
+
+            // Here, you can implement your filtering logic based on the selectedBrand and selectedCategory.
+            // For this example, let's assume you have an array of car data and filter it accordingly.
+
+            // Replace this with your actual data and filtering logic
+            const carData = [
+                {
+                    brand: "brand1",
+                    category: "sedan",
+                    model: "Influencer",
+                    description: "Lorem ipsum dolor sit amet...",
+                },
+                {
+                    brand: "brand2",
+                    category: "suv",
+                    model: "Car Model 2",
+                    description: "Lorem ipsum dolor sit amet...",
+                },
+                // Add more car data as needed
+            ];
+
+            // Filter the cars based on brand and category
+            const filteredCars = carData.filter((car) => {
+                return (
+                    (selectedBrand === "all" || car.brand === selectedBrand) &&
+                    (selectedCategory === "all" || car.category === selectedCategory)
+                );
+            });
+
+            // Display the filtered cars
+            displayFilteredCars(filteredCars);
+        }
+
+        function displayFilteredCars(cars) {
+            const filteredCarListings = document.querySelector(".filtered-car-listings");
+            filteredCarListings.innerHTML = ""; // Clear previous results
+
+            cars.forEach((car) => {
+                const carListing = document.createElement("div");
+                carListing.classList.add("car-listing");
+
+                // Create and populate elements for car details (e.g., image, description, price)
+                // You can customize this part to match your actual data structure
+                const carImage = document.createElement("img");
+                carImage.classList.add("car-image");
+                carImage.src = car.imageURL;
+                carImage.alt = car.model;
+
+                const carDescription = document.createElement("div");
+                carDescription.classList.add("car-description");
+                carDescription.innerHTML = `
+                    <h2>${car.model}</h2>
+                    <p>${car.description}</p>
+                    <p>Price: $${car.price}</p>
+                `;
+
+                const viewDetailsButton = document.createElement("a");
+                viewDetailsButton.classList.add("btn");
+                viewDetailsButton.href = "index2.html";
+                viewDetailsButton.textContent = "View Details";
+
+                // Append elements to the carListing div
+                carListing.appendChild(carImage);
+                carListing.appendChild(carDescription);
+                carListing.appendChild(viewDetailsButton);
+
+                // Append the carListing to the filteredCarListings div
+                filteredCarListings.appendChild(carListing);
+            });
+        }
+    });
+</script>
+
+
+        <div class="right-column">
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search...">
+                <button class="btn" id="search-button">Search</button>
+            </div>
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+            <div class="car-listing">
+                <img class="car-image" src="images/IMG-0609.png" alt="Car 1">
+                <div class="car-description">
+                    <h2>Influencer</h2>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula est non purus
+                        ultricies.</p>
+                    <p>Price: $25,000</p>
+                </div>
+                <a class="btn" href="index2.html">View Details</a>
+            </div>
+
+
+
+
+            <!-- Car listings go here -->
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+

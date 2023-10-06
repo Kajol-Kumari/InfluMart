@@ -1,0 +1,170 @@
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f8fa;
+    }
+
+ /* Header styles */
+.startup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: #452f4f;
+    padding: 5px 20px; /* Adjust the padding for height */
+}
+
+/* Logo styles */
+.logo img {
+    max-width: 40px; /* Adjust the maximum width of the logo */
+    margin-right: 10px;
+}
+
+/* Title (h2) styles */
+.startup-header h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Search bar styles */
+#hashtag-search {
+    flex-grow: 2;
+    margin: 0 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 800px;
+    font-size: 16px;
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+    transition: border-color 0.3s ease-in-out; /* Add a smooth transition for border color */
+}
+
+#hashtag-search::placeholder {
+    color: #999; /* Placeholder text color */
+}
+
+#hashtag-search:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #c5bdcc; /* Border color on focus */
+}
+
+/* Search button styles */
+.startup-header button {
+    background-color: #84648c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px; /* Increase padding for a larger button */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition for background color */
+}
+
+.startup-header button:hover {
+    background-color: #c5bdcc; /* Background color on hover */
+}
+
+/* User actions styles */
+.user-actions a {
+    text-decoration: none;
+    color: #452f4f;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Sort options styles */
+.sort-options label {
+    color: #452f4f;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 13px;
+
+}
+
+.sort-options select {
+    background-color: #fff;
+    color: #84648c;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+    input[type="text"] {
+        max-width: 800px;
+        /* Increase max-width for a wider search bar */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #chat-container {
+        background-color: #fff;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        max-height: 600px;
+        /* Set a maximum height for the chat container */
+        overflow-y: auto;
+        /* Add a vertical scrollbar when content exceeds the max height */
+        position: relative;
+    }
+
+    /* Fix the position of the post form to the bottom */
+    #post-form {
+        position: fixed;
+        /* Fix the position */
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background-color: #f0eef2;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    #post-text {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #84648c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #c5bdcc;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 10px 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    strong {
+        font-weight: bold;
+    }

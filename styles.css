@@ -1,0 +1,437 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color and text color for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Style the header and navigation */
+header {
+    background-image: url('images/image1bg.png');
+    /* Replace with your header background image URL */
+    background-size: cover;
+    background-position: center;
+    color: black;
+    height: 100vh;
+    display: flex;
+}
+
+/* Add this to your CSS */
+header img {
+    height: 40px;
+    /* Adjust the height as needed */
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    /* Add a smooth color transition on hover */
+
+}
+
+nav a:hover {
+    color: #ff9900;
+    /* Change color on hover */
+}
+
+
+/* Style the hero section */
+#hero {
+    background-image: url('images/Screenshot\ 2023-09-28\ at\ 10.28.04\ PM\ 2.png');
+    /* Replace with your image URL */
+    background-size: cover;
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+    position: relative;
+}
+
+#hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Add a subtle text shadow */
+}
+
+#hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    /* Add a smooth hover transition */
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+/* Style other sections as needed */
+section {
+    padding: 50px 0;
+}
+
+section h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+#services {
+    background-image: url('images/Screenshot\ 2023-09-28\ at\ 10.45.34\ PM\ 2.png');
+    /* Replace with your image URL */
+    background-size: cover;
+    padding: 100px 0;
+    text-align: center;
+}
+
+
+.service {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    /* Add a subtle hover effect */
+}
+
+.service h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.service p {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.service:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+}
+
+#CaseStudies {
+    background-color: #f5f5f5;
+    /* Background color for the section */
+    padding: 40px 0;
+    /* Adjust the padding as needed */
+    text-align: center;
+}
+
+.CaseStudiesContainer {
+    display: flex;
+    overflow-x: scroll;
+    /* Enable horizontal scrolling */
+    overflow-y: hidden;
+    /* Hide vertical scrollbar */
+    white-space: nowrap;
+    /* Prevent videos from wrapping to the next line */
+    margin-bottom: 20px;
+    /* Add space at the bottom of the container */
+    padding: 20px 0;
+    /* Add padding around the container */
+}
+
+.CaseStudiesContainer video {
+    max-width: 100%;
+    /* Ensure videos are responsive */
+    flex: 0 0 auto;
+    /* Prevent videos from growing or shrinking */
+    margin-right: 20px;
+    /* Add spacing between videos */
+    white-space: nowrap;
+    /* Prevent videos from wrapping to the next line */
+
+}
+
+.CaseStudies {
+    display: inline-block;
+    margin: 20px;
+    /* Adjust the margin as needed */
+    border-radius: 20px;
+    /* Create circular shape */
+    overflow: hidden;
+    /* Hide overflowing content */
+    width: 250px;
+    /* Adjust the width of the circular container */
+    height: 400px;
+    /* Adjust the height of the circular container */
+    background-color: #fff;
+    /* Background color of the circular container */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    /* Add a subtle shadow */
+    transition: transform 0.3s ease;
+    /* Add a subtle hover effect */
+    position: relative;
+    /* Position for absolute elements */
+}
+
+.CaseStudies:hover {
+    transform: scale(1.05);
+    /* Increase size on hover */
+}
+
+.CaseStudies video {
+    width: 100%;
+    height: 100%;
+    /* Reduce image height to make room for additional content */
+    object-fit: cover;
+    border-radius: 10px;
+    /* Add rounded edges */
+}
+
+.hover-video {
+    width: 100%;
+    height: 60%;
+    /* Reduce video height to make room for additional content */
+    object-fit: cover;
+    border-radius: 10px;
+    /* Add rounded edges */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Play video on hover */
+.CaseStudies:hover .hover-video {
+    transform: scale(1.05);
+    /* Increase video size on hover */
+}
+
+/* Add content overlay for Case Studies */
+/* Style the contact form */
+form {
+    max-width: 400px;
+    margin: 15px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    /* Add a smooth border color transition on focus */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #ff9900;
+    /* Change border color on focus */
+}
+
+button.btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    /* Add a smooth background color transition on hover */
+}
+
+button.btn:hover {
+    background-color: #555;
+}
+
+/* Style the footer */
+footer {
+    background: linear-gradient(to bottom, #333 0%, #222 100%);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+
+    form,
+    .btn {
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    #hero h2 {
+        font-size: 28px;
+    }
+
+    #hero p {
+        font-size: 16px;
+    }
+
+    section h2 {
+        font-size: 24px;
+    }
+
+    .CaseStudies {
+        width: 100%;
+        height: auto;
+        margin: 20px 0;
+        /* Adjust margin for smaller screens */
+    }
+
+    .CaseStudies img {
+        height: auto;
+        /* Maintain aspect ratio on smaller screens */
+    }
+
+}
+
+@media (max-width: 576px) {
+    header img {
+        height: 30px;
+        /* Adjust the height for smaller screens */
+        margin-top: 10px;
+        /* Adjust the margin for smaller screens */
+    }
+
+    header h1 {
+        font-size: 18px;
+        /* Adjust the font size for smaller screens */
+    }
+
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    #hero h2 {
+        font-size: 24px;
+    }
+
+    #hero p {
+        font-size: 14px;
+    }
+
+    section h2 {
+        font-size: 22px;
+    }
+
+    .CaseStudies {
+        width: 100%;
+        height: auto;
+        margin: 20px 0;
+    }
+
+    .CaseStudies img {
+        height: auto;
+    }
+
+    form,
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Additional media queries for larger screens */
+
+@media (min-width: 1200px) {
+    header h1 {
+        font-size: 28px;
+        /* Adjust the font size for larger screens */
+    }
+
+    nav ul li {
+        margin-right: 30px;
+        /* Adjust the margin for larger screens */
+    }
+
+    #hero h2 {
+        font-size: 40px;
+        /* Adjust the font size for larger screens */
+    }
+
+    #hero p {
+        font-size: 20px;
+        /* Adjust the font size for larger screens */
+    }
+
+    section h2 {
+        font-size: 36px;
+        /* Adjust the font size for larger screens */
+    }
+}

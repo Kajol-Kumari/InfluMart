@@ -1,0 +1,264 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    font-size: 15px;
+}
+.filter-section {
+    flex: 10%; /* 30% width for filter section */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+
+/* Car Listing Styles */
+.car-listing {
+    
+    width: 80%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    border-radius: 20px;
+}
+.right-column {
+    flex: 70%; /* 70% width for right column */
+    padding: 20px;
+    margin-left: 20px;
+}
+
+/* Additional styles for filter section */
+.filter-section h2 {
+    font-size: 18px;
+}
+
+/* Style and align filter labels */
+.filter-section label {
+    justify-content: center;
+    display: block; /* Display labels as blocks for better alignment */
+    margin-top: 20px; /* Add space between labels and dropdowns */
+    margin-bottom: 10px;
+    font-weight: bold; /* Add bold font for labels (optional) */
+    font-size: 16px; /* Adjust font size for labels (optional) */
+    color: #333; /* Text color for labels (optional) */
+}
+
+.filter-section select {
+    width: 100%; /* Make dropdowns full-width within their container */
+    padding: 10px; /* Add some padding for better appearance */
+    border: 1px solid #ccc; /* Add a border to dropdowns */
+    border-radius: 4px; /* Round the corners of dropdowns */
+    background-color: #f9f9f9; /* Background color for dropdowns */
+    font-size: 16px; /* Adjust font size */
+    color: #333; /* Text color */
+    outline: none; /* Remove default outline */
+    cursor: pointer;
+}
+.filter-section input[type="range"] {
+    
+    width: 100%;
+    margin-top: 5px;
+}
+#apply-filters {
+    margin-top: 20px; /* Add space between filters and the button */
+    background-color: #84648c;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#apply-filters:hover {
+    background-color: #84648c;
+}
+
+
+.car-image {
+    max-width: 150px;
+    height: auto;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.car-description {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.car-description h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.car-description p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.car-price {
+    font-size: 20px;
+    color: #84648c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.btn {
+    vertical-align: middle;
+    display: inline-block;
+    padding: 5px 20px; /* Decrease padding to decrease height */
+    background-color: #84648c;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: auto; /* Center vertically */
+    margin-bottom: auto; /* Center vertically */
+    margin-right: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+    line-height: 1; /* Ensure text is vertically centered */
+}
+
+.btn:hover {
+    background-color: #84648c;
+} 
+
+/* ... Previous CSS code ... */
+
+/* Add styling for the search bar */
+.search-bar {
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+#search {
+    flex-grow: 1;
+    padding: 10px;
+    border: 01px solid #ccc;
+    border-radius: 10px;
+}
+
+#search-button {
+    margin-left: 10px;
+    background-color: #84648c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* Add styling for the sorting order bar */
+
+label {
+    margin-left:36%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#sort {
+    padding: 10px;
+    font-size: 16px; /* Adjust the font size */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+@media screen and (max-width: 576px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .car-description h2 {
+        font-size: 20px;
+    }
+
+    .car-description p {
+        font-size: 14px;
+    }
+
+    .car-listing {
+        flex-direction: column; /* Stack car listings vertically */
+    }
+
+    .car-image {
+        max-width: 100%; /* Make car images fill the width */
+        margin-right: 0;
+        border-radius: 0; /* Remove border radius on images */
+    }
+
+    .car-description {
+        padding: 10px;
+        text-align: center; /* Center text */
+    }
+}
+
+/* Medium screens (577px to 992px) */
+@media screen and (min-width: 577px) and (max-width: 992px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .car-description h2 {
+        font-size: 22px;
+    }
+
+    .car-description p {
+        font-size: 16px;
+    }
+}
+
+/* Large screens (993px to 1200px) */
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    .car-description h2 {
+        font-size: 24px;
+    }
+
+    .car-description p {
+        font-size: 18px;
+    }
+}
+
+/* Extra-large screens (greater than 1200px) */
+@media screen and (min-width: 1201px) {
+    /* You can add styles for extra-large screens here */
+}

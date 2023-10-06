@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Community Chat</title>
+    <link rel="stylesheet" href="styles9.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+
+</head>
+
+<body>
+    <header class="startup-header">
+        <div class="logo">
+            <img src="images/logo.png" alt="Company Logo">
+        </div>
+
+        <h2>Influencers Community Chat</h2>
+        <div>
+            <input type="text" id="hashtag-search" placeholder="Search by hashtag">
+            <button onclick="searchByHashtag()">Search</button>
+        </div>
+        <div class="user-actions">
+            <a href="#">My Posts</a>
+            <div class="sort-options">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                    <option value="likes">Likes</option>
+                    <option value="dislikes">Dislikes</option>
+                </select>
+            </div>
+        </div>
+    
+    </header>
+    <div id="chat-container">
+        <!-- Display posts here -->
+    </div>
+    <div id="post-form">
+        <textarea id="post-text" placeholder="Write your post..."></textarea>
+        <button onclick="submitPost()">Post</button>
+    </div>
+    <script>
+        // Simulated data for posts
+        let posts = [];
+
+        // Generate a random username
+        function generateRandomUsername() {
+            const adjectives = ["Happy", "Lucky", "Sunny", "Cool", "Clever"];
+            const nouns = ["User", "Poster", "Chatter", "Member", "Friend"];
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            return `${randomAdjective}${randomNoun}`;
+        }
+
+        function displayPosts(filteredPosts = posts) {
+            const chatContainer = document.getElementById("chat-container");
+            chatContainer.innerHTML = "";
+        
+            filteredPosts.forEach((post, index) => {
+                const postElement = document.createElement("div");
+        
+                // Get the post date
+                const postDate = new Date(post.timestamp);
+        
+                // Format the date as desired
+                const options = { 
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                };
+                        const displayTimestamp = postDate.toLocaleString(undefined, options);
+        
+                postElement.innerHTML = `
+                    <p style="vertical-align: middle;">
+                        <img src="images/IMG-0609.png" alt="Image Description" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; vertical-align: middle;">
+                        <strong>@${post.username} ·<span style="font-family: 'Times New Roman', serif; color: #919ba4;">${displayTimestamp}</span> : </strong> ${post.text}
+                    </p>
+                    <div>
+                        <button onclick="likePost(${index})">Like (${post.likes})</button>
+                        <button onclick="dislikePost(${index})">Dislike (${post.dislikes})</button>
+                        <button onclick="commentOnPost(${index})">Comment</button>
+                    </div>
+                    <p>Comments (${post.comments.length})<p>
+                    <ul>
+                        ${post.comments.map(comment => `<li>${comment}</li>`).join('')}
+                    </ul>
+                    <hr>
+                `;
+                chatContainer.appendChild(postElement);
+            });
+        }
+        
+        function submitPost() {
+            const postText = document.getElementById("post-text").value;
+            if (postText.trim() !== "") {
+                // Generate a random username
+                const username = generateRandomUsername();
+                const currentDate = new Date();
+                const timestamp = currentDate.toLocaleString();
+    
+                // Add the post to the array
+                posts.push({ username: username, text: postText, timestamp: timestamp, likes: 0, dislikes: 0, comments: [] });
+                // Clear the input field
+                document.getElementById("post-text").value = "";
+                // Update the display
+                displayPosts();
+            }
+        }
+
+        function likePost(index) {
+            posts[index].likes++;
+            displayPosts();
+        }
+
+        function dislikePost(index) {
+            posts[index].dislikes++;
+            displayPosts();
+        }
+
+        function commentOnPost(index) {
+            const commentText = prompt("Enter your comment:");
+            if (commentText !== null) {
+                posts[index].comments.push(commentText);
+                displayPosts();
+            }
+        }
+
+        function searchByHashtag() {
+            const hashtagToSearch = document.getElementById("hashtag-search").value.toLowerCase();
+            const filteredPosts = posts.filter(post =>
+                post.text.toLowerCase().includes(hashtagToSearch)
+            );
+            displayPosts(filteredPosts);
+        }
+
+        // Initial display
+        displayPosts();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,984 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333; /* Header background color */
+    color: #fff; /* Text color */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.company-logo img {
+    margin-left: 10px;
+    max-width: 40px; /* Adjust the maximum width of the logo */
+    margin-right: 10px;
+}
+
+.company-name {
+    color: #452f4f;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-center {
+    flex-grow: 1; /* Allow the search bar to expand and take available space */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    margin-left: 20px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc; /* Border for the search input */
+    border-radius: 5px;
+}
+
+.search-bar button {
+    background-color: #84648c; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.notification-button button,
+.profile-button button,
+.chat-button button {
+    background-color: #84648c; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.dropdown-content {
+    
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: #333; /* Text color for links */
+    transition: background-color 0.3s ease;
+}
+
+/* Style the dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.profile-button:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.notification-button {
+    position: relative;
+    display: inline-block;
+}
+
+/* Styles for the badge (count) */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+/* Styles for the notifications div */
+.notifications {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-width: 500px;
+    max-width: 700px;
+    height: 400px;
+    z-index: 2; /* Increase z-index to ensure it's above the blurred background */
+    color: #000;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    overflow-y: auto;
+    backdrop-filter: blur(8px); /* Apply a blur effect to the background */
+}
+
+/* Style for individual notifications */
+.notification {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.leftSide {
+    flex-direction: row;
+    display: flex;
+    /* Use flexbox for layout */
+    width: 100vw;
+    /* Full width of the viewport */
+    height: 100vh;
+    /* Full height of the viewport */
+    overflow-x: hidden;
+
+
+}
+
+.component1 {
+    flex: 0 0 20%;
+    /* 30% width */
+    background-color: #F7F9F9;
+    /* Background color for visualization */
+    text-align: center;
+    /* Center align content */
+    padding: 20px;
+    /* Add some padding for spacing */
+    margin-bottom: 10px;
+}
+
+/* Style the second section with a width of 50% */
+.component2 {
+    
+    flex: 0 0 45%;
+    /* 50% width */
+    background-color: #F7F9F9;
+    /* Background color for visualization */
+    text-align: center;
+    /* Center align content */
+    padding: 20px;
+    /* Add some padding for spacing */
+}
+
+/* Style the third section with a width of 20% */
+.component3 {
+    flex: 0 0 30%;
+    /* 20% width */
+    background-color: #F7F9F9;
+    /* Background color for visualization */
+    text-align: center;
+    /* Center align content */
+    padding: 20px;
+    /* Add some padding for spacing */
+}
+
+.column {
+    margin-left: 0;
+    display: inline-block;
+    width: 25%;
+    height: auto;
+    /* Adjust height automatically based on video size */
+    margin: 0 2.5%;
+    /* Add a little margin between columns */
+    vertical-align: top;
+    /* Align columns to the top */
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* Add vertical scroll for overflowing content */
+    overflow-x: hidden;
+    margin-top: 10px;
+}
+
+.component2 h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #452f4f;
+    
+}
+
+.column p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.subcolumn1,
+.subcolumn2,
+.subcolumn3 {
+    background-color: #fff;
+    /* Background color for subcolumns */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Shadow */
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* Style the video to fit the subcolumn */
+.subcolumn1 video {
+    width: 100%;
+    /* Adjust the width to 100% to fit the subcolumn */
+    height: auto;
+    /* Adjust height automatically based on width */
+    border-radius: 10px;
+    /* Add border-radius to the video */
+
+}
+
+.subcolumn2 video {
+    border-radius: 10px;
+    width: 100%;
+    /* Adjust the width to 100% to fit the subcolumn */
+    height: auto;
+    /* Adjust height automatically based on width */
+}
+
+.subcolumn3 video {
+    border-radius: 10px;
+    width: 100%;
+    /* Adjust the width to 100% to fit the subcolumn */
+    height: auto;
+    /* Adjust height automatically based on width */
+}
+
+.content-slot {
+    background-color: #fff;
+    /* Background color for slots */
+    padding: 10px;
+    /* Add padding for spacing */
+    margin-bottom: 10px;
+    /* Add margin between slots */
+    border-radius: 5px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Shadow */
+}
+
+
+.subcolumn4 {
+    background-color: #fff;
+    /* Background color for subcolumn4 */
+    padding: 15px;
+    /* Add padding for spacing */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Shadow */
+    height: 400px;
+    /* Fixed height for subcolumn4 */
+    overflow-y: auto;
+    /* Add vertical scroll for overflowing content */
+    margin-top: 20px;
+    /* Add a top margin of 20px */
+
+}
+.subcolumn4 h2 {
+    color: #452f4f;
+}
+
+#profile-picture2 {
+    width: 50px; /* Adjust the width as needed */
+    height: 25px; /* Adjust the height as needed */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    display: inline;
+}
+
+.subcolumn5 {
+    background-color: #fff;
+    /* Background color for subcolumn4 */
+    padding: 15px;
+    /* Add padding for spacing */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Shadow */
+    height: 400px;
+    /* Fixed height for subcolumn4 */
+    overflow-y: auto;
+    /* Add vertical scroll for overflowing content */
+    margin-top: 20px;
+    /* Add a top margin of 20px */
+}
+/* Style for the list container */
+.subcolumn5 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style for each list item */
+.subcolumn5 li {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: inline-block; /* Display list items in a horizontal line */
+    align-items: center;
+}
+
+/* Style for the brand symbol (emoji) */
+.subcolumn5 li span {
+    margin-right: 10px;
+}
+
+/* Additional styling for the brand name */
+.subcolumn5 li {
+    color: #333;
+    font-weight: bold;
+}
+
+.component3 h3{
+    margin-top: 10px;
+    justify-content: center;
+}
+
+#myChartFollowers, #myChartViews , #myChartEngagement {
+    /* You can style the canvas as needed */
+    width: 100%;
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+.contactopt {
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+}
+.contact-influencer hr {
+    margin: 10px 0; /* Adjust the margin as needed */
+    border: none;
+    border-top: 1px solid #ccc; /* Specify the line color and style */
+
+
+}
+
+#profile hr{
+
+    margin: 10px 0; /* Adjust the margin as needed */
+    border: none;
+    border-top: 1px solid #ccc; /* Specify the line color and style */
+
+
+}
+
+
+/* Style the header and navigation bar */
+/* Header styles */
+header {
+    background-color: #fff;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center; /* Center the text horizontally */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the header */
+}
+
+/* Navigation styles */
+nav ul {
+    list-style: none;
+    padding: 0; /* Remove default padding */
+    text-align: center; /* Center the navigation links horizontally */
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #452f4f;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+nav a:hover {
+    color: #ff5c84;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow on hover */
+}
+
+/* Style the profile section */
+#profile {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Shadow */
+    margin-top: 10px;
+    /* Margin from the top */
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    display: block;
+    margin: 0 auto;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+
+.profile-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+
+}
+
+.profile-header h1 {
+    color: #452f4f;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.profile-header p {
+    font-size: 16px;
+    color: #777;
+}
+
+.total-reviews {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.follow-button {
+    background-color: #84648c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0;
+    /* 10px margin on top and bottom, 0 margin on left and right */
+}
+
+/* Style the profile details */
+.profile-details {
+    margin-top: 10px;
+}
+
+.profile-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Style the posts section */
+
+
+
+
+/* Style the footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    flex-shrink: 0;
+
+}
+
+/* Style for the dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.social-buttons {
+    height: 150px;
+    /* Set the desired height for your scroll box */
+    overflow-y: scroll;
+    /* Add vertical scroll */
+    scrollbar-width: thin;
+    /* Optional: Adjust scrollbar width */
+    scrollbar-color: #888 #F7F9F9;
+    /* Optional: Adjust scrollbar colors */
+}
+
+.social-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    width: 300px;
+    height: 30px;
+    padding: 10px;
+    text-align: left;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #fff;
+    /* Background color for the buttons */
+    border-radius: 15px;
+    /* Rounded corners */
+    /* Add some spacing between buttons */
+    border: none;
+    /* Remove the border */
+    box-shadow: none;
+    /* Remove the box shadow */
+    overflow: hidden;
+    /* Hide any content overflowing from the button */
+    font-size: 18px;
+    text-size-adjust: 5px;
+    align-items: center;
+}
+
+
+.social-button svg {
+    margin-right: 10px;
+    /* Adjust this value to control the space */
+}
+
+/* Style for social buttons on hover */
+.social-button:hover {
+    background-color: #F7F9F9;
+    color: #333;
+    cursor: pointer;
+    /* Change cursor to a pointer on hover */
+    transform: scale(1.05);
+    /* Slightly scale up on hover */
+    transition-duration: 0.3s;
+    /* Smooth scaling transition */
+}
+
+/* Add this to your CSS to style the social media section */
+
+#statistics {
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f0eef2;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#statistics h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider {
+    margin: 10px 0;
+}
+
+.slider h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+input[type="range"] {
+    width: 150px;
+    max-width: 300px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    border-radius: 5px;
+    background: #ccc;
+    outline: none;
+    transition: background 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #452f4f;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #452f4f;
+    cursor: pointer;
+}
+
+input[type="range"]:hover {
+    background: #ccc;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #452f4f;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #452f4f;
+}
+
+#hashtags {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.hashtag {
+    display: inline-block;
+    background-color: #84648c;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    /* Add a smooth hover transition */
+}
+
+.hashtag:hover {
+    background-color: #555;
+    /* Change color on hover */
+}
+
+.total-reviews {
+    align-items: center;
+    margin-top: 5px;
+}
+
+/* Container for the entire rating section */
+.google-rating {
+    align-items: center;
+    display: inline-block;
+    font-size: 16px;
+    color: #c5bdcc;
+    /* Yellow color for stars */
+    font-weight: bold;
+}
+
+/* Container for the star icons */
+.star-rating {
+    display: inline-block;
+    margin-right: 5px;
+    /* Adjust the spacing between stars and total reviews */
+    margin-top: 10 px;
+}
+
+/* Individual star icons */
+.star {
+    text-align: center;
+    font-size: 20px;
+    /* Adjust the star size as needed */
+    color: #c5bdcc;
+    /* Yellow color for stars */
+}
+
+/* Styling for the total reviews text */
+.total-reviews {
+    color: #333;
+    /* Color for the total reviews text */
+    font-weight: normal;
+    /* Adjust font-weight as needed */
+    margin-left: 10px;
+    /* Add some spacing between stars and total reviews */
+}
+
+/* Hover effect for stars */
+.star:hover,
+.star:hover~.star {
+    color: #7c6c84;
+    /* Brighter yellow on hover */
+}
+
+
+
+.logo {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.button {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.messageArea {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.message {
+    margin-bottom: 5px;
+}
+
+.username {
+    font-weight: bold;
+    color: #F7F9F9;
+}
+
+.delete {
+    align-items: left;
+    justify-content: end;
+}
+
+.button-content {
+    display: inline-block;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    /* Add a transition effect for the filter property */
+}
+
+.blur {
+    filter: blur(4px);
+    /* Apply a blur filter */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    nav ul li {
+        margin-right: 10px;
+    }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .leftSide {
+        flex-direction: column;
+        /* Stack components vertically on smaller screens */
+    }
+
+    .component1,
+    .component2,
+    .component3 {
+        flex: 0 0 100%;
+        /* Full width for components on smaller screens */
+        margin-bottom: 20px;
+    }
+
+    /* Adjust font sizes for smaller screens */
+    .column h2 {
+        font-size: 20px;
+    }
+
+    .column p {
+        font-size: 14px;
+    }
+
+    /* Responsive design for the social buttons */
+    .social-button {
+        width: 100%;
+        /* Full width for social buttons on smaller screens */
+    }
+
+    /* Responsive design for navigation */
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    /* Responsive design for the profile */
+    #profile {
+        margin-left: 0;
+    }
+
+    /* Responsive design for the footer */
+    footer {
+        font-size: 12px;
+        /* Smaller font size for footer on smaller screens */
+    }
+
+    /* Responsive design for the star ratings */
+    .star-rating {
+        font-size: 14px;
+        /* Adjust the star rating font size for smaller screens */
+    }
+}
+
+/* Additional media queries for specific screen sizes can be added here */
+
+
+body {
+
+    font-family: Arial, sans-serif;
+    background-color: #F7F9F9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+
+}
+body hr{
+    margin: 10px 0; /* Adjust the margin as needed */
+    border: none;
+    border-top: 1px solid #ccc; /* Specify the line color and style */
+    border: none;
+
+}
+/* Media query for screens smaller than 576px (e.g., mobile devices) */
+@media (max-width: 576px) {
+    .notifications {
+        width: 90%; /* Adjust the width for smaller screens */
+        max-width: none; /* Remove max-width */
+        margin: 0 auto; /* Center the notifications div */
+        min-height: 250px; /* Adjust the minimum height */
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+}
+
+/* Media query for screens between 576px and 768px (e.g., larger smartphones and small tablets) */
+@media (min-width: 576px) and (max-width: 768px) {
+    .notifications {
+        width: 80%; /* Adjust the width for medium-sized screens */
+        max-width: none; /* Remove max-width */
+        margin: 0 auto; /* Center the notifications div */
+        min-height: 350px; /* Adjust the minimum height */
+        font-size: 16px; /* Adjust font size for medium-sized screens */
+    }
+}
+
+/* Media query for screens between 768px and 992px (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .notifications {
+        width: 70%; /* Adjust the width for tablet-sized screens */
+        max-width: none; /* Remove max-width */
+        margin: 0 auto; /* Center the notifications div */
+        min-height: 400px; /* Adjust the minimum height */
+        font-size: 18px; /* Adjust font size for tablet-sized screens */
+    }
+}
+
+/* Media query for screens larger than 1200px (e.g., desktops) */
+@media (min-width: 1200px) {
+    .notifications {
+        width: 500px; /* Adjust the width for larger screens */
+        max-width: 700px; /* Restore max-width for desktops */
+        margin: 0; /* Remove margin for desktops */
+        min-height: 400px; /* Adjust the minimum height */
+        font-size: 20px; /* Adjust font size for desktops */
+    }
+}
+
+/* Additional media queries for specific screen sizes can be added here */
+
+/* Add this CSS in your <style> tags or a separate CSS file */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 0 20px;
+}
+
+h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Display links horizontally */
+}
+
+li {
+    margin-right: 20px; /* Add spacing between links */
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Style links on hover */
+a:hover {
+    text-decoration: underline;
+}

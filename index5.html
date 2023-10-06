@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles5.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1> <img src="images/logo.png" alt="no image" width="50px" height=" 30 px"></h1>
+        <h3>Login</h3>
+    
+        <h5> Hey enter your details to sign in to your account
+        </h5>
+
+        <form action="#" method="post" id="loginForm">
+            <input type="text" id="username" name="username" required placeholder="Email">
+            <input type="password" id="password" name="password" required placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+        <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+        </div>
+        <div class="signup-link">
+            Don't have an account? <a href="index7.html">Sign Up</a>
+        </div>
+    </div>
+    <script>
+        // Get the login form by its ID
+        const loginForm = document.getElementById("loginForm");
+    
+        // Add an event listener to the form's submit event
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the form from actually submitting
+    
+            // Perform any login authentication here (e.g., check credentials)
+            // If login is successful, open index8.html
+            window.location.href = "index8.html"; // Replace with the actual URL of index8.html
+        });
+    </script>
+    
+</body>
+</html>

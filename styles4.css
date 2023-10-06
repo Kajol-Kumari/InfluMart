@@ -1,0 +1,204 @@
+/* Reset some default styles */
+body, p, h1, h2, h3, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for the chat container */
+#chat-container {
+    width: 90%;
+    margin: 10px auto;
+    margin-left: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 500px; /* Adjust the height to your desired value */
+}
+#last-seen{
+    margin-top: 2px;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold; /* Bold text */
+    line-height: 1.5; /* Line height for better readability */
+    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
+
+    
+}
+
+/* CSS for the timestamp in the corner of each message */
+
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* Hide the chat container initially */
+#chat-container.hidden {
+    display: none;
+}
+
+/* CSS for the influencer info section */
+.influencer-info {
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Add some space between the info and the chat container */
+    text-align: left;
+    color: #452f4f;
+    width: 90%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for individual info items (e.g., Category, Price, etc.) */
+.influencer-info p {
+    color: #452f4f;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* Style for the separator line */
+.influencer-info hr {
+    margin: 10px 0; /* Adjust the margin as needed */
+    border: none;
+    border-top: 1px solid #ccc; /* Specify the line color and style */
+}
+.component3 .chat-header {
+    font-size: 20px; /* Font size for the chat header */
+    font-weight: bold; /* Font weight for the chat header */
+    margin-bottom: 10px; /* Margin at the bottom of the chat header */
+    text-align: left; /* Left-align the chat header text */
+    color: #fff; /* Text color for the chat header */
+    display: flex; /* Display the content in a flex container */
+    justify-content: space-between; /* Push items to the left and right edges */
+    align-items: center; /* Center-align items vertically within the container */
+    background-color: #84648c;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the SVG icon */
+.component3 .chat-header svg {
+    fill: #000; /* Fill color for the SVG icon */
+    width: 30px; /* Width of the SVG icon */
+    height: 30px; /* Height of the SVG icon */
+}
+
+/* Styling for chat messages */
+/* Style for user messages */
+/* Style for user messages */
+/* Style for user messages */
+.user-message {
+    background-color: #007bff; /* Background color for user messages */
+    color: #fff; /* Text color for user messages */
+    padding: 10px; /* Padding for user messages */
+    margin: 10px 0; /* Margin between user messages */
+    border-radius: 20px; /* Rounded corners for user messages */
+    clear: both; /* Clear floats */
+    float: right; /* Float user messages to the right */
+    max-width: 70%; /* Maximum width for user messages */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+}
+
+/* Hover effect for user messages */
+.user-message:hover {
+    background-color: #0056b3; /* Background color on hover */
+}
+
+/* Style for bot messages */
+.bot-message {
+    background-color: #ff5c84; /* Background color for bot messages */
+    color: #fff; /* Text color for bot messages */
+    padding: 10px; /* Padding for bot messages */
+    margin: 10px 0; /* Margin between bot messages */
+    border-radius: 20px; /* Rounded corners for bot messages */
+    clear: both; /* Clear floats */
+    float: left; /* Float bot messages to the left */
+    max-width: 70%; /* Maximum width for bot messages */
+    text-align: left; /* Left-align text in bot messages */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for bot messages */
+.bot-message:hover {
+    background-color: #c42568; /* Background color on hover */
+}
+
+/* Style for timestamp of messages (you can modify this as needed) */
+.message-timestamp {
+    font-size: 12px; /* Font size for the timestamp */
+    color: #999; /* Text color for the timestamp */
+    margin-top: 5px; /* Margin above the timestamp */
+}
+
+
+/* Styling for user input */
+#user-input {
+    background-color: #F7F9F9;
+    margin-top: auto; /* Push the input bar to the bottom */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 0px;
+    justify-content: center;
+}
+
+#user-message {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+}
+
+#send-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the chat container header */
+#chat-container h1 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* Styling for chat container scrollbar */
+#chat-output {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 20px;
+}
+
+/* Styling for chat container scrollbar */
+#chat-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-output::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+#chat-output::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
