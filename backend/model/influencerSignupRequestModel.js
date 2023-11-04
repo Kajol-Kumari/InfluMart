@@ -13,6 +13,8 @@ const influencerSignupRequestSchema = new mongoose.Schema({
   category: [String],
   residenceArea: String,
   price: Number,
+  userName: String,
+  password: String,
 });
 
 const InfluencerSignupRequest = mongoose.model(
