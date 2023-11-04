@@ -3,44 +3,34 @@
  */
 // influencerController.js
 
-// Sample storage for influencers (replace with a database)
-const influencersDB = [];
+const { authenticate } = require("../auth/authenticate");
+const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 
 // Signup an influencer
-exports.signup = (req, res) => {
-  const {
-    firstName,
-    lastName,
-    nickName,
-    instaProfile,
-    twitterProfile,
-    linkedInProfile,
-    facebookProfile,
-    otherSocialHandles,
-    briefAbout,
-    category,
-    residenceArea,
-    price,
-  } = req.body;
+exports.signup = async (req, res) => {
+  const influencerData = req.body;
 
-  // Create a new influencer object and add it to the database
-  const influencer = {
-    firstName,
-    lastName,
-    nickName,
-    instaProfile,
-    twitterProfile,
-    linkedInProfile,
-    facebookProfile,
-    otherSocialHandles,
-    briefAbout,
-    category,
-    residenceArea,
-    price,
-  };
-  influencersDB.push(influencer);
+  try {
+    const influencer = new InfluencerSignupRequest(influencerData);
+    await influencer.save(); // This saves the influencer data to the database
+    res.status(201).json({ message: 'Influencer signed up successfully' });
+  } catch (err) {
+    console.error('Error saving influencer data:', err);
+    res.status(500).json({ message: 'Failed to save influencer data' });
+  }
+};
 
-  res.status(201).json({ message: 'Influencer signed up successfully' });
+// Login as an influencer (basic example, should be replaced with authentication logic)
+exports.login = (req, res) => {
+  const { userName, password } = req.body;
+
+  const influencer = authenticate(userName, password);
+
+  if (!influencer) {
+    return res.status(401).json({ message: 'Authentication failed' });
+  }
+
+  res.status(200).json({ message: 'Login successful', influencer });
 };
 
 // Login as an influencer (basic example, should be replaced with authentication logic)

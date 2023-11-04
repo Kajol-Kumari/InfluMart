@@ -1,6 +1,10 @@
 const Influencer = require("../../model/influencers");
 
 const influencerAuthenticationMiddleware = async (req, res, next) => {
+  if (req.path === "/influencers/signup") {
+    // Skip authentication check for the signup route
+    return next();
+  }
   // check if the influencer is authenticated
   // For simplicity, we assume the influencer is authenticated
   if (req.cookies.jwt) {
