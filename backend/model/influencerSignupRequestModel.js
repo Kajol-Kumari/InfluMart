@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require("uuid");
 const mongoose = require("mongoose");
 
 const influencerSignupRequestSchema = new mongoose.Schema({
@@ -13,8 +14,12 @@ const influencerSignupRequestSchema = new mongoose.Schema({
   category: [String],
   residenceArea: String,
   price: Number,
-  userName: String,
+  userName: { type: String, unique: true },
   password: String,
+  role: {
+    type: String,
+    default: "influencer", // Set the default value to "influencer"
+  },
 });
 
 const InfluencerSignupRequest = mongoose.model(

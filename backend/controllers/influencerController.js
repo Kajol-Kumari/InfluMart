@@ -2,70 +2,175 @@
  * Signup (firstName, lastName, nickName, InstaProfile, twitterProfile, linkedInProfile, facebook profile, other social handle profiles, a brief about yourself, category of influence, active residence area[the place where you market a lot/live], price)
  */
 // influencerController.js
-
-const { authenticate } = require("../auth/authenticate");
+const jwt = require("jsonwebtoken"); // For generating JSON Web Tokens
+const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
+const mongoose = require("mongoose");
 
 // Signup an influencer
 exports.signup = async (req, res) => {
   const influencerData = req.body;
 
   try {
-    const influencer = new InfluencerSignupRequest(influencerData);
-    await influencer.save(); // This saves the influencer data to the database
-    res.status(201).json({ message: 'Influencer signed up successfully' });
+    // Check if a user with the same userName already exists
+    const existingInfluencer = await InfluencerSignupRequest.findOne({
+      userName: influencerData.userName,
+    });
+
+    if (existingInfluencer) {
+      // If an influencer with the same userName exists, return a 400 Bad Request response
+      return res.status(400).json({ message: "Username is already in use" });
+    }
+
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(influencerData.password, 10);
+
+    // Create a new InfluencerSignupRequest with the hashed password
+    const influencer = new InfluencerSignupRequest({
+      ...influencerData,
+      password: hashedPassword,
+    });
+
+    // Save the influencer data to the database
+    await influencer.save();
+    res.status(201).json({ message: "Influencer signed up successfully" });
   } catch (err) {
-    console.error('Error saving influencer data:', err);
-    res.status(500).json({ message: 'Failed to save influencer data' });
+    if (err.name === "MongoError" && err.code === 11000) {
+      // Handle the unique constraint violation error
+      res.status(400).json({ message: "Username already exists" });
+    } else {
+      console.error("Error saving influencer data:", err);
+      res.status(500).json({ message: "Failed to save influencer data" });
+    }
   }
 };
 
-// Login as an influencer (basic example, should be replaced with authentication logic)
-exports.login = (req, res) => {
-  const { userName, password } = req.body;
+// Login as an influencer
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
 
-  const influencer = authenticate(userName, password);
+  try {
+    // Find the influencer by their username
+    const influencer = await InfluencerSignupRequest.findOne({
+      userName: username,
+    });
 
-  if (!influencer) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    // Check if the influencer exists
+    if (!influencer) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isPasswordValid = await bcrypt.compare(password, influencer.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+
+    // Generate a JSON Web Token (JWT) for the authenticated user
+    const token = jwt.sign(
+      { userId: influencer._id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
+
+    // Create a modified influencer object without the password
+    const modifiedInfluencer = { ...influencer._doc };
+    delete modifiedInfluencer.password;
+
+    // Return the token and the modified influencer object
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      influencer: modifiedInfluencer,
+    });
+  } catch (err) {
+    console.error("Error during login:", err);
+    res.status(500).json({ message: "Internal server error" });
   }
-
-  res.status(200).json({ message: 'Login successful', influencer });
 };
 
-// Login as an influencer (basic example, should be replaced with authentication logic)
-exports.login = (req, res) => {
-  const { userName, password } = req.body;
+// Get influencer's profile by ID
+exports.getProfile = async (req, res) => {
+  const influencerId = req.params.id; // Get the influencer's ID from the request parameters
 
-  // Perform authentication (e.g., check against a database)
-  // For simplicity, we assume the influencer exists in the influencersDB
+  try {
+    // const influencerObjectId = new mongoose.Types.ObjectId(influencerId);
+    const influencer = await InfluencerSignupRequest.findById(
+      influencerId
+    ).select("-password");
 
-  const influencer = influencersDB.find((inf) => inf.userName === userName && inf.password === password);
+    if (!influencer) {
+      return res.status(404).json({ message: "Influencer not found" });
+    }
 
-  if (!influencer) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    res.status(200).json({ influencer });
+  } catch (err) {
+    console.error("Error getting influencer profile:", err);
+    res.status(500).json({ message: "Failed to retrieve profile" });
   }
-
-  res.status(200).json({ message: 'Login successful', influencer });
 };
 
-// Get influencer's profile (requires authentication)
-exports.getProfile = (req, res) => {
-  // Retrieve the authenticated influencer's profile
-  // Replace this with your authentication logic
-  const influencer = req.influencer;
+// Update influencer's profile by ID
+exports.updateProfile = async (req, res) => {
+  const influencerId = req.params.id; // Get the influencer's ID from the request parameters
 
-  res.status(200).json({ influencer });
+  try {
+    const updatedInfluencerData = req.body; // Assuming you have an object with updated data
+
+    const influencer = await InfluencerSignupRequest.findById(influencerId);
+
+    if (!influencer) {
+      return res.status(404).json({ message: "Influencer not found" });
+    }
+
+    // Update influencer's profile fields as needed
+    Object.assign(influencer, updatedInfluencerData);
+
+    // Save the updated influencer data to the database
+    await influencer.save();
+
+    res
+      .status(200)
+      .json({ message: "Profile updated successfully", influencer });
+  } catch (err) {
+    console.error("Error updating influencer profile:", err);
+    res.status(500).json({ message: "Failed to update profile" });
+  }
 };
 
-// Update influencer's profile (requires authentication)
-exports.updateProfile = (req, res) => {
-  const influencer = req.influencer;
+// Delete influencer's profile by ID
+exports.deleteProfile = async (req, res) => {
+  const influencerId = req.params.id; // Get the influencer's ID from the request parameters
 
-  // Update influencer's profile fields as needed
-  // For simplicity, we assume you have an updatedInfluencer object
+  try {
+    const influencer = await InfluencerSignupRequest.findById(influencerId);
 
-  Object.assign(influencer, updatedInfluencer);
+    if (!influencer) {
+      return res.status(404).json({ message: "Influencer not found" });
+    }
 
-  res.status(200).json({ message: 'Profile updated successfully', influencer });
+    // Remove the influencer's profile from the database
+    await influencer.remove();
+
+    res.status(200).json({ message: "Profile deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting influencer profile:", err);
+    res.status(500).json({ message: "Failed to delete profile" });
+  }
+};
+
+// Get all influencers' profiles
+exports.getAllProfiles = async (req, res) => {
+  try {
+    const influencers = await InfluencerSignupRequest.find(
+      {},
+      { password: 0, userName: 0 }
+    ); // Exclude password field from the results
+
+    res.status(200).json({ influencers });
+  } catch (err) {
+    console.error("Error getting all influencer profiles:", err);
+    res.status(500).json({ message: "Failed to retrieve profiles" });
+  }
 };

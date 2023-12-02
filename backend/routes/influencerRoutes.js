@@ -1,17 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { signup, login, getProfile, updateProfile } = require('../controllers/influencerController');
+const {
+  signup,
+  login,
+  getProfile,
+  updateProfile,
+  deleteProfile,
+  getAllProfiles,
+} = require("../controllers/influencerController");
 
 // Signup an influencer
-router.post('/signup', signup);
+router.post("/signup", signup);
 
 // Login as an influencer
-router.post('/login', login);
-
-// Get influencer's profile
-router.get('/profile', getProfile);
+router.post("/login", login);
 
 // Update influencer's profile
-router.put('/profile', updateProfile);
+router.put("/profile", updateProfile);
+
+// Get an influencer's profile by ID
+router.get("/profile/:id", getProfile);
+
+// Update an influencer's profile by ID
+router.put("/profile/:id", updateProfile);
+
+// Delete an influencer's profile by ID
+router.delete("/profile/:id", deleteProfile);
+
+// Route to get all influencers' profiles
+router.get("/profiles", getAllProfiles);
 
 module.exports = router;

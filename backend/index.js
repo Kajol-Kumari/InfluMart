@@ -24,23 +24,21 @@ const brandAuthorizationMiddleware = require("./middleware/brands/brandAuthoriza
 const brandAuthenticationMiddleware = require("./middleware/brands/brandAuthenticationMiddleware");
 const brandValidationMiddleware = require("./middleware/brands/brandValidationMiddleware");
 const brandLoggingMiddleware = require("./middleware/brands/brandLoggingMiddleware");
-// const influencerValidationMiddleware = require("./middleware/influencers/influencerValidationMiddleware");
-// const influencerAuthorizationMiddleware = require("./middleware/influencers/influencerAuthorizationMiddleware");
-// const influencerAuthenticationMiddleware = require("./middleware/influencers/influencerAuthenticationMiddleware");
+const influencerAuthorizationMiddleware = require("./middleware/influencers/influencerAuthorizationMiddleware");
+const influencerAuthenticationMiddleware = require("./middleware/influencers/influencerAuthenticationMiddleware");
 
 const influencerLoggingMiddleware = require("./middleware/influencers/influencerLoggingMiddleware");
 
 // Middleware for Brands
 app.use("/brands", brandAuthenticationMiddleware); // Authentication for brands
 app.use("/brands", brandAuthorizationMiddleware); // Authorization for brands
-app.use("/brands", brandValidationMiddleware); // Validation for brand-specific data
+// app.use("/brands", brandValidationMiddleware); // Validation for brand-specific data
 app.use("/brands", brandLoggingMiddleware); // Logging for brand-specific activities
 
 // Middleware for Influencers
-// app.use("/influencers", influencerAuthenticationMiddleware); // Authentication for influencers
-// app.use("/influencers", influencerAuthorizationMiddleware); // Authorization for influencers
-// app.use("/influencers", influencerValidationMiddleware); // Validation for influencer-specific data
-// app.use("/influencers", influencerLoggingMiddleware); // Logging for influencer-specific activities
+app.use("/influencers", influencerAuthenticationMiddleware); // Authentication for influencers
+app.use("/influencers", influencerAuthorizationMiddleware); // Authorization for influencers
+app.use("/influencers", influencerLoggingMiddleware); // Logging for influencer-specific activities
 
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
