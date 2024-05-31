@@ -1,8 +1,4 @@
-# InfluMart
 
-## One-Stop Solution for Influencers and Brands
-
-InfluMart is a platform designed to bridge the gap between brands and influencers, facilitating seamless connections and collaborations. Whether you're a brand looking for the perfect influencer to promote your product or an influencer seeking new opportunities, InfluMart is your go-to solution.
 
 ## MVP Requirements
 
