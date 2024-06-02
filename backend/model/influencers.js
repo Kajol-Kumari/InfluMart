@@ -6,6 +6,7 @@ const Influencer = {
   twitterProfile: "", // Twitter profile URL
   linkedInProfile: "", // LinkedIn profile URL
   facebookProfile: "", // Facebook profile URL
+  youtubeChannel: "", //youtube channel
   otherSocialHandles: [], // Array of other social handle profiles
   briefAbout: "", // A brief description about the influencer
   categoryOfInfluence: "", // Category of influence (e.g., travel, fitness)
@@ -13,6 +14,10 @@ const Influencer = {
   price: 0, // Pricing information
   userName: "", // User name for login (if applicable)
   password: "", // Password for login (if applicable)
+  instaData: [], // Instagram data
+  fbData: [], // Facebook data
+  ytData: [], // YouTube data
+  tracked: "",
 };
 
 module.exports = Influencer;

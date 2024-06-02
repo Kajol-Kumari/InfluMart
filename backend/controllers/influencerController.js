@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken"); // For generating JSON Web Tokens
 const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 const mongoose = require("mongoose");
+const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
 
 // Signup an influencer
 exports.signup = async (req, res) => {
@@ -24,11 +25,19 @@ exports.signup = async (req, res) => {
 
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(influencerData.password, 10);
-
+    //data
+    const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
+    const instaData = await InstagramData(influencerData.instaProfile)
+    const ytData = await YoutubeData(influencerData.youtubeChannel)
+    const track = trackingData();
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({
       ...influencerData,
       password: hashedPassword,
+      instaData: [instaData],
+      fbData: [fbData],
+      ytData: [ytData],
+      tracked: track,
     });
 
     // Save the influencer data to the database

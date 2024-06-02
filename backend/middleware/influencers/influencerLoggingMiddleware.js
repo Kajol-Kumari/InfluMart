@@ -1,6 +1,6 @@
 const influencerLoggingMiddleware = (req, res, next) => {
     const timestamp = new Date().toLocaleString(); // Get the current timestamp
-    const influencerId = res.locals.influencer.id;
+    const influencerId = res.locals.influencer?.id;
     const method = req.method;
     const url = req.url;
     
