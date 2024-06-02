@@ -7,7 +7,6 @@ const {
   updateProfile,
   deleteProfile,
   getAllProfiles,
-  getSocialData,
 } = require("../controllers/influencerController");
 
 // Signup an influencer
@@ -22,8 +21,6 @@ router.put("/profile", updateProfile);
 // Get an influencer's profile by ID
 router.get("/profile/:id", getProfile);
 
-// Get an influencer's social data by ID
-router.get("/profile/social/:id", getSocialData);
 
 // Update an influencer's profile by ID
 router.put("/profile/:id", updateProfile);
