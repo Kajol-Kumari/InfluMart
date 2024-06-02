@@ -120,6 +120,26 @@ exports.getProfile = async (req, res) => {
   }
 };
 
+// endpoint to get influencer's social handle
+exports.getSocialData = async (req, res) => {
+  const influencerId = req.params.id; // Get the influencer's ID from the request parameters
+
+  try {
+    // const influencerObjectId = new mongoose.Types.ObjectId(influencerId);
+    const influencer = await InfluencerSignupRequest.findById(
+      influencerId
+    ).select("-password");
+
+    if (!influencer) {
+      return res.status(404).json({ message: "Influencer not found" });
+    }
+    res.status(200).json({ instaData: influencer.instaData, fbData: influencer.fbData, ytData: influencer.ytData});
+  } catch (err) {
+    console.error("Error getting influencer profile:", err);
+    res.status(500).json({ message: "Failed to retrieve profile" });
+  }
+};
+
 // Update influencer's profile by ID
 exports.updateProfile = async (req, res) => {
   const influencerId = req.params.id; // Get the influencer's ID from the request parameters
