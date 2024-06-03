@@ -9,6 +9,7 @@ const influencerSignupRequestSchema = new mongoose.Schema({
   twitterProfile: String,
   linkedInProfile: String,
   facebookProfile: String,
+  youtubeChannel: String,
   otherSocialHandles: [String], // Use String data type for URLs in an array
   briefAbout: String,
   category: [String],
@@ -20,6 +21,10 @@ const influencerSignupRequestSchema = new mongoose.Schema({
     type: String,
     default: "influencer", // Set the default value to "influencer"
   },
+  instaData: [], // Instagram data
+  fbData: [], // Facebook data
+  ytData: [], // YouTube data
+  tracked: {type:String,default:""},
 });
 
 const InfluencerSignupRequest = mongoose.model(

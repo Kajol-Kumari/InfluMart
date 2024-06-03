@@ -21,6 +21,7 @@ router.put("/profile", updateProfile);
 // Get an influencer's profile by ID
 router.get("/profile/:id", getProfile);
 
+
 // Update an influencer's profile by ID
 router.put("/profile/:id", updateProfile);
 

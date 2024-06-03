@@ -28,6 +28,7 @@ const influencerAuthorizationMiddleware = require("./middleware/influencers/infl
 const influencerAuthenticationMiddleware = require("./middleware/influencers/influencerAuthenticationMiddleware");
 
 const influencerLoggingMiddleware = require("./middleware/influencers/influencerLoggingMiddleware");
+const { getSocialData } = require("./controllers/influencerController");
 
 // Middleware for Brands
 app.use("/brands", brandAuthenticationMiddleware); // Authentication for brands
@@ -43,6 +44,8 @@ app.use("/influencers", influencerLoggingMiddleware); // Logging for influencer-
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
 
+// Get an influencer's social data by ID
+app.use("/social/:id", getSocialData);
 // Mount the brand routes on a specific path
 app.use("/brands", brandRoutes);
 

@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken"); // For generating JSON Web Tokens
 const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 const mongoose = require("mongoose");
+const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
 
 // Signup an influencer
 exports.signup = async (req, res) => {
@@ -24,11 +25,19 @@ exports.signup = async (req, res) => {
 
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(influencerData.password, 10);
-
+    //data
+    const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
+    const instaData = await InstagramData(influencerData.instaProfile)
+    const ytData = await YoutubeData(influencerData.youtubeChannel)
+    const track = trackingData();
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({
       ...influencerData,
       password: hashedPassword,
+      instaData: [instaData],
+      fbData: [fbData],
+      ytData: [ytData],
+      tracked: track,
     });
 
     // Save the influencer data to the database
@@ -105,6 +114,26 @@ exports.getProfile = async (req, res) => {
     }
 
     res.status(200).json({ influencer });
+  } catch (err) {
+    console.error("Error getting influencer profile:", err);
+    res.status(500).json({ message: "Failed to retrieve profile" });
+  }
+};
+
+// endpoint to get influencer's social handle
+exports.getSocialData = async (req, res) => {
+  const influencerId = req.params.id; // Get the influencer's ID from the request parameters
+
+  try {
+    // const influencerObjectId = new mongoose.Types.ObjectId(influencerId);
+    const influencer = await InfluencerSignupRequest.findById(
+      influencerId
+    ).select("-password");
+
+    if (!influencer) {
+      return res.status(404).json({ message: "Influencer not found" });
+    }
+    res.status(200).json({ instaData: influencer.instaData, fbData: influencer.fbData, ytData: influencer.ytData});
   } catch (err) {
     console.error("Error getting influencer profile:", err);
     res.status(500).json({ message: "Failed to retrieve profile" });
