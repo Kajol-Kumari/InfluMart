@@ -1,4 +1,9 @@
+## Tech Stack
 
+- ReactNative
+- NodeJS
+- ExpressJS
+- MongoDB
 
 ## MVP Requirements
 
