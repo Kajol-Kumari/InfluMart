@@ -20,6 +20,7 @@ require("./middleware/db")();
 // Import the influencer routes
 const influencerRoutes = require("./routes/influencerRoutes");
 const brandRoutes = require("./routes/brandRoutes");
+const subscriptionRouter = require("./routes/subscriptionRouter");
 const brandAuthorizationMiddleware = require("./middleware/brands/brandAuthorizationMiddleware");
 const brandAuthenticationMiddleware = require("./middleware/brands/brandAuthenticationMiddleware");
 const brandValidationMiddleware = require("./middleware/brands/brandValidationMiddleware");
@@ -46,6 +47,10 @@ app.use("/influencers", influencerRoutes);
 
 // Get an influencer's social data by ID
 app.use("/social/:id", getSocialData);
+
+app.use("/subscriptions", subscriptionRouter);
+
+
 // Mount the brand routes on a specific path
 app.use("/brands", brandRoutes);
 
