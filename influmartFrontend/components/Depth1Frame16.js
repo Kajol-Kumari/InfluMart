@@ -89,7 +89,7 @@ const Depth1Frame16 = ({
           <View style={[styles.depth4Frame01, styles.frameBg]}>
             <View style={styles.depth5Frame0}>
               <Text style={[styles.viewRequest, styles.dateJun15Typo]}>
-                View Request
+                View
               </Text>
             </View>
           </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
   },
   depth4Frame01: {
-    width: 94,
+    width: 'auto',
     height: 21,
   },
   depth3Frame01: {

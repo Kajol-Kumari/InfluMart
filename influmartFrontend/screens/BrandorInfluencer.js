@@ -10,6 +10,8 @@ const BrandorInfluencer = () => {
   return (
     <View style={styles.brandorinfluencer}>
       <View style={[styles.depth0Frame0, styles.frameLayout]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock1]}>
           <View style={styles.depth2Frame0}>
             <View style={[styles.depth3Frame0, styles.depth3FrameLayout1]} />
@@ -17,16 +19,18 @@ const BrandorInfluencer = () => {
               <View style={styles.depth4Frame0}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.joinTheFun, styles.brandTypo]}>
-                    Join the fun
+                    Join the Community
                   </Text>
                 </View>
               </View>
             </View>
+          
             <View style={[styles.depth3Frame2, styles.depth3FrameLayout1]}>
               <View style={[styles.depth4Frame01, styles.depth3FrameLayout1]} />
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame01}>
             <Text style={styles.areYouA}>
@@ -36,7 +40,7 @@ const BrandorInfluencer = () => {
         </View>
         <View style={[styles.depth1Frame2, styles.frameFlexBox]}>
           <View style={styles.depth2Frame02}>
-          <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
 
             <View style={styles.depth3FrameLayout}>
               <View style={[styles.depth4Frame02, styles.depth4FrameLayout]}>
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 101,
+    width: 'auto',
     height: 23,
     overflow: "hidden",
   },
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth1Frame1: {
-    height: 60,
+    height: 'auto',
     paddingTop: Padding.p_xl,
   },
   brand: {
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth5Frame01: {
-    width: 42,
+    width: 'auto',
     height: 21,
   },
   depth4Frame02: {
@@ -218,7 +222,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth5Frame02: {
-    width: 72,
+    width: 'auto',
     height: 21,
   },
   depth4Frame03: {
@@ -251,7 +255,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   depth1Frame3: {
-    height: 58,
+    height: 'auto',
     paddingTop: Padding.p_9xs,
   },
   depth1Frame4: {

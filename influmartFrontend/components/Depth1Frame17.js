@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth5Frame01: {
-    height: 28,
-    width: 214,
+    height: 'auto',
+    width: 'auto',
   },
   influencer150kFollowers: {
     fontSize: FontSize.size_base,
@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   depth5Frame1: {
-    height: 24,
-    width: 214,
+    height: 'auto',
+    width: 'auto',
   },
   depth4Frame1: {
     marginLeft: 16,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   depth6Frame02: {
-    width: 65,
+    width: 'auto',
     height: 21,
   },
   depth5Frame02: {

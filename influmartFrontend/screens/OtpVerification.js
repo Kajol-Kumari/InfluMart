@@ -1,12 +1,18 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text , TouchableOpacity } from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+
 
 const OtpVerification = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.otpverification}>
       <View style={styles.depth0Frame0}>
+      <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
           <View style={[styles.depth2Frame0, styles.frameFlexBox1]}>
             <View style={[styles.depth3Frame0, styles.frameLayout]}>
@@ -23,6 +29,7 @@ const OtpVerification = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <View style={styles.depth1Frame1}>
           <View style={styles.depth2Frame01}>
             <Text style={[styles.enterTheCode, styles.nextTypo]}>
@@ -46,6 +53,8 @@ const OtpVerification = () => {
         </View>
         <View style={styles.depth1Frame3} />
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
+        <TouchableOpacity onPress={() => navigation.navigate('BrandAccountReviewNotification')}>
+
           <View style={[styles.depth2Frame03, styles.frameBg]}>
             <View style={[styles.depth3Frame02, styles.frameBg]}>
               <View style={styles.depth2Frame01}>
@@ -53,6 +62,7 @@ const OtpVerification = () => {
               </View>
             </View>
           </View>
+          </TouchableOpacity>
         </View>
         <View style={[styles.depth1Frame5, styles.depth1FrameBg]} />
       </View>
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth1Frame1: {
-    height: 60,
+    height: 'auto',
     paddingTop: Padding.p_xl,
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
@@ -182,7 +192,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth3Frame02: {
-    width: 33,
+    width: 'auto',
     height: 21,
   },
   depth2Frame03: {

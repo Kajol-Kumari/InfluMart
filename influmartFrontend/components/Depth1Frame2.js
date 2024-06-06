@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   depth1Frame8: {
     backgroundColor: Color.colorWhite,
-    width: 390,
+    width: 'auto',
     height: 56,
   },
 });

@@ -41,9 +41,9 @@ const Depth1Frame14 = () => {
         </View>
       </View>
       <Depth2Frame1 standard="Premium" />
-      <Depth2Frame1 standard="Product Post" propWidth={90} />
-      <Depth2Frame1 standard="Story Post" propWidth={72} />
-      <Depth2Frame1 standard="Reel" propWidth={29} />
+      <Depth2Frame1 standard="Product Post" propWidth={'auto'} />
+      <Depth2Frame1 standard="Story Post" propWidth={'auto'} />
+      <Depth2Frame1 standard="Reel" propWidth={'auto'} />
     </View>
   );
 };
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 38,
+    width: 'auto',
     height: 21,
   },
   depth4Frame1: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     height: 82,
   },
   depth4Frame02: {
-    width: 65,
+    width: 'auto',
     height: 21,
   },
   depth2Frame1: {

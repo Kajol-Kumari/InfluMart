@@ -1,34 +1,42 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import Depth1Frame7 from "../components/Depth1Frame7";
+import { useNavigation } from "@react-navigation/native";
+
 import Depth2Frame3 from "../components/Depth2Frame3";
 import Depth2Frame2 from "../components/Depth2Frame2";
 import { Padding, Color, Border, FontFamily, FontSize } from "../GlobalStyles";
 
 const PlanChooseInterface = () => {
+  const navigation = useNavigation();
+
   return (
+    <ScrollView style={styles.planchooseinterface}>
+
     <View style={styles.planchooseinterface}>
       <View style={styles.depth0Frame0}>
+      <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
+
         <Depth1Frame7
           depth4Frame0={require("../assets/depth-4-frame-019.png")}
           requestDetails="Choose Your Plan"
           depth3Frame0BackgroundColor="#fff"
-          requestDetailsWidth={150}
+          requestDetailsWidth={'auto'}
           depth4Frame0FontFamily="WorkSans-Bold"
           depth4Frame0Color="#121417"
         />
+        </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock1]}>
           <View style={styles.depth2Frame0}>
             <Text style={[styles.huluNoAds, styles.huluNoAdsFlexBox]}>
-              Hulu (No Ads)
+              Influmart Subscriptions
             </Text>
           </View>
         </View>
         <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock1]}>
           <View style={styles.depth2Frame0}>
             <Text style={[styles.enjoyOurEntire, styles.huluNoAdsFlexBox]}>
-              Enjoy our entire library, plus exclusive streaming access to the
-              biggest winner movies.
+            "Join now to unlock exclusive brand collaborations and elevate your marketing game!"            
             </Text>
           </View>
         </View>
@@ -61,7 +69,7 @@ const PlanChooseInterface = () => {
           <View style={[styles.depth2Frame03, styles.depth3FrameFlexBox]}>
             <View style={[styles.depth3Frame01, styles.depth4FrameLayout]}>
               <View style={styles.depth2Frame0}>
-                <Text style={styles.selectPlan}>Select Plan</Text>
+                <Text style={styles.selectPlan}>Checkout</Text>
               </View>
             </View>
           </View>
@@ -69,6 +77,7 @@ const PlanChooseInterface = () => {
         <View style={styles.depth1Frame7} />
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -134,7 +143,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.workSansRegular,
   },
   depth1Frame2: {
-    height: 88,
+    height: 'auto',
     paddingTop: Padding.p_9xs,
   },
   monthly: {
@@ -142,7 +151,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   depth4Frame0: {
-    width: 55,
+    width: 'auto',
   },
   depth3Frame0: {
     shadowColor: "rgba(0, 0, 0, 0.1)",
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
     color: "#637587",
   },
   depth4Frame01: {
-    width: 41,
+    width: 'auto',
   },
   depth3Frame1: {
     paddingHorizontal: Padding.p_5xs,
@@ -205,7 +214,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth3Frame01: {
-    width: 81,
+    width: 'auto',
     backgroundColor: Color.colorWhitesmoke_300,
     height: 21,
   },

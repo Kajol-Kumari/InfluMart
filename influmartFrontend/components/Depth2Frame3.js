@@ -10,19 +10,19 @@ const Depth2Frame3 = () => {
         <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
           <View style={styles.depth5Frame0}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.withAds, styles.withFlexBox]}>With Ads</Text>
+              <Text style={[styles.withAds, styles.withFlexBox]}>3 months</Text>
             </View>
           </View>
         </View>
         <View style={[styles.depth4Frame1, styles.depth4FrameFlexBox]}>
           <View style={styles.depth5Frame01}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.text, styles.withFlexBox]}>$9.99</Text>
+              <Text style={[styles.text, styles.withFlexBox]}>$9999</Text>
             </View>
           </View>
           <View style={styles.depth5Frame1}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.withAds, styles.withFlexBox]}>/mo</Text>
+              <Text style={[styles.withAds, styles.withFlexBox]}>/month</Text>
             </View>
           </View>
         </View>
@@ -39,7 +39,7 @@ const Depth2Frame3 = () => {
           <View style={styles.depth5Frame11}>
             <View style={styles.depth6Frame0}>
               <Text style={[styles.watchEverythingWith, styles.withFlexBox]}>
-                Watch everything with limited ads for a lower price
+                Checkout this plan
               </Text>
             </View>
           </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth5Frame0: {
-    width: 71,
+    width: 'auto',
     height: 20,
   },
   depth4Frame0: {
@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.workSansBlack,
   },
   depth5Frame01: {
-    width: 95,
+    width: 'auto',
     height: 45,
   },
   depth5Frame1: {
-    width: 32,
+    width: 'auto',
     marginLeft: 4,
     height: 20,
   },
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   depth5Frame11: {
     width: 276,
     marginLeft: 12,
-    height: 39,
+    height: 'auto',
   },
   depth4Frame01: {
     height: 39,

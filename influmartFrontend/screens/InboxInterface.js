@@ -13,7 +13,10 @@ const InboxInterface = () => {
       <View style={[styles.inboxinterface, styles.depth0Frame0Layout]}>
         <View style={[styles.depth0Frame0, styles.depth0Frame0Layout]}>
           <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
+
             <View style={styles.depth2Frame0}>
+            <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+
               <View style={styles.depth3Frame0}>
                 <View style={styles.depth4Frame0}>
                   <View style={styles.depth5Frame0}>
@@ -21,6 +24,7 @@ const InboxInterface = () => {
                   </View>
                 </View>
               </View>
+              </TouchableOpacity>
               <View style={[styles.depth3Frame1, styles.frameLayout1]}>
                 <View style={[styles.depth4Frame01, styles.frameFlexBox]}>
                   <Image
@@ -42,7 +46,7 @@ const InboxInterface = () => {
               <View style={styles.depth3Frame11}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.searchForA, styles.searchForATypo]}>
-                    Search for a project, brand or influencer
+                    Search for a brand
                   </Text>
                 </View>
               </View>
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 49,
+    width: 'auto',
     height: 23,
     overflow: "hidden",
   },
@@ -244,7 +248,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   depth3Frame11: {
-    width: 290,
+    width: 'auto',
     marginLeft: 12,
     height: 48,
   },
@@ -275,7 +279,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_500,
   },
   depth4Frame03: {
-    width: 140,
+    width: 160,              //check later
     height: 24,
     overflow: "hidden",
   },
@@ -309,12 +313,12 @@ const styles = StyleSheet.create({
     color: Color.colorGray_500,
   },
   depth1Frame3: {
-    height: 64,
+    height: 'auto',
     paddingTop: Padding.p_9xs,
     paddingBottom: Padding.p_xs,
   },
   depth4Frame04: {
-    width: 129,
+    width: 149,       //check later
     height: 24,
     overflow: "hidden",
   },

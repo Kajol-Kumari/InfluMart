@@ -1,13 +1,19 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "@react-navigation/native";
+
 import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
 
 const Depth1Frame11 = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.depth1Frame0}>
       <View style={styles.depth2Frame0}>
         <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
+        <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+
         <View style={styles.depth3Frame1}>
           <View style={styles.depth4Frame0}>
             <View style={styles.depth5Frame0}>
@@ -15,6 +21,8 @@ const Depth1Frame11 = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
+
         <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
           <View style={[styles.depth4Frame01, styles.depth3FrameLayout]}>
             <Image
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 113,
+    width: 'auto',
     overflow: "hidden",
     height: 23,
   },

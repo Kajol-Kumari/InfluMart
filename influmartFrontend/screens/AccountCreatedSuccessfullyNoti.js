@@ -1,11 +1,17 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+
 
 const AccountCreatedSuccessfullyNoti = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.accountcreatedsuccessfullynoti}>
       <View style={[styles.depth0Frame0, styles.frameLayout]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
           <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
             <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
@@ -23,6 +29,7 @@ const AccountCreatedSuccessfullyNoti = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame01}>
             <Text style={[styles.yourAccountHas, styles.yourAccountHasFlexBox]}>
@@ -40,6 +47,8 @@ const AccountCreatedSuccessfullyNoti = () => {
         <View style={[styles.depth1Frame3, styles.depth3FrameFlexBox]}>
           <View style={[styles.depth2Frame03, styles.depth2FrameLayout]}>
             <View style={[styles.depth3Frame01, styles.depth3FrameFlexBox]}>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
+
               <View style={[styles.depth4Frame02, styles.frameBg]}>
                 <View style={[styles.depth5Frame01, styles.frameBg]}>
                   <View style={styles.depth5Frame0}>
@@ -49,6 +58,7 @@ const AccountCreatedSuccessfullyNoti = () => {
                   </View>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 144,
+    width: 'auto',
     height: 23,
     overflow: "hidden",
   },
@@ -159,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth1Frame1: {
-    height: 102,
+    height: 'auto',
     paddingTop: Padding.p_xl,
   },
   clickTheButton: {
@@ -168,7 +178,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth1Frame2: {
-    height: 64,
+    height: 'auto',
     paddingTop: Padding.p_9xs,
   },
   clickHereTo: {
@@ -180,8 +190,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   depth5Frame01: {
-    height: 24,
-    width: 144,
+    height: 'auto',
+    width: 'auto',
   },
   depth4Frame02: {
     borderRadius: Border.br_5xl,

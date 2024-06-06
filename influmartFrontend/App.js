@@ -18,6 +18,10 @@ import ChatInterface from "./screens/ChatInterface";
 import UserProfile from "./screens/UserProfile";
 import InfluencerRegistrationForm from "./screens/InfluencerRegistrationForm";
 import PlanChooseInterface from "./screens/PlanChooseInterface";
+import LoginPageBrand from "./screens/LoginPageBrands";
+import BrandAssosciated from "./screens/BrandsAssosciated";
+import BrandProfile from "./screens/BrandProfile";
+import AdminPanel from "./screens/AdminPanel";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -81,15 +85,38 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="AdminPanel"
+              component={AdminPanel}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="LoginPage"
               component={LoginPage}
               options={{ headerShown: false }}
             />
+              <Stack.Screen
+              name="BrandProfile"
+              component={BrandProfile}
+              options={{ headerShown: false }}
+            />
+
+              <Stack.Screen
+              name="LoginPageBrands"
+              component={LoginPageBrand}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="FriendRequestPage"
               component={FriendRequestPage}
               options={{ headerShown: false }}
             />
+                        <Stack.Screen
+              name="BrandsAssosciated"
+              component={BrandAssosciated}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="AccountCreatedSuccessfullyNoti"
               component={AccountCreatedSuccessfullyNoti}

@@ -16,14 +16,14 @@ const Depth1Frame15 = () => {
         <View style={[styles.depth3Frame1, styles.depth3FramePosition]}>
           <View style={[styles.depth4Frame01, styles.frameLayout1]}>
             <View style={styles.depth5Frame0}>
-              <Text style={[styles.content, styles.pricingTypo]}>Content</Text>
+              <Text style={[styles.content, styles.pricingTypo]}>Spot</Text>
             </View>
           </View>
         </View>
         <View style={[styles.depth3Frame2, styles.frameLayout]}>
           <View style={[styles.depth4Frame02, styles.frameLayout]}>
             <View style={styles.depth5Frame0}>
-              <Text style={[styles.content, styles.pricingTypo]}>Services</Text>
+              <Text style={[styles.content, styles.pricingTypo]}>Service</Text>
             </View>
           </View>
         </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   depth4Frame0: {
     height: 21,
     alignItems: "center",
-    width: 52,
+    width: 'auto',
   },
   depth3Frame0: {
     paddingBottom: Padding.p_smi,
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderColor: Color.colorGainsboro_100,
     alignItems: "center",
-    width: 52,
+    width: 'auto',
     borderStyle: "solid",
   },
   content: {
@@ -87,10 +87,21 @@ const styles = StyleSheet.create({
   },
   depth4Frame01: {
     height: 21,
+    alignItems: "center",
+    width: 'auto',
+
+
   },
   depth3Frame1: {
-    width: 59,
+    paddingBottom: Padding.p_smi,
+    paddingTop: Padding.p_base,
+    justifyContent: "center",
+    height: 53,
+    borderBottomWidth: 3,
+    borderColor: Color.colorGainsboro_100,
     alignItems: "center",
+    width: 'auto',
+    borderStyle: "solid",
   },
   depth4Frame02: {
     height: 21,
@@ -108,18 +119,18 @@ const styles = StyleSheet.create({
   depth2Frame0: {
     borderColor: Color.colorDarkslategray_100,
     borderBottomWidth: 1,
-    height: 54,
+    height: 56,
     overflow: "hidden",
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
     borderStyle: "solid",
-    width: 390,
+    width: 'auto',
   },
   depth1Frame5: {
     height: 66,
     paddingBottom: Padding.p_xs,
-    width: 390,
+    width: 'auto',
   },
 });
 

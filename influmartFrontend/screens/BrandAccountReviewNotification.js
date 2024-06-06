@@ -1,12 +1,18 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+
 
 const BrandAccountReviewNotification = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.brandaccountreviewnotification}>
       <View style={styles.depth0Frame0}>
+      <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
           <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
             <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
@@ -19,7 +25,7 @@ const BrandAccountReviewNotification = () => {
                       styles.createAccountTypo,
                     ]}
                   >
-                    Review your registration
+                    Review
                   </Text>
                 </View>
               </View>
@@ -29,6 +35,7 @@ const BrandAccountReviewNotification = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <Depth1Frame5 />
         <View style={styles.depth1Frame2}>
           <View style={styles.depth2Frame01}>
@@ -43,7 +50,7 @@ const BrandAccountReviewNotification = () => {
               <View style={styles.frameLayout2}>
                 <View style={styles.frameLayout2}>
                   <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                    sophia@getglo.com
+                    sophia@getgljevfo.com
                   </Text>
                 </View>
               </View>
@@ -126,6 +133,8 @@ const BrandAccountReviewNotification = () => {
         </View>
         <View style={styles.depth1Frame6} />
         <View style={[styles.depth1Frame7, styles.depth1FrameLayout]}>
+        <TouchableOpacity onPress={() => navigation.navigate('AccountCreatedSuccessfullyNoti')}>
+
           <View style={[styles.depth2Frame05, styles.frameBg]}>
             <View style={[styles.depth3Frame07, styles.frameBg]}>
               <View style={styles.depth5Frame0}>
@@ -135,6 +144,7 @@ const BrandAccountReviewNotification = () => {
               </View>
             </View>
           </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.depth1Frame8} />
       </View>
@@ -146,7 +156,7 @@ const styles = StyleSheet.create({
   depth1FrameLayout: {
     paddingHorizontal: Padding.p_base,
     height: 72,
-    width: 390,
+    width: '100%',
   },
   depth2FrameLayout: {
     height: 48,
@@ -214,8 +224,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 211,
-    height: 23,
+    width: 'auto',
+    height: 'auto',
     overflow: "hidden",
   },
   depth3Frame1: {
@@ -261,12 +271,12 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   frameLayout2: {
-    width: 151,
-    height: 24,
+    width: 'auto',
+    height: 'auto',
   },
   depth3Frame11: {
-    width: 151,
-    height: 24,
+    width: 'auto',
+    height: 'auto',
   },
   depth2Frame01: {
     top: 16,
@@ -309,7 +319,7 @@ const styles = StyleSheet.create({
     color: Color.colorSteelblue_200,
   },
   depth4Frame1: {
-    width: 122,
+    width: 'auto',
   },
   depth3Frame03: {
     width: 122,
@@ -337,7 +347,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth4Frame11: {
-    width: 130,
+    width: 'auto',
   },
   depth3Frame05: {
     width: 130,
@@ -360,7 +370,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth3Frame07: {
-    width: 124,
+    width: 'auto',
     height: 24,
   },
   depth2Frame05: {

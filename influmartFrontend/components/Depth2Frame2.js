@@ -10,14 +10,14 @@ const Depth2Frame2 = () => {
         <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
           <View style={styles.depth5Frame0}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.adFree, styles.textClr]}>Ad-Free</Text>
+              <Text style={[styles.adFree, styles.textClr]}>6 months</Text>
             </View>
           </View>
           <View style={styles.frameLayout}>
             <View style={[styles.depth6Frame01, styles.frameLayout]}>
               <View style={styles.depth7Frame0}>
                 <View style={styles.depth6Frame0}>
-                  <Text style={styles.currentPlan}>Current Plan</Text>
+                  <Text style={styles.currentPlan}>Suggested</Text>
                 </View>
               </View>
             </View>
@@ -26,12 +26,12 @@ const Depth2Frame2 = () => {
         <View style={[styles.depth4Frame1, styles.depth4FrameFlexBox]}>
           <View style={styles.depth5Frame01}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.text, styles.textClr]}>$14.99</Text>
+              <Text style={[styles.text, styles.textClr]}>$900</Text>
             </View>
           </View>
           <View style={styles.depth5Frame11}>
             <View style={styles.depth6Frame0}>
-              <Text style={[styles.adFree, styles.textClr]}>/mo</Text>
+              <Text style={[styles.adFree, styles.textClr]}>/month</Text>
             </View>
           </View>
         </View>
@@ -48,7 +48,7 @@ const Depth2Frame2 = () => {
           <View style={styles.depth5Frame12}>
             <View style={styles.depth6Frame0}>
               <Text style={[styles.downloadYourFavorites, styles.textClr]}>
-                Download your favorites to watch on-the-go Stream in 4K UHD
+                Checkout this plan
               </Text>
             </View>
           </View>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth5Frame0: {
-    width: 64,
+    width: 'auto',
     height: 20,
   },
   currentPlan: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   depth7Frame0: {
-    width: 77,
+    width: 'auto',
     height: 18,
   },
   depth6Frame01: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   depth5Frame11: {
-    width: 32,
+    width: 'auto',
     marginLeft: 4,
     height: 20,
   },

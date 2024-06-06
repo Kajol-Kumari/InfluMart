@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth6Frame0: {
-    width: 40,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },

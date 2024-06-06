@@ -1,12 +1,20 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+
 
 const BrandRegistrationForm = () => {
+  const navigation = useNavigation();
+
   return (
+    <ScrollView style={styles.scrollView}>
+
     <View style={styles.brandregistrationform}>
       <View style={[styles.depth0Frame0, styles.frameLayout2]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
           <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
             <View style={[styles.depth3Frame0, styles.frameLayout1]}>
@@ -23,9 +31,10 @@ const BrandRegistrationForm = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame01}>
-            <Text style={styles.createAnAccount}>Create an account</Text>
+            <Text style={styles.createAnAccount}>Create a Brand account</Text>
           </View>
         </View>
         <View style={styles.depth1Frame2}>
@@ -131,6 +140,8 @@ const BrandRegistrationForm = () => {
         <View style={styles.depth1Frame6}>
           <View style={styles.depth2Frame06}>
             <View style={styles.depth3FrameLayout}>
+            <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')}>
+
               <View style={[styles.depth4Frame06, styles.depth4FrameLayout]}>
                 <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
                   <View style={styles.depth7Frame0}>
@@ -140,27 +151,37 @@ const BrandRegistrationForm = () => {
                   </View>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
+
               <View style={[styles.depth4Frame07, styles.frameBg]}>
                 <View style={[styles.depth5Frame06, styles.frameBg]}>
                   <View style={styles.depth7Frame0}>
                     <Text style={[styles.signUp, styles.signUpTypo]}>
-                      Sign Up
+                      Sign In
                     </Text>
                   </View>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
         <View style={[styles.depth1Frame7, styles.frameLayout2]} />
       </View>
     </View>
+    </ScrollView>
+
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+
   frameLayout2: {
     width: 390,
     backgroundColor: Color.colorWhitesmoke_100,
@@ -287,7 +308,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth6Frame0: {
-    width: 44,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
@@ -319,17 +340,17 @@ const styles = StyleSheet.create({
     width: 390,
   },
   depth6Frame01: {
-    width: 74,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
   depth6Frame02: {
-    width: 87,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
   depth6Frame03: {
-    width: 79,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
@@ -337,7 +358,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth5Frame05: {
-    width: 98,
+    width: 'auto',
     height: 21,
   },
   depth4Frame06: {
@@ -348,7 +369,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth5Frame06: {
-    width: 54,
+    width: 'auto',
     height: 21,
   },
   depth4Frame07: {

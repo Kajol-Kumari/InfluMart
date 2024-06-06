@@ -19,18 +19,22 @@ const Depth1Frame9 = () => {
             <View style={styles.depth5Frame01}>
               <View style={styles.depth6Frame0}>
                 <Text style={[styles.caroline, styles.followTypo]}>
-                  Caroline
+                  Caroline 
                 </Text>
               </View>
             </View>
             <View style={[styles.depth5Frame1, styles.depth5FrameLayout]}>
               <View style={styles.depth6Frame0}>
-                <Text style={styles.age27Los}>Age 27, Los Angeles, CA</Text>
+                <Text style={styles.age27Los} numberOfLines={1}>
+                  Age 27, Los Angeles, CA
+                </Text>
               </View>
             </View>
             <View style={[styles.depth5Frame2, styles.depth5FrameLayout]}>
               <View style={styles.depth6Frame0}>
-                <Text style={styles.age27Los}>Beauty, Fashion, Travel</Text>
+                <Text style={styles.age27Los} numberOfLines={1}>
+                  Beauty, Fashion, Travel
+                </Text>
               </View>
             </View>
           </View>
@@ -94,8 +98,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth5Frame01: {
-    width: 92,
-    height: 28,
+    width: 'auto',
+    height: 'auto',
     alignItems: "center",
   },
   age27Los: {
@@ -106,10 +110,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   depth5Frame1: {
-    width: 189,
+    width: 'auto',
   },
   depth5Frame2: {
-    width: 181,
+    width: 'auto',
   },
   depth4Frame1: {
     height: 76,
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth6Frame03: {
-    width: 48,
+    width: 'auto',
     height: 21,
   },
   depth5Frame02: {

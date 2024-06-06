@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 60,
+    width: 'auto',
     height: 21,
   },
   depth4Frame1: {

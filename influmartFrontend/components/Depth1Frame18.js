@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth5Frame0: {
-    width: 34,
+    width: 'auto',
     height: 20,
   },
   depth4Frame0: {
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.plusJakartaSansExtraBold,
   },
   depth5Frame01: {
-    width: 24,
+    width: 'auto',
     height: 45,
   },
   depth5Frame1: {
-    width: 59,
+    width: 'auto',
     marginLeft: 4,
     height: 20,
   },

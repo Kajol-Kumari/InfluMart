@@ -1,16 +1,23 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View,TouchableOpacity  } from "react-native";
 import Depth1Frame7 from "../components/Depth1Frame7";
+import { useNavigation } from "@react-navigation/native";
+
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 
 const FriendRequestPage = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.friendrequestpage}>
       <View style={styles.depth0Frame0}>
+      <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+
         <Depth1Frame7
           depth4Frame0={require("../assets/depth-4-frame-08.png")}
           requestDetails="Request Details"
         />
+        </TouchableOpacity>
         <View style={styles.depth1Frame1}>
           <View style={styles.depth2Frame0}>
             <Text style={[styles.samanthaAdams, styles.samanthaFlexBox]}>
@@ -33,7 +40,7 @@ const FriendRequestPage = () => {
                 <View style={[styles.depth5Frame0, styles.frameBg1]}>
                   <View style={styles.depth2Frame0}>
                     <Text style={[styles.decline, styles.declineTypo]}>
-                      Decline
+                      Reject
                     </Text>
                   </View>
                 </View>
@@ -44,7 +51,7 @@ const FriendRequestPage = () => {
                 <View style={[styles.depth5Frame01, styles.frameBg]}>
                   <View style={styles.depth2Frame0}>
                     <Text style={[styles.collaborate, styles.declineTypo]}>
-                      Collaborate
+                      Accept
                     </Text>
                   </View>
                 </View>
@@ -109,11 +116,11 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth1Frame1: {
-    height: 60,
+    height: 'auto',
     paddingTop: Padding.p_xl,
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: 'auto',
   },
   samanthaWouldLike: {
     fontSize: FontSize.size_base,
@@ -122,10 +129,10 @@ const styles = StyleSheet.create({
   },
   depth1Frame2: {
     paddingTop: Padding.p_9xs,
-    height: 64,
+    height: 'auto',
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: 'auto',
   },
   decline: {
     color: Color.colorGray_400,
@@ -133,8 +140,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
   },
   depth5Frame0: {
-    width: 53,
-    height: 21,
+    width: 'auto',
+    height: 'auto',
   },
   depth4Frame0: {
     backgroundColor: Color.colorAliceblue,
@@ -153,11 +160,11 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth5Frame01: {
-    width: 82,
-    height: 21,
+    width: 'auto',
+    height: 'auto',
   },
   depth4Frame01: {
-    width: 114,
+    width: 'auto',
     justifyContent: "center",
     height: 40,
     flexDirection: "row",

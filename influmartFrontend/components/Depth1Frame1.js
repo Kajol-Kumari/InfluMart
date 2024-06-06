@@ -36,7 +36,7 @@ const Depth1Frame1 = () => {
 const styles = StyleSheet.create({
   container: {
     width: 390,
-    height: 261,
+    height: 'auto',
     overflow: "hidden",
   },
   scrollViewContent: {

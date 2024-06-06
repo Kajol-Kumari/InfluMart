@@ -36,11 +36,13 @@ const Depth1Frame13 = () => {
           <View style={[styles.depth4Frame11, styles.depth4FrameSpaceBlock]}>
             <View style={styles.depth5Frame01}>
               <Text style={[styles.partnerships, styles.homeTypo]}>
-                Partnerships
+                Partnership
               </Text>
             </View>
           </View>
         </View>
+        <TouchableOpacity onPress={() => navigation.navigate('AdminPanel')}>
+
         <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
           <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
             <Image
@@ -49,12 +51,15 @@ const Depth1Frame13 = () => {
               source={require("../assets/depth-5-frame-029.png")}
             />
           </View>
+
           <View style={[styles.depth4Frame12, styles.depth4FrameSpaceBlock]}>
             <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>Post</Text>
+              <Text style={[styles.home, styles.homeTypo]}>Settings</Text>
             </View>
           </View>
         </View>
+        </TouchableOpacity>
+
         <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
           <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
             <Image
@@ -65,7 +70,7 @@ const Depth1Frame13 = () => {
           </View>
           <View style={[styles.depth4Frame13, styles.depth4FrameSpaceBlock]}>
             <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>My Network</Text>
+              <Text style={[styles.home, styles.homeTypo]}>Network</Text>
             </View>
           </View>
         </View>
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
     width: 77,
   },
   depth4Frame12: {
-    width: 27,
+    width: 'auto',
     height: 18,
     marginTop: 4,
   },
@@ -166,11 +171,11 @@ const styles = StyleSheet.create({
     width: 62,
   },
   depth4Frame13: {
-    height: 36,
-    width: 62,
+    height: 'auto',
+    width: 'auto',
   },
   depth4Frame14: {
-    width: 40,
+    width: 'auto',
     height: 18,
     marginTop: 4,
   },

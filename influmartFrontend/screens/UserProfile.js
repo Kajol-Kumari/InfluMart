@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import Depth1Frame17 from "../components/Depth1Frame17";
 import Depth1Frame16 from "../components/Depth1Frame16";
 import Depth1Frame15 from "../components/Depth1Frame15";
@@ -9,19 +11,26 @@ import Depth1Frame13 from "../components/Depth1Frame13";
 import { Color, Padding, FontSize, FontFamily } from "../GlobalStyles";
 
 const UserProfile = () => {
+  const navigation = useNavigation();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.userprofile}>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+
           <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
             <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
+
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
+
                 <Image
                   style={styles.depth4Frame0}
                   contentFit="cover"
                   source={require("../assets/depth-4-frame-018.png")}
                 />
               </View>
+
               <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
                 <View style={[styles.depth4Frame01, styles.frameLayout]}>
                   <View style={[styles.depth5Frame0, styles.frameLayout]} />
@@ -29,6 +38,8 @@ const UserProfile = () => {
               </View>
             </View>
           </View>
+          </TouchableOpacity>
+
           <Depth1Frame17 />
           <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>
@@ -132,7 +143,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth2Frame01: {
-    width: 255,
+    width: 'auto',
     height: 28,
   },
   depth1Frame2: {

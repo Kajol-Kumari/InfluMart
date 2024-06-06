@@ -13,8 +13,11 @@ const LoginPage = () => {
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.loginpage}>
         <View style={styles.depth0Frame0}>
+        <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+
           <View style={styles.depth1Frame0}>
             <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
+
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
                 <Image
                   style={styles.depth4Frame0}
@@ -29,6 +32,8 @@ const LoginPage = () => {
               </View>
             </View>
           </View>
+          </TouchableOpacity>
+
           <View style={styles.depth1Frame1}>
             <View style={styles.depth2Frame01}>
               <Text style={[styles.welcomeBack, styles.getReadyToFlexBox]}>
@@ -44,7 +49,7 @@ const LoginPage = () => {
             </View>
           </View>
           <Depth1Frame6 userEmail="Email" />
-          <Depth1Frame6 userEmail="Password" propWidth={74} />
+          <Depth1Frame6 userEmail="Password" propWidth={'auto'} />
           <View style={[styles.depth1Frame5, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>
               <Text style={[styles.forgotYourPassword, styles.logInTypo]}>
@@ -55,6 +60,7 @@ const LoginPage = () => {
           <View style={styles.depth1Frame6}>
             <View style={styles.depth2Frame04}>
               <View style={styles.depth3FrameLayout}>
+                
                 <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
                   <View style={[styles.depth4Frame02, styles.depth4FrameLayout]}>
                     <View style={[styles.depth5Frame01, styles.frameBg1]}>
@@ -66,6 +72,8 @@ const LoginPage = () => {
                 </TouchableOpacity>
               </View>
               <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
+              <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
+
                 <View style={[styles.depth4Frame03, styles.frameBg]}>
                   <View style={[styles.depth5Frame02, styles.frameBg]}>
                     <View style={styles.depth2Frame01}>
@@ -75,6 +83,7 @@ const LoginPage = () => {
                     </View>
                   </View>
                 </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -181,7 +190,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth1Frame1: {
-    height: 60,
+    height: 'auto',
     paddingTop: Padding.p_xl,
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
@@ -193,14 +202,14 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interRegular,
   },
   depth1Frame2: {
-    height: 64,
+    height: 'auto',
   },
   forgotYourPassword: {
     color: Color.colorSteelblue_200,
     fontFamily: FontFamily.interRegular,
   },
   depth1Frame5: {
-    height: 37,
+    height: 'auto',
   },
   logIn: {
     color: Color.colorWhitesmoke_100,
@@ -209,7 +218,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth5Frame01: {
-    width: 43,
+    width: 'auto',
     height: 21,
   },
   depth4Frame02: {
@@ -224,7 +233,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth5Frame02: {
-    width: 54,
+    width: 'auto',
     height: 21,
   },
   depth4Frame03: {

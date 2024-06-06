@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
-import { Image } from "expo-image";
-import { StyleSheet, View, Text, ImageSourcePropType } from "react-native";
+import { Image, StyleSheet, View, Text, ImageSourcePropType } from "react-native";
 import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
+
 const Depth1Frame7 = ({
   depth4Frame0,
   requestDetails,
@@ -87,15 +87,12 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame01: {
-    width: 134,
     overflow: "hidden",
-    height: 23,
+    height: 'auto',
   },
   depth3Frame1: {
-    width: 262,
     justifyContent: "center",
-    height: 23,
-    alignItems: "center",
+    alignItems: "flex-start",
     flexDirection: "row",
   },
   depth4Frame02: {
@@ -110,15 +107,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    height: 48,
+    height: 'auto',
   },
   depth1Frame0: {
     backgroundColor: Color.colorWhitesmoke_100,
     width: 390,
-    height: 72,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
+    height: 'auto',
   },
 });
 

@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_500,
   },
   depth1Frame3: {
-    height: 88,
+    height: 'auto',
     paddingTop: Padding.p_9xs,
   },
   brandRegistration: {
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   depth5Frame0: {
-    width: 159,
+    width: 'auto',
     height: 24,
   },
   depth4Frame01: {
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth5Frame01: {
-    width: 196,
+    width: 'auto',
     height: 24,
   },
   depth4Frame02: {

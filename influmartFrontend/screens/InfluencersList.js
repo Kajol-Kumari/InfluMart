@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Depth1Frame11 from "../components/Depth1Frame11";
 import Depth1Frame10 from "../components/Depth1Frame10";
 import Depth1Frame from "../components/Depth1Frame";
@@ -8,7 +8,7 @@ import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
 
 const InfluencersList = () => {
   return (
-    <View style={styles.influencerslist}>
+    <ScrollView style={styles.influencerslist} contentContainerStyle={styles.contentContainer}>
       <View style={[styles.depth0Frame0, styles.frameLayout1]}>
         <Depth1Frame11 />
         <View style={styles.depth1Frame1}>
@@ -195,11 +195,14 @@ const InfluencersList = () => {
         />
         <View style={[styles.depth1Frame18, styles.frameLayout1]} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    paddingBottom: 20,
+  },
   frameLayout1: {
     width: 390,
     backgroundColor: Color.colorWhite,
@@ -309,8 +312,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth2Frame01: {
-    width: 96,
-    height: 28,
+    width: 'auto',
+    height: 30,
   },
   depth1Frame8: {
     paddingHorizontal: Padding.p_base,
@@ -329,7 +332,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
   },
   depth4Frame1: {
-    width: 47,
+    width: 'auto',
     marginLeft: 8,
     overflow: "hidden",
   },

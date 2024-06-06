@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     color: Color.colorSlategray_200,
   },
   depth5Frame02: {
-    width: 110,
+    width: 'auto',
     height: 24,
   },
   text1: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   depth5Frame1: {
-    width: 34,
+    width: 'auto',
     marginLeft: 4,
     height: 24,
   },
@@ -230,23 +230,23 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   depth6Frame03: {
-    width: 23,
+    width: 'auto',
     height: 20,
   },
   depth6Frame1: {
-    width: 25,
+    width: 'auto',
     height: 20,
   },
   depth6Frame2: {
-    width: 26,
+    width: 'auto',
     height: 20,
   },
   depth6Frame4: {
-    width: 28,
+    width: 'auto',
     height: 20,
   },
   depth6Frame5: {
-    width: 22,
+    width: 'auto',
     height: 20,
   },
   depth5Frame11: {

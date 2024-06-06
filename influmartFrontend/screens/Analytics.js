@@ -1,6 +1,8 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View , ScrollView, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "@react-navigation/native";
+
 import Depth1Frame7 from "../components/Depth1Frame7";
 import Depth1Frame9 from "../components/Depth1Frame9";
 import Depth1Frame8 from "../components/Depth1Frame8";
@@ -8,9 +10,15 @@ import Depth2Frame from "../components/Depth2Frame";
 import { Color, FontSize, Padding, Border, FontFamily } from "../GlobalStyles";
 
 const Analytics = () => {
+  const navigation = useNavigation();
+
   return (
+    <ScrollView style={styles.analytics}>
+
     <View style={styles.analytics}>
       <View style={styles.depth0Frame0}>
+      <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+
         <Depth1Frame7
           depth4Frame0={require("../assets/depth-4-frame-010.png")}
           requestDetails="Caroline, Influencer"
@@ -19,6 +27,7 @@ const Analytics = () => {
           depth4Frame0FontFamily="BeVietnamPro-Bold"
           depth4Frame0Color="#121217"
         />
+        </TouchableOpacity>
         <Depth1Frame9 />
         <View style={styles.depth1Frame2}>
           <View style={[styles.depth2Frame0, styles.depth2FrameFlexBox1]}>
@@ -68,7 +77,7 @@ const Analytics = () => {
           <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock]}>
             <View style={styles.depth3Frame06}>
               <View style={styles.depth4Frame0}>
-                <Text style={styles.cartierTypo}>6.4M Followers</Text>
+                <Text style={styles.cartierTypo}>6.4M Folllowers</Text>
               </View>
             </View>
           </View>
@@ -95,7 +104,7 @@ const Analytics = () => {
                   <Text
                     style={[styles.pastCollaborations, styles.contactInfoTypo]}
                   >
-                    Past Collaborations
+                    Collaborations
                   </Text>
                 </View>
               </View>
@@ -104,7 +113,7 @@ const Analytics = () => {
               <View style={styles.depth4Frame010}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.contactInfo, styles.cartier1Clr]}>
-                    Contact Info
+                    Contact 
                   </Text>
                 </View>
               </View>
@@ -124,7 +133,7 @@ const Analytics = () => {
           prop1="+1.2M"
           vector0={require("../assets/vector--01.png")}
           vector1={require("../assets/vector--11.png")}
-          propWidth={46}
+          propWidth={'auto'}
         />
         <Depth1Frame8
           engagementRateOverTime="Likes Over Time"
@@ -132,8 +141,14 @@ const Analytics = () => {
           prop1="+0.2M"
           vector0={require("../assets/vector--0.png")}
           vector1={require("../assets/vector--1.png")}
-          propWidth={50}
+          propWidth={'auto'}
         />
+        <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.horizontalScrollContainer}
+            >
+
         <View style={styles.depth1Frame8}>
           <Depth2Frame
             depth4Frame0={require("../assets/depth-4-frame-011.png")}
@@ -182,6 +197,7 @@ const Analytics = () => {
             </View>
           </View>
         </View>
+        </ScrollView>
         <View style={styles.depth1Frame9}>
           <View style={[styles.depth2Frame03, styles.frameBg]}>
             <View style={[styles.depth3Frame011, styles.frameBg]}>
@@ -196,6 +212,7 @@ const Analytics = () => {
         <View style={styles.depth1Frame10} />
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -365,7 +382,7 @@ const styles = StyleSheet.create({
     width: 390,
   },
   depth3Frame06: {
-    height: 24,
+    height: 'auto',
     width: 123,
   },
   depth2Frame01: {
@@ -377,7 +394,7 @@ const styles = StyleSheet.create({
     left: 16,
   },
   depth3Frame07: {
-    height: 48,
+    height: 'auto',
     width: 123,
   },
   depth2Frame11: {
@@ -389,7 +406,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
   },
   depth3Frame08: {
-    width: 310,
+    width: 'auto',
     height: 24,
   },
   depth2Frame21: {
@@ -415,7 +432,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame09: {
-    width: 145,
+    width: 'auto',
     height: 21,
     alignItems: "center",
   },
@@ -429,7 +446,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth4Frame010: {
-    width: 92,
+    width: 'auto',
     height: 21,
     alignItems: "center",
   },
@@ -501,7 +518,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   depth3Frame011: {
-    width: 186,
+    width: 'auto',
     height: 24,
   },
   depth2Frame03: {

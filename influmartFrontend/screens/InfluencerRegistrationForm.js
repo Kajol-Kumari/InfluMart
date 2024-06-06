@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View, Text, ScrollView , TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
 import Depth1Frame2 from "../components/Depth1Frame2";
 import Depth1Frame18 from "../components/Depth1Frame18";
 import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
@@ -13,6 +12,8 @@ const InfluencerRegistrationForm = () => {
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View style={styles.influencerregistrationform}>
       <View style={[styles.depth0Frame0, styles.frameLayout3]}>
+      <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock1]}>
           <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
             <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
@@ -30,6 +31,7 @@ const InfluencerRegistrationForm = () => {
             </View>
           </View>
         </View>
+        </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
           <View style={[styles.depth2Frame01, styles.frameLayout2]}>
             <View style={styles.frameLayout2}>
@@ -161,7 +163,7 @@ const InfluencerRegistrationForm = () => {
               <View style={[styles.depth4Frame13, styles.depth4FrameLayout]}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.youMustBe, styles.email1Typo]}>
-                    You must be at least 18 to use this service.
+                    You must be at least 18 .
                   </Text>
                 </View>
               </View>
@@ -188,7 +190,7 @@ const InfluencerRegistrationForm = () => {
               <View style={[styles.depth4Frame14, styles.depth4FrameLayout]}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.youMustBe, styles.email1Typo]}>
-                    You need to agree to the terms of service.
+                    You need to agree to the T&C.
                   </Text>
                 </View>
               </View>
@@ -216,8 +218,8 @@ const InfluencerRegistrationForm = () => {
             <View style={styles.depth3Frame011}>
               <View style={styles.depth5Frame0}>
                 <Text style={styles.iAmA}>
-                  I am a member of an industry association
-                </Text>
+                I'm associated with               
+                 </Text>
               </View>
             </View>
             <View style={[styles.depth3Frame11, styles.frameLayout]}>
@@ -280,7 +282,7 @@ const InfluencerRegistrationForm = () => {
             <View style={[styles.depth3Frame015, styles.frameBg]}>
               <View style={styles.depth5Frame0}>
                 <Text style={[styles.createAccount, styles.email1Layout]}>
-                  Create account
+                  Select Plan
                 </Text>
               </View>
             </View>
@@ -385,8 +387,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 63,
-    height: 23,
+    width: 'auto',
+    height: 26,
     overflow: "hidden",
   },
   depth3Frame1: {
@@ -429,7 +431,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   depth6Frame0: {
-    width: 41,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
@@ -455,12 +457,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth6Frame01: {
-    width: 74,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
   depth6Frame02: {
-    width: 77,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
@@ -474,8 +476,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth2Frame04: {
-    width: 191,
-    height: 28,
+    width: 'auto',
+    height: 30,
   },
   depth1Frame4: {
     height: 60,
@@ -484,11 +486,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame05: {
-    width: 284,
-    height: 28,
+    width: 'auto',
+    height: 31,
   },
   depth4Frame05: {
-    width: 271,
+    width: 'auto',
     height: 24,
     overflow: "hidden",
   },
@@ -497,7 +499,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
   },
   depth4Frame13: {
-    width: 271,
+    width: 'auto',
   },
   depth3Frame06: {
     width: 271,
@@ -554,8 +556,8 @@ const styles = StyleSheet.create({
     left: 16,
   },
   depth2Frame08: {
-    width: 209,
-    height: 28,
+    width: 'auto',
+    height: 31,
   },
   iAmA: {
     fontFamily: FontFamily.plusJakartaSansRegular,
@@ -566,7 +568,7 @@ const styles = StyleSheet.create({
   },
   depth3Frame011: {
     width: 291,
-    height: 24,
+    height: 'auto',
     overflow: "hidden",
   },
   depth3Frame11: {
@@ -584,16 +586,16 @@ const styles = StyleSheet.create({
     height: 56,
   },
   depth2Frame010: {
-    width: 144,
-    height: 28,
+    width: 'auto',
+    height: 30,
   },
   depth2Frame011: {
-    width: 92,
+    width: 'auto',
     height: 28,
   },
   depth2Frame012: {
-    width: 193,
-    height: 28,
+    width: 'auto',
+    height: 30,
   },
   createAccount: {
     color: Color.colorWhitesmoke_200,
@@ -605,7 +607,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   depth3Frame015: {
-    width: 125,
+    width: 'auto',
     height: 24,
   },
   depth2Frame013: {

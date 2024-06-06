@@ -1,13 +1,14 @@
 import React, { useMemo } from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ImageSourcePropType , TouchableOpacity} from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View, Text, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { FontFamily, FontSize, Border, Color, Padding } from "../GlobalStyles";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
+
 const Depth1Frame = ({
   depth5Frame0,
   depth5Frame01,
@@ -148,6 +149,8 @@ const Depth1Frame = ({
             </View>
           </View>
         </View>
+        <TouchableOpacity onPress={() => navigation.navigate('InfluencersList')}>
+
         <View
           style={[
             styles.depth3Frame1,
@@ -176,6 +179,10 @@ const Depth1Frame = ({
             </View>
           </View>
         </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('BrandsAssosciated')}>
+
         <View
           style={[
             styles.depth3Frame1,
@@ -204,7 +211,10 @@ const Depth1Frame = ({
             </View>
           </View>
         </View>
+        </TouchableOpacity >
+
         <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+
         <View
           style={[
             styles.depth3Frame1,
@@ -234,7 +244,6 @@ const Depth1Frame = ({
           </View>
         </View>
         </TouchableOpacity>
-
       </View>
     </View>
   );
@@ -242,9 +251,9 @@ const Depth1Frame = ({
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: 84,
+    width: 90,
     alignItems: "center",
-    height: 54,
+    height: 55,
   },
   depth4FrameFlexBox: {
     height: 32,
@@ -281,7 +290,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame1: {
-    width: 36,
+    width: 42,
   },
   depth3Frame0: {
     alignItems: "center",
@@ -289,23 +298,23 @@ const styles = StyleSheet.create({
   depth4Frame01: {
     paddingHorizontal: 0,
     paddingVertical: Padding.p_9xs,
-    width: 24,
+    width: 30,
   },
   search: {
     color: Color.colorSlategray_300,
   },
   depth4Frame11: {
-    width: 42,
+    width: 48,
   },
   depth3Frame1: {
     marginLeft: 8,
     alignItems: "center",
   },
   depth4Frame12: {
-    width: 64,
+    width: 70,
   },
   depth4Frame13: {
-    width: 39,
+    width: 45,
   },
   depth2Frame0: {
     width: 358,

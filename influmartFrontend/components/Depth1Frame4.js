@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame01: {
-    width: 88,
+    width: 'auto',
     overflow: "hidden",
     height: 23,
   },
   depth3Frame1: {
-    width: 262,
+    width: 'auto',
     justifyContent: "center",
     height: 23,
     alignItems: "center",
