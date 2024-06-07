@@ -1,6 +1,21 @@
 const { UPI_URL } = require("../config/dbConfig");
 const Subscription = require("../model/Subscription");
 
+
+const calculateCharges = (followers) => {
+  const maxFollowers = followers;
+
+  const quarterCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 3 + (0.20 * (((0.8 * maxFollowers) * 0.50) / 12) * 3);
+  const halfYearCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 6 + (0.10 * (((0.8 * maxFollowers) * 0.50) / 12) * 6);
+  const yearCharge = (0.8 * maxFollowers) * 0.50;
+
+  return {
+      quarter: quarterCharge.toFixed(2),
+      halfYear: halfYearCharge.toFixed(2),
+      year: yearCharge.toFixed(2),
+  };
+};
+
 const postSubscription = async (req, res) => {
   try {
     const {
@@ -58,4 +73,23 @@ const getSubscription = async (req, res) => {
   }
 };
 
-module.exports = { postSubscription, getSubscription, getPayment };
+
+const subscriptionPlans = (req, res) => {
+  const { platform, followers } = req.body;
+
+  if (!platform || !followers) {
+      return res.status(400).json({ error: 'Platform and followers are required' });
+  }
+
+  const charges = calculateCharges(followers);
+
+  return res.json({
+      platform,
+      followers,
+      charges,
+  });
+};
+
+
+
+module.exports = { postSubscription, getSubscription, getPayment, subscriptionPlans };
