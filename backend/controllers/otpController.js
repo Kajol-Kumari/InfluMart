@@ -1,0 +1,83 @@
+const nodemailer = require("nodemailer");
+const Brand = require("../model/brands");
+const OTP = require("../model/otp");
+const dbConfig = require("../config/dbConfig");
+
+const transporter = nodemailer.createTransport({
+  host: dbConfig.SMTP_HOST,
+  port: 465,
+  secure: true,
+  auth: {
+    user: dbConfig.OTP_MAIL,
+    pass: dbConfig.PASSWORD,
+  },
+});
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+const sendOTP = async (req, res) => {
+  const { email } = req.body;
+
+  // Check if email exists
+  //Uncomment this only after integrating the brand with database
+  //let brand = await Brand.findOne({ email });
+  // if (!brand) {
+  //     return res.status(400).send('Email does not exist');
+  // }
+  let _email = await OTP.findOne({ email });
+  if (_email) {
+    if (Date.now() < _email.otpExpires) {
+      return res.status(400).send("OTP is not expired yet");
+    }
+  }
+  // Generate OTP
+  const otp = generateOTP();
+  const otpExpires = Date.now() + 3600000;
+  if (_email) {
+    _email.otp = otp;
+    _email.otpExpires = otpExpires;
+    await _email.save();
+  } else {
+    const newOTP = new OTP({
+      email,
+      otp,
+      otpExpires,
+    });
+    await newOTP.save();
+  }
+  const mailOptions = {
+    from: dbConfig.OTP_MAIL,
+    to: email,
+    subject: "Verify Your OTP Code",
+    text: `Your OTP code is ${otp}. It will expire in 1 hour.`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).json({message:"Error sending email"});
+    }
+    res.status(200).json({message:"OTP sent successfully"});
+  });
+};
+
+const verifyOTP = async (req, res) => {
+  const { email, otp } = req.body;
+
+  const user = await OTP.findOne({ email });
+  if (!user) {
+    return res.status(400).json({ message: "Email does not exist" });
+  }
+
+  if (user.otp !== otp) {
+    return res.status(400).json({ message: "Invalid OTP" });
+  }
+
+  if (Date.now() > user.otpExpires) {
+    return res.status(400).json({ message: "OTP expired" });
+  }
+
+  res.status(200).json({ message: "OTP verified successfully" });
+};
+
+module.exports = { sendOTP, verifyOTP };
