@@ -13,6 +13,7 @@ const dbConfig = {
   YT_ENDPOINT: process.env.YT_ENDPOINT,
   FB_ENDPOINT: process.env.FB_ENDPOINT,
   INSTA_ENDPOINT: process.env.INSTA_ENDPOINT,
+  UPI_URL: process.env.UPI_URL,
 };
 
 module.exports = dbConfig;
