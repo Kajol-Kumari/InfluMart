@@ -1,6 +1,21 @@
 const { UPI_URL } = require("../config/dbConfig");
 const Subscription = require("../model/Subscription");
 
+
+const calculateCharges = (followers) => {
+  const maxFollowers = followers;
+
+  const quarterCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 3 + (0.20 * (((0.8 * maxFollowers) * 0.50) / 12) * 3);
+  const halfYearCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 6 + (0.10 * (((0.8 * maxFollowers) * 0.50) / 12) * 6);
+  const yearCharge = (0.8 * maxFollowers) * 0.50;
+
+  return {
+      quarterly: quarterCharge.toFixed(2),
+      halfYearly: halfYearCharge.toFixed(2),
+      annually: yearCharge.toFixed(2),
+  };
+};
+
 const postSubscription = async (req, res) => {
   try {
     const {
@@ -58,4 +73,26 @@ const getSubscription = async (req, res) => {
   }
 };
 
-module.exports = { postSubscription, getSubscription, getPayment };
+// TODO: Implement the subscriptionPlans controller function dynamically fetch data without user entry
+// 1. we need to get the platform and their account handle to get the followers count all possible platforms.
+// eg: [{ platform: 'instagram', username: 'mrbeast' }, { platform: 'youtube', username: 'mrbeast' }, ...]
+// 2. call the influencerAnalytics function to get the followers count for each platform. provide the parameters correctly as shown in comments in that file.
+// 3. Now store the max followers count in followers variable. 
+// 4. Now test the api working with the postman and check the response of getting subscription plans.
+const subscriptionPlans = (req, res) => {
+  const { platform, followers } = req.body;
+
+  if (!platform || !followers) {
+      return res.status(400).json({ error: 'Platform and followers are required' });
+  }
+
+  const charges = calculateCharges(followers);
+
+  return res.json({
+      charges
+  });
+};
+
+
+
+module.exports = { postSubscription, getSubscription, getPayment, subscriptionPlans };
