@@ -2,6 +2,7 @@
   "cli": {
     "version": ">= 9.2.0"
   },
+  "image": "default",
   "build": {
     "development": {
       "developmentClient": true,
