@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { signup, login, getProfile, updateProfile } = require('../controllers/brandController');
 
-// Signup a brand
-router.post('/signup', signup);
-
 // Login as a brand
 router.post('/login', login);
 

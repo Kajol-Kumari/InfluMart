@@ -20,20 +20,13 @@ const brandSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    required: true,
   },
   website: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    default: "brand", // Set the default value to "brand"
-  },
+  }
 });
 
 const Brand = mongoose.model("Brand", brandSchema);
