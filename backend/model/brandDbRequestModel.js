@@ -20,12 +20,15 @@ const brandSchema = new mongoose.Schema({
   },
   location: {
     type: String,
+    default: "N/A",
   },
   website: {
     type: String,
+    default: "N/A",
   },
   description: {
     type: String,
+    default: "N/A",
   }
 });
 
