@@ -14,6 +14,9 @@ const dbConfig = {
   FB_ENDPOINT: process.env.FB_ENDPOINT,
   INSTA_ENDPOINT: process.env.INSTA_ENDPOINT,
   UPI_URL: process.env.UPI_URL,
+  OTP_MAIL: process.env.OTP_MAIL,
+  PASSWORD: process.env.PASSWORD,
+  SMTP_HOST: process.env.SMTP_HOST,
 };
 
 module.exports = dbConfig;
