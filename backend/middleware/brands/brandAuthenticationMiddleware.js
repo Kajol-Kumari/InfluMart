@@ -24,8 +24,7 @@ const brandAuthenticationMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "Authentication failed" });
     }
   }
-  // No JWT present, continue processing the request as unauthenticated
-  next();
+  return res.status(401).json({ message: "Unauthenticated. Please login"})
 };
 
 module.exports = brandAuthenticationMiddleware;

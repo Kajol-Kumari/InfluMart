@@ -15,25 +15,21 @@ const brandSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: String,
+    type: [String],
     required: true,
   },
   location: {
     type: String,
-    required: true,
+    default: "N/A",
   },
   website: {
     type: String,
-    required: true,
+    default: "N/A",
   },
   description: {
     type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    default: "brand", // Set the default value to "brand"
-  },
+    default: "N/A",
+  }
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

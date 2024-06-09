@@ -1,11 +1,11 @@
-const Brand = require("../model/brands");
+const Brand = require("../model/brandDbRequestModel");
 
 // Sample storage for brands (replace with a database)
 const brandsDB = [];
 
 // Signup a brand
 exports.signup = (req, res) => {
-  const { name, email, password, category, location, website, description } =
+  const { name, email, password, category } =
     req.body;
 
   const brand = new Brand({
@@ -13,9 +13,6 @@ exports.signup = (req, res) => {
     email,
     password,
     category,
-    location,
-    website,
-    description,
   });
   brand
     .save()

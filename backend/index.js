@@ -32,12 +32,6 @@ const influencerAuthenticationMiddleware = require("./middleware/influencers/inf
 const influencerLoggingMiddleware = require("./middleware/influencers/influencerLoggingMiddleware");
 const { getSocialData } = require("./controllers/influencerController");
 
-// Middleware for Brands
-app.use("/brands", brandAuthenticationMiddleware); // Authentication for brands
-app.use("/brands", brandAuthorizationMiddleware); // Authorization for brands
-// app.use("/brands", brandValidationMiddleware); // Validation for brand-specific data
-app.use("/brands", brandLoggingMiddleware); // Logging for brand-specific activities
-
 // Middleware for Influencers
 app.use("/influencers", influencerAuthenticationMiddleware); // Authentication for influencers
 app.use("/influencers", influencerAuthorizationMiddleware); // Authorization for influencers
