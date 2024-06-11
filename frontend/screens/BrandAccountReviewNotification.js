@@ -1,12 +1,31 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
-import { useNavigation } from "@react-navigation/native";
 
 
-const BrandAccountReviewNotification = () => {
-  const navigation = useNavigation();
+const BrandAccountReviewNotification = ({ route, navigation }) => {
+  const { payload } = route.params;
+
+  const registerBrand = async () => {
+    try {
+      const response = await fetch("http://192.168.160.76:3000/brands/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if(response.status === 201){
+        navigation.navigate('AccountCreatedSuccessfullyNoti')
+      }else{
+        Alert.alert("ERROR",data.message);
+      }
+    } catch (error) {
+      Alert.alert("ERROR","Something went wrong");
+    }
+  };
 
   return (
     <View style={styles.brandaccountreviewnotification}>
@@ -50,7 +69,7 @@ const BrandAccountReviewNotification = () => {
               <View style={styles.frameLayout2}>
                 <View style={styles.frameLayout2}>
                   <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                    sophia@getgljevfo.com
+                    {payload.email}
                   </Text>
                 </View>
               </View>
@@ -70,7 +89,7 @@ const BrandAccountReviewNotification = () => {
               <View style={styles.frameLayout1}>
                 <View style={styles.frameLayout1}>
                   <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                    8 characters
+                    {payload.password}
                   </Text>
                 </View>
               </View>
@@ -99,7 +118,7 @@ const BrandAccountReviewNotification = () => {
           <View style={[styles.depth2Frame1, styles.frameLayout]}>
             <View style={styles.frameLayout}>
               <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                Personal
+                {payload.category?.join(", ")}
               </Text>
             </View>
           </View>
@@ -126,14 +145,14 @@ const BrandAccountReviewNotification = () => {
           <View style={[styles.depth2Frame1, styles.frameLayout]}>
             <View style={styles.frameLayout}>
               <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                @sophia
+                {payload.name}
               </Text>
             </View>
           </View>
         </View>
         <View style={styles.depth1Frame6} />
         <View style={[styles.depth1Frame7, styles.depth1FrameLayout]}>
-        <TouchableOpacity onPress={() => navigation.navigate('AccountCreatedSuccessfullyNoti')}>
+        <TouchableOpacity onPress={registerBrand}>
 
           <View style={[styles.depth2Frame05, styles.frameBg]}>
             <View style={[styles.depth3Frame07, styles.frameBg]}>

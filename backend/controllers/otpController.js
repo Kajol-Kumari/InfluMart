@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const Brand = require("../model/brands");
+const Brand = require("../model/brandDbRequestModel");
 const OTP = require("../model/otp");
 const dbConfig = require("../config/dbConfig");
 const {
@@ -12,6 +12,7 @@ const {
   DOESNT_EXIST,
   OTP_SENT,
   OTP_NOT_EXPIRED,
+  BRAND_ALREADY_EXISTS,
 } = require("../constant/constants");
 
 const transporter = nodemailer.createTransport({
@@ -32,14 +33,14 @@ const sendOTP = async (req, res) => {
 
   // Check if email exists
   //Uncomment this only after integrating the brand with database
-  //let brand = await Brand.findOne({ email });
-  // if (!brand) {
-  //     return res.status(400).send('Email does not exist');
-  // }
+  let brand = await Brand.findOne({ email });
+  if (brand) {
+      return res.status(400).json({message: BRAND_ALREADY_EXISTS});
+  }
   let _email = await OTP.findOne({ email });
   if (_email) {
     if (Date.now() < _email.otpExpires) {
-      return res.status(400).json({ message: OTP_NOT_EXPIRED });
+      return res.status(200).json({ message: OTP_NOT_EXPIRED });
     }
   }
   // Generate OTP
