@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Homepage from "./screens/Homepage";
 import BrandorInfluencer from "./screens/BrandorInfluencer";
-import BrandAccountReviewNotification from "./screens/BrandAccountSignupDataPreview";
 import BrandRegistrationForm from "./screens/BrandRegistrationForm";
 import OtpVerification from "./screens/OtpVerification";
 import LoginPage from "./screens/LoginPage";
