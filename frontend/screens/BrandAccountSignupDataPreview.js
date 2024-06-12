@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
-import {API_URL} from '@env'
+import {API_ENDPOINT} from '@env'
 
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
@@ -10,7 +10,7 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
 
   const registerBrand = async () => {
     try {
-      const response = await fetch(`${API_URL}/brands/signup`, {
+      const response = await fetch(`${API_ENDPOINT}/brands/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

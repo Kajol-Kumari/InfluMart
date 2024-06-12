@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
-import {API_URL} from '@env'
+import {API_ENDPOINT} from '@env'
 
 
 const BrandRegistrationForm = ({ navigation }) => {
@@ -42,7 +42,7 @@ const BrandRegistrationForm = ({ navigation }) => {
     }
     try {
       // Send Otp
-      const response = await fetch(`${API_URL}/otp/sendOTP`, {
+      const response = await fetch(`${API_ENDPOINT}/otp/sendOTP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
