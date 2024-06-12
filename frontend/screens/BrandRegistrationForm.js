@@ -1,179 +1,168 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
-
 
 const BrandRegistrationForm = () => {
   const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.scrollView}>
-
-    <View style={styles.brandregistrationform}>
-      <View style={[styles.depth0Frame0, styles.frameLayout2]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
-
-        <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
-            <View style={[styles.depth3Frame0, styles.frameLayout1]}>
-              <Image
-                style={styles.depth4Frame0}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-07.png")}
-              />
-            </View>
-            <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-              <View style={[styles.depth4Frame01, styles.frameLayout1]}>
-                <View style={[styles.depth5Frame0, styles.frameLayout1]} />
-              </View>
-            </View>
-          </View>
-        </View>
-        </TouchableOpacity>
-        <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
-          <View style={styles.depth2Frame01}>
-            <Text style={styles.createAnAccount}>Create a Brand account</Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Email</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame0}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Email
-                      </Text>
-                    </View>
-                  </View>
+      <View style={styles.brandregistrationform}>
+        <View style={[styles.depth0Frame0, styles.frameLayout2]}>
+          <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+            <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
+              <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
+                <View style={[styles.depth3Frame0, styles.frameLayout1]}>
                   <Image
                     style={styles.depth4Frame0}
                     contentFit="cover"
+                    source={require("../assets/depth-4-frame-07.png")}
+                  />
+                </View>
+                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
+                  <View style={[styles.depth4Frame01, styles.frameLayout1]}>
+                    <View style={[styles.depth5Frame0, styles.frameLayout1]} />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame01}>
+              <Text style={styles.createAnAccount}>Create a Brand account</Text>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Email</Text>
+                </View>
+                <View style={styles.emailText}>
+                  <TextInput
+                    style={[styles.email1, styles.emailTypo]}
+                    placeholder="Email"
+                  />
+                  <Image
+                    contentFit="cover"
+                    style={styles.depth4Frame0}
                     source={require("../assets/depth-6-frame-1.png")}
                   />
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Password</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame01}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Password
-                      </Text>
-                    </View>
-                  </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Password</Text>
+                </View>
+                <View style={styles.emailText}>
+                  <TextInput
+                    style={[styles.email1, styles.emailTypo]}
+                    placeholder="Password"
+                  />
                   <Image
-                    style={styles.depth4Frame0}
                     contentFit="cover"
+                    style={styles.depth4Frame0}
                     source={require("../assets/depth-6-frame-11.png")}
                   />
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Brand Type</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame02}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Brand Type
-                      </Text>
-                    </View>
-                  </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Brand Type
+                  </Text>
+                </View>
+                <View style={styles.emailText}>
+                  <TextInput
+                    style={[styles.email1, styles.emailTypo]}
+                    placeholder="Brand Type"
+                  />
                   <Image
-                    style={styles.depth4Frame0}
                     contentFit="cover"
+                    style={styles.depth4Frame0}
                     source={require("../assets/depth-6-frame-12.png")}
                   />
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Username</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame03}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Username
-                      </Text>
-                    </View>
-                  </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Username</Text>
+                </View>
+                <View style={styles.emailText}>
+                  <TextInput
+                    style={[styles.email1, styles.emailTypo]}
+                    placeholder="Username"
+                  />
                   <Image
-                    style={styles.depth4Frame0}
                     contentFit="cover"
+                    style={styles.depth4Frame0}
                     source={require("../assets/depth-6-frame-1.png")}
                   />
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.depth1Frame6}>
-          <View style={styles.depth2Frame06}>
-            <View style={styles.depth3FrameLayout}>
-            <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')}>
-
-              <View style={[styles.depth4Frame06, styles.depth4FrameLayout]}>
-                <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
-                  <View style={styles.depth7Frame0}>
-                    <Text style={[styles.generateOtp, styles.signUpTypo]}>
-                      Generate OTP
-                    </Text>
+          <View style={styles.depth1Frame6}>
+            <View style={styles.depth2Frame06}>
+              <View style={styles.depth3FrameLayout}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("OtpVerification")}
+                >
+                  <View
+                    style={[styles.depth4Frame06, styles.depth4FrameLayout]}
+                  >
+                    <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
+                      <View style={styles.depth7Frame0}>
+                        <Text style={[styles.generateOtp, styles.signUpTypo]}>
+                          Generate OTP
+                        </Text>
+                      </View>
+                    </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               </View>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
-
-              <View style={[styles.depth4Frame07, styles.frameBg]}>
-                <View style={[styles.depth5Frame06, styles.frameBg]}>
-                  <View style={styles.depth7Frame0}>
-                    <Text style={[styles.signUp, styles.signUpTypo]}>
-                      Sign In
-                    </Text>
+              <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("LoginPageBrands")}
+                >
+                  <View style={[styles.depth4Frame07, styles.frameBg]}>
+                    <View style={[styles.depth5Frame06, styles.frameBg]}>
+                      <View style={styles.depth7Frame0}>
+                        <Text style={[styles.signUp, styles.signUpTypo]}>
+                          Sign In
+                        </Text>
+                      </View>
+                    </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               </View>
-              </TouchableOpacity>
             </View>
           </View>
+          <View style={[styles.depth1Frame7, styles.frameLayout2]} />
         </View>
-        <View style={[styles.depth1Frame7, styles.frameLayout2]} />
       </View>
-    </View>
     </ScrollView>
-
   );
 };
 
@@ -181,7 +170,16 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-
+  emailText: {
+    height: 56,
+    backgroundColor: Color.colorAliceblue,
+    justifyContent: "space-between",
+    paddingHorizontal: Padding.p_base,
+    borderRadius: Border.br_xs,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
   frameLayout2: {
     width: 390,
     backgroundColor: Color.colorWhitesmoke_100,
@@ -206,7 +204,6 @@ const styles = StyleSheet.create({
   },
   emailTypo: {
     textAlign: "left",
-    lineHeight: 24,
     fontSize: FontSize.size_base,
   },
   depth5FrameBg: {
@@ -301,6 +298,7 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
   },
   email1: {
+    flex: 1,
     fontFamily: FontFamily.workSansRegular,
     color: Color.colorSteelblue_200,
   },
@@ -308,9 +306,9 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth6Frame0: {
-    width: 'auto',
+    width: "auto",
     height: 24,
-    overflow: "hidden",
+    // overflow: "hidden",
   },
   depth5Frame01: {
     padding: Padding.p_base,
@@ -340,17 +338,17 @@ const styles = StyleSheet.create({
     width: 390,
   },
   depth6Frame01: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
   depth6Frame02: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
   depth6Frame03: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -358,7 +356,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth5Frame05: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth4Frame06: {
@@ -369,7 +367,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth5Frame06: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth4Frame07: {
@@ -408,8 +406,10 @@ const styles = StyleSheet.create({
   brandregistrationform: {
     backgroundColor: Color.colorWhite,
     flex: 1,
-    width: "100%",
-    height: 844,
+    width: "auto",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
