@@ -1,18 +1,47 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView,TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from "react-native";
 import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
 
 
 const LoginPageBrand = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  //It handle the login functionality
+  const handleBrandLogin = async () => {
+    if (email.trim() != "" && password.trim() != "") {
+      try {
+        const response = await fetch(`${process.env.API_ENDPOINT}/brands/login`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json()
+        if (response.status == 200){
+          Alert.alert("Success", data.message)
+          navigation.navigate("BrandProfile")
+          setEmail("")
+          setPassword("")
+        }
+        else
+          Alert.alert("Error", data.message)
+      }
+      catch (error) {
+        Alert.alert("Error", error.message)
+      }
+    }
+    else
+      Alert.alert("Error", "Please provide email and password")
+  }
 
   return (
-    <ScrollView style={styles.loginpagebrand} contentContainerStyle={styles.scrollViewContent}>
-
-    <View style={styles.loginpagebrand}>
-      <View style={[styles.depth0Frame0, styles.frameLayout2]}>
+    <ScrollView style={{ width: '100%', height: "100%", paddingTop: 30, backgroundColor: Color.colorWhitesmoke_100 }}>
       <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
 
         <View style={styles.depth1Frame0}>
@@ -32,103 +61,84 @@ const LoginPageBrand = () => {
             </View>
           </View>
         </View>
-        </TouchableOpacity>
-        <View style={styles.depth1Frame1}>
-          <View style={styles.depth2Frame01}>
-            <Text style={styles.welcomeBack}>Welcome back!</Text>
-          </View>
+      </TouchableOpacity>
+      <View style={styles.depth1Frame1}>
+        <View style={styles.depth2Frame01}>
+          <Text style={styles.welcomeBack}>Welcome back!</Text>
         </View>
-        <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-          <View style={styles.depth2Frame01}>
-            <Text style={styles.getReadyTo}>
-              Get Influencers of your choice. Please log in to your brand account to continue.
-            </Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame3}>
-          <View style={[styles.depth2Frame03, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={[styles.depth4Frame02, styles.frameLayout]}>
-                <View style={styles.depth5Frame01}>
-                  <View style={styles.depth6Frame0}>
-                    <View style={styles.depth2Frame01}>
-                      <Text style={[styles.email, styles.emailClr]}>Email</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame3}>
-          <View style={[styles.depth2Frame03, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={[styles.depth4Frame02, styles.frameLayout]}>
-                <View style={styles.depth5Frame01}>
-                  <View style={styles.depth6Frame01}>
-                    <View style={styles.depth2Frame01}>
-                      <Text style={[styles.email, styles.emailClr]}>
-                        Password
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.depth1Frame5, styles.depth1FrameSpaceBlock]}>
-          <View style={styles.depth2Frame01}>
-            <Text style={[styles.forgotYourPassword, styles.logInTypo]}>
-              Forgot your password?
-            </Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame6}>
-          <View style={styles.depth2Frame06}>
-          <TouchableOpacity onPress={() => navigation.navigate('BrandProfile')}>
-
-            <View style={styles.depth3FrameLayout}>
-              <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>
-                <View style={[styles.depth5Frame03, styles.frameBg1]}>
-                  <View style={styles.depth2Frame01}>
-                    <Text style={[styles.logIn, styles.logInTypo]}>Log In</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-            </TouchableOpacity>
-            <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
-
-              <View style={[styles.depth4Frame05, styles.frameBg]}>
-                <View style={[styles.depth5Frame04, styles.frameBg]}>
-                  <View style={styles.depth2Frame01}>
-                    <Text style={[styles.signUp, styles.logInTypo]}>
-                      Sign Up
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.depth1Frame7, styles.frameLayout2]} />
       </View>
-    </View>
-        </ScrollView>
+      <View style={{ margin: 15 }}>
+        <View style={styles.depth2Frame01}>
+          <Text style={styles.getReadyTo}>
+            Get Influencers of your choice. Please log in to your brand account to continue.
+          </Text>
+        </View>
+      </View>
+      <View style={{ margin: 15 }}>
+        <View style={styles.depth5Frame01}>
+          <View style={styles.depth6Frame0}>
+            <View style={styles.depth2Frame01}>
+              <TextInput placeholder="Email" textContentType='emailAddress' style={[styles.email, styles.emailClr]} value={email} onChangeText={setEmail} />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={{ margin: 15 }}>
+        <View style={styles.depth5Frame01}>
+          <View style={styles.depth6Frame0}>
+            <View style={styles.depth2Frame01}>
+              <TextInput placeholder="Password" textContentType='password' style={[styles.email, styles.emailClr]} value={password} onChangeText={setPassword} />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={[styles.depth1Frame5, styles.depth1FrameSpaceBlock]}>
+        <View style={styles.depth2Frame01}>
+          <Text style={[styles.forgotYourPassword, styles.logInTypo]}>
+            Forgot your password?
+          </Text>
+        </View>
+      </View>
+      <View style={{ margin: 15 }}>
+        <View style={styles.depth2Frame06}>
+          <TouchableOpacity style={{ width: "100%" }} onPress={handleBrandLogin}>
+            <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>
+              <View style={[styles.depth5Frame03, styles.frameBg1]}>
+                <View style={styles.depth2Frame01}>
+                  <Text style={[styles.logIn, styles.logInTypo]}>Log In</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('BrandRegistrationForm')}>
+
+            <View style={[styles.depth4Frame05, styles.frameBg]}>
+              <View style={[styles.depth5Frame04, styles.frameBg]}>
+                <View style={styles.depth2Frame01}>
+                  <Text style={[styles.signUp, styles.logInTypo]}>
+                    Sign Up
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
 
   );
 };
 
 const styles = StyleSheet.create({
-    scrollViewContent: {
-        flexGrow: 1,
-      },
-    
+  scrollViewContent: {
+    flexGrow: 1,
+    width: "100%",
+    height: "100%",
+    alignItems: 'center'
+  },
+
   frameLayout2: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
   },
   frameFlexBox: {
@@ -167,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
   },
   frameBg1: {
@@ -244,14 +254,16 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   email: {
-    lineHeight: 24,
+    width: 330,
+    height: 25,
     fontSize: FontSize.size_base,
     color: Color.colorSteelblue_200,
     textAlign: "left",
+    outlineStyle: "none"
   },
   depth6Frame0: {
     width: 'auto',
-    height: 24,
+    height: 40,
     overflow: "hidden",
   },
   depth5Frame01: {
@@ -263,7 +275,7 @@ const styles = StyleSheet.create({
     height: 56,
     justifyContent: "space-between",
     flexDirection: "row",
-    width: 358,
+    width: '100%',
     overflow: "hidden",
     backgroundColor: Color.colorWhitesmoke_100,
   },
@@ -272,6 +284,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame03: {
+    width: "100%",
     alignItems: "flex-end",
     flexDirection: "row",
   },
@@ -281,7 +294,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth6Frame01: {
     width: 'auto',
@@ -308,7 +321,7 @@ const styles = StyleSheet.create({
   },
   depth4Frame04: {
     backgroundColor: Color.colorDodgerblue,
-    overflow: "hidden",
+    overflow: "hidden"
   },
   signUp: {
     color: Color.colorGray,
@@ -328,8 +341,9 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
+    marginTop: 10
   },
   depth3Frame11: {
     marginTop: 12,
@@ -337,7 +351,7 @@ const styles = StyleSheet.create({
   depth2Frame06: {
     height: 92,
     alignItems: "center",
-    width: 358,
+    width: "100%",
   },
   depth1Frame6: {
     height: 116,
@@ -351,13 +365,16 @@ const styles = StyleSheet.create({
     height: 20,
   },
   depth0Frame0: {
-    height: 844,
+    width: '100%',
+    height: '100%',
     overflow: "hidden",
   },
   loginpagebrand: {
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
+    height: "100%",
+    paddingTop: 20
   },
 });
 
