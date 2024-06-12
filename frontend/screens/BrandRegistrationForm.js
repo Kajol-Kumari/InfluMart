@@ -1,179 +1,210 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
-import { useNavigation } from "@react-navigation/native";
+import {API_ENDPOINT} from '@env'
 
 
-const BrandRegistrationForm = () => {
-  const navigation = useNavigation();
+const BrandRegistrationForm = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [brandType, setBrandType] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = async () => {
+    // Construct the payload
+    const payload = {
+      email,
+      password,
+      category: [brandType],
+      name: username,
+    };
+    const emailRegex = /\S+@\S+\.\S+/;
+    if(!emailRegex.test(email)){
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
+    if (!email || !password || !brandType || !username) {
+      Alert.alert("Error", "Please fill all the fields");
+      return;
+    }
+    if(password.length<8){
+      Alert.alert("Error", "Password should be atleast 8 characters long");
+      return;
+    }
+    try {
+      // Send Otp
+      const response = await fetch(`${API_ENDPOINT}/otp/sendOTP`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name: username }),
+      });
+      const data = await response.json();
+      if (response.status == 200) {
+        navigation.navigate("OtpVerification", { payload });
+      } else {
+        Alert.alert("Error",data.message);
+      }
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong. Please try again.");
+      console.log(error)
+    }
+  };
 
   return (
     <ScrollView style={styles.scrollView}>
-
-    <View style={styles.brandregistrationform}>
-      <View style={[styles.depth0Frame0, styles.frameLayout2]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
-
-        <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
-            <View style={[styles.depth3Frame0, styles.frameLayout1]}>
-              <Image
-                style={styles.depth4Frame0}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-07.png")}
-              />
-            </View>
-            <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-              <View style={[styles.depth4Frame01, styles.frameLayout1]}>
-                <View style={[styles.depth5Frame0, styles.frameLayout1]} />
-              </View>
-            </View>
-          </View>
-        </View>
-        </TouchableOpacity>
-        <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
-          <View style={styles.depth2Frame01}>
-            <Text style={styles.createAnAccount}>Create a Brand account</Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Email</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame0}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Email
-                      </Text>
-                    </View>
-                  </View>
+      <View style={styles.brandregistrationform}>
+        <View style={[styles.depth0Frame0, styles.frameLayout2]}>
+          <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+            <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
+              <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
+                <View style={[styles.depth3Frame0, styles.frameLayout1]}>
                   <Image
                     style={styles.depth4Frame0}
                     contentFit="cover"
-                    source={require("../assets/depth-6-frame-1.png")}
+                    source={require("../assets/depth-4-frame-07.png")}
                   />
+                </View>
+                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
+                  <View style={[styles.depth4Frame01, styles.frameLayout1]}>
+                    <View style={[styles.depth5Frame0, styles.frameLayout1]} />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame01}>
+              <Text style={styles.createAnAccount}>Create a Brand account</Text>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Email</Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={email}
+                      onChangeText={setEmail}
+                      placeholder="Email"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                    />
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Password</Text>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Password</Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={password}
+                      onChangeText={setPassword}
+                      placeholder="Password"
+                      secureTextEntry
+                    />
+                  </View>
+                </View>
               </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame01}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Password
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Brand Type
+                  </Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={brandType}
+                      onChangeText={setBrandType}
+                      placeholder="Brand Type"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Username</Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={username}
+                      onChangeText={setUsername}
+                      placeholder="Username"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth1Frame6}>
+            <View style={styles.depth2Frame06}>
+              <View style={styles.depth3FrameLayout}>
+                <TouchableOpacity onPress={handleSubmit}>
+                  <View
+                    style={[styles.depth4Frame06, styles.depth4FrameLayout]}
+                  >
+                    <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
+                      <Text style={[styles.generateOtp, styles.signUpTypo]}>
+                        Generate OTP
                       </Text>
                     </View>
                   </View>
-                  <Image
-                    style={styles.depth4Frame0}
-                    contentFit="cover"
-                    source={require("../assets/depth-6-frame-11.png")}
-                  />
-                </View>
+                </TouchableOpacity>
               </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Brand Type</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame02}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Brand Type
-                      </Text>
+              <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("LoginPageBrands")}
+                >
+                  <View style={[styles.depth4Frame07, styles.frameBg]}>
+                    <View style={[styles.depth5Frame06, styles.frameBg]}>
+                      <View style={styles.depth7Frame0}>
+                        <Text style={[styles.signUp, styles.signUpTypo]}>
+                          Sign In
+                        </Text>
+                      </View>
                     </View>
                   </View>
-                  <Image
-                    style={styles.depth4Frame0}
-                    contentFit="cover"
-                    source={require("../assets/depth-6-frame-12.png")}
-                  />
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
+          <View style={[styles.depth1Frame7, styles.frameLayout2]} />
         </View>
-        <View style={styles.depth1Frame2}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <View style={styles.depth4Frame02}>
-                <Text style={[styles.email, styles.emailTypo]}>Username</Text>
-              </View>
-              <View style={styles.depth4Frame1}>
-                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                  <View style={styles.depth6Frame03}>
-                    <View style={styles.depth7Frame0}>
-                      <Text style={[styles.email1, styles.emailTypo]}>
-                        Username
-                      </Text>
-                    </View>
-                  </View>
-                  <Image
-                    style={styles.depth4Frame0}
-                    contentFit="cover"
-                    source={require("../assets/depth-6-frame-1.png")}
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame6}>
-          <View style={styles.depth2Frame06}>
-            <View style={styles.depth3FrameLayout}>
-            <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')}>
-
-              <View style={[styles.depth4Frame06, styles.depth4FrameLayout]}>
-                <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
-                  <View style={styles.depth7Frame0}>
-                    <Text style={[styles.generateOtp, styles.signUpTypo]}>
-                      Generate OTP
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
-
-              <View style={[styles.depth4Frame07, styles.frameBg]}>
-                <View style={[styles.depth5Frame06, styles.frameBg]}>
-                  <View style={styles.depth7Frame0}>
-                    <Text style={[styles.signUp, styles.signUpTypo]}>
-                      Sign In
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.depth1Frame7, styles.frameLayout2]} />
       </View>
-    </View>
     </ScrollView>
-
   );
 };
 
@@ -181,7 +212,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-
   frameLayout2: {
     width: 390,
     backgroundColor: Color.colorWhitesmoke_100,
@@ -308,7 +338,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth6Frame0: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -340,17 +370,17 @@ const styles = StyleSheet.create({
     width: 390,
   },
   depth6Frame01: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
   depth6Frame02: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
   depth6Frame03: {
-    width: 'auto',
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -358,7 +388,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth5Frame05: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth4Frame06: {
@@ -369,7 +399,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth5Frame06: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth4Frame07: {
@@ -410,6 +440,16 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: 844,
+  },
+  textInput: {
+    height: 40,
+    borderColor: Color.colorGray_400,
+    borderWidth: 0,
+    borderRadius: Border.br_xs,
+    paddingHorizontal: Padding.p_base,
+    fontSize: FontSize.size_base,
+    color: Color.colorGray_400,
+    flex: 1,
   },
 });
 
