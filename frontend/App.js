@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Homepage from "./screens/Homepage";
 import BrandorInfluencer from "./screens/BrandorInfluencer";
-import BrandAccountReviewNotification from "./screens/BrandAccountReviewNotification";
+import BrandAccountReviewNotification from "./screens/BrandAccountSignupDataPreview";
 import BrandRegistrationForm from "./screens/BrandRegistrationForm";
 import OtpVerification from "./screens/OtpVerification";
 import LoginPage from "./screens/LoginPage";
@@ -25,6 +25,7 @@ import AdminPanel from "./screens/AdminPanel";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -71,7 +72,7 @@ const App = () => {
             />
             <Stack.Screen
               name="BrandAccountReviewNotification"
-              component={BrandAccountReviewNotification}
+              component={BrandAccountSignupDataPreview}
               options={{ headerShown: false }}
             />
             <Stack.Screen

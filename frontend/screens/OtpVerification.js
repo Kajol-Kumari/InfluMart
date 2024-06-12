@@ -2,6 +2,7 @@ import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
+import {API_URL} from '@env'
 
 const OtpVerification = ({ route, navigation }) => {
   const { payload } = route.params;
@@ -10,7 +11,7 @@ const OtpVerification = ({ route, navigation }) => {
   const verifyOTP = async () => {
     const { email } = payload;
     try {
-      const response = await fetch("http://192.168.160.76:3000/otp/verifyOTP", {
+      const response = await fetch(`${API_URL}/otp/verifyOTP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

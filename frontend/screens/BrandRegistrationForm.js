@@ -10,6 +10,8 @@ import {
   Alert,
 } from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
+import {API_URL} from '@env'
+
 
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -25,18 +27,27 @@ const BrandRegistrationForm = ({ navigation }) => {
       category: [brandType],
       name: username,
     };
+    const emailRegex = /\S+@\S+\.\S+/;
+    if(!emailRegex.test(email)){
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
     if (!email || !password || !brandType || !username) {
       Alert.alert("Error", "Please fill all the fields");
       return;
     }
+    if(password.length<8){
+      Alert.alert("Error", "Password should be atleast 8 characters long");
+      return;
+    }
     try {
       // Send Otp
-      const response = await fetch("http://192.168.160.76:3000/otp/sendOTP", {
+      const response = await fetch(`${API_URL}/otp/sendOTP`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, name: username }),
       });
       const data = await response.json();
       if (response.status == 200) {

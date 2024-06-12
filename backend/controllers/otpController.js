@@ -13,6 +13,7 @@ const {
   OTP_SENT,
   OTP_NOT_EXPIRED,
   BRAND_ALREADY_EXISTS,
+  NAME_ALREADY_EXISTS,
 } = require("../constant/constants");
 
 const transporter = nodemailer.createTransport({
@@ -29,13 +30,17 @@ function generateOTP() {
 }
 
 const sendOTP = async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
 
   // Check if email exists
   //Uncomment this only after integrating the brand with database
   let brand = await Brand.findOne({ email });
+  let _name = await Brand.findOne({ name });
+  if (_name) {
+    return res.status(400).json({ message: NAME_ALREADY_EXISTS });
+  }
   if (brand) {
-      return res.status(400).json({message: BRAND_ALREADY_EXISTS});
+    return res.status(400).json({ message: BRAND_ALREADY_EXISTS });
   }
   let _email = await OTP.findOne({ email });
   if (_email) {

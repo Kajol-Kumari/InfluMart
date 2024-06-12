@@ -2,14 +2,15 @@ import * as React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
+import {API_URL} from '@env'
 
 
-const BrandAccountReviewNotification = ({ route, navigation }) => {
+const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const { payload } = route.params;
 
   const registerBrand = async () => {
     try {
-      const response = await fetch("http://192.168.160.76:3000/brands/signup", {
+      const response = await fetch(`${API_URL}/brands/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -424,4 +425,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BrandAccountReviewNotification;
+export default BrandAccountSignupDataPreview;
