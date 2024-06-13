@@ -87,7 +87,7 @@ const LoginPageBrand = () => {
         <View style={styles.depth5Frame01}>
           <View style={styles.depth6Frame0}>
             <View style={styles.depth2Frame01}>
-              <TextInput placeholder="Password" textContentType='password' style={[styles.email, styles.emailClr]} value={password} onChangeText={setPassword} />
+              <TextInput placeholder="Password" secureTextEntry={true} textContentType='password' style={[styles.email, styles.emailClr]} value={password} onChangeText={setPassword} />
             </View>
           </View>
         </View>
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   email: {
-    width: 330,
+    width: "100%",
     height: 25,
     fontSize: FontSize.size_base,
     color: Color.colorSteelblue_200,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     outlineStyle: "none"
   },
   depth6Frame0: {
-    width: 'auto',
+    width: '100%',
     height: 40,
     overflow: "hidden",
   },
