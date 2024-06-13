@@ -5,11 +5,10 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Alert,
   TextInput,
 } from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
-import { API_ENDPOINT } from "@env";
+import { verifyOTP } from "../controller/signupController";
 
 const OtpVerification = ({ route, navigation }) => {
   const { payload } = route.params;
@@ -31,33 +30,13 @@ const OtpVerification = ({ route, navigation }) => {
     }
   };
 
-  const verifyOTP = async () => {
-    const { email } = payload;
+  const handleNext = async () => {
     if (otp.includes("")) {
       setError(true);
       return;
     }
     const _otp = otp.join("");
-    try {
-      const response = await fetch(`${API_ENDPOINT}/otp/verifyOTP`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          otp: _otp,
-        }),
-      });
-      const data = await response.json();
-      if (response.status === 200) {
-        navigation.navigate("BrandAccountReviewNotification", { payload });
-      } else {
-        Alert.alert("Error", data.message);
-      }
-    } catch (error) {
-      Alert.alert("Error", "Something went wrong. Please try again.");
-    }
+    await verifyOTP(_otp,payload,navigation);
   };
 
   return (
@@ -108,7 +87,7 @@ const OtpVerification = ({ route, navigation }) => {
         </View>
         <View style={styles.depth1Frame3} />
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
-          <TouchableOpacity onPress={verifyOTP}>
+          <TouchableOpacity onPress={handleNext}>
             <View style={[styles.depth2Frame03, styles.frameBg]}>
               <View style={[styles.depth3Frame02, styles.frameBg]}>
                 <View style={styles.depth2Frame01}>

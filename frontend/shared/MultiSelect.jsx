@@ -12,6 +12,7 @@ import {
   Pressable,
   Keyboard,
 } from "react-native";
+import { Border, Color } from "../GlobalStyles";
 
 const MultipleSelectList = ({
   setSelected,
@@ -76,7 +77,7 @@ const MultipleSelectList = ({
   }, [dropdownShown]);
 
   return (
-    <View>
+    <View style={{backgroundColor:"#E8EDF2",borderRadius: Border.br_xs,borderColor:"#E8EDF2",borderWidth:1}}>
       {dropdown && search ? (
         <View style={[styles.wrapper]}>
           <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
@@ -136,7 +137,7 @@ const MultipleSelectList = ({
             <View
               style={{
                 flexDirection: "row",
-                overflow: "scroll",
+                overflow: "hidden",
               }}
             >
               {selectedval?.map((item, index) => {
@@ -174,7 +175,7 @@ const MultipleSelectList = ({
             }
           }}
         >
-          <Text style={[{  }]}>
+          <Text style={[{ color: Color.colorSteelblue_200 }]}>
             {selectedval == ""
               ? placeholder
                 ? placeholder
@@ -385,9 +386,8 @@ export default MultipleSelectList;
 
 const styles = StyleSheet.create({
   wrapper: {
-    borderWidth: 1,
     borderRadius: 10,
-    borderColor: "gray",
+    backgroundColor: "E8EDF2",
     paddingHorizontal: 20,
     paddingVertical: 12,
     flexDirection: "row",

@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Homepage from "./screens/Homepage";
 import BrandorInfluencer from "./screens/BrandorInfluencer";
-import BrandRegistrationForm from "./screens/BrandRegistrationForm";
 import OtpVerification from "./screens/OtpVerification";
 import LoginPage from "./screens/LoginPage";
 import FriendRequestPage from "./screens/FriendRequestPage";
@@ -25,6 +24,7 @@ import AdminPanel from "./screens/AdminPanel";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
+import BrandRegistrationForm from "./screens/signup/BrandRegistrationForm";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
