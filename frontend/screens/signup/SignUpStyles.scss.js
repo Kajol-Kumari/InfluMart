@@ -103,7 +103,7 @@ export const signupStyles = {
       fontSize: FontSize.size_3xl,
       lineHeight: 28,
       textAlign: "center",
-      color: Color.colorSteelblue_200,
+      color: Color.colorBlack,
       fontFamily: FontFamily.workSansBold,
       fontWeight: "700",
       letterSpacing: 0,
@@ -121,7 +121,7 @@ export const signupStyles = {
     email: {
       fontWeight: "500",
       fontFamily: FontFamily.workSansMedium,
-      color: Color.colorSteelblue_200,
+      color: Color.colorBlack,
       alignSelf: "stretch",
     },
     depth4Frame02: {
