@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Image } from "expo-image";
@@ -7,23 +7,23 @@ import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const InboxInterface = () => {
   const navigation = useNavigation();
+  const { width, height } = Dimensions.get("window");
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={[styles.inboxinterface, styles.depth0Frame0Layout]}>
-        <View style={[styles.depth0Frame0, styles.depth0Frame0Layout]}>
+      <View style={[styles.inboxinterface, { height }]}>
+        <View style={styles.depth0Frame0}>
           <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
 
             <View style={styles.depth2Frame0}>
-            <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
-
-              <View style={styles.depth3Frame0}>
-                <View style={styles.depth4Frame0}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.inbox, styles.inboxFlexBox]}>Inbox</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+                <View style={styles.depth3Frame0}>
+                  <View style={styles.depth4Frame0}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.inbox, styles.inboxFlexBox]}>Inbox</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
               </TouchableOpacity>
               <View style={[styles.depth3Frame1, styles.frameLayout1]}>
                 <View style={[styles.depth4Frame01, styles.frameFlexBox]}>
@@ -53,34 +53,31 @@ const InboxInterface = () => {
             </View>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('ChatInterface')}>
-
-          <View style={[styles.depth1Frame2, styles.depth1FrameLayout]}>
-            <View style={styles.depth2Frame02}>
-              <Image
-                style={[styles.depth3Frame02, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-3-frame-05.png")}
-              />
-              <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
-                <View style={styles.depth4Frame03}>
-                  <View style={styles.depth5Frame0}>
-                    <Text
-                      style={[styles.projectWithAnna, styles.searchForALayout]}
-                    >
-                      Project with Anna
-                    </Text>
+            <View style={[styles.depth1Frame2, styles.depth1FrameLayout]}>
+              <View style={styles.depth2Frame02}>
+                <Image
+                  style={[styles.depth3Frame02, styles.frameLayout]}
+                  contentFit="cover"
+                  source={require("../assets/depth-3-frame-05.png")}
+                />
+                <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
+                  <View style={styles.depth4Frame03}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.projectWithAnna, styles.searchForALayout]}>
+                        Project with Anna
+                      </Text>
+                    </View>
                   </View>
-                </View>
-                <View style={[styles.depth4Frame1, styles.depth4FrameLayout]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.inProgress, styles.searchForATypo]}>
-                      In progress
-                    </Text>
+                  <View style={[styles.depth4Frame1, styles.depth4FrameLayout]}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.inProgress, styles.searchForATypo]}>
+                        In progress
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
           </TouchableOpacity>
 
           <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
@@ -91,34 +88,31 @@ const InboxInterface = () => {
             </View>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('ChatInterface')}>
-
-          <View style={[styles.depth1Frame2, styles.depth1FrameLayout]}>
-            <View style={styles.depth2Frame02}>
-              <Image
-                style={[styles.depth3Frame02, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-3-frame-06.png")}
-              />
-              <View style={[styles.depth3Frame21, styles.depth3FrameSpaceBlock]}>
-                <View style={styles.depth4Frame04}>
-                  <View style={styles.depth5Frame0}>
-                    <Text
-                      style={[styles.projectWithAnna, styles.searchForALayout]}
-                    >
-                      Project with Will
-                    </Text>
+            <View style={[styles.depth1Frame2, styles.depth1FrameLayout]}>
+              <View style={styles.depth2Frame02}>
+                <Image
+                  style={[styles.depth3Frame02, styles.frameLayout]}
+                  contentFit="cover"
+                  source={require("../assets/depth-3-frame-06.png")}
+                />
+                <View style={[styles.depth3Frame21, styles.depth3FrameSpaceBlock]}>
+                  <View style={styles.depth4Frame04}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.projectWithAnna, styles.searchForALayout]}>
+                        Project with Will
+                      </Text>
+                    </View>
                   </View>
-                </View>
-                <View style={[styles.depth4Frame11, styles.depth4FrameLayout]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.inProgress, styles.searchForATypo]}>
-                      Not started
-                    </Text>
+                  <View style={[styles.depth4Frame11, styles.depth4FrameLayout]}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.inProgress, styles.searchForATypo]}>
+                        Not started
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
           </TouchableOpacity>
 
           <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
@@ -151,13 +145,17 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
   },
-  depth0Frame0Layout: {
-    height: 844,
-    backgroundColor: Color.colorWhite,
+  inboxinterface: {
+    flex: 1,
+    width: "100%",
+  },
+  depth0Frame0: {
+    overflow: "hidden",
+    width: "100%",
   },
   depth1FrameSpaceBlock: {
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   inboxFlexBox: {
     textAlign: "left",
@@ -214,7 +212,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame0: {
-    width: 310,
+    width: '100%',
     height: 23,
     alignItems: "center",
     flexDirection: "row",
@@ -235,7 +233,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 48,
-    width: 358,
+    width: '100%',
   },
   depth1Frame0: {
     paddingTop: Padding.p_base,
@@ -258,7 +256,7 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: '100%',
     paddingHorizontal: Padding.p_base,
     height: 72,
   },
@@ -267,7 +265,7 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: '100%',
   },
   depth3Frame02: {
     borderRadius: Border.br_9xl,
@@ -300,10 +298,10 @@ const styles = StyleSheet.create({
     height: 56,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: '100%',
   },
   depth1Frame2: {
-    width: 390,
+    width: '100%',
   },
   hiAnnaHere: {
     fontFamily: FontFamily.beVietnamProRegular,
@@ -330,7 +328,7 @@ const styles = StyleSheet.create({
   },
   depth1Frame6: {
     height: 308,
-    width: 390,
+    width: '100%',
   },
   depth3Frame04: {
     shadowColor: "rgba(0, 0, 0, 0.1)",
@@ -359,20 +357,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_xl,
     paddingBottom: Padding.p_xl,
     overflow: "hidden",
-    width: 390,
+    width: '100%',
   },
   depth1Frame8: {
     height: 20,
-    width: 390,
+    width: '100%',
     backgroundColor: Color.colorWhite,
-  },
-  depth0Frame0: {
-    overflow: "hidden",
-    width: 390,
-  },
-  inboxinterface: {
-    flex: 1,
-    width: "100%",
   },
 });
 

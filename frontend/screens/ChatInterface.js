@@ -14,16 +14,15 @@ const ChatInterface = () => {
     <View style={styles.chatinterface}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <View style={styles.depth0Frame0}>
-        <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
-
-          <Depth1Frame7
-            depth4Frame0={require("../assets/depth-4-frame-017.png")}
-            requestDetails="Chat with Liliam"
-            depth3Frame0BackgroundColor="#fff"
-            requestDetailsWidth={'auto'}
-            depth4Frame0FontFamily="BeVietnamPro-Bold"
-            depth4Frame0Color="#000"
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
+            <Depth1Frame7
+              depth4Frame0={require("../assets/depth-4-frame-017.png")}
+              requestDetails="Chat with Liliam"
+              depth3Frame0BackgroundColor="#fff"
+              requestDetailsWidth={'auto'}
+              depth4Frame0FontFamily="BeVietnamPro-Bold"
+              depth4Frame0Color="#000"
+            />
           </TouchableOpacity>
           <View style={styles.depth1Frame1}>
             <View style={styles.depth2Frame0}>
@@ -178,14 +177,14 @@ const styles = StyleSheet.create({
     height: 24,
   },
   depth3Frame1: {
-    width: 310,
+    flex: 1,
     paddingHorizontal: 0,
     paddingVertical: Padding.p_xs,
     marginLeft: 8,
     height: 72,
   },
   depth2Frame0: {
-    width: 358,
+    flex: 1,
     flexDirection: "row",
     height: 72,
   },
@@ -198,24 +197,22 @@ const styles = StyleSheet.create({
     height: 24,
   },
   depth1Frame1: {
-    height: 216,
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
-    width: 390,
+    width: '100%',
   },
   depth1Frame3: {
     height: 389,
-    width: 390,
+    width: '100%',
   },
   depth1Frame5: {
     height: 20,
-    width: 390,
+    width: '100%',
     backgroundColor: Color.colorWhite,
   },
   depth0Frame0: {
-    height: 844,
-    overflow: "hidden",
-    width: 390,
+    flex: 1,
+    width: '100%',
     backgroundColor: Color.colorWhite,
   },
   chatinterface: {
