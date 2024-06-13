@@ -10,38 +10,50 @@ import {
   Alert,
 } from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
-import {API_ENDPOINT} from '@env'
-
+import { API_ENDPOINT } from "@env";
+import MultipleSelectList from "../shared/MultiSelect";
 
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [brandType, setBrandType] = useState("");
   const [username, setUsername] = useState("");
+  const [selected, setSelected] = useState([]);
+
+  const data = [
+    { key: "grocery", value: "Grocery" },
+    { key: "electronics", value: "Electronics" },
+    { key: "fashion", value: "Fashion" },
+    { key: "toys", value: "Toys" },
+    { key: "beauty", value: "Beauty" },
+    { key: "home-decoration", value: "Home Decoration" },
+    { key: "fitness", value: "Fitness" },
+    { key: "education", value: "Education" },
+    { key: "others", value: "Others" },
+  ];
 
   const handleSubmit = async () => {
     // Construct the payload
     const payload = {
       email,
       password,
-      category: [brandType],
+      category: selected,
       name: username,
     };
     const emailRegex = /\S+@\S+\.\S+/;
-    if(!emailRegex.test(email)){
+    if (!emailRegex.test(email)) {
       Alert.alert("Error", "Please enter a valid email address");
       return;
     }
-    if (!email || !password || !brandType || !username) {
+    if (!email || !password || !selected.length || !username) {
       Alert.alert("Error", "Please fill all the fields");
       return;
     }
-    if(password.length<8){
-      Alert.alert("Error", "Password should be atleast 8 characters long");
+    if (password.length < 8) {
+      Alert.alert("Error", "Password should be at least 8 characters long");
       return;
     }
     try {
-      // Send Otp
+      // Send OTP
       const response = await fetch(`${API_ENDPOINT}/otp/sendOTP`, {
         method: "POST",
         headers: {
@@ -53,11 +65,10 @@ const BrandRegistrationForm = ({ navigation }) => {
       if (response.status == 200) {
         navigation.navigate("OtpVerification", { payload });
       } else {
-        Alert.alert("Error",data.message);
+        Alert.alert("Error", data.message);
       }
     } catch (error) {
       Alert.alert("Error", "Something went wrong. Please try again.");
-      console.log(error)
     }
   };
 
@@ -94,8 +105,8 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Email</Text>
                 </View>
-                <View style={styles.depth4Frame1}>
-                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                <View>
+                  <View style={[styles.depth5Frame01]}>
                     <TextInput
                       style={styles.textInput}
                       value={email}
@@ -137,26 +148,25 @@ const BrandRegistrationForm = ({ navigation }) => {
                     Brand Type
                   </Text>
                 </View>
-                <View style={styles.depth4Frame1}>
-                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                    <TextInput
-                      style={styles.textInput}
-                      value={brandType}
-                      onChangeText={setBrandType}
-                      placeholder="Brand Type"
+                <View>
+                  <View>
+                    <MultipleSelectList
+                      setSelected={(val) => setSelected(val)}
+                      data={data}
+                      save="value"
                     />
                   </View>
                 </View>
               </View>
             </View>
           </View>
-          <View style={styles.depth1Frame2}>
-            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+          <View style={styles.depth1Frame6}>
+            <View style={[styles.depth2Frame06]}>
               <View style={styles.frameLayout}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Username</Text>
                 </View>
-                <View style={styles.depth4Frame1}>
+                <View style={styles.depth4Frame06}>
                   <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
                     <TextInput
                       style={styles.textInput}
@@ -173,30 +183,23 @@ const BrandRegistrationForm = ({ navigation }) => {
             <View style={styles.depth2Frame06}>
               <View style={styles.depth3FrameLayout}>
                 <TouchableOpacity onPress={handleSubmit}>
-                  <View
-                    style={[styles.depth4Frame06, styles.depth4FrameLayout]}
-                  >
-                    <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
-                      <Text style={[styles.generateOtp, styles.signUpTypo]}>
-                        Generate OTP
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("LoginPageBrands")}
-                >
                   <View style={[styles.depth4Frame07, styles.frameBg]}>
                     <View style={[styles.depth5Frame06, styles.frameBg]}>
                       <View style={styles.depth7Frame0}>
                         <Text style={[styles.signUp, styles.signUpTypo]}>
-                          Sign In
+                          Generate OTP
                         </Text>
                       </View>
                     </View>
                   </View>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.loginFrame}>
+                <Text>Already have account? </Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("LoginPageBrands")}
+                >
+                  <Text style={{ color: Color.colorDodgerblue }}>Login</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -266,6 +269,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     width: 358,
+  },
+  loginFrame: {
+    height: 40,
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    width: 358,
+    alignItems: "center",
   },
   frameBg: {
     backgroundColor: Color.colorDodgerblue,
@@ -343,13 +353,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth5Frame01: {
-    padding: Padding.p_base,
     borderRadius: Border.br_xs,
     backgroundColor: Color.colorAliceblue,
     height: 56,
     justifyContent: "space-between",
     flexDirection: "row",
     width: 358,
+    zIndex: 1,
   },
   depth4Frame1: {
     height: 56,
@@ -360,6 +370,7 @@ const styles = StyleSheet.create({
   depth2Frame02: {
     alignItems: "flex-end",
     flexDirection: "row",
+    zIndex: 1,
   },
   depth1Frame2: {
     height: 112,
@@ -368,6 +379,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
     width: 390,
+    zIndex: 1,
   },
   depth6Frame01: {
     width: "auto",
@@ -442,7 +454,6 @@ const styles = StyleSheet.create({
     height: 844,
   },
   textInput: {
-    height: 40,
     borderColor: Color.colorGray_400,
     borderWidth: 0,
     borderRadius: Border.br_xs,
