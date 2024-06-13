@@ -7,7 +7,8 @@ VERIFY_OTP = "OTP verified successfully";
 DOESNT_EXIST = "Email or User does not exist. create new account.";
 OTP_SENT = "OTP sent successfully. Please check your email.";
 OTP_NOT_EXPIRED = "OTP is not expired yet. Please check your email.";
-
+BRAND_ALREADY_EXISTS = "Brand already exists.";
+NAME_ALREADY_EXISTS = "User Name already exists.Try another name.";
 module.exports = {
   SUBJECT,
   ERR_SAVE_DATA,
@@ -18,4 +19,6 @@ module.exports = {
   DOESNT_EXIST,
   OTP_SENT,
   OTP_NOT_EXPIRED,
+  BRAND_ALREADY_EXISTS,
+  NAME_ALREADY_EXISTS,
 };

@@ -9,7 +9,7 @@ module.exports = function(api) {
       "safe": false,
       "allowUndefined": false,
       "verbose": false
-    }]]
-    
+    }]
+    ]
   };
 };
