@@ -7,26 +7,18 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from "react-native";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
   Alert,
 } from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
-import {API_ENDPOINT} from '@env'
-
+import { API_ENDPOINT } from "@env";
+import { useNavigation } from "@react-navigation/native";
 
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [brandType, setBrandType] = useState("");
   const [username, setUsername] = useState("");
-
+  const navigation = useNavigation();
   const handleSubmit = async () => {
     // Construct the payload
     const payload = {
@@ -36,7 +28,7 @@ const BrandRegistrationForm = ({ navigation }) => {
       name: username,
     };
     const emailRegex = /\S+@\S+\.\S+/;
-    if(!emailRegex.test(email)){
+    if (!emailRegex.test(email)) {
       Alert.alert("Error", "Please enter a valid email address");
       return;
     }
@@ -44,7 +36,7 @@ const BrandRegistrationForm = ({ navigation }) => {
       Alert.alert("Error", "Please fill all the fields");
       return;
     }
-    if(password.length<8){
+    if (password.length < 8) {
       Alert.alert("Error", "Password should be atleast 8 characters long");
       return;
     }
@@ -61,18 +53,13 @@ const BrandRegistrationForm = ({ navigation }) => {
       if (response.status == 200) {
         navigation.navigate("OtpVerification", { payload });
       } else {
-        Alert.alert("Error",data.message);
+        Alert.alert("Error", data.message);
       }
     } catch (error) {
       Alert.alert("Error", "Something went wrong. Please try again.");
-      console.log(error)
+      console.log(error);
     }
   };
-import { useNavigation } from "@react-navigation/native";
-
-const BrandRegistrationForm = () => {
-  const navigation = useNavigation();
-
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.brandregistrationform}>
@@ -464,5 +451,4 @@ const styles = StyleSheet.create({
     height: 844,
   },
 });
-
 export default BrandRegistrationForm;
