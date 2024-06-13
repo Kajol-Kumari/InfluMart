@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Image } from "expo-image";
 import {
   StyleSheet,
@@ -8,7 +8,66 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from "react-native";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
+import {API_ENDPOINT} from '@env'
+
+
+const BrandRegistrationForm = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [brandType, setBrandType] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = async () => {
+    // Construct the payload
+    const payload = {
+      email,
+      password,
+      category: [brandType],
+      name: username,
+    };
+    const emailRegex = /\S+@\S+\.\S+/;
+    if(!emailRegex.test(email)){
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
+    if (!email || !password || !brandType || !username) {
+      Alert.alert("Error", "Please fill all the fields");
+      return;
+    }
+    if(password.length<8){
+      Alert.alert("Error", "Password should be atleast 8 characters long");
+      return;
+    }
+    try {
+      // Send Otp
+      const response = await fetch(`${API_ENDPOINT}/otp/sendOTP`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name: username }),
+      });
+      const data = await response.json();
+      if (response.status == 200) {
+        navigation.navigate("OtpVerification", { payload });
+      } else {
+        Alert.alert("Error",data.message);
+      }
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong. Please try again.");
+      console.log(error)
+    }
+  };
 import { useNavigation } from "@react-navigation/native";
 
 const BrandRegistrationForm = () => {
@@ -47,16 +106,17 @@ const BrandRegistrationForm = () => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Email</Text>
                 </View>
-                <View style={styles.emailText}>
-                  <TextInput
-                    style={[styles.email1, styles.emailTypo]}
-                    placeholder="Email"
-                  />
-                  <Image
-                    contentFit="cover"
-                    style={styles.depth4Frame0}
-                    source={require("../assets/depth-6-frame-1.png")}
-                  />
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={email}
+                      onChangeText={setEmail}
+                      placeholder="Email"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -67,16 +127,16 @@ const BrandRegistrationForm = () => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Password</Text>
                 </View>
-                <View style={styles.emailText}>
-                  <TextInput
-                    style={[styles.email1, styles.emailTypo]}
-                    placeholder="Password"
-                  />
-                  <Image
-                    contentFit="cover"
-                    style={styles.depth4Frame0}
-                    source={require("../assets/depth-6-frame-11.png")}
-                  />
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={password}
+                      onChangeText={setPassword}
+                      placeholder="Password"
+                      secureTextEntry
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -89,16 +149,15 @@ const BrandRegistrationForm = () => {
                     Brand Type
                   </Text>
                 </View>
-                <View style={styles.emailText}>
-                  <TextInput
-                    style={[styles.email1, styles.emailTypo]}
-                    placeholder="Brand Type"
-                  />
-                  <Image
-                    contentFit="cover"
-                    style={styles.depth4Frame0}
-                    source={require("../assets/depth-6-frame-12.png")}
-                  />
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={brandType}
+                      onChangeText={setBrandType}
+                      placeholder="Brand Type"
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -109,16 +168,15 @@ const BrandRegistrationForm = () => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Username</Text>
                 </View>
-                <View style={styles.emailText}>
-                  <TextInput
-                    style={[styles.email1, styles.emailTypo]}
-                    placeholder="Username"
-                  />
-                  <Image
-                    contentFit="cover"
-                    style={styles.depth4Frame0}
-                    source={require("../assets/depth-6-frame-1.png")}
-                  />
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={username}
+                      onChangeText={setUsername}
+                      placeholder="Username"
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -126,18 +184,14 @@ const BrandRegistrationForm = () => {
           <View style={styles.depth1Frame6}>
             <View style={styles.depth2Frame06}>
               <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("OtpVerification")}
-                >
+                <TouchableOpacity onPress={handleSubmit}>
                   <View
                     style={[styles.depth4Frame06, styles.depth4FrameLayout]}
                   >
                     <View style={[styles.depth5Frame05, styles.depth5FrameBg]}>
-                      <View style={styles.depth7Frame0}>
-                        <Text style={[styles.generateOtp, styles.signUpTypo]}>
-                          Generate OTP
-                        </Text>
-                      </View>
+                      <Text style={[styles.generateOtp, styles.signUpTypo]}>
+                        Generate OTP
+                      </Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -406,10 +460,8 @@ const styles = StyleSheet.create({
   brandregistrationform: {
     backgroundColor: Color.colorWhite,
     flex: 1,
-    width: "auto",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: "100%",
+    height: 844,
   },
 });
 
