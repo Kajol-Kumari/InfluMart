@@ -1,31 +1,15 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
-import {API_ENDPOINT} from '@env'
+import { BrandSignUp } from "../controller/signupController";
 
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const { payload } = route.params;
 
   const registerBrand = async () => {
-    try {
-      const response = await fetch(`${API_ENDPOINT}/brands/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      if(response.status === 201){
-        navigation.navigate('AccountCreatedSuccessfullyNoti')
-      }else{
-        Alert.alert("ERROR",data.message);
-      }
-    } catch (error) {
-      Alert.alert("ERROR","Something went wrong");
-    }
+    await BrandSignUp(payload, navigation)
   };
 
   return (
