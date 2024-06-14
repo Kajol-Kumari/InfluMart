@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
 import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
@@ -8,6 +8,7 @@ import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
 const InboxInterface = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
+  const { width, height } = Dimensions.get("window");
 
   const handleSearchChange = (text) => {
     setSearchQuery(text);
@@ -16,8 +17,8 @@ const InboxInterface = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={[styles.inboxinterface, styles.depth0Frame0Layout]}>
-        <View style={[styles.depth0Frame0, styles.depth0Frame0Layout]}>
+      <View style={[styles.inboxinterface, { height }]}>
+        <View style={[styles.depth0Frame0, { height }]}>
           <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame0}>
               <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
@@ -152,12 +153,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   depth0Frame0Layout: {
-    height: 844,
     backgroundColor: Color.colorWhite,
   },
   depth1FrameSpaceBlock: {
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   inboxFlexBox: {
     textAlign: "left",
@@ -212,12 +212,14 @@ const styles = StyleSheet.create({
     width: 'auto',
     height: 23,
     overflow: "hidden",
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame0: {
     width: 310,
     height: 23,
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: Color.colorWhite,
   },
   depth5Frame01: {
     width: 24,
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     alignItems: "center",
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame1: {
     flexDirection: "row",
@@ -235,7 +238,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 48,
-    width: 358,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   depth1Frame0: {
     paddingTop: Padding.p_base,
@@ -259,7 +263,7 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
     height: 72,
   },
@@ -268,10 +272,12 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame02: {
     borderRadius: Border.br_9xl,
+    backgroundColor: Color.colorWhite,
   },
   projectWithAnna: {
     fontWeight: "500",
@@ -280,9 +286,10 @@ const styles = StyleSheet.create({
     color: Color.colorGray_500,
   },
   depth4Frame03: {
-    width: 160,              //check later
+    width: 160, //check later
     height: 24,
     overflow: "hidden",
+    backgroundColor: Color.colorWhite,
   },
   inProgress: {
     fontSize: FontSize.size_sm,
@@ -290,9 +297,11 @@ const styles = StyleSheet.create({
   },
   depth4Frame1: {
     width: 140,
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame2: {
     width: 140,
+    backgroundColor: Color.colorWhite,
   },
   depth2Frame02: {
     position: "absolute",
@@ -301,10 +310,12 @@ const styles = StyleSheet.create({
     height: 56,
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   depth1Frame2: {
-    width: 390,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   hiAnnaHere: {
     fontFamily: FontFamily.beVietnamProRegular,
@@ -317,21 +328,26 @@ const styles = StyleSheet.create({
     height: 'auto',
     paddingTop: Padding.p_9xs,
     paddingBottom: Padding.p_xs,
+    backgroundColor: Color.colorWhite,
   },
   depth4Frame04: {
-    width: 149,       //check later
+    width: 149, //check later
     height: 24,
     overflow: "hidden",
+    backgroundColor: Color.colorWhite,
   },
   depth4Frame11: {
     width: 129,
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame21: {
     width: 129,
+    backgroundColor: Color.colorWhite,
   },
   depth1Frame6: {
     height: 308,
-    width: 390,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   depth3Frame04: {
     shadowColor: "rgba(0, 0, 0, 0.1)",
@@ -354,26 +370,30 @@ const styles = StyleSheet.create({
   depth2Frame06: {
     justifyContent: "flex-end",
     flexDirection: "row",
+    backgroundColor: Color.colorWhite,
   },
   depth1Frame7: {
     height: 76,
     paddingHorizontal: Padding.p_xl,
     paddingBottom: Padding.p_xl,
     overflow: "hidden",
-    width: 390,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   depth1Frame8: {
     height: 20,
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
   },
   depth0Frame0: {
     overflow: "hidden",
-    width: 390,
+    width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   inboxinterface: {
     flex: 1,
     width: "100%",
+    backgroundColor: Color.colorWhite,
   },
   searchBar: {
     flex: 1,
@@ -381,6 +401,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
     color: Color.colorGray_500,
     marginLeft: 12,
+    backgroundColor: Color.colorWhitesmoke_300,
   },
 });
 
