@@ -1,35 +1,42 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
-import {API_ENDPOINT} from '@env'
+import { verifyOTP } from "../controller/signupController";
 
 const OtpVerification = ({ route, navigation }) => {
   const { payload } = route.params;
-  const [otp, setOtp] = React.useState("");
-
-  const verifyOTP = async () => {
-    const { email } = payload;
-    try {
-      const response = await fetch(`${API_ENDPOINT}/otp/verifyOTP`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          otp,
-        }),
-      });
-      const data = await response.json();
-      if (response.status === 200) {
-        navigation.navigate("BrandAccountReviewNotification", { payload });
-      } else {
-        Alert.alert("Error", data.message);
-      }
-    } catch (error) {
-      Alert.alert("Error", "Something went wrong. Please try again.")
+  const [otp, setOtp] = React.useState(["", "", "", "", "", ""]);
+  const inputs = React.useRef([]);
+  const [error, setError] = React.useState(false);
+  const handleChange = (text, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+    if (text && index < 5) {
+      inputs.current[index + 1].focus();
     }
+  };
+
+  const handleKeyPress = ({ nativeEvent }, index) => {
+    if (nativeEvent.key === "Backspace" && index > 0 && !otp[index]) {
+      inputs.current[index - 1].focus();
+    }
+  };
+
+  const handleNext = async () => {
+    if (otp.includes("")) {
+      setError(true);
+      return;
+    }
+    const _otp = otp.join("");
+    await verifyOTP(_otp,payload,navigation);
   };
 
   return (
@@ -63,22 +70,24 @@ const OtpVerification = ({ route, navigation }) => {
           </View>
         </View>
         <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame02, styles.depth2FrameLayout]}>
-            <View style={styles.depth3Frame01}>
-              <View style={styles.depth4Frame02}>
-                <Text style={styles.text}>|</Text>
-              </View>
-            </View>
+          <View style={styles.otpContainer}>
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => (inputs.current[index] = ref)}
+                value={digit}
+                onChangeText={(text) => handleChange(text, index)}
+                onKeyPress={(e) => handleKeyPress(e, index)}
+                keyboardType="numeric"
+                maxLength={1}
+                style={[styles.otpInput, error && { borderColor: "red" }]}
+              />
+            ))}
           </View>
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
         </View>
         <View style={styles.depth1Frame3} />
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
-          <TouchableOpacity onPress={verifyOTP}>
+          <TouchableOpacity onPress={handleNext}>
             <View style={[styles.depth2Frame03, styles.frameBg]}>
               <View style={[styles.depth3Frame02, styles.frameBg]}>
                 <View style={styles.depth2Frame01}>
@@ -108,6 +117,21 @@ const styles = StyleSheet.create({
   frameLayout: {
     width: 48,
     height: 48,
+  },
+  otpContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  otpInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    margin: 5,
+    width: 40,
+    height: 40,
+    textAlign: "center",
+    fontSize: 20,
+    borderRadius: 5,
   },
   nextTypo: {
     textAlign: "left",
