@@ -36,7 +36,7 @@ const InboxInterface = () => {
                     <Image
                       style={styles.depth5Frame01}
                       contentFit="cover"
-                      source={require("../assets/depth-5-frame-021.png")}
+                      /*source={require("../assets/depth-5-frame-021.png")}*/
                     />
                   </View>
                 </TouchableOpacity>
@@ -144,6 +144,12 @@ const InboxInterface = () => {
           <View style={styles.depth1Frame8} />
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate('NewMessage')}
+      >
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -403,6 +409,23 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     backgroundColor: Color.colorWhitesmoke_300,
   },
+  addButton: {
+    position: 'absolute',
+    top: 10,
+    right: 20,
+    width: 56,
+    height: 56,
+    backgroundColor: 'white',
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+  },
+  addButtonText: {
+    fontSize: 40,
+    color: 'Black',
+  },
 });
 
 export default InboxInterface;
+/*InboxInterface*/
