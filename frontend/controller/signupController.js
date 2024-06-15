@@ -1,21 +1,19 @@
 import { API_ENDPOINT } from "@env";
+import axios from "axios";
 import { Alert } from "react-native";
 
 const SendOtp = async (payload, navigation) => {
-  const { email, username } = payload;
+  const { email, name } = payload;
   try {
     // Send OTP
-    const response = await fetch(`${API_ENDPOINT}/otp/sendOTP`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, name: username }),
+    const response = await axios.post(`${API_ENDPOINT}/otp/sendOTP`, {
+      email,
+      name,
     });
-    const data = await response.json();
     if (response.status == 200) {
       navigation.navigate("OtpVerification", { payload });
     } else {
+      const data = await response.json();
       Alert.alert("Error", data.message);
     }
   } catch (error) {
@@ -25,20 +23,14 @@ const SendOtp = async (payload, navigation) => {
 
 const verifyOTP = async (otp, payload, navigation) => {
   try {
-    const response = await fetch(`${API_ENDPOINT}/otp/verifyOTP`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        otp,
-      }),
+    const response = await axios.post(`${API_ENDPOINT}/otp/verifyOTP`, {
+      email: payload.email,
+      otp,
     });
-    const data = await response.json();
     if (response.status === 200) {
       navigation.navigate("BrandAccountReviewNotification", { payload });
     } else {
+      const data = await response.json();
       Alert.alert("Error", data.message);
     }
   } catch (error) {
@@ -48,17 +40,12 @@ const verifyOTP = async (otp, payload, navigation) => {
 
 const BrandSignUp = async (payload, navigation) => {
   try {
-    const response = await fetch(`${API_ENDPOINT}/brands/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    const data = await response.json();
+    const response = await axios.post(`${API_ENDPOINT}/brands/signup`,payload);
+    
     if (response.status === 201) {
       navigation.navigate("AccountCreatedSuccessfullyNoti");
     } else {
+      const data = await response.json();
       Alert.alert("ERROR", data.message);
     }
   } catch (error) {
