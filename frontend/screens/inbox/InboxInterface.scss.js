@@ -1,4 +1,4 @@
-import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { Color, Padding, FontFamily, FontSize, Border } from "../../GlobalStyles";
 
 export const inboxStyles = {
     scrollViewContent: {

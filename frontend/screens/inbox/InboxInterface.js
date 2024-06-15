@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
-import { Color } from "../GlobalStyles";
+import { Color } from "../../GlobalStyles";
 import { inboxStyles } from './InboxInterface.scss';
 
 const InboxInterface = () => {

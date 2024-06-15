@@ -1,4 +1,4 @@
-import { Color, FontSize, Border, FontFamily, Padding } from "../GlobalStyles";
+import { Color, FontSize, Border, FontFamily, Padding } from "../../GlobalStyles";
 
 export const chatStyle = {
     scrollContentContainer: {
