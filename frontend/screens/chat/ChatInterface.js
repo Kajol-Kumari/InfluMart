@@ -16,7 +16,7 @@ const ChatInterface = () => {
         <View style={styles.depth0Frame0}>
           <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
             <Depth1Frame7
-              depth4Frame0={require("../assets/depth-4-frame-017.png")}
+              depth4Frame0={require("../../assets/depth-4-frame-017.png")}
               requestDetails="Chat with Liliam"
               depth3Frame0BackgroundColor="#fff"
               requestDetailsWidth={'auto'}
@@ -92,12 +92,12 @@ const ChatInterface = () => {
           <Depth1Frame12 />
           <View style={styles.depth1Frame3} />
           <Depth1Frame
-            depth5Frame0={require("../assets/depth-5-frame-022.png")}
-            depth5Frame01={require("../assets/depth-5-frame-023.png")}
+            depth5Frame0={require("../../assets/depth-5-frame-022.png")}
+            depth5Frame01={require("../../assets/depth-5-frame-023.png")}
             search="Collaborations"
-            depth5Frame02={require("../assets/depth-5-frame-024.png")}
+            depth5Frame02={require("../../assets/depth-5-frame-024.png")}
             myBrands="Inbox"
-            depth5Frame03={require("../assets/depth-5-frame-025.png")}
+            depth5Frame03={require("../../assets/depth-5-frame-025.png")}
             propBorderColor="#ededed"
             propWidth={81}
             propWidth1={35}

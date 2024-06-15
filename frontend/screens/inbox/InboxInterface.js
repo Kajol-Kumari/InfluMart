@@ -63,7 +63,7 @@ const InboxInterface = () => {
               <Image
                 style={styles.depth5Frame01}
                 contentFit="cover"
-                source={require("../assets/depth-3-frame-04.png")}
+                source={require("../../assets/depth-3-frame-04.png")}
               />
               <View style={styles.depth3Frame11}>
                 <TextInput
@@ -84,7 +84,7 @@ const InboxInterface = () => {
                 <Image
                   style={[styles.depth3Frame02, styles.frameLayout]}
                   contentFit="cover"
-                  source={require("../assets/depth-3-frame-05.png")}
+                  source={require("../../assets/depth-3-frame-05.png")}
                 />
                 <View
                   style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}
@@ -127,7 +127,7 @@ const InboxInterface = () => {
                 <Image
                   style={[styles.depth3Frame02, styles.frameLayout]}
                   contentFit="cover"
-                  source={require("../assets/depth-3-frame-06.png")}
+                  source={require("../../assets/depth-3-frame-06.png")}
                 />
                 <View
                   style={[styles.depth3Frame21, styles.depth3FrameSpaceBlock]}
@@ -172,7 +172,7 @@ const InboxInterface = () => {
                   <Image
                     style={styles.depth5Frame01}
                     contentFit="cover"
-                    source={require("../assets/depth-4-frame-016.png")}
+                    source={require("../../assets/depth-4-frame-016.png")}
                   />
                 </View>
               </View>
