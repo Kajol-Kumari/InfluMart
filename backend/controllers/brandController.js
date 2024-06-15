@@ -1,17 +1,15 @@
 const { DOESNT_EXIST } = require("../constant/constants");
 const Brand = require("../model/brandDbRequestModel");
-
-// Sample storage for brands (replace with a database)
-const brandsDB = [];
-
+const bcrypt = require("bcrypt"); // For password hashing
 // Signup a brand
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   const { name, email, password, category } = req.body;
 
+  const hashedPassword = await bcrypt.hash(password, 10);
   const brand = new Brand({
     name,
     email,
-    password,
+    password: hashedPassword,
     category,
   });
   brand
@@ -35,7 +33,8 @@ exports.login = async (req, res) => {
   if (!brand) {
     return res.status(404).json({ message: DOESNT_EXIST });
   }
-  if (brand.password == password) {
+  const isPasswordValid = await bcrypt.compare(password, brand.password);
+  if (isPasswordValid) {
     res.status(200).json({ message: "Login successful", brand });
   } else {
     res.status(401).json({ message: "Authentication failed" });
