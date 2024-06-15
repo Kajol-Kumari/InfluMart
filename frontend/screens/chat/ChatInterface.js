@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import Depth1Frame7 from "../components/Depth1Frame7";
 import Depth1Frame12 from "../components/Depth1Frame12";
 import Depth1Frame from "../components/Depth1Frame";
+import { chatStyle } from './ChatStyles.scss';
 
 const ChatInterface = () => {
   const navigation = useNavigation();

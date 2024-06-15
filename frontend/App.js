@@ -11,8 +11,8 @@ import AccountCreatedSuccessfullyNoti from "./screens/AccountCreatedSuccessfully
 import FailedPaymentStatus from "./screens/FailedPaymentStatus";
 import Analytics from "./screens/Analytics";
 import InfluencersList from "./screens/InfluencersList";
-import InboxInterface from "./screens/InboxInterface";
-import ChatInterface from "./screens/ChatInterface";
+import InboxInterface from "./screens/inbox/InboxInterface";
+import ChatInterface from "./screens/chat/ChatInterface";
 import UserProfile from "./screens/UserProfile";
 import InfluencerRegistrationForm from "./screens/InfluencerRegistrationForm";
 import PlanChooseInterface from "./screens/PlanChooseInterface";
