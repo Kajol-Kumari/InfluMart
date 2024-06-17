@@ -14,12 +14,12 @@ import MultipleSelectList from "../../shared/MultiSelect";
 import { SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
 
-
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
+  const [focus, setFocus] = useState(false);
 
   const data = [
     { key: "grocery", value: "Grocery" },
@@ -93,7 +93,12 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View>
                   <View style={[styles.depth5Frame01]}>
                     <TextInput
-                      style={styles.textInput}
+                      onFocus={() => setFocus(true)}
+                      onBlur={() => setFocus(false)}
+                      style={[
+                        styles.textInput,
+                        focus ? styles.inputOnFocus : styles.inputOnBlur,
+                      ]}
                       value={email}
                       onChangeText={setEmail}
                       placeholder="Email"
@@ -111,10 +116,15 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Password</Text>
                 </View>
-                <View style={styles.depth4Frame1}>
+                <View>
                   <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
                     <TextInput
-                      style={styles.textInput}
+                      onFocus={() => setFocus(true)}
+                      onBlur={() => setFocus(false)}
+                      style={[
+                        styles.textInput,
+                        focus ? styles.inputOnFocus : styles.inputOnBlur,
+                      ]}
                       value={password}
                       onChangeText={setPassword}
                       placeholder="Password"
@@ -154,7 +164,12 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame06}>
                   <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
                     <TextInput
-                      style={styles.textInput}
+                      onFocus={() => setFocus(true)}
+                      onBlur={() => setFocus(false)}
+                      style={[
+                        styles.textInput,
+                        focus ? styles.inputOnFocus : styles.inputOnBlur,
+                      ]}
                       value={username}
                       onChangeText={setUsername}
                       placeholder="Username"
@@ -192,6 +207,19 @@ const BrandRegistrationForm = ({ navigation }) => {
           <View style={[styles.depth1Frame7, styles.frameLayout2]} />
         </View>
       </View>
+      {/* <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+        <TextInput
+          style={[
+            styles.textInput,
+            focus ? styles.inputOnFocus : styles.inputOnBlur,
+          ]}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Username"
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+      </View> */}
     </ScrollView>
   );
 };
