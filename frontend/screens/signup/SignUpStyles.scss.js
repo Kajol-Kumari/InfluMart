@@ -255,13 +255,11 @@ export const signupStyles = {
     height: 844,
   },
   textInput: {
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: Border.br_xs,
     paddingHorizontal: Padding.p_base,
     fontSize: FontSize.size_base,
     flex: 1,
     color: Color.colorSteelblue_200,
   },
-  inputOnFocus: { borderColor: Color.colorBlack },
-  inputOnBlur: { borderColor: Color.colorRoyalblue },
 };

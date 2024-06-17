@@ -19,7 +19,6 @@ const BrandRegistrationForm = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
-  const [focus, setFocus] = useState(false);
 
   const data = [
     { key: "grocery", value: "Grocery" },
@@ -95,10 +94,7 @@ const BrandRegistrationForm = ({ navigation }) => {
                     <TextInput
                       onFocus={() => setFocus(true)}
                       onBlur={() => setFocus(false)}
-                      style={[
-                        styles.textInput,
-                        focus ? styles.inputOnFocus : styles.inputOnBlur,
-                      ]}
+                      style={styles.textInput}
                       value={email}
                       onChangeText={setEmail}
                       placeholder="Email"
@@ -121,10 +117,7 @@ const BrandRegistrationForm = ({ navigation }) => {
                     <TextInput
                       onFocus={() => setFocus(true)}
                       onBlur={() => setFocus(false)}
-                      style={[
-                        styles.textInput,
-                        focus ? styles.inputOnFocus : styles.inputOnBlur,
-                      ]}
+                      style={styles.textInput}
                       value={password}
                       onChangeText={setPassword}
                       placeholder="Password"
@@ -166,10 +159,7 @@ const BrandRegistrationForm = ({ navigation }) => {
                     <TextInput
                       onFocus={() => setFocus(true)}
                       onBlur={() => setFocus(false)}
-                      style={[
-                        styles.textInput,
-                        focus ? styles.inputOnFocus : styles.inputOnBlur,
-                      ]}
+                      style={styles.textInput}
                       value={username}
                       onChangeText={setUsername}
                       placeholder="Username"
@@ -207,19 +197,6 @@ const BrandRegistrationForm = ({ navigation }) => {
           <View style={[styles.depth1Frame7, styles.frameLayout2]} />
         </View>
       </View>
-      {/* <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-        <TextInput
-          style={[
-            styles.textInput,
-            focus ? styles.inputOnFocus : styles.inputOnBlur,
-          ]}
-          value={username}
-          onChangeText={setUsername}
-          placeholder="Username"
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        />
-      </View> */}
     </ScrollView>
   );
 };
