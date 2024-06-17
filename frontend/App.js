@@ -4,27 +4,27 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Homepage from "./screens/Homepage";
 import BrandorInfluencer from "./screens/BrandorInfluencer";
-import BrandAccountReviewNotification from "./screens/BrandAccountReviewNotification";
-import BrandRegistrationForm from "./screens/BrandRegistrationForm";
 import OtpVerification from "./screens/OtpVerification";
-import LoginPage from "./screens/LoginPage";
+import LoginPage from "./screens/login/LoginPage";
 import FriendRequestPage from "./screens/FriendRequestPage";
 import AccountCreatedSuccessfullyNoti from "./screens/AccountCreatedSuccessfullyNoti";
 import FailedPaymentStatus from "./screens/FailedPaymentStatus";
 import Analytics from "./screens/Analytics";
 import InfluencersList from "./screens/InfluencersList";
-import InboxInterface from "./screens/InboxInterface";
-import ChatInterface from "./screens/ChatInterface";
+import InboxInterface from "./screens/inbox/InboxInterface";
+import ChatInterface from "./screens/chat/ChatInterface";
 import UserProfile from "./screens/UserProfile";
 import InfluencerRegistrationForm from "./screens/InfluencerRegistrationForm";
 import PlanChooseInterface from "./screens/PlanChooseInterface";
-import LoginPageBrand from "./screens/LoginPageBrands";
+import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
+import BrandRegistrationForm from "./screens/signup/BrandRegistrationForm";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -71,7 +71,7 @@ const App = () => {
             />
             <Stack.Screen
               name="BrandAccountReviewNotification"
-              component={BrandAccountReviewNotification}
+              component={BrandAccountSignupDataPreview}
               options={{ headerShown: false }}
             />
             <Stack.Screen

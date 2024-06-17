@@ -1,34 +1,66 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text , TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
-import { useNavigation } from "@react-navigation/native";
+import { verifyOTP } from "../controller/signupController";
 
+const OtpVerification = ({ route, navigation }) => {
+  const { payload } = route.params;
+  const [otp, setOtp] = React.useState(["", "", "", "", "", ""]);
+  const inputs = React.useRef([]);
+  const [error, setError] = React.useState(false);
+  const handleChange = (text, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+    if (text && index < 5) {
+      inputs.current[index + 1].focus();
+    }
+  };
 
-const OtpVerification = () => {
-  const navigation = useNavigation();
+  const handleKeyPress = ({ nativeEvent }, index) => {
+    if (nativeEvent.key === "Backspace" && index > 0 && !otp[index]) {
+      inputs.current[index - 1].focus();
+    }
+  };
+
+  const handleNext = async () => {
+    if (otp.includes("")) {
+      setError(true);
+      return;
+    }
+    const _otp = otp.join("");
+    await verifyOTP(_otp,payload,navigation);
+  };
 
   return (
     <View style={styles.otpverification}>
       <View style={styles.depth0Frame0}>
-      <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
-
-        <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
-          <View style={[styles.depth2Frame0, styles.frameFlexBox1]}>
-            <View style={[styles.depth3Frame0, styles.frameLayout]}>
-              <Image
-                style={styles.depth4Frame0}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-07.png")}
-              />
-            </View>
-            <View style={[styles.depth3Frame1, styles.frameFlexBox1]}>
-              <View style={[styles.depth4Frame01, styles.frameLayout]}>
-                <View style={[styles.depth5Frame0, styles.frameLayout]} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("BrandRegistrationForm")}
+        >
+          <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
+            <View style={[styles.depth2Frame0, styles.frameFlexBox1]}>
+              <View style={[styles.depth3Frame0, styles.frameLayout]}>
+                <Image
+                  style={styles.depth4Frame0}
+                  contentFit="cover"
+                  source={require("../assets/depth-4-frame-07.png")}
+                />
+              </View>
+              <View style={[styles.depth3Frame1, styles.frameFlexBox1]}>
+                <View style={[styles.depth4Frame01, styles.frameLayout]}>
+                  <View style={[styles.depth5Frame0, styles.frameLayout]} />
+                </View>
               </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
         <View style={styles.depth1Frame1}>
           <View style={styles.depth2Frame01}>
@@ -38,30 +70,31 @@ const OtpVerification = () => {
           </View>
         </View>
         <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame02, styles.depth2FrameLayout]}>
-            <View style={styles.depth3Frame01}>
-              <View style={styles.depth4Frame02}>
-                <Text style={styles.text}>|</Text>
-              </View>
-            </View>
+          <View style={styles.otpContainer}>
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => (inputs.current[index] = ref)}
+                value={digit}
+                onChangeText={(text) => handleChange(text, index)}
+                onKeyPress={(e) => handleKeyPress(e, index)}
+                keyboardType="numeric"
+                maxLength={1}
+                style={[styles.otpInput, error && { borderColor: "red" }]}
+              />
+            ))}
           </View>
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]} />
         </View>
         <View style={styles.depth1Frame3} />
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
-        <TouchableOpacity onPress={() => navigation.navigate('BrandAccountReviewNotification')}>
-
-          <View style={[styles.depth2Frame03, styles.frameBg]}>
-            <View style={[styles.depth3Frame02, styles.frameBg]}>
-              <View style={styles.depth2Frame01}>
-                <Text style={[styles.next, styles.nextTypo]}>Next</Text>
+          <TouchableOpacity onPress={handleNext}>
+            <View style={[styles.depth2Frame03, styles.frameBg]}>
+              <View style={[styles.depth3Frame02, styles.frameBg]}>
+                <View style={styles.depth2Frame01}>
+                  <Text style={[styles.next, styles.nextTypo]}>Next</Text>
+                </View>
               </View>
             </View>
-          </View>
           </TouchableOpacity>
         </View>
         <View style={[styles.depth1Frame5, styles.depth1FrameBg]} />
@@ -84,6 +117,21 @@ const styles = StyleSheet.create({
   frameLayout: {
     width: 48,
     height: 48,
+  },
+  otpContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  otpInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    margin: 5,
+    width: 40,
+    height: 40,
+    textAlign: "center",
+    fontSize: 20,
+    borderRadius: 5,
   },
   nextTypo: {
     textAlign: "left",
@@ -148,7 +196,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth1Frame1: {
-    height: 'auto',
+    height: "auto",
     paddingTop: Padding.p_xl,
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
@@ -192,7 +240,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhitesmoke_100,
   },
   depth3Frame02: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth2Frame03: {
