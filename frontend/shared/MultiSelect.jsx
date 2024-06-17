@@ -77,7 +77,7 @@ const MultipleSelectList = ({
   }, [dropdownShown]);
 
   return (
-    <View style={{backgroundColor:"#E8EDF2",borderRadius: Border.br_xs,borderColor:"#E8EDF2",borderWidth:1}}>
+    <View style={{borderRadius: Border.br_xs,borderColor:"#d4d4d4",borderWidth:1}}>
       {dropdown && search ? (
         <View style={[styles.wrapper]}>
           <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>

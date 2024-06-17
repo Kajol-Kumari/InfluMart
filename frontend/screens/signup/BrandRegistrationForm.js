@@ -89,19 +89,15 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Email</Text>
                 </View>
-                <View>
-                  <View style={[styles.depth5Frame01]}>
-                    <TextInput
-                      onFocus={() => setFocus(true)}
-                      onBlur={() => setFocus(false)}
-                      style={styles.textInput}
-                      value={email}
-                      onChangeText={setEmail}
-                      placeholder="Email"
-                      keyboardType="email-address"
-                      autoCapitalize="none"
-                    />
-                  </View>
+                <View style={[styles.depth5Frame01]}>
+                  <TextInput
+                    style={styles.textInput}
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                  />
                 </View>
               </View>
             </View>
@@ -115,8 +111,6 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View>
                   <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
                     <TextInput
-                      onFocus={() => setFocus(true)}
-                      onBlur={() => setFocus(false)}
                       style={styles.textInput}
                       value={password}
                       onChangeText={setPassword}
@@ -137,13 +131,11 @@ const BrandRegistrationForm = ({ navigation }) => {
                   </Text>
                 </View>
                 <View>
-                  <View>
-                    <MultipleSelectList
-                      setSelected={(val) => setSelected(val)}
-                      data={data}
-                      save="value"
-                    />
-                  </View>
+                  <MultipleSelectList
+                    setSelected={(val) => setSelected(val)}
+                    data={data}
+                    save="value"
+                  />
                 </View>
               </View>
             </View>
@@ -154,17 +146,13 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Username</Text>
                 </View>
-                <View style={styles.depth4Frame06}>
-                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
-                    <TextInput
-                      onFocus={() => setFocus(true)}
-                      onBlur={() => setFocus(false)}
-                      style={styles.textInput}
-                      value={username}
-                      onChangeText={setUsername}
-                      placeholder="Username"
-                    />
-                  </View>
+                <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                  <TextInput
+                    style={styles.textInput}
+                    value={username}
+                    onChangeText={setUsername}
+                    placeholder="Username"
+                  />
                 </View>
               </View>
             </View>

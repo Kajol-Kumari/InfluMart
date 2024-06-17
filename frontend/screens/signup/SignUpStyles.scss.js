@@ -41,7 +41,6 @@ export const signupStyles = {
     fontSize: FontSize.size_base,
   },
   depth5FrameBg: {
-    backgroundColor: Color.colorAliceblue,
     overflow: "hidden",
   },
   depth4FrameLayout: {
@@ -153,7 +152,6 @@ export const signupStyles = {
   },
   depth5Frame01: {
     borderRadius: Border.br_xs,
-    backgroundColor: Color.colorAliceblue,
     height: 56,
     justifyContent: "space-between",
     flexDirection: "row",
@@ -255,8 +253,9 @@ export const signupStyles = {
     height: 844,
   },
   textInput: {
-    borderWidth: 0,
+    borderWidth: 1,
     borderRadius: Border.br_xs,
+    borderColor: "#d4d4d4",
     paddingHorizontal: Padding.p_base,
     fontSize: FontSize.size_base,
     flex: 1,
