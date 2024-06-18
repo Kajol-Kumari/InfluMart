@@ -10,11 +10,10 @@ const BrandorInfluencer = () => {
   return (
     <View style={styles.brandorinfluencer}>
       <View style={[styles.depth0Frame0, styles.frameLayout]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+      <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('Homepage')}>
 
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock1]}>
           <View style={styles.depth2Frame0}>
-            <View style={[styles.depth3Frame0, styles.depth3FrameLayout1]} />
             <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
               <View style={styles.depth4Frame0}>
                 <View style={styles.depth5Frame0}>
@@ -40,7 +39,7 @@ const BrandorInfluencer = () => {
         </View>
         <View style={[styles.depth1Frame2, styles.frameFlexBox]}>
           <View style={styles.depth2Frame02}>
-          <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
+          <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('LoginPageBrands')}>
 
             <View style={styles.depth3FrameLayout}>
               <View style={[styles.depth4Frame02, styles.depth4FrameLayout]}>
@@ -54,7 +53,7 @@ const BrandorInfluencer = () => {
               </View>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+            <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('LoginPage')}>
             <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
               <View style={[styles.depth4Frame03, styles.frameBg]}>
                 <View style={[styles.depth5Frame02, styles.frameBg]}>
@@ -77,7 +76,6 @@ const BrandorInfluencer = () => {
             </Text>
           </View>
         </View>
-        <View style={[styles.depth1Frame4, styles.frameLayout]} />
       </View>
     </View>
   );
@@ -85,32 +83,34 @@ const BrandorInfluencer = () => {
 
 const styles = StyleSheet.create({
   frameLayout: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
   },
   depth1FrameSpaceBlock1: {
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth3FrameLayout1: {
     width: 48,
     height: 48,
   },
   frameFlexBox: {
+    width:"100%",
     justifyContent: "center",
     flexDirection: "row",
   },
   brandTypo: {
-    textAlign: "left",
+    textAlign: "center",
     fontFamily: FontFamily.interBold,
     fontWeight: "700",
     letterSpacing: 0,
+    width:"100%"
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
     alignItems: "center",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth4FrameLayout: {
     paddingVertical: 0,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
   },
   frameBg1: {
@@ -129,35 +129,40 @@ const styles = StyleSheet.create({
   brandLayout: {
     lineHeight: 21,
     fontSize: FontSize.size_sm,
+    width:"100%"
   },
   depth3FrameLayout: {
     height: 40,
     justifyContent: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
   },
   frameBg: {
     backgroundColor: Color.colorAliceblue,
     overflow: "hidden",
   },
   depth3Frame0: {
+    width:"100%",
     alignItems: "center",
   },
   joinTheFun: {
     fontSize: FontSize.size_lg,
     lineHeight: 23,
     color: Color.colorGray_400,
+    width:"100%",
+    textAlign:"center"
   },
   depth5Frame0: {
+    width:"100%",
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 'auto',
+    width: '100%',
     height: 23,
     overflow: "hidden",
   },
   depth3Frame1: {
-    width: 262,
+    width: "100%",
     height: 23,
     alignItems: "center",
   },
@@ -173,14 +178,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth1Frame0: {
+    width:"100%",
     height: 72,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
     backgroundColor: Color.colorWhitesmoke_100,
     paddingHorizontal: Padding.p_base,
+    marginTop:20
   },
   areYouA: {
     fontSize: FontSize.size_3xl,
@@ -198,16 +205,18 @@ const styles = StyleSheet.create({
   depth1Frame1: {
     height: 'auto',
     paddingTop: Padding.p_xl,
+    width:"100%"
   },
   brand: {
     color: Color.colorWhitesmoke_100,
-    textAlign: "left",
+    textAlign: "center",
     fontFamily: FontFamily.interBold,
     fontWeight: "700",
     letterSpacing: 0,
+    width:"100%"
   },
   depth5Frame01: {
-    width: 'auto',
+    width: '100%',
     height: 21,
   },
   depth4Frame02: {
@@ -232,7 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
   },
   depth3Frame11: {
@@ -241,13 +250,13 @@ const styles = StyleSheet.create({
   depth2Frame02: {
     height: 92,
     alignItems: "center",
-    width: 358,
+    width: "100%",
   },
   depth1Frame2: {
     height: 116,
     paddingVertical: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   byJoiningYou: {
     fontFamily: FontFamily.interRegular,
@@ -257,18 +266,21 @@ const styles = StyleSheet.create({
   depth1Frame3: {
     height: 'auto',
     paddingTop: Padding.p_9xs,
+    width:"100%"
   },
   depth1Frame4: {
     height: 20,
   },
   depth0Frame0: {
-    height: 844,
+    height: "100%",
     overflow: "hidden",
+    width:"100%"
   },
   brandorinfluencer: {
     backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
+    height:"100%"
   },
 });
 
