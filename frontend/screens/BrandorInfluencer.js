@@ -23,10 +23,6 @@ const BrandorInfluencer = () => {
                 </View>
               </View>
             </View>
-          
-            <View style={[styles.depth3Frame2, styles.depth3FrameLayout1]}>
-              <View style={[styles.depth4Frame01, styles.depth3FrameLayout1]} />
-            </View>
           </View>
         </View>
         </TouchableOpacity>
@@ -273,7 +269,7 @@ const styles = StyleSheet.create({
   },
   depth0Frame0: {
     height: "100%",
-    overflow: "hidden",
+    overflow: "scroll",
     width:"100%"
   },
   brandorinfluencer: {
