@@ -167,7 +167,7 @@ const BrandRegistrationForm = ({ navigation }) => {
           <View style={styles.depth1Frame6}>
             <View style={styles.depth2Frame06}>
               <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity onPress={handleSubmit}>
+                <TouchableOpacity style={{width:"100%"}} onPress={handleSubmit}>
                   <View style={[styles.depth4Frame07, styles.frameBg]}>
                     <View style={[styles.depth5Frame06, styles.frameBg]}>
                       <View style={styles.depth7Frame0}>

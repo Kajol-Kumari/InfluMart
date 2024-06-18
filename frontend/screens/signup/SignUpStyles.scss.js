@@ -3,14 +3,17 @@ import { Color, Padding, FontSize, Border, FontFamily } from "../../GlobalStyles
 export const signupStyles = {
     scrollView: {
       flex: 1,
+      width:"100%",
+      height:"100%",
+      backgroundColor: Color.colorWhitesmoke_100,
     },
     frameLayout2: {
-      width: 390,
+      width: "100%",
       backgroundColor: Color.colorWhitesmoke_100,
     },
     depth1FrameSpaceBlock: {
       paddingHorizontal: Padding.p_base,
-      width: 390,
+      width: "100%",
     },
     frameFlexBox: {
       justifyContent: "space-between",
@@ -24,7 +27,7 @@ export const signupStyles = {
     },
     frameLayout: {
       height: 88,
-      width: 358,
+      width: "100%",
     },
     emailTypo: {
       textAlign: "left",
@@ -33,7 +36,7 @@ export const signupStyles = {
     },
     depth5FrameBg: {
       backgroundColor: Color.colorAliceblue,
-      overflow: "hidden",
+      overflow: "hidden"
     },
     depth4FrameLayout: {
       paddingVertical: 0,
@@ -48,22 +51,23 @@ export const signupStyles = {
     signUpTypo: {
       lineHeight: 21,
       fontSize: FontSize.size_sm,
-      textAlign: "left",
+      textAlign: "center",
       fontFamily: FontFamily.workSansBold,
       fontWeight: "700",
       letterSpacing: 0,
+      width:"100%"
     },
     depth3FrameLayout: {
       height: 40,
       justifyContent: "center",
       flexDirection: "row",
-      width: 358,
+      width: "100%",
     },
     loginFrame: {
-      height: 40,
+      height: 60,
       justifyContent: "center",
       flexDirection: "row",
-      width: 358,
+      width: "100%",
       alignItems: "center",
     },
     frameBg: {
@@ -75,6 +79,7 @@ export const signupStyles = {
       height: 24,
     },
     depth3Frame0: {
+      width:"100%",
       alignItems: "center",
       flexDirection: "row",
     },
@@ -90,7 +95,7 @@ export const signupStyles = {
       paddingLeft: Padding.p_243xl,
     },
     depth2Frame0: {
-      width: 358,
+      width: "100%",
     },
     depth1Frame0: {
       height: 72,
@@ -119,6 +124,7 @@ export const signupStyles = {
       alignItems: "center",
     },
     email: {
+      width:"100%",
       fontWeight: "500",
       fontFamily: FontFamily.workSansMedium,
       color: Color.colorBlack,
@@ -126,7 +132,7 @@ export const signupStyles = {
     },
     depth4Frame02: {
       height: 32,
-      width: 358,
+      width: "100%",
       paddingBottom: Padding.p_5xs,
     },
     email1: {
@@ -134,7 +140,7 @@ export const signupStyles = {
       color: Color.colorSteelblue_200,
     },
     depth7Frame0: {
-      alignSelf: "stretch",
+      width:"100%"
     },
     depth6Frame0: {
       width: "auto",
@@ -147,16 +153,17 @@ export const signupStyles = {
       height: 56,
       justifyContent: "space-between",
       flexDirection: "row",
-      width: 358,
+      width: "100%",
       zIndex: 1,
     },
     depth4Frame1: {
       height: 56,
       alignItems: "center",
       flexDirection: "row",
-      width: 358,
+      width: "100%",
     },
     depth2Frame02: {
+      width:"100%",
       alignItems: "flex-end",
       flexDirection: "row",
       zIndex: 1,
@@ -167,7 +174,7 @@ export const signupStyles = {
       alignItems: "center",
       flexDirection: "row",
       paddingHorizontal: Padding.p_base,
-      width: 390,
+      width: "100%",
       zIndex: 1,
     },
     depth6Frame01: {
@@ -193,15 +200,18 @@ export const signupStyles = {
       height: 21,
     },
     depth4Frame06: {
+      width:"100%",
       backgroundColor: Color.colorAliceblue,
       overflow: "hidden",
       borderRadius: Border.br_xs,
     },
     signUp: {
+      width:"100%",
+      textAlign:"center",
       color: Color.colorWhitesmoke_400,
     },
     depth5Frame06: {
-      width: "auto",
+      width: "100%",
       height: 21,
     },
     depth4Frame07: {
@@ -211,7 +221,7 @@ export const signupStyles = {
       borderRadius: Border.br_xs,
       alignItems: "center",
       flexDirection: "row",
-      width: 358,
+      width: "100%",
       paddingHorizontal: Padding.p_base,
     },
     depth3Frame11: {
@@ -220,7 +230,7 @@ export const signupStyles = {
     depth2Frame06: {
       height: 92,
       alignItems: "center",
-      width: 358,
+      width: "100%",
     },
     depth1Frame6: {
       height: 116,
@@ -228,22 +238,24 @@ export const signupStyles = {
       paddingVertical: Padding.p_xs,
       flexDirection: "row",
       paddingHorizontal: Padding.p_base,
-      width: 390,
+      width: "100%",
     },
     depth1Frame7: {
       height: 20,
     },
     depth0Frame0: {
       overflow: "hidden",
-      height: 844,
+      height: "100%",
+      width:"100%"
     },
     brandregistrationform: {
       backgroundColor: Color.colorWhite,
       flex: 1,
       width: "100%",
-      height: 844,
+      height:"100%"
     },
     textInput: {
+      width:"100%",
       borderColor: Color.colorGray_400,
       borderWidth: 0,
       borderRadius: Border.br_xs,
