@@ -36,56 +36,52 @@ const OtpVerification = ({ route, navigation }) => {
       return;
     }
     const _otp = otp.join("");
-    await verifyOTP(_otp,payload,navigation);
+    await verifyOTP(_otp, payload, navigation);
   };
 
   return (
     <View style={styles.otpverification}>
       <View style={styles.depth0Frame0}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("BrandRegistrationForm")}
-        >
-          <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
-            <View style={[styles.depth2Frame0, styles.frameFlexBox1]}>
-              <View style={[styles.depth3Frame0, styles.frameLayout]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-4-frame-07.png")}
-                />
-              </View>
-              <View style={[styles.depth3Frame1, styles.frameFlexBox1]}>
-                <View style={[styles.depth4Frame01, styles.frameLayout]}>
-                  <View style={[styles.depth5Frame0, styles.frameLayout]} />
+        <View style={{ width: "100%" }}>
+          <TouchableOpacity style={{ width: "100%" }}
+            onPress={() => navigation.navigate("BrandRegistrationForm")}
+          >
+            <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
+              <View style={[styles.depth2Frame0, styles.frameFlexBox1]}>
+                <View style={[styles.depth3Frame0, styles.frameLayout]}>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-4-frame-07.png")}
+                  />
                 </View>
               </View>
             </View>
+          </TouchableOpacity>
+          <View style={styles.depth1Frame1}>
+            <View style={styles.depth2Frame01}>
+              <Text style={[styles.enterTheCode, styles.nextTypo]}>
+                Enter the code sent to your email
+              </Text>
+            </View>
           </View>
-        </TouchableOpacity>
-        <View style={styles.depth1Frame1}>
-          <View style={styles.depth2Frame01}>
-            <Text style={[styles.enterTheCode, styles.nextTypo]}>
-              Enter the code sent to your email
-            </Text>
+          <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.otpContainer}>
+              {otp.map((digit, index) => (
+                <TextInput
+                  key={index}
+                  ref={(ref) => (inputs.current[index] = ref)}
+                  value={digit}
+                  onChangeText={(text) => handleChange(text, index)}
+                  onKeyPress={(e) => handleKeyPress(e, index)}
+                  keyboardType="numeric"
+                  maxLength={1}
+                  style={[styles.otpInput, error && { borderColor: "red" }]}
+                />
+              ))}
+            </View>
           </View>
         </View>
-        <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-          <View style={styles.otpContainer}>
-            {otp.map((digit, index) => (
-              <TextInput
-                key={index}
-                ref={(ref) => (inputs.current[index] = ref)}
-                value={digit}
-                onChangeText={(text) => handleChange(text, index)}
-                onKeyPress={(e) => handleKeyPress(e, index)}
-                keyboardType="numeric"
-                maxLength={1}
-                style={[styles.otpInput, error && { borderColor: "red" }]}
-              />
-            ))}
-          </View>
-        </View>
-        <View style={styles.depth1Frame3} />
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
           <TouchableOpacity onPress={handleNext}>
             <View style={[styles.depth2Frame03, styles.frameBg]}>
@@ -97,7 +93,6 @@ const OtpVerification = ({ route, navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={[styles.depth1Frame5, styles.depth1FrameBg]} />
       </View>
     </View>
   );
@@ -106,7 +101,7 @@ const OtpVerification = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   depth1FrameBg: {
     backgroundColor: Color.colorWhitesmoke_100,
-    width: 390,
+    width: "100%",
   },
   frameFlexBox1: {
     justifyContent: "space-between",
@@ -115,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   frameLayout: {
-    width: 48,
+    width: "100%",
     height: 48,
   },
   otpContainer: {
@@ -134,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   nextTypo: {
-    textAlign: "left",
+    textAlign: "center",
     fontFamily: FontFamily.workSansBold,
     fontWeight: "700",
     letterSpacing: 0,
@@ -143,7 +138,7 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth2FrameLayout: {
     height: 56,
@@ -165,6 +160,7 @@ const styles = StyleSheet.create({
   depth3Frame0: {
     alignItems: "center",
     flexDirection: "row",
+    width: "100%"
   },
   depth5Frame0: {
     justifyContent: "flex-end",
@@ -178,19 +174,21 @@ const styles = StyleSheet.create({
     paddingLeft: Padding.p_243xl,
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
   },
   depth1Frame0: {
     height: 72,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
+    marginTop: 20
   },
   enterTheCode: {
     fontSize: FontSize.size_3xl,
     lineHeight: 28,
     color: Color.colorGray_400,
+    textAlign: "center"
   },
   depth2Frame01: {
     alignSelf: "stretch",
@@ -200,7 +198,7 @@ const styles = StyleSheet.create({
     paddingTop: Padding.p_xl,
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   text: {
     fontSize: FontSize.size_base,
@@ -252,25 +250,32 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
+    bottom:20,
+    right:20
   },
   depth1Frame4: {
     height: 64,
     justifyContent: "flex-end",
+    marginTop:40
   },
   depth1Frame5: {
     height: 20,
     width: 390,
   },
   depth0Frame0: {
-    height: 844,
-    overflow: "hidden",
-    width: 390,
+    height: "100%",
+    overflow: "scroll",
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"space-between"
   },
   otpverification: {
     backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
+    height: "100%"
   },
 });
 
