@@ -1,4 +1,4 @@
-const Collaboration = require('../model/collaborationModel');
+const Collaboration = require('../model/collaboration');
 
 {/* Creating a new collaboration */}
 
