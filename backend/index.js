@@ -22,6 +22,7 @@ const influencerRoutes = require("./routes/influencerRoutes");
 const brandRoutes = require("./routes/brandRoutes");
 const subscriptionRouter = require("./routes/subscriptionRouter");
 const otpRouter = require("./routes/otpRoutes");
+const collaborationRoutes = require('./routes/collaborationRoutes');
 const brandAuthorizationMiddleware = require("./middleware/brands/brandAuthorizationMiddleware");
 const brandAuthenticationMiddleware = require("./middleware/brands/brandAuthenticationMiddleware");
 const brandValidationMiddleware = require("./middleware/brands/brandValidationMiddleware");
@@ -45,10 +46,12 @@ app.use("/social/:id", getSocialData);
 
 app.use("/subscriptions", subscriptionRouter);
 
-app.use("/otp",otpRouter)
+app.use("/otp",otpRouter);
 
 // Mount the brand routes on a specific path
 app.use("/brands", brandRoutes);
+
+app.use('/api', collaborationRoutes);
 
 // Home route
 app.get("/", (_req, res) => {
