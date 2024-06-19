@@ -27,32 +27,38 @@ const trackingData = () => {
 //Instagram
 const InstagramData = async (instagramId) => {
   const options = {
-    method: "GET",
-    url: process.env.INSTA_ENDPOINT,
+    method: 'GET',
+    url: config.INSTA_ENDPOINT,
     params: {
-      username_or_id: instagramId,
-      include_about: "true",
-      nocors: "true",
+      url: `https://www.instagram.com/${instagramId}/`
     },
     headers: {
       "x-rapidapi-key": config.X_RAPIDAPI_KEY,
       "x-rapidapi-host": config.X_RAPIDAPI_HOST_INSTA,
     },
   };
-
+  
   try {
     const response = await axios.request(options);
-    const _data = response.data.data;
+    const data = response.data.data
     const track = trackingData();
     const store = {
-      followers: _data.follower_count,
-      mediaCount: _data.media_count,
+      followers: data.usersCount,
+      avgER: data.avgER,
+      avgInteractions: data.avgInteractions,
+      avgLikes: data.avgLikes,
+      avgComments: data.avgComments,
+      memberCities:data.membersCities.slice(0, 5),
+      ages: data.ages,
+      genders: data.genders,
+      lastPosts: data.lastPosts,
+      membersReachability: data.membersReachability,
+      tags: data.tags,
       trackingDate: track,
     };
     return store
   } catch (error) {
     console.log(error);
-    return {error:"Somethinng wrong"}
   }
 };
 
@@ -77,8 +83,9 @@ const YoutubeData = async (youtubeId) => {
     const _data = response.data.meta;
     const track = trackingData()
     const store = {
-      subscribers: _data.subscriberCount,
-      views: _data.videosCount,
+      channelId:_data.channelId,
+      lastPost: [],
+      popularVideos: [],
       popularVideo: {},
       trackingData: track,
     };
@@ -86,6 +93,8 @@ const YoutubeData = async (youtubeId) => {
       (listing) =>
         listing.type === "video_listing" && listing.title === "Popular videos"
     );
+    store.lastPost = response.data.data[1];
+    store.popularVideos = popularVideosListing;
     if (
       popularVideosListing &&
       popularVideosListing.data &&
@@ -114,7 +123,8 @@ const YoutubeData = async (youtubeId) => {
     } else {
       console.log('No "Popular videos" listing found.');
     }
-    return store
+    const final = await YoutubeData2(store)
+    return final
   } catch (error) {
     console.log(error);
     return {error: `Something wrong${error}`}
@@ -122,6 +132,35 @@ const YoutubeData = async (youtubeId) => {
 };
 
 //YoutubeData("@MrBeast")
+
+const YoutubeData2 = async (store) =>{
+  const options = {
+    method: 'POST',
+    url: config.YT2_ENDPOINT,
+    headers: {
+      'x-rapidapi-key': config.X_RAPIDAPI_KEY,
+      'x-rapidapi-host': config.X_RAPIDAPI_HOST_YT2,
+      'Content-Type': 'application/json'
+    },
+    data: {
+      id: store.channelId,
+      part: [
+        'general',
+        'statistics',
+        'content'
+      ]
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    const data = response.data
+    const final = {...store, videoCount: data.videoCount,viewCount: data.viewCount,subscriberCount:data.subscriberCount}
+    return final
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 //facebook
 const facebookData = async (facebookUrl) => {
@@ -164,5 +203,8 @@ module.exports = {facebookData,YoutubeData,InstagramData,trackingData}
 // you tube
 // https://rapidapi.com/ytjar/api/yt-api/playground/apiendpoint_3d10cfc9-0699-452b-8ed6-eaafb3efafcf
 
+// you tube 2
+// https://rapidapi.com/dataverse-dataverse-default/api/youtube-data-apis/playground/apiendpoint_e466b510-e081-4f8a-b480-f80aa19c92b3
+
 // Instagram
-// https://rapidapi.com/mrngstar/api/instagram-scraper-api3/playground/apiendpoint_ef493eb2-bd53-47d9-99e7-b66f292cd959
+// https://rapidapi.com/artemlipko/api/instagram-statistics-api/playground/apiendpoint_68509d50-85d1-4dae-8060-92be061602d3
