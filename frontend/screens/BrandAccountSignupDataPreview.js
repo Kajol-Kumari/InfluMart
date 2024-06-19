@@ -14,7 +14,7 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
     await BrandSignUp(payload, navigation)
   };
 
-  const [image, setImage] = React.useState("../assets/blank-profile.png")
+  const [image, setImage] = React.useState(null)
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,7 +32,7 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView style={{height:"100%"}}>
+    <ScrollView style={{height:"100%",backgroundColor:Color.colorWhitesmoke_200}}>
       <View style={styles.brandaccountreviewnotification}>
         <View style={styles.depth0Frame0}>
           <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('OtpVerification')}>
@@ -445,8 +445,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 15,
     fontWeight: "700",
-    backgroundColor: "#f00",
-    color: Color.colorWhitesmoke_100,
+    backgroundColor: Color.colorAliceblue,
+    color: Color.colorBlack,
     textAlign: "center",
     borderRadius: Border.br_xs,
     marginHorizontal: 10
