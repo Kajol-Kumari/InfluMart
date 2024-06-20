@@ -6,10 +6,10 @@ function transformFB(inputData) {
       trackingData: [],
     },
   };
-  inputData.fbData.forEach((item) => {
-    transformedData.fbdata.followers.push(item.followers);
-    transformedData.fbdata.likes.push(item.likes);
-    transformedData.fbdata.trackingData.push(item.trackingData);
+  inputData?.fbData?.forEach((item) => {
+    transformedData.fbdata.followers.push(item?.followers);
+    transformedData.fbdata.likes.push(item?.likes);
+    transformedData.fbdata.trackingData.push(item?.trackingData);
   });
 
   // Padding with zeros if followers or likes contain less than 4 data
@@ -35,11 +35,11 @@ function transformYT(inputData) {
       trackingData: [],
     },
   };
-  inputData.ytData.forEach((item) => {
-    transformedData.ytdata.subscriberCount.push(item.subscriberCount);
-    transformedData.ytdata.videoCount.push(item.videoCount);
-    transformedData.ytdata.viewCount.push(item.viewCount);
-    transformedData.ytdata.trackingData.push(item.trackingData);
+  inputData?.ytData?.forEach((item) => {
+    transformedData.ytdata.subscriberCount.push(item?.subscriberCount);
+    transformedData.ytdata.videoCount.push(item?.videoCount);
+    transformedData.ytdata.viewCount.push(item?.viewCount);
+    transformedData.ytdata.trackingData.push(item?.trackingData);
   });
 
   // Padding with zeros if followers or likes contain less than 4 data
@@ -70,13 +70,13 @@ function transformIG(inputData) {
       trackingData: [],
     },
   };
-  inputData.instaData.forEach((item) => {
-    transformedData.instadata.followers.push(item.followers);
-    transformedData.instadata.avgComments.push(item.avgComments);
-    transformedData.instadata.trackingData.push(item.trackingDate);
-    transformedData.instadata.avgER.push(item.avgER*1000);
-    transformedData.instadata.avgInteractions.push(item.avgInteractions);
-    transformedData.instadata.avgLikes.push(item.avgLikes);
+  inputData?.instaData?.forEach((item) => {
+    transformedData.instadata.followers.push(item?.followers);
+    transformedData.instadata.avgComments.push(item?.avgComments);
+    transformedData.instadata.trackingData.push(item?.trackingDate);
+    transformedData.instadata.avgER.push(item?.avgER*1000);
+    transformedData.instadata.avgInteractions.push(item?.avgInteractions);
+    transformedData.instadata.avgLikes.push(item?.avgLikes);
   });
 
   // Padding with zeros if followers or likes contain less than 4 data
