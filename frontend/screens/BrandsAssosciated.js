@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text , ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,154 +8,58 @@ import { useNavigation } from "@react-navigation/native";
 const BrandAssosciated = () => {
   const navigation = useNavigation();
 
-    
+  const fakeData = ["Google","Cisco","Zoho","PWC","Meta","Swiggy","LinkedIn","Zomato"]
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
     <View style={styles.galileoDesign}>
       <View style={[styles.depth0Frame0, styles.frameBg]}>
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-        <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+          <TouchableOpacity style={{ width: "100%", height: "auto" }} onPress={() => navigation.navigate('Homepage')}>
+            <View style={styles.depth2Frame0}>
 
-
-          <View style={styles.depth2Frame0}>
-
-            <View style={styles.depth3Frame0}>
-              <Image
-                style={styles.depth4Frame0}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame1}>
-              <View style={styles.depth4Frame01}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={styles.allPartners}>Case Studies</Text>
+              <View style={styles.depth3Frame0}>
+                <Image
+                  style={styles.depth4Frame0}
+                  contentFit="cover"
+                  source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
+                />
+              </View>
+              <View style={styles.depth3Frame1}>
+                <View style={styles.depth4Frame01}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={styles.allPartners}>Case Studies</Text>
+                  </View>
                 </View>
               </View>
+              <View style={styles.depth3Frame2}>
+                <View style={styles.depth4Frame02} />
+              </View>
             </View>
-            <View style={styles.depth3Frame2}>
-              <View style={styles.depth4Frame02} />
-            </View>
-          </View>
           </TouchableOpacity>
         </View>
-      
-        
-        <View style={styles.depth1Frame1}>
-          <View style={[styles.depth2Frame01, styles.depth2FrameLayout]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-01.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>Google</Text>
-              </View>
-            </View>
+        <ScrollView style={{ width: '100%' }}>
+          <View style={styles.depth1Frame1}>
+            {
+              fakeData.map((value,index)=> {
+                return (
+                  <View style={styles.depth2FrameLayout} key={index}>
+                    <Image
+                      style={styles.depth4Frame03}
+                      contentFit="cover"
+                      source={require("../assets/depth-4-frame-01.png")}
+                    />
+                    <View style={styles.depth3Frame11}>
+                      <View style={styles.depth4Frame04}>
+                        <Text style={styles.google}>{value}</Text>
+                      </View>
+                    </View>
+                  </View>
+                )
+              })
+            }
           </View>
-          <View style={[styles.depth2Frame1, styles.depth2FrameLayout]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-01.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>Verizon</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame2, styles.depth2FramePosition2]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-03.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>Bank of America</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame3, styles.depth2FramePosition2]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-04.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>KPMG</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame4, styles.depth2FramePosition1]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-05.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>IBM</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame5, styles.depth2FramePosition1]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-06.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>Cisco</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame6, styles.depth2FramePosition]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-03.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>PWC</Text>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame7, styles.depth2FramePosition]}>
-            <View style={styles.frameLayout}>
-              <Image
-                style={[styles.depth4Frame03, styles.frameLayout]}
-                contentFit="cover"
-                source={require("../assets/depth-4-frame-03.png")}
-              />
-            </View>
-            <View style={styles.depth3Frame11}>
-              <View style={styles.depth4Frame04}>
-                <Text style={styles.google}>Nestle</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        </ScrollView>
         <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame02}>
             <View style={styles.depth3FrameLayout}>
@@ -224,28 +128,29 @@ const BrandAssosciated = () => {
             </View>
           </View>
         </View>
-        <View style={[styles.depth1Frame4, styles.frameBg]} />
       </View>
     </View>
-    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   frameBg: {
     backgroundColor: Color.colorWhitesmoke_100,
-    width: 390,
+    width: "100%",
+    height: "100%"
   },
   depth1FrameSpaceBlock: {
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
+    height: "auto"
   },
   depth2FrameLayout: {
-    height: 221,
-    top: 16,
-    position: "absolute",
-    width: 173,
+    height: 'auto',
+    width: 280,
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center"
   },
   frameLayout: {
     height: 173,
@@ -288,7 +193,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   depth3FrameLayout: {
-    width: 84,
+    width: "auto",
     height: 54,
     alignItems: "center",
   },
@@ -320,7 +225,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame1: {
-    width: 262,
+    width: "auto",
     justifyContent: "center",
     height: 23,
     alignItems: "center",
@@ -341,17 +246,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    height: 48,
-    width: 358,
+    height: "auto",
+    width: "100%",
   },
   depth1Frame0: {
-    height: 72,
-    paddingTop: Padding.p_base,
+    paddingTop: 30,
     paddingBottom: Padding.p_5xs,
+    position: "relative",
+    top: 0,
+    zIndex: 10
   },
   depth4Frame03: {
     borderRadius: Border.br_xs,
     overflow: "hidden",
+    width: 280,
+    height: 280
   },
   google: {
     fontSize: FontSize.size_base,
@@ -364,13 +273,13 @@ const styles = StyleSheet.create({
   },
   depth4Frame04: {
     width: 173,
-    height: 24,
+    height: "auto",
   },
   depth3Frame11: {
-    height: 36,
+    height: "auto",
     marginTop: 12,
     paddingBottom: Padding.p_xs,
-    width: 173,
+    width: "100%",
   },
   depth2Frame01: {
     left: 16,
@@ -397,13 +306,19 @@ const styles = StyleSheet.create({
     left: 201,
   },
   depth1Frame1: {
-    height: 952,
-    width: 390,
+    height: "100%",
+    width: "100%",
+    display:"flex",
+    flexDirection:"row",
+    flexWrap:"wrap",
+    gap:20,
+    justifyContent:"center",
+    paddingHorizontal:"2%"
   },
   depth4Frame019: {
     paddingHorizontal: 0,
     paddingVertical: Padding.p_9xs,
-    width: 24,
+    width: "auto",
   },
   home: {
     color: Color.colorSteelblue_200,
@@ -441,29 +356,41 @@ const styles = StyleSheet.create({
   depth2Frame02: {
     height: 54,
     flexDirection: "row",
-    width: 358,
+    display: "flex",
+    justifyContent: "center",
+    width: "auto",
+    gap:40
   },
   depth1Frame3: {
     borderStyle: "solid",
     borderColor: "#e8edf5",
     borderTopWidth: 1,
-    height: 75,
+    height: "10%",
+    width: "100%",
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
+    position: "relative",
+    bottom: 0,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
   },
   depth1Frame4: {
     height: 20,
     width: 390,
   },
   depth0Frame0: {
-    height: 1119,
+    height: "100%",
     overflow: "hidden",
-    width: 390,
+    width: "100%",
+    display: "flex",
+    flexDirection: "column"
   },
   galileoDesign: {
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
+    height: "100%"
   },
 });
 
