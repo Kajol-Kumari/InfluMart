@@ -40,20 +40,20 @@ const InstagramData = async (instagramId) => {
   
   try {
     const response = await axios.request(options);
-    const data = response.data.data
+    const data = response.data?.data
     const track = trackingData();
     const store = {
-      followers: data.usersCount,
-      avgER: data.avgER,
-      avgInteractions: data.avgInteractions,
-      avgLikes: data.avgLikes,
-      avgComments: data.avgComments,
-      memberCities:data.membersCities.slice(0, 5),
-      ages: data.ages,
-      genders: data.genders,
-      lastPosts: data.lastPosts,
-      membersReachability: data.membersReachability,
-      tags: data.tags,
+      followers: data?.usersCount,
+      avgER: data?.avgER,
+      avgInteractions: data?.avgInteractions,
+      avgLikes: data?.avgLikes,
+      avgComments: data?.avgComments,
+      memberCities:data?.membersCities.slice(0, 5),
+      ages: data?.ages,
+      genders: data?.genders,
+      lastPosts: data?.lastPosts,
+      membersReachability: data?.membersReachability,
+      tags: data?.tags,
       trackingDate: track,
     };
     return store
@@ -80,20 +80,20 @@ const YoutubeData = async (youtubeId) => {
 
   try {
     const response = await axios.request(option);
-    const _data = response.data.meta;
+    const _data = response.data?.meta;
     const track = trackingData()
     const store = {
-      channelId:_data.channelId,
+      channelId:_data?.channelId,
       lastPost: [],
       popularVideos: [],
       popularVideo: {},
       trackingData: track,
     };
-    const popularVideosListing = response.data.data.find(
+    const popularVideosListing = response.data?.data?.find(
       (listing) =>
         listing.type === "video_listing" && listing.title === "Popular videos"
     );
-    store.lastPost = response.data.data[1];
+    store.lastPost = response.data?.data[1];
     store.popularVideos = popularVideosListing;
     if (
       popularVideosListing &&
@@ -123,7 +123,7 @@ const YoutubeData = async (youtubeId) => {
     } else {
       console.log('No "Popular videos" listing found.');
     }
-    const final = await YoutubeData2(store)
+    const final = await YoutubeStats(store)
     return final
   } catch (error) {
     console.log(error);
@@ -133,13 +133,13 @@ const YoutubeData = async (youtubeId) => {
 
 //YoutubeData("@MrBeast")
 
-const YoutubeData2 = async (store) =>{
+const YoutubeStats = async (store) =>{
   const options = {
     method: 'POST',
-    url: config.YT2_ENDPOINT,
+    url: config.YT_STAT_ENDPOINT,
     headers: {
       'x-rapidapi-key': config.X_RAPIDAPI_KEY,
-      'x-rapidapi-host': config.X_RAPIDAPI_HOST_YT2,
+      'x-rapidapi-host': config.X_RAPIDAPI_HOST_YT_STAT,
       'Content-Type': 'application/json'
     },
     data: {
@@ -155,7 +155,7 @@ const YoutubeData2 = async (store) =>{
   try {
     const response = await axios.request(options);
     const data = response.data
-    const final = {...store, videoCount: data.videoCount,viewCount: data.viewCount,subscriberCount:data.subscriberCount}
+    const final = {...store, videoCount: data?.videoCount,viewCount: data?.viewCount,subscriberCount:data?.subscriberCount}
     return final
   } catch (error) {
     console.error(error);
@@ -181,8 +181,8 @@ const facebookData = async (facebookUrl) => {
     const _data = response.data[0];
     const track = trackingData()
     const store = {
-      followers: _data.followers_count,
-      likes: _data.likes_count,
+      followers: _data?.followers_count,
+      likes: _data?.likes_count,
       trackingData: track,
     };
     return store

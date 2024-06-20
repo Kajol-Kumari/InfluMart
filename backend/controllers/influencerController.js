@@ -15,7 +15,7 @@ exports.signup = async (req, res) => {
   try {
     // Check if a user with the same userName already exists
     const existingInfluencer = await InfluencerSignupRequest.findOne({
-      userName: influencerData.userName,
+      userName: influencerData?.userName,
     });
 
     if (existingInfluencer) {
@@ -24,11 +24,11 @@ exports.signup = async (req, res) => {
     }
 
     // Hash the password before saving it to the database
-    const hashedPassword = await bcrypt.hash(influencerData.password, 10);
+    const hashedPassword = await bcrypt.hash(influencerData?.password, 10);
     //data
-    const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
-    const instaData = await InstagramData(influencerData.instaProfile)
-    const ytData = await YoutubeData(influencerData.youtubeChannel)
+    const fbData = await facebookData(`https://www.facebook.com/${influencerData?.facebookProfile}`)
+    const instaData = await InstagramData(influencerData?.instaProfile)
+    const ytData = await YoutubeData(influencerData?.youtubeChannel)
     const track = trackingData();
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({

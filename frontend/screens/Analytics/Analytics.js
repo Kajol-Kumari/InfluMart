@@ -15,7 +15,6 @@ import { FBStats, InstaStats, YTStats } from "./components/stats/AllStats";
 import { FBGraph, IgGraph, YTGraph } from "./components/MyGraphs/AllGraphs";
 import { InstaDemo, YTDemo } from "./components/Images/AllImages";
 import { AnalyticsStyles } from "./Analytics.scss";
-//import { data } from "./test";
 
 const Analytics = ({ route, navigation }) => {
   const [fbData, setFbData] = React.useState({});
@@ -28,7 +27,6 @@ const Analytics = ({ route, navigation }) => {
   React.useEffect(() => {
     const userId = "666fecab7b21456e84d3c7e2";
     getSocialData(userId).then((data) => {
-    //const getData = () => {
       const transformedFb = transformFB(data);
       const transformedYt = transformYT(data);
       const transformedIg = transformIG(data);
@@ -59,7 +57,6 @@ const Analytics = ({ route, navigation }) => {
       setPopularPosts(popular);
     }
     ).catch((error) => console.log(error));
-    //getData();
   }, []);
 
   const processTag = (tag) => {

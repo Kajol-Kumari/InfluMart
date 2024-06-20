@@ -14,7 +14,7 @@ const FBStats = ({ fbData }) => {
       <View style={[styles.statsContainer]}>
         <Text style={styles.statsTitle}>
           {fbData?.likes &&
-            `Avg Likes: ${formatNumber(Math.max(...fbData.likes))}%`}
+            `Avg Likes: ${formatNumber(Math.max(...fbData?.likes))}%`}
         </Text>
       </View>
     </View>
@@ -32,7 +32,7 @@ const YTStats = ({ ytData }) => {
       <View style={[styles.statsContainer]}>
         <Text style={styles.statsTitle}>
           {ytData?.viewCount &&
-            `Avg Views: ${formatNumber(Math.max(...ytData.viewCount))}`}
+            `Avg Views: ${formatNumber(Math.max(...ytData?.viewCount))}`}
         </Text>
       </View>
     </View>
@@ -50,14 +50,14 @@ const InstaStats = ({ instaData }) => {
       <View style={[styles.statsContainer]}>
         <Text style={styles.statsTitle}>
           {instaData?.avgER &&
-            `Engagement Rate: ${Math.max(...instaData.avgER).toPrecision(2)}%`}
+            `Engagement Rate: ${Math.max(...instaData?.avgER).toPrecision(2)}%`}
         </Text>
       </View>
       <View style={[styles.statsContainer, styles.fullWidth]}>
         <Text style={styles.statsTitle}>
           {instaData?.avgLikes &&
             `Average Likes Rate: ${formatNumber(
-              Math.max(...instaData.avgLikes)
+              Math.max(...instaData?.avgLikes)
             )}`}
         </Text>
       </View>

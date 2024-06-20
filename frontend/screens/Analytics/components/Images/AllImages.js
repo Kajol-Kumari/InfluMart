@@ -48,9 +48,6 @@ const YTDemo = ({ videoId, width = 400, height = 300 }) => {
   );
 };
 
-// const YTDemo = ({ url, width = 200, height = 400 }) => {
-//   return <YouTubeEmbed url={url} maxWidth={width} height={height} />;
-// };
 const FBDemo = () => {
   return <></>;
 };
