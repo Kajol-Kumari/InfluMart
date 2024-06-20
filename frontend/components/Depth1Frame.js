@@ -1,8 +1,19 @@
 import React, { useMemo } from "react";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, View, Text, ImageSourcePropType, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, ImageSourcePropType, TouchableOpacity, Dimensions } from "react-native";
 import { FontFamily, FontSize, Border, Color, Padding } from "../GlobalStyles";
+
+const { height, width } = Dimensions.get('window');
+const itemWidth = width / 4 - 16;
+
+
+const dynamicStyles = {
+  frameWidth: Math.min(width * 0.9), // Setting a maximum width of 400
+  frameHeight: height * 0.07,
+  imageSize: Math.min(width * 0.06, 40), // Setting a maximum size of 40
+  fontSize: Math.min(width * 0.02, 30), // Setting a maximum font size of 30
+};
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -251,7 +262,7 @@ const Depth1Frame = ({
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: 90,
+    width: itemWidth,
     alignItems: "center",
     height: 55,
   },
@@ -271,11 +282,11 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 18,
     letterSpacing: 0,
-    fontSize: FontSize.size_xs,
+    fontSize: dynamicStyles.fontSize,
   },
   depth5Frame0: {
-    height: 24,
-    width: 24,
+    height:  dynamicStyles.imageSize,
+    width:  dynamicStyles.imageSize,
   },
   depth4Frame0: {
     borderRadius: Border.br_base,
@@ -317,19 +328,18 @@ const styles = StyleSheet.create({
     width: 45,
   },
   depth2Frame0: {
-    width: 358,
+    width: width - 32,
     flexDirection: "row",
-    height: 54,
+    height: dynamicStyles.frameHeight,
   },
   depth1Frame13: {
     backgroundColor: Color.colorWhite,
     borderStyle: "solid",
     borderColor: Color.colorGhostwhite,
     borderTopWidth: 1,
-    width: 390,
-    height: 75,
+    width: width - 16,
     paddingHorizontal: Padding.p_base,
-    paddingTop: Padding.p_5xs,
+    paddingTop: Padding.p_5xl,
     paddingBottom: Padding.p_xs,
   },
 });

@@ -1,7 +1,14 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
+
+const { width: screenWidth } = Dimensions.get("window");
+
+const scaleFontSize = (size) => {
+  const baseWidth = 375; // base width for scaling (iPhone 6/7/8)
+  return size * (screenWidth / baseWidth);
+};
 
 const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
   return (
@@ -38,21 +45,21 @@ const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
 
 const styles = StyleSheet.create({
   depth4Frame0: {
-    width: 24,
-    height: 24,
+    width: scaleFontSize(24),
+    height: scaleFontSize(24),
   },
   depth3Frame0: {
     borderRadius: Border.br_5xs,
     backgroundColor: Color.colorGhostwhite,
-    width: 48,
-    height: 48,
+    width: scaleFontSize(48),
+    height: scaleFontSize(48),
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   contactUs: {
-    fontSize: FontSize.size_base,
-    lineHeight: 24,
+    fontSize: scaleFontSize(FontSize.size_base),
+    lineHeight: scaleFontSize(24),
     fontWeight: "500",
     fontFamily: FontFamily.lexendMedium,
     color: Color.colorGray_500,
@@ -62,38 +69,38 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame01: {
-    width: 294,
-    height: 24,
+    width: scaleFontSize(294),
+    height: scaleFontSize(24),
   },
   sanFranciscoCa: {
-    fontSize: FontSize.size_sm,
-    lineHeight: 21,
+    fontSize: scaleFontSize(FontSize.size_sm),
+    lineHeight: scaleFontSize(21),
     fontFamily: FontFamily.lexendRegular,
     color: Color.colorSlategray_300,
     textAlign: "left",
   },
   depth4Frame1: {
-    height: 21,
-    width: 294,
+    height: scaleFontSize(21),
+    width: scaleFontSize(294),
   },
   depth3Frame1: {
-    marginLeft: 16,
-    width: 294,
+    marginLeft: scaleFontSize(16),
+    width: scaleFontSize(294),
     justifyContent: "center",
-    height: 66,
+    height: scaleFontSize(66),
   },
   depth2Frame0: {
     position: "absolute",
-    top: 12,
-    left: 16,
-    width: 358,
+    top: scaleFontSize(12),
+    left: scaleFontSize(16),
+    width: scaleFontSize(358),
     flexDirection: "row",
-    height: 66,
+    height: scaleFontSize(66),
   },
   depth1Frame5: {
     backgroundColor: Color.colorWhite,
-    width: 390,
-    height: 90,
+    width: screenWidth,
+    height: scaleFontSize(90),
   },
 });
 

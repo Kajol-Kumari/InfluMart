@@ -1,7 +1,13 @@
-import * as React from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import Depth3Frame from "./Depth3Frame";
 import { Padding } from "../GlobalStyles";
+import {
+  responsiveWidth,
+  responsiveFontSize,
+  responsiveScreenHeight,
+  responsiveScreenFontSize
+} from "react-native-responsive-dimensions";
 
 const Depth1Frame1 = () => {
   return (
@@ -20,13 +26,13 @@ const Depth1Frame1 = () => {
           depth4Frame0={require("../assets/depth-4-frame-04.png")}
           zara="Lulu Lemon"
           menswearCollection="Yoga pants"
-          propMarginLeft={12}
+          propMarginLeft={responsiveWidth(3)} // Adjusted margin to be responsive
         />
         <Depth3Frame
           depth4Frame0={require("../assets/depth-4-frame-05.png")}
           zara="Chanel"
           menswearCollection="Handbags"
-          propMarginLeft={12}
+          propMarginLeft={responsiveWidth(3)} // Adjusted margin to be responsive
         />
       </ScrollView>
     </View>
@@ -35,7 +41,7 @@ const Depth1Frame1 = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 390,
+    width: responsiveWidth(100), // Adjusted width to be responsive
     height: 'auto',
     overflow: "hidden",
   },

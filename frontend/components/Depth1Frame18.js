@@ -1,6 +1,9 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { Color, FontSize, FontFamily, Border, Padding } from "../GlobalStyles";
+import { Text, StyleSheet, View, Dimensions } from "react-native";
+import { Color, FontFamily, Border, Padding } from "../GlobalStyles";
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions";
+
+const { width: screenWidth } = Dimensions.get("window");
 
 const Depth1Frame18 = () => {
   return (
@@ -35,15 +38,15 @@ const Depth1Frame18 = () => {
 const styles = StyleSheet.create({
   depth4FrameFlexBox: {
     flexDirection: "row",
-    width: 308,
+    width: "100%",
   },
   freeFlexBox: {
     textAlign: "left",
     color: Color.colorGray_100,
   },
   free: {
-    fontSize: FontSize.size_base,
-    lineHeight: 20,
+    fontSize: responsiveFontSize(1.8),
+    lineHeight: responsiveHeight(2),
     fontWeight: "700",
     fontFamily: FontFamily.plusJakartaSansBold,
   },
@@ -51,54 +54,53 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth5Frame0: {
-    width: 'auto',
-    height: 20,
+    height: responsiveHeight(2.5),
   },
   depth4Frame0: {
     alignItems: "center",
     justifyContent: "space-between",
-    height: 20,
+    height: responsiveHeight(2.5),
+    flex: 1,
   },
   text: {
-    fontSize: FontSize.size_17xl,
+    fontSize: responsiveFontSize(2.5),
     letterSpacing: -1,
-    lineHeight: 45,
+    lineHeight: responsiveHeight(8),
     fontWeight: "800",
     fontFamily: FontFamily.plusJakartaSansExtraBold,
   },
   depth5Frame01: {
-    width: 'auto',
-    height: 45,
+    height: responsiveHeight(5.6),
   },
   depth5Frame1: {
-    width: 'auto',
-    marginLeft: 4,
-    height: 20,
+    marginLeft: responsiveWidth(2.5),
+    height: responsiveHeight(2.5),
   },
   depth4Frame1: {
-    marginTop: 4,
-    height: 45,
+    marginTop: responsiveHeight(0.5),
+    height: responsiveHeight(5.6),
+    flex: 1,
   },
   depth3Frame0: {
-    height: 69,
-    width: 308,
+    height: responsiveHeight(8.6),
+    width: "100%",
   },
   depth2Frame0: {
     position: "absolute",
-    top: 12,
-    left: 16,
+    top: responsiveHeight(1.5),
+    left: responsiveWidth(2.5),
     borderRadius: Border.br_xs,
     backgroundColor: Color.colorWhitesmoke_200,
     borderStyle: "solid",
     borderColor: Color.colorGainsboro_500,
     borderWidth: 1,
-    width: 358,
-    height: 119,
+    width: screenWidth - responsiveWidth(6),
+    height: responsiveHeight(15),
     padding: Padding.p_5xl,
   },
   depth1Frame21: {
-    width: 390,
-    height: 143,
+    width: "100%",
+    height: responsiveHeight(18),
   },
 });
 

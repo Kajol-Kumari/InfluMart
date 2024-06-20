@@ -1,6 +1,13 @@
 import * as React from "react";
 import { ScrollView, Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
 import Depth1Frame4 from "../components/Depth1Frame4";
 import Depth1Frame3 from "../components/Depth1Frame3";
 import Depth1Frame2 from "../components/Depth1Frame2";
@@ -12,10 +19,11 @@ const Homepage = () => {
   const navigation = useNavigation();
 
   return (
+    <View style={styles.container}>
+      <Depth1Frame4 />
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.homepage}>
-        <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <Depth1Frame4 />
+        <View style={[styles.depth0Frame0, styles.frameLayout1]}>      
           <View style={styles.frameLayout}>
             <View style={styles.frameLayout}>
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
@@ -27,27 +35,14 @@ const Homepage = () => {
               </View>
             </View>
           </View>
-          <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[
-                  styles.welcomeToInflumart,
-                  styles.welcomeToInflumartFlexBox,
-                ]}
-              >
-                Welcome to Influmart
-              </Text>
-            </View>
-          </View>
-          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[styles.anOnboardingPlatform, styles.registrationLayout]}
-              >
-                An onboarding platform for brands and influencers. Join the best
-                brands and influencers in the world.
-              </Text>
-            </View>
+          <View style={styles.container}>    
+            <Text style={styles.welcomeText}>
+              Welcome to Influmart
+            </Text>   
+            <Text style={styles.descriptionText}>
+              An onboarding platform for brands and influencers. Join the best
+              brands and influencers in the world.
+            </Text>      
           </View>
           <View style={styles.depth1Frame4}>
             <View style={styles.depth2Frame03}>
@@ -89,16 +84,20 @@ const Homepage = () => {
               </View>
             </View>
           </View>
-          <Depth1Frame3
-            contactUs="Contact us"
-            sanFranciscoCA="San Francisco, CA"
-            contactinflumartcom="contact@influmart.com"
-          />
-          <Depth1Frame3
-            contactUs="About"
-            sanFranciscoCA="Learn more"
-            contactinflumartcom="Get started"
-          />
+          <View style={styles.movedDown}>
+            <Depth1Frame3
+              contactUs="Contact us"
+              sanFranciscoCA="San Francisco, CA"
+              contactinflumartcom="contact@influmart.com"
+            />
+          </View>
+          <View>
+            <Depth1Frame3
+              contactUs="About"
+              sanFranciscoCA="Learn more"
+              contactinflumartcom="Get started"
+            />
+          </View>
           <View style={styles.depth1Frame7}>
             <View style={styles.depth2Frame04}>
               <View style={styles.depth2Frame01}>
@@ -108,6 +107,7 @@ const Homepage = () => {
               </View>
             </View>
           </View>
+          <View >
           <Depth1Frame2
             brands="Brands"
             depth3Frame1={require("../assets/depth-3-frame-1.png")}
@@ -119,69 +119,96 @@ const Homepage = () => {
             propFontFamily="Lexend-Regular"
             propColor="#121217"
           />
+          </View>
           <View style={styles.depth1Frame7}>
-            <View style={styles.depth2Frame05}>
               <View style={styles.depth2Frame01}>
                 <Text style={[styles.services, styles.registrationTypo]}>
                   Recent Highlights
                 </Text>
-              </View>
             </View>
           </View>
-          <Depth1Frame1 />
-          <Depth1Frame
-            depth5Frame0={require("../assets/depth-5-frame-01.png")}
-            depth5Frame01={require("../assets/depth-5-frame-02.png")}
-            search="Search"
-            depth5Frame02={require("../assets/depth-5-frame-03.png")}
-            myBrands="My Brands"
-            depth5Frame03={require("../assets/depth-5-frame-04.png")}
-          />
-          <View style={[styles.depth1Frame14, styles.frameLayout1]} />
+            <Depth1Frame1/>
         </View>
       </View>
     </ScrollView>
+    <View style={styles.stickyBottom}>
+        <Depth1Frame
+          depth5Frame0={require("../assets/depth-5-frame-01.png")}
+          depth5Frame01={require("../assets/depth-5-frame-02.png")}
+          search="Search"
+          depth5Frame02={require("../assets/depth-5-frame-03.png")}
+          myBrands="My Brands"
+          depth5Frame03={require("../assets/depth-5-frame-04.png")}
+        />
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   scrollContainer: {
     flexGrow: 1,
   },
   frameLayout1: {
-    width: 390,
+    width: responsiveWidth(100),
     backgroundColor: Color.colorWhite,
+    paddingBottom: responsiveHeight(15) 
   },
   frameLayout: {
-    height: 218,
-    width: 390,
+    height: responsiveScreenWidth(50),
+    width:  responsiveWidth(100),
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: responsiveHeight(),
+  },
+  welcomeText: {
+    fontSize: responsiveFontSize(3),
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    paddingHorizontal: responsiveHeight(2),
+    paddingVertical: responsiveHeight(1),
+  },
+  descriptionText: {
+    fontSize: responsiveFontSize(1.8),
+    fontFamily: FontFamily.lexendRegular,
+    textAlign: 'left',
+    paddingHorizontal: responsiveHeight(2),
+    paddingVertical: responsiveHeight(1),
   },
   welcomeToInflumartFlexBox: {
     textAlign: "left",
     color: Color.colorGray_500,
   },
   registrationLayout: {
-    lineHeight: 24,
-    fontSize: FontSize.size_base,
+    lineHeight: responsiveHeight(3), 
+    fontSize: responsiveFontSize(1.8), 
   },
   depth4FrameLayout: {
     paddingVertical: 0,
-    paddingHorizontal: Padding.p_xl,
+    paddingHorizontal: Padding.p_5xl,
     borderRadius: Border.br_xs,
-    height: 48,
+    height: responsiveHeight(5.5),
     alignItems: "center",
-    width: 358,
+    width: responsiveWidth(90),
     justifyContent: "center",
     flexDirection: "row",
   },
   frameBg1: {
     backgroundColor: Color.colorMediumslateblue,
     overflow: "hidden",
+  },
+  services: {
+    letterSpacing: 0,
+    textAlign: "left",
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: "700",
+    fontSize: responsiveFontSize(2), 
   },
   registrationTypo: {
     letterSpacing: 0,
@@ -190,8 +217,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   depth3FrameLayout: {
-    height: 48,
-    width: 358,
+    height: responsiveHeight(5.5),
+    width: responsiveWidth(90),
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -210,60 +237,49 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
   },
-  welcomeToInflumart: {
-    fontSize: FontSize.size_9xl,
-    letterSpacing: -1,
-    lineHeight: 35,
-    fontFamily: FontFamily.lexendBold,
-    fontWeight: "700",
-    textAlign: "left",
-  },
   depth2Frame01: {
     alignSelf: "stretch",
+    height: 'auto',
   },
   depth1Frame2: {
-    height: 67,
+    height: responsiveHeight(8), // Adjust the multiplier as needed
     paddingTop: Padding.p_xl,
-  },
-  anOnboardingPlatform: {
-    fontFamily: FontFamily.lexendRegular,
-    textAlign: "left",
-    color: Color.colorGray_500,
   },
   depth1Frame3: {
     height: 'auto',
     paddingTop: Padding.p_9xs,
   },
   brandRegistration: {
+    lineHeight: responsiveScreenHeight(3),
+    fontSize: responsiveFontSize(1.8),
     color: Color.colorWhite,
-    lineHeight: 24,
-    fontSize: FontSize.size_base,
+    letterSpacing: 0,
   },
   depth5Frame0: {
     width: 'auto',
-    height: 24,
+    height: responsiveScreenHeight(3),
   },
   depth4Frame01: {
     backgroundColor: Color.colorMediumslateblue,
     overflow: "hidden",
   },
   influencerRegistration: {
-    lineHeight: 24,
-    fontSize: FontSize.size_base,
+    lineHeight: responsiveScreenHeight(3),
+    fontSize: responsiveFontSize(1.8),
     color: Color.colorGray_500,
     letterSpacing: 0,
   },
   depth5Frame01: {
     width: 'auto',
-    height: 24,
+    height: responsiveScreenHeight(3),
   },
-  depth4Frame02: {
+  depth4Frame02: {  // inf btn size
     paddingVertical: 0,
     paddingHorizontal: Padding.p_xl,
     borderRadius: Border.br_xs,
-    height: 48,
+    height: responsiveScreenHeight(5.2),
     alignItems: "center",
-    width: 358,
+    width: responsiveWidth(90),
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -271,42 +287,46 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   depth2Frame03: {
-    height: 108,
+    height: responsiveHeight(12),
     alignItems: "center",
-    width: 358,
+    width: responsiveWidth(10),
   },
   depth1Frame4: {
-    height: 132,
+    height: responsiveHeight(15),
     paddingVertical: Padding.p_xs,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    marginBottom:  responsiveHeight(2),
   },
   depth2Frame04: {
     height: 23,
   },
   depth1Frame7: {
-    height: 47,
+    height: responsiveScreenHeight(5.2),
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
     flexDirection: "row",
-    paddingHorizontal: Padding.p_base,
-    width: 390,
-  },
-  depth2Frame05: {
-    width: 157,
-    height: 23,
+    paddingHorizontal: Padding.p_5xs,
+    width: responsiveWidth(90),
   },
   depth1Frame14: {
     height: 20,
   },
   depth0Frame0: {
-    height: 1318,
     overflow: "hidden",
   },
   homepage: {
     flex: 1,
     width: "100%",
+    backgroundColor: Color.colorWhite,
+  },
+  stickyBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 9999,
     backgroundColor: Color.colorWhite,
   },
 });

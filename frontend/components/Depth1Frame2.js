@@ -1,12 +1,20 @@
 import React, { useMemo } from "react";
-import { Text, StyleSheet, View, ImageSourcePropType } from "react-native";
+import { Text, StyleSheet, View, Dimensions } from "react-native";
 import { Image } from "expo-image";
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
+
+const { width: screenWidth } = Dimensions.get("window");
+
+const scaleSize = (size) => {
+  const baseWidth = 400; // Base width for scaling (iPhone 6/7/8)
+  return size * (screenWidth / baseWidth);
+};
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
+
 const Depth1Frame2 = ({
   brands,
   depth3Frame1,
@@ -47,38 +55,35 @@ const Depth1Frame2 = ({
 
 const styles = StyleSheet.create({
   brands: {
-    fontSize: FontSize.size_base,
-    lineHeight: 24,
+    fontSize: scaleSize(FontSize.size_base),
+    lineHeight: scaleSize(24),
     fontFamily: FontFamily.lexendRegular,
     color: Color.colorGray_500,
     textAlign: "left",
   },
   depth4Frame0: {
-    alignSelf: "stretch",
+    flex: 1, // Make it flexible to take up available space
   },
   depth3Frame0: {
-    width: 314,
-    height: 24,
+    flex: 1, // Make it flexible to take up available space
     overflow: "hidden",
   },
   depth3Frame1: {
-    width: 28,
-    marginLeft: 16,
-    height: 28,
+    width: scaleSize(28),
+    height: scaleSize(28),
+    marginLeft: scaleSize(16),
   },
   depth2Frame0: {
-    position: "absolute",
-    top: 14,
-    left: 16,
-    width: 358,
     flexDirection: "row",
     alignItems: "center",
-    height: 28,
+    paddingHorizontal: scaleSize(16),
+    height: scaleSize(28),
+    width: '100%', // Take full width
   },
   depth1Frame8: {
     backgroundColor: Color.colorWhite,
-    width: 'auto',
-    height: 56,
+    width: '100%', // Take full width
+    paddingVertical: scaleSize(14),
   },
 });
 
