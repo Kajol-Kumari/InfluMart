@@ -15,7 +15,7 @@ import { FBStats, InstaStats, YTStats } from "./components/stats/AllStats";
 import { FBGraph, IgGraph, YTGraph } from "./components/MyGraphs/AllGraphs";
 import { InstaDemo, YTDemo } from "./components/Images/AllImages";
 import { AnalyticsStyles } from "./Analytics.scss";
-import { data } from "./test";
+//import { data } from "./test";
 
 const Analytics = ({ route, navigation }) => {
   const [fbData, setFbData] = React.useState({});
@@ -27,39 +27,39 @@ const Analytics = ({ route, navigation }) => {
 
   React.useEffect(() => {
     const userId = "666fecab7b21456e84d3c7e2";
-    //getSocialData(userId).then((data) => {
-      const getData = ()=>{  
+    getSocialData(userId).then((data) => {
+    //const getData = () => {
       const transformedFb = transformFB(data);
-        const transformedYt = transformYT(data);
-        const transformedIg = transformIG(data);
-        setFbData(transformedFb.fbdata);
-        setInstaData(transformedIg.instadata);
-        setYtData(transformedYt.ytdata);
-        setSocialData(data);
-        const sortedPosts = data.instaData[
-          data.instaData.length - 1
-        ].lastPosts.sort((a, b) => b.likes - a.likes);
-        const popularPosts = sortedPosts.slice(0, 2);
-        let popular = popularPosts.map((post) => ({
-          title: post.text,
-          url: post.url,
-          platform: "Instagram",
-        }));
-        const sortedYtPosts = data.ytData[
-          data.ytData.length - 1
-        ].popularVideos.data.sort((a, b) => b.viewCount - a.viewCount);
-        const popularYtPosts = sortedYtPosts.slice(0, 2);
-        popularYtPosts.map((item) => {
-          popular.push({
-            title: item.title,
-            url: `${item.videoId}`,
-            platform: "YouTube",
-          });
+      const transformedYt = transformYT(data);
+      const transformedIg = transformIG(data);
+      setFbData(transformedFb.fbdata);
+      setInstaData(transformedIg.instadata);
+      setYtData(transformedYt.ytdata);
+      setSocialData(data);
+      const sortedPosts = data.instaData[
+        data.instaData.length - 1
+      ].lastPosts.sort((a, b) => b.likes - a.likes);
+      const popularPosts = sortedPosts.slice(0, 2);
+      let popular = popularPosts.map((post) => ({
+        title: post.text,
+        url: post.url,
+        platform: "Instagram",
+      }));
+      const sortedYtPosts = data.ytData[
+        data.ytData.length - 1
+      ].popularVideos.data.sort((a, b) => b.viewCount - a.viewCount);
+      const popularYtPosts = sortedYtPosts.slice(0, 2);
+      popularYtPosts.map((item) => {
+        popular.push({
+          title: item.title,
+          url: `${item.videoId}`,
+          platform: "YouTube",
         });
-        setPopularPosts(popular);
-      }
-    //).catch((error) => console.log(error));
-    getData()
+      });
+      setPopularPosts(popular);
+    }
+    ).catch((error) => console.log(error));
+    //getData();
   }, []);
 
   const processTag = (tag) => {
@@ -82,12 +82,15 @@ const Analytics = ({ route, navigation }) => {
             />
           </TouchableOpacity>
           <Depth1Frame9 />
-          <ScrollView>
+          <View style={styles.recentContainer}>
+            <Text style={styles.recentText}>Frequently used hashtags</Text>
+          </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.tagContainer}>
               {socialData &&
                 socialData.instaData[0].tags.map((tag, index) => (
                   <View key={index} style={styles.tagItem}>
-                    <Text style={styles.tagText}>{processTag(tag)}</Text>
+                    <Text style={styles.tagText}>{`#${processTag(tag)}`}</Text>
                   </View>
                 ))}
             </View>
@@ -183,15 +186,19 @@ const Analytics = ({ route, navigation }) => {
             showsHorizontalScrollIndicator={false}
           >
             {popularPosts &&
-              popularPosts.map((item, index) => (
-                <View key={index} style={styles.frame}>
-                  {item.platform == "Instagram" ? (
-                    <InstaDemo key={index} url={item.url} />
-                  ) : (
-                    <YTDemo key={index} videoId={item.url} />
-                  )}
-                </View>
-              ))}
+              popularPosts.map((item, index) =>
+                item.platform == "Instagram"
+                  ? tab != "youtube" && (
+                      <View key={index} style={styles.frame}>
+                        <InstaDemo key={index} url={item.url} />
+                      </View>
+                    )
+                  : tab == "youtube" && (
+                      <View key={index} style={styles.frame}>
+                        <YTDemo key={index} videoId={item.url} />
+                      </View>
+                    )
+              )}
           </ScrollView>
           <View style={styles.connectContainer}>
             <TouchableOpacity>
