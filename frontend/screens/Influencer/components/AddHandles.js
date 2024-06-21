@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Image } from "expo-image";
-import { Color, Padding, Border, FontSize, FontFamily } from "../GlobalStyles";
+import { AddHandlesStyles } from "./AddHandle.scss";
 
 const FormField = ({
   label,
@@ -41,7 +41,7 @@ const FormField = ({
           <Image
             style={styles.verifyIcon}
             contentFit="cover"
-            source={require("../assets/verify_symbol.png")}
+            source={require("../../../assets/verify_symbol.png")}
           />
           <Text style={styles.verifyText}>Verify</Text>
         </TouchableOpacity>
@@ -72,7 +72,7 @@ const AddHandles = ({ route, navigation }) => {
               <Image
                 style={styles.headerImage}
                 contentFit="cover"
-                source={require("../assets/cross_symbol.png")}
+                source={require("../../../assets/cross_symbol.png")}
               />
             </TouchableOpacity>
           </View>
@@ -132,98 +132,6 @@ const AddHandles = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  fieldContainer: {
-    marginVertical: Padding.p_xs,
-    paddingHorizontal: Padding.p_xs,
-  },
-  fieldLabel: {
-    fontFamily: FontFamily.plusJakartaSansMedium,
-    fontWeight: "500",
-    fontSize: FontSize.size_base,
-    color: Color.colorGray_100,
-  },
-  verifyContainer: {
-    paddingHorizontal: Padding.p_5xs,
-  },
-  textInput: {
-    borderRadius: Border.br_xs,
-    borderColor: Color.colorAliceblue,
-    padding: Padding.p_base,
-    marginTop: Padding.p_5xs,
-    color: "#4F7A94",
-    fontSize: FontSize.size_base,
-    fontFamily: FontFamily.plusJakartaSansRegular,
-    borderWidth: 2,
-  },
-  container: {
-    flex: 1,
-    width: 390,
-    backgroundColor: Color.colorWhite,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: Padding.p_base,
-    backgroundColor: Color.colorWhite,
-  },
-  headerText: {
-    fontSize: 18,
-    lineHeight: 23,
-    textAlign: "center",
-    fontFamily: FontFamily.plusJakartaSansBold,
-    fontWeight: "700",
-    width: "100%",
-  },
-  headerIcon: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerImage: {
-    height: 24,
-    width: 24,
-  },
-  platform: {
-    fontFamily: FontFamily.plusJakartaSansMedium,
-    fontWeight: "500",
-    fontSize: FontSize.size_base,
-    color: Color.colorGray,
-  },
-  username: {
-    fontFamily: FontFamily.plusJakartaSansRegular,
-    color: Color.colorSlategray,
-    lineHeight: 24,
-  },
-  verifyButton: {
-    flexDirection: "column",
-    paddingLeft: Padding.p_xs,
-  },
-  verifyIcon: {
-    width: 40,
-    height: 40,
-  },
-  verifyText: {
-    fontSize: FontSize.size_sm,
-    lineHeight: 21,
-    fontFamily: FontFamily.plusJakartaSansMedium,
-    fontWeight: "500",
-    color: Color.colorGray,
-  },
-  confirmButton: {
-    backgroundColor: "#388fe6",
-    paddingVertical: Padding.p_base,
-    alignItems: "center",
-    borderRadius: Border.br_xs,
-    margin: Padding.p_base,
-  },
-  confirmText: {
-    color: Color.colorWhite,
-    lineHeight: 24,
-    fontSize: FontSize.size_base,
-    textAlign: "center",
-    fontFamily: FontFamily.plusJakartaSansBold,
-    fontWeight: "700",
-  },
-});
+const styles = StyleSheet.create(AddHandlesStyles);
 
 export default AddHandles;

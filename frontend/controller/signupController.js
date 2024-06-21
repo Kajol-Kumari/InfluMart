@@ -80,6 +80,7 @@ const InfluencerVerify = async (payload,navigation) => {
     }
   } catch (error) {
     Alert.alert("ERROR", "Something went wrong");
+    console.log(error)
   }
 }
 

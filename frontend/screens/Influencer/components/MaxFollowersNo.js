@@ -7,23 +7,23 @@ import {
   TextInput,
 } from "react-native";
 import { Image } from "expo-image";
-import { Padding, Color, FontFamily, Border, FontSize } from "../GlobalStyles";
+import { MaxFollowersNoStyles } from "./MaxFollowers.scss";
 
 const socialAccounts = [
   {
     name: "Instagram",
     description: "Share your photos and videos",
-    image: require("../assets/instagram_symbol.png"),
+    image: require("../../../assets/instagram_symbol.png"),
   },
   {
     name: "YouTube",
     description: "Watch, stream, and upload videos",
-    image: require("../assets/yt_symbol.png"),
+    image: require("../../../assets/yt_symbol.png"),
   },
   {
     name: "TikTok",
     description: "Create and discover short videos",
-    image: require("../assets/tt_symbol.png"),
+    image: require("../../../assets/tt_symbol.png"),
   },
 ];
 
@@ -48,7 +48,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
             <Image
               style={styles.icon}
               contentFit="cover"
-              source={require("../assets/cross_symbol.png")}
+              source={require("../../../assets/cross_symbol.png")}
             />
           </TouchableOpacity>
           <Text style={styles.addAccountText}>Add a social account</Text>
@@ -95,97 +95,6 @@ const MaxFollowersNo = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Color.colorWhite,
-    padding: Padding.p_base,
-    width: 390,
-  },
-  header: {
-    marginBottom: Padding.p_base,
-  },
-  addAccountButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: Padding.p_base,
-    backgroundColor: Color.colorWhitesmoke,
-    borderRadius: Border.br_xs,
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    marginRight: Padding.p_base,
-  },
-  addAccountText: {
-    fontSize: 18,
-    lineHeight: 23,
-    fontFamily: FontFamily.beVietnamProBold,
-    fontWeight: "700",
-    textAlign: "center",
-    width: "80%",
-  },
-  accountContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: Padding.p_base,
-    backgroundColor: Color.colorWhitesmoke,
-    borderRadius: Border.br_xs,
-    marginBottom: Padding.p_base,
-  },
-  activeAccount: {
-    borderWidth: 2,
-    borderColor:"#637587",
-  },
-  accountIcon: {
-    width: 48,
-    height: 48,
-    marginRight: Padding.p_base,
-  },
-  accountInfo: {
-    flex: 1,
-  },
-  accountName: {
-    fontSize: FontSize.size_base,
-    fontFamily: FontFamily.beVietnamProMedium,
-    color: Color.colorGray,
-    marginBottom: 2,
-  },
-  accountDescription: {
-    fontSize: FontSize.size_sm,
-    fontFamily: FontFamily.beVietnamProRegular,
-    color: Color.colorSlategray,
-  },
-  followerCountContainer: {
-    padding: Padding.p_base,
-    backgroundColor: Color.colorWhitesmoke,
-    borderRadius: Border.br_xs,
-    marginBottom: Padding.p_base,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  enterFollowerCountText: {
-    borderRadius: Border.br_xs,
-    borderColor: Color.colorAliceblue,
-    padding: Padding.p_base,
-    marginTop: Padding.p_5xs,
-    color: "#637587",
-    fontSize: FontSize.size_base,
-    fontFamily: FontFamily.plusJakartaSansRegular,
-    borderWidth: 2,
-    width: 250,
-  },
-  confirmButton: {
-    backgroundColor: "#388fe6",
-    paddingVertical: Padding.p_base,
-    borderRadius: Border.br_xs,
-    alignItems: "center",
-  },
-  confirmButtonText: {
-    fontSize: FontSize.size_base,
-    fontFamily: FontFamily.beVietnamProBold,
-    color: Color.colorWhite,
-  },
-});
+const styles = StyleSheet.create(MaxFollowersNoStyles);
 
 export default MaxFollowersNo;

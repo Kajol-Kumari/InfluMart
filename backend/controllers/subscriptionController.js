@@ -3,7 +3,7 @@ const Subscription = require("../model/Subscription");
 
 
 const calculateCharges = (followers) => {
-  const maxFollowers = followers;
+  const maxFollowers = parseInt(followers);
 
   const quarterCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 3 + (0.20 * (((0.8 * maxFollowers) * 0.50) / 12) * 3);
   const halfYearCharge = (((0.8 * maxFollowers) * 0.50) / 12) * 6 + (0.10 * (((0.8 * maxFollowers) * 0.50) / 12) * 6);
@@ -41,6 +41,7 @@ const postSubscription = async (req, res) => {
     await newSubscription.save();
     res.status(201).json({ message: "Subscription created successfully" });
   } catch (error) {
+    console.log(error)
     res
       .status(400)
       .json({ message: "Error creating subscription", error: error.message });
