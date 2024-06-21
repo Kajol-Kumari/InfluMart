@@ -13,7 +13,7 @@ const SendOtp = async (payload, navigation) => {
     if (response.status == 200) {
       navigation.navigate("OtpVerification", { payload });
     } else {
-      const data = await response.json();
+      const data = await response.data;
       Alert.alert("Error", data.message);
     }
   } catch (error) {
@@ -30,7 +30,7 @@ const verifyOTP = async (otp, payload, navigation) => {
     if (response.status === 200) {
       navigation.navigate("BrandAccountReviewNotification", { payload });
     } else {
-      const data = await response.json();
+      const data = await response.data;
       Alert.alert("Error", data.message);
     }
   } catch (error) {
@@ -53,4 +53,34 @@ const BrandSignUp = async (payload, navigation) => {
   }
 };
 
-export { SendOtp, verifyOTP, BrandSignUp };
+
+const InfluencerSignUp = async (payload, navigation) => {
+  try {
+    const response = await axios.post(`${API_ENDPOINT}/influencers/signup`, payload);
+    const data = await response.data
+    if (response.status === 201) {
+      navigation.navigate("UserProfile")
+    } else {
+      Alert.alert("ERROR", data.message);
+    }
+  } catch (error) {
+    console.log(error)
+    Alert.alert("ERROR", "Something went wrong");
+  }
+}
+
+const InfluencerVerify = async (payload,navigation) => {
+  try {
+    const response = await axios.post(`${API_ENDPOINT}/influencers/verifyUser`, {userName:payload.userName,email:payload.email});
+    const data = await response.data
+    if (response.status === 200) {
+      Alert.alert("ERROR", data.message)
+    }else if(response.status===201){
+      navigation.navigate("PlanChooseInterface",{payload})
+    }
+  } catch (error) {
+    Alert.alert("ERROR", "Something went wrong");
+  }
+}
+
+export { SendOtp, verifyOTP, BrandSignUp, InfluencerSignUp,InfluencerVerify };

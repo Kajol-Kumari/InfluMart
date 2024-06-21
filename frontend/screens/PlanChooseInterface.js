@@ -1,250 +1,224 @@
-import * as React from "react";
-import { Text, StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
-import Depth1Frame7 from "../components/Depth1Frame7";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import Depth1Frame7 from "../components/Depth1Frame7";
 import Depth2Frame3 from "../components/Depth2Frame3";
 import Depth2Frame2 from "../components/Depth2Frame2";
 import { Padding, Color, Border, FontFamily, FontSize } from "../GlobalStyles";
+import PlanBox from "../shared/PlansBox";
+import { getSubscriptionPlans, subscribe } from "../controller/subscriptionController";
+import { generateSubscriptionDates } from "../util/subscriptionDate";
 
-const PlanChooseInterface = () => {
-  const navigation = useNavigation();
+const PlanChooseInterface = ({ route, navigation }) => {
+  const [plans, setPlans] = useState(false);
+  const payload = route.params?.payload;
+  const [planData, setPlanData] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const handleSelectPlan = async () => {
+    const _data = generateSubscriptionDates(selectedPlan?.duration);
+    let subscription = {
+      userName: payload.userName,
+      plan: selectedPlan?.plan || "free",
+      startDate: _data.startDate,
+      endDate: _data.endDate,
+      isFree: _data.isFree,
+      amount: selectedPlan ? selectedPlan?.price : "",
+      paymentMode: "",
+      transactionDate: _data.transactionDate,
+    };
+    await subscribe(subscription, payload, navigation);
+  };
+  useEffect(() => {
+    const getPlans = async () => {
+      const data = await getSubscriptionPlans({
+        platform: payload.follower.platform,
+        followers: payload.follower.value,
+      });
+      setPlanData(data);
+    };
 
+    getPlans();
+  }, []);
   return (
-    <ScrollView style={styles.planchooseinterface}>
-
-    <View style={styles.planchooseinterface}>
-      <View style={styles.depth0Frame0}>
-      <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
-
-        <Depth1Frame7
-          depth4Frame0={require("../assets/depth-4-frame-019.png")}
-          requestDetails="Choose Your Plan"
-          depth3Frame0BackgroundColor="#fff"
-          requestDetailsWidth={'auto'}
-          depth4Frame0FontFamily="WorkSans-Bold"
-          depth4Frame0Color="#121417"
-        />
+    <ScrollView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("InfluencerRegistrationForm")}
+        >
+          <Depth1Frame7
+            depth4Frame0={require("../assets/depth-4-frame-019.png")}
+            requestDetails="Choose Your Plan"
+            depth3Frame0BackgroundColor="#fff"
+            requestDetailsWidth="auto"
+            depth4Frame0FontFamily="WorkSans-Bold"
+            depth4Frame0Color="#121417"
+          />
         </TouchableOpacity>
-        <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock1]}>
-          <View style={styles.depth2Frame0}>
-            <Text style={[styles.huluNoAds, styles.huluNoAdsFlexBox]}>
-              Influmart Subscriptions
-            </Text>
+
+        <View style={styles.header}>
+          <Text style={styles.headerText}>{`Hulu (No Ads)`}</Text>
+        </View>
+
+        <View style={styles.subHeader}>
+          <Text style={styles.subHeaderText}>
+            Enjoy our entire library, plus exclusive streaming access to the
+            biggest winner movies.
+          </Text>
+        </View>
+
+        <View style={styles.planToggle}>
+          <TouchableOpacity
+            style={[styles.planButton, !plans && styles.planActive]}
+            onPress={() => setPlans(false)}
+          >
+            <Text style={[plans && styles.planText]}>Monthly</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setPlans(true)}
+            style={[styles.planButton, plans && styles.planActive]}
+          >
+            <Text style={[!plans && styles.planText]}>Yearly</Text>
+          </TouchableOpacity>
+        </View>
+
+        {!plans && planData && (
+          <PlanBox
+            setSelect={setSelectedPlan}
+            select={selectedPlan}
+            plan={"halfYearly"}
+            duration={"6 months"}
+            price={`$ ${planData?.halfYearly}`}
+            suggested={true}
+          />
+        )}
+        {!plans && planData && (
+          <PlanBox
+            setSelect={setSelectedPlan}
+            select={selectedPlan}
+            plan={"quarterly"}
+            duration={"3 months"}
+            price={`$ ${planData?.quarterly}`}
+          />
+        )}
+        {plans && planData && (
+          <PlanBox
+            setSelect={setSelectedPlan}
+            select={selectedPlan}
+            plan={"annually"}
+            duration={"1 year"}
+            price={`$ ${planData?.annually}`}
+          />
+        )}
+        <TouchableOpacity
+          onPress={() => {
+            handleSelectPlan();
+          }}
+        >
+          <View style={styles.selectPlanButton}>
+            <Text style={styles.selectPlanButtonText}>Select Plan</Text>
           </View>
-        </View>
-        <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock1]}>
-          <View style={styles.depth2Frame0}>
-            <Text style={[styles.enjoyOurEntire, styles.huluNoAdsFlexBox]}>
-            "Join now to unlock exclusive brand collaborations and elevate your marketing game!"            
-            </Text>
-          </View>
-        </View>
-        <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame02, styles.depth2FrameLayout]}>
-            <View style={[styles.depth3Frame0, styles.depth3FrameFlexBox]}>
-              <View style={[styles.depth4Frame0, styles.depth4FrameLayout]}>
-                <View style={styles.depth2Frame0}>
-                  <Text style={[styles.monthly, styles.yearlyTypo]}>
-                    Monthly
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={[styles.depth3Frame1, styles.depth3FrameFlexBox]}>
-              <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
-                <View style={styles.depth2Frame0}>
-                  <Text style={[styles.yearly, styles.yearlyTypo]}>Yearly</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame4}>
-          <Depth2Frame3 />
-          <Depth2Frame2 />
-        </View>
-        <View style={styles.depth1Frame5} />
-        <View style={[styles.depth1Frame6, styles.depth1FrameSpaceBlock]}>
-          <View style={[styles.depth2Frame03, styles.depth3FrameFlexBox]}>
-            <View style={[styles.depth3Frame01, styles.depth4FrameLayout]}>
-              <View style={styles.depth2Frame0}>
-                <Text style={styles.selectPlan}>Checkout</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame7} />
+        </TouchableOpacity>
       </View>
-    </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  depth1FrameSpaceBlock1: {
-    paddingBottom: Padding.p_xs,
-    paddingHorizontal: Padding.p_base,
+  container: {
+    flex: 1,
+    backgroundColor: Color.colorWhite,
     width: 390,
   },
-  huluNoAdsFlexBox: {
-    textAlign: "left",
-    color: Color.colorGray_300,
-  },
-  depth1FrameSpaceBlock: {
-    paddingVertical: Padding.p_xs,
-    flexDirection: "row",
-    height: 64,
-    paddingHorizontal: Padding.p_base,
-    width: 390,
-  },
-  depth2FrameLayout: {
-    height: 40,
-    width: 358,
-    backgroundColor: Color.colorWhitesmoke_300,
-  },
-  depth3FrameFlexBox: {
-    paddingVertical: 0,
-    borderRadius: Border.br_xs,
-    justifyContent: "center",
+  innerContainer: {
+    padding: Padding.p_base,
     alignItems: "center",
-    flexDirection: "row",
-    overflow: "hidden",
+    height: "auto",
   },
-  depth4FrameLayout: {
-    height: 21,
-    overflow: "hidden",
+  header: {
+    marginVertical: Padding.p_xl,
+    width: "90%",
   },
-  yearlyTypo: {
-    fontFamily: FontFamily.workSansMedium,
-    fontWeight: "500",
-    lineHeight: 21,
-    fontSize: FontSize.size_sm,
-    textAlign: "left",
-  },
-  huluNoAds: {
+  headerText: {
     fontSize: FontSize.size_3xl,
     lineHeight: 28,
     fontFamily: FontFamily.workSansBold,
-    fontWeight: "700",
-    letterSpacing: 0,
+    color: Color.colorGray_300,
     textAlign: "left",
   },
-  depth2Frame0: {
-    alignSelf: "stretch",
+  subHeader: {
+    marginBottom: Padding.p_xl,
+    paddingHorizontal: Padding.p_xs,
   },
-  depth1Frame1: {
-    height: 60,
-    paddingTop: Padding.p_xl,
-  },
-  enjoyOurEntire: {
+  subHeaderText: {
     fontSize: FontSize.size_base,
     lineHeight: 24,
     fontFamily: FontFamily.workSansRegular,
-  },
-  depth1Frame2: {
-    height: 'auto',
-    paddingTop: Padding.p_9xs,
-  },
-  monthly: {
     color: Color.colorGray_300,
-    fontWeight: "500",
+    textAlign: "left",
   },
-  depth4Frame0: {
-    width: 'auto',
+  planToggle: {
+    flexDirection: "row",
+    marginBottom: Padding.p_xl,
+    justifyContent: "center",
+    backgroundColor: "#F0F2F5",
+    width: "99%",
+    paddingVertical: 4,
+    paddingHorizontal: Padding.p_xs,
+    borderRadius: 12,
   },
-  depth3Frame0: {
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowRadius: 4,
-    elevation: 4,
-    shadowOpacity: 1,
-    paddingHorizontal: Padding.p_5xs,
-    height: 32,
-    width: 175,
-    paddingVertical: 0,
-    backgroundColor: Color.colorWhite,
-  },
-  yearly: {
+  planButton: {
+    width: 165,
+    height: 40,
+    backgroundColor: Color.colorWhitesmoke_300,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: Padding.p_5xs,
+    borderRadius: Border.br_xs,
     color: "#637587",
   },
-  depth4Frame01: {
-    width: 'auto',
+  planText: {
+    color: "#637587",
   },
-  depth3Frame1: {
-    paddingHorizontal: Padding.p_5xs,
-    height: 32,
-    width: 175,
-    paddingVertical: 0,
+  planActive: {
+    color: "#121417",
+    backgroundColor: "#FFFFFF",
   },
-  depth2Frame02: {
-    padding: Padding.p_9xs,
-    borderRadius: Border.br_xs,
-    height: 40,
-    width: 358,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  depth1Frame3: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: Padding.p_xs,
-    flexDirection: "row",
-    height: 64,
-  },
-  depth1Frame4: {
-    height: 386,
-    width: 390,
-  },
-  depth1Frame5: {
-    height: 91,
-    width: 390,
-  },
-  selectPlan: {
-    lineHeight: 21,
-    fontSize: FontSize.size_sm,
-    textAlign: "left",
-    color: Color.colorGray_300,
-    fontFamily: FontFamily.workSansBold,
-    fontWeight: "700",
-    letterSpacing: 0,
-  },
-  depth3Frame01: {
-    width: 'auto',
-    backgroundColor: Color.colorWhitesmoke_300,
-    height: 21,
-  },
-  depth2Frame03: {
-    height: 40,
-    width: 358,
-    backgroundColor: Color.colorWhitesmoke_300,
-    paddingVertical: 0,
-    paddingHorizontal: Padding.p_base,
-  },
-  depth1Frame6: {
-    paddingVertical: Padding.p_xs,
-    flexDirection: "row",
-    height: 64,
-  },
-  depth1Frame7: {
-    height: 20,
-    width: 390,
-    backgroundColor: Color.colorWhite,
-  },
-  depth0Frame0: {
-    height: 844,
-    overflow: "hidden",
-    width: 390,
-    backgroundColor: Color.colorWhite,
-  },
-  planchooseinterface: {
-    flex: 1,
+  planDetails: {
     width: "100%",
-    backgroundColor: Color.colorWhite,
+    marginBottom: Padding.p_xl,
+  },
+  checkoutButton: {
+    width: 358,
+    height: 40,
+    backgroundColor: Color.colorPrimary,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: Border.br_xs,
+  },
+  checkoutButtonText: {
+    fontSize: FontSize.size_sm,
+    lineHeight: 21,
+    fontFamily: FontFamily.workSansBold,
+    color: Color.colorWhite,
+  },
+  selectPlanButton: {
+    backgroundColor: "#F0F2F5",
+    borderRadius: 12,
+    paddingVertical: Padding.p_base,
+    alignItems: "center",
+    marginVertical: Padding.p_base,
+    width: 260,
+  },
+  selectPlanButtonText: {
+    color: "black",
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.plusJakartaSansBold,
   },
 });
 
