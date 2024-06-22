@@ -1,10 +1,11 @@
 import axios from "axios";
+import { API_ENDPOINT } from "@env";
 
 //It handle the Influencer login functionality
 export const handleInfluencerLogin = async (username,password) => {
     if (username.trim() != "" && password.trim() != "") {
       try {
-        const response = await fetch(`${process.env.API_ENDPOINT}/influencers/login`, {
+        const response = await fetch(`${API_ENDPOINT}/influencers/login`, {
           method: "post",
           headers: {
             "Content-Type": "application/json"
@@ -31,7 +32,7 @@ export const handleBrandLogin = async (email, password) => {
   if (email.trim() != "" && password.trim() != "") {
     try {
       const response = await axios.post(
-        `${process.env.API_ENDPOINT}/brands/login`,
+        `${API_ENDPOINT}/brands/login`,
         { email, password }
       );
       const data = await response.data;

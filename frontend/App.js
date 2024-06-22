@@ -14,8 +14,8 @@ import InfluencersList from "./screens/InfluencersList";
 import InboxInterface from "./screens/inbox/InboxInterface";
 import ChatInterface from "./screens/chat/ChatInterface";
 import UserProfile from "./screens/UserProfile";
-import InfluencerRegistrationForm from "./screens/InfluencerRegistrationForm";
-import PlanChooseInterface from "./screens/PlanChooseInterface";
+import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrationForm";
+import PlanChooseInterface from "./screens/Influencer/PlanChooseInterface";
 import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
@@ -25,6 +25,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
 import BrandRegistrationForm from "./screens/signup/BrandRegistrationForm";
+import AddHandles from "./screens/Influencer/components/AddHandles";
+import PricePerPost from "./screens/Influencer/components/PricePerPost";
+import UserProfilePhoto from "./screens/Influencer/components/UserProfilePhoto";
+import MaxFollowersNo from "./screens/Influencer/components/MaxFollowersNo";
+import InfluencerConfirmAccount from "./screens/Influencer/InfluencerConfirmAccount";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -72,6 +77,11 @@ const App = () => {
             <Stack.Screen
               name="BrandAccountReviewNotification"
               component={BrandAccountSignupDataPreview}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InfluencerConfirmAccount"
+              component={InfluencerConfirmAccount}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -143,6 +153,16 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="InfluencerSocialHandles"
+              component={AddHandles}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PricePerPost"
+              component={PricePerPost}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="ChatInterface"
               component={ChatInterface}
               options={{ headerShown: false }}
@@ -155,6 +175,16 @@ const App = () => {
             <Stack.Screen
               name="InfluencerRegistrationForm"
               component={InfluencerRegistrationForm}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="UserProfilePhoto"
+              component={UserProfilePhoto}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="MaxFollowersNo"
+              component={MaxFollowersNo}
               options={{ headerShown: false }}
             />
             <Stack.Screen

@@ -13,8 +13,9 @@ const influencerSignupRequestSchema = new mongoose.Schema({
   otherSocialHandles: [String], // Use String data type for URLs in an array
   briefAbout: String,
   category: [String],
-  residenceArea: String,
-  price: Number,
+  location: String,
+  price: [],
+  email: { type: String, unique: true }, // Set the unique constraint to ensure email uniqueness
   userName: { type: String, unique: true },
   password: String,
   role: {
@@ -25,6 +26,10 @@ const influencerSignupRequestSchema = new mongoose.Schema({
   fbData: [], // Facebook data
   ytData: [], // YouTube data
   tracked: {type:String,default:""},
+  agreedToTerms: { type: Boolean, default: false },
+  industryAssociation: { type: Boolean, default: false },
+  over18: { type: Boolean, default: false },
+  profileUrl: { type: String, default: "" },
 });
 
 const InfluencerSignupRequest = mongoose.model(
