@@ -20,6 +20,7 @@ import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
+import FilterUI from './screens/FiltersUI'
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -160,6 +161,11 @@ const App = () => {
             <Stack.Screen
               name="PlanChooseInterface"
               component={PlanChooseInterface}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="FilterUI"
+              component={FilterUI}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
