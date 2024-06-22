@@ -1,13 +1,17 @@
-import * as React from "react";
+import React, { useMemo } from "react";
+import { Text, StyleSheet, View, Dimensions} from "react-native";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
-import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
+import {
+  responsiveWidth,
+  responsiveFontSize,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
+import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 
-const { width: screenWidth } = Dimensions.get("window");
+const { height, width } = Dimensions.get('window');
 
-const scaleFontSize = (size) => {
-  const baseWidth = 375; // base width for scaling (iPhone 6/7/8)
-  return size * (screenWidth / baseWidth);
+const dynamicStyles = {
+  imageSize: Math.min(width * 0.06, 40),
 };
 
 const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
@@ -45,21 +49,21 @@ const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
 
 const styles = StyleSheet.create({
   depth4Frame0: {
-    width: scaleFontSize(24),
-    height: scaleFontSize(24),
+    width: responsiveFontSize(3),
+    height: responsiveFontSize(3),
   },
   depth3Frame0: {
     borderRadius: Border.br_5xs,
     backgroundColor: Color.colorGhostwhite,
-    width: scaleFontSize(48),
-    height: scaleFontSize(48),
+    width: responsiveFontSize(4),
+    height: responsiveFontSize(4),
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   contactUs: {
-    fontSize: scaleFontSize(FontSize.size_base),
-    lineHeight: scaleFontSize(24),
+    fontSize: responsiveFontSize(2),
+    lineHeight: responsiveFontSize(3),
     fontWeight: "500",
     fontFamily: FontFamily.lexendMedium,
     color: Color.colorGray_500,
@@ -69,38 +73,38 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame01: {
-    width: scaleFontSize(294),
-    height: scaleFontSize(24),
+    width: responsiveScreenWidth(80),
+    // height: responsiveWidth(6),
   },
   sanFranciscoCa: {
-    fontSize: scaleFontSize(FontSize.size_sm),
-    lineHeight: scaleFontSize(21),
+    fontSize: responsiveFontSize(1.75),
+    lineHeight: responsiveFontSize(2.5),
     fontFamily: FontFamily.lexendRegular,
     color: Color.colorSlategray_300,
     textAlign: "left",
   },
   depth4Frame1: {
-    height: scaleFontSize(21),
-    width: scaleFontSize(294),
+    // height: responsiveWidth(5),
+    width: responsiveScreenWidth(80),
   },
   depth3Frame1: {
-    marginLeft: scaleFontSize(16),
-    width: scaleFontSize(294),
+    marginLeft: responsiveWidth(4),
+    width: responsiveScreenWidth(80),
     justifyContent: "center",
-    height: scaleFontSize(66),
+    // height: responsiveWidth(16),
   },
   depth2Frame0: {
     position: "absolute",
-    top: scaleFontSize(12),
-    left: scaleFontSize(16),
-    width: scaleFontSize(358),
+    top: responsiveWidth(3),
+    left: responsiveWidth(4),
+    width: responsiveScreenWidth(95),
     flexDirection: "row",
-    height: scaleFontSize(66),
+    // height: responsiveWidth(16),
   },
   depth1Frame5: {
     backgroundColor: Color.colorWhite,
-    width: screenWidth,
-    height: scaleFontSize(90),
+    width: responsiveScreenWidth(100),
+    height: responsiveFontSize(12),
   },
 });
 

@@ -4,8 +4,6 @@ import { Border, FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
 import {
   responsiveWidth,
   responsiveFontSize,
-  responsiveScreenHeight,
-  responsiveScreenFontSize
 } from "react-native-responsive-dimensions";
 
 const getStyleValue = (key, value) => {
@@ -55,45 +53,45 @@ const styles = StyleSheet.create({
   },
   depth4Frame0: {
     borderRadius: Border.br_xs,
-    height: responsiveWidth(30), // Adjusted height to be responsive
+    height: responsiveWidth(30),
     overflow: "hidden",
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    width: responsiveWidth(30), 
   },
   zara: {
-    fontSize: responsiveFontSize(2), // Adjusted font size to be responsive
-    lineHeight: responsiveFontSize(2.5), // Adjusted line height to be responsive
+    fontSize: responsiveFontSize(2), 
+    lineHeight: responsiveFontSize(2.5), 
     fontWeight: "500",
     fontFamily: FontFamily.lexendMedium,
     color: Color.colorGray_500,
   },
   depth6Frame0: {
-    height: responsiveFontSize(2.5), // Adjusted height to be responsive
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    height: responsiveFontSize(2.5), 
+    width: responsiveWidth(30), 
   },
   menswearCollection: {
-    fontSize: responsiveFontSize(1.4), // Adjusted font size to be responsive
-    lineHeight: responsiveFontSize(2), // Adjusted line height to be responsive
+    fontSize: responsiveFontSize(1.4), 
+    lineHeight: responsiveFontSize(2), 
     fontFamily: FontFamily.lexendRegular,
     color: Color.colorSlategray_300,
   },
   depth6Frame1: {
-    height: responsiveFontSize(2), // Adjusted height to be responsive
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    height: responsiveFontSize(2), 
+    width: responsiveWidth(30),
   },
   depth5Frame0: {
-    height: responsiveWidth(9), // Adjusted height to be responsive
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    height: responsiveWidth(9), 
+    width: responsiveWidth(30), 
   },
   depth4Frame2: {
-    height: responsiveWidth(13), // Adjusted height to be responsive
+    height: responsiveWidth(13), 
     paddingHorizontal: 0,
     paddingVertical: Padding.p_xs,
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    width: responsiveWidth(30), 
   },
   depth3Frame0: {
     borderRadius: Border.br_5xs,
-    height: responsiveWidth(40), // Adjusted height to be responsive
-    width: responsiveWidth(30), // Adjusted width to be responsive
+    height: responsiveWidth(40), 
+    width: responsiveWidth(30), 
   },
 });
 

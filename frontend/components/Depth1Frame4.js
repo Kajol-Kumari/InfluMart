@@ -6,10 +6,10 @@ import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
 const { width, height } = Dimensions.get("window");
 
 const dynamicStyles = {
-  frameWidth: Math.min(width * 0.9), // Setting a maximum width of 400
+  frameWidth: Math.min(width * 0.9), 
   frameHeight: height * 0.07,
-  imageSize: Math.min(width * 0.06, 40), // Setting a maximum size of 40
-  fontSize: Math.min(width * 0.05, 30), // Setting a maximum font size of 30
+  imageSize: Math.min(width * 0.06, 40), 
+  fontSize: Math.min(width * 0.05, 30), 
 };
 
 const Depth1Frame4 = () => {

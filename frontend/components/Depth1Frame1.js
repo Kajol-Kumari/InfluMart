@@ -26,13 +26,13 @@ const Depth1Frame1 = () => {
           depth4Frame0={require("../assets/depth-4-frame-04.png")}
           zara="Lulu Lemon"
           menswearCollection="Yoga pants"
-          propMarginLeft={responsiveWidth(3)} // Adjusted margin to be responsive
+          propMarginLeft={responsiveWidth(3)} 
         />
         <Depth3Frame
           depth4Frame0={require("../assets/depth-4-frame-05.png")}
           zara="Chanel"
           menswearCollection="Handbags"
-          propMarginLeft={responsiveWidth(3)} // Adjusted margin to be responsive
+          propMarginLeft={responsiveWidth(3)} 
         />
       </ScrollView>
     </View>

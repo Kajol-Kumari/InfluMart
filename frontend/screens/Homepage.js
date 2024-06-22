@@ -44,47 +44,15 @@ const Homepage = () => {
               brands and influencers in the world.
             </Text>      
           </View>
-          <View style={styles.depth1Frame4}>
-            <View style={styles.depth2Frame03}>
-              <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
-                  <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
-                    <View style={[styles.depth5Frame0, styles.frameBg1]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.brandRegistration,
-                            styles.registrationTypo,
-                          ]}
-                        >
-                          Brand Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
-                <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
-                  <View style={[styles.depth4Frame02, styles.frameBg]}>
-                    <View style={[styles.depth5Frame01, styles.frameBg]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.influencerRegistration,
-                            styles.registrationTypo,
-                          ]}
-                        >
-                          Influencer Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <View style={styles.movedDown}>
+      
+            <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('BrandRegistrationForm')}>
+              <Text style={styles.buttonText1}>Brand Registration</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
+              <Text style={styles.buttonText2}>Influencer Registration</Text>
+            </TouchableOpacity>
+          
+          <View >
             <Depth1Frame3
               contactUs="Contact us"
               sanFranciscoCA="San Francisco, CA"
@@ -107,7 +75,7 @@ const Homepage = () => {
               </View>
             </View>
           </View>
-          <View >
+          <View style={styles.depth2Frame0}>
           <Depth1Frame2
             brands="Brands"
             depth3Frame1={require("../assets/depth-3-frame-1.png")}
@@ -158,46 +126,31 @@ const styles = StyleSheet.create({
     paddingBottom: responsiveHeight(15) 
   },
   frameLayout: {
-    height: responsiveScreenWidth(50),
+    height: responsiveScreenWidth(60),
     width:  responsiveWidth(100),
-  },
-  depth1FrameSpaceBlock: {
-    paddingBottom: Padding.p_xs,
-    paddingHorizontal: Padding.p_base,
-    width: responsiveHeight(),
   },
   welcomeText: {
     fontSize: responsiveFontSize(3),
     fontFamily: FontFamily.lexendBold,
     fontWeight: 'bold',
     textAlign: 'left',
-    paddingHorizontal: responsiveHeight(2),
-    paddingVertical: responsiveHeight(1),
+    marginTop: responsiveHeight(3),
+    flexDirection: "row",
+    paddingHorizontal: responsiveHeight(3),
+    width: responsiveWidth(90),
   },
   descriptionText: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: FontFamily.lexendRegular,
     textAlign: 'left',
-    paddingHorizontal: responsiveHeight(2),
-    paddingVertical: responsiveHeight(1),
-  },
-  welcomeToInflumartFlexBox: {
-    textAlign: "left",
+    fontWeight: '500',
+    letterSpacing: 0,
+    lineHeight: responsiveFontSize(3),
     color: Color.colorGray_500,
-  },
-  registrationLayout: {
-    lineHeight: responsiveHeight(3), 
-    fontSize: responsiveFontSize(1.8), 
-  },
-  depth4FrameLayout: {
-    paddingVertical: 0,
-    paddingHorizontal: Padding.p_5xl,
-    borderRadius: Border.br_xs,
-    height: responsiveHeight(5.5),
-    alignItems: "center",
-    width: responsiveWidth(90),
-    justifyContent: "center",
+    margin: responsiveHeight(1),
+    padding: responsiveHeight(1),
     flexDirection: "row",
+    paddingHorizontal: responsiveHeight(2),
   },
   frameBg1: {
     backgroundColor: Color.colorMediumslateblue,
@@ -216,15 +169,12 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.lexendBold,
     fontWeight: "700",
   },
-  depth3FrameLayout: {
-    height: responsiveHeight(5.5),
-    width: responsiveWidth(90),
-    justifyContent: "center",
-    flexDirection: "row",
-  },
   frameBg: {
     backgroundColor: Color.colorGhostwhite,
     overflow: "hidden",
+  },
+  depth2Frame0: {
+    margin: responsiveHeight(2),
   },
   depth4Frame0: {
     position: "absolute",
@@ -240,14 +190,6 @@ const styles = StyleSheet.create({
   depth2Frame01: {
     alignSelf: "stretch",
     height: 'auto',
-  },
-  depth1Frame2: {
-    height: responsiveHeight(8), // Adjust the multiplier as needed
-    paddingTop: Padding.p_xl,
-  },
-  depth1Frame3: {
-    height: 'auto',
-    paddingTop: Padding.p_9xs,
   },
   brandRegistration: {
     lineHeight: responsiveScreenHeight(3),
@@ -273,45 +215,15 @@ const styles = StyleSheet.create({
     width: 'auto',
     height: responsiveScreenHeight(3),
   },
-  depth4Frame02: {  // inf btn size
-    paddingVertical: 0,
-    paddingHorizontal: Padding.p_xl,
-    borderRadius: Border.br_xs,
-    height: responsiveScreenHeight(5.2),
-    alignItems: "center",
-    width: responsiveWidth(90),
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  depth3Frame1: {
-    marginTop: 12,
-  },
-  depth2Frame03: {
-    height: responsiveHeight(12),
-    alignItems: "center",
-    width: responsiveWidth(10),
-  },
-  depth1Frame4: {
-    height: responsiveHeight(15),
-    paddingVertical: Padding.p_xs,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom:  responsiveHeight(2),
-  },
+  
   depth2Frame04: {
-    height: 23,
+    height: responsiveHeight(2),
   },
   depth1Frame7: {
-    height: responsiveScreenHeight(5.2),
-    paddingTop: Padding.p_base,
-    paddingBottom: Padding.p_5xs,
+    height: responsiveScreenHeight(6),
+    padding: responsiveHeight(2),
     flexDirection: "row",
-    paddingHorizontal: Padding.p_5xs,
     width: responsiveWidth(90),
-  },
-  depth1Frame14: {
-    height: 20,
   },
   depth0Frame0: {
     overflow: "hidden",
@@ -328,6 +240,36 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 9999,
     backgroundColor: Color.colorWhite,
+  },
+  button1: {
+    backgroundColor: Color.colorMediumslateblue,
+    padding: responsiveHeight(1.5), 
+    borderRadius: responsiveFontSize(1.3),
+    marginVertical: responsiveHeight(1), 
+    marginHorizontal: responsiveHeight(2), 
+    minWidth: responsiveFontSize(1), 
+    alignItems: 'center',
+  },
+  buttonText1: {
+    color: Color.colorWhitesmoke_100,
+    fontSize: responsiveFontSize(2), 
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: "700",
+  },
+  button2: {
+    backgroundColor: Color.colorGhostwhite,
+    padding: responsiveHeight(1.5), 
+    borderRadius: responsiveFontSize(1.3),
+    marginVertical: responsiveHeight(1), 
+    marginHorizontal: responsiveHeight(2), 
+    minWidth: responsiveFontSize(1), 
+    alignItems: 'center',
+  },
+  buttonText2: {
+    color: Color.colorGray_500,
+    fontSize: responsiveFontSize(2), 
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: "700",
   },
 });
 
