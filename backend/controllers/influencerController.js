@@ -8,11 +8,52 @@ const InfluencerSignupRequest = require("../model/influencerSignupRequestModel")
 const mongoose = require("mongoose");
 const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
 
+
+exports.verifyUser = async (req,res) =>{
+  const influencerData = req.body;
+  try {
+    // Check if a user with the same mail already exists
+    const existingMail = await InfluencerSignupRequest.findOne({
+      email: influencerData.email,
+    });
+
+    if (existingMail) {
+      // If an influencer with the same mail exists, return a 400 Bad Request response
+      return res.status(200).json({ message: "Email is already in use" });
+    }
+
+    // Check if a user with the same userName already exists
+    const existingInfluencer = await InfluencerSignupRequest.findOne({
+      userName: influencerData.userName,
+    });
+
+    if (existingInfluencer) {
+      // If an influencer with the same userName exists, return a 400 Bad Request response
+      return res.status(200).json({ message: "Username is already in use" });
+    }
+    if(!existingInfluencer && !existingMail){
+      return res.status(201).json({message:"User doesn't exist"})
+    }
+  }catch(err){
+    return res.status(500).json({message:"Something Went Wrong"});
+  }
+}
+
 // Signup an influencer
 exports.signup = async (req, res) => {
   const influencerData = req.body;
 
   try {
+    // Check if a user with the same mail already exists
+    const existingMail = await InfluencerSignupRequest.findOne({
+      email: influencerData.email,
+    });
+
+    if (existingMail) {
+      // If an influencer with the same mail exists, return a 400 Bad Request response
+      return res.status(400).json({ message: "Email is already in use" });
+    }
+
     // Check if a user with the same userName already exists
     const existingInfluencer = await InfluencerSignupRequest.findOne({
       userName: influencerData.userName,

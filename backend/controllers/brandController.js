@@ -1,17 +1,15 @@
+const { DOESNT_EXIST } = require("../constant/constants");
 const Brand = require("../model/brandDbRequestModel");
-
-// Sample storage for brands (replace with a database)
-const brandsDB = [];
-
+const bcrypt = require("bcrypt"); // For password hashing
 // Signup a brand
-exports.signup = (req, res) => {
-  const { name, email, password, category } =
-    req.body;
+exports.signup = async (req, res) => {
+  const { name, email, password, category } = req.body;
 
+  const hashedPassword = await bcrypt.hash(password, 10);
   const brand = new Brand({
     name,
     email,
-    password,
+    password: hashedPassword,
     category,
   });
   brand
@@ -25,20 +23,22 @@ exports.signup = (req, res) => {
 };
 
 // Login as a brand (basic example, should be replaced with authentication logic)
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   // Perform authentication (e.g., check against a database)
   // For simplicity, we assume the brand exists in the brandsDB
-  const brand = brandsDB.find(
-    (b) => b.email === email && b.password === password
-  );
+  const brand = await Brand.findOne({ email });
 
   if (!brand) {
-    return res.status(401).json({ message: "Authentication failed" });
+    return res.status(404).json({ message: DOESNT_EXIST });
   }
-
-  res.status(200).json({ message: "Login successful", brand });
+  const isPasswordValid = await bcrypt.compare(password, brand.password);
+  if (isPasswordValid) {
+    res.status(200).json({ message: "Login successful", brand });
+  } else {
+    res.status(401).json({ message: "Authentication failed" });
+  }
 };
 
 // Get brand's profile (requires authentication)
@@ -46,7 +46,6 @@ exports.getProfile = (req, res) => {
   // Retrieve the authenticated brand's profile
   // Replace this with your authentication logic
   const brand = req.brand;
-  
 
   res.status(200).json({ brand });
 };

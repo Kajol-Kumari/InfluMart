@@ -2,10 +2,10 @@ import * as React from "react";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import Depth1Frame7 from "../components/Depth1Frame7";
-import Depth1Frame12 from "../components/Depth1Frame12";
-import Depth1Frame from "../components/Depth1Frame";
-import { Color, FontSize, Border, FontFamily, Padding } from "../GlobalStyles";
+import Depth1Frame7 from "../../components/Depth1Frame7";
+import Depth1Frame12 from "../../components/Depth1Frame12";
+import Depth1Frame from "../../components/Depth1Frame";
+import { chatStyle } from './ChatStyles.scss';
 
 const ChatInterface = () => {
   const navigation = useNavigation();
@@ -14,16 +14,15 @@ const ChatInterface = () => {
     <View style={styles.chatinterface}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <View style={styles.depth0Frame0}>
-        <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
-
-          <Depth1Frame7
-            depth4Frame0={require("../assets/depth-4-frame-017.png")}
-            requestDetails="Chat with Liliam"
-            depth3Frame0BackgroundColor="#fff"
-            requestDetailsWidth={'auto'}
-            depth4Frame0FontFamily="BeVietnamPro-Bold"
-            depth4Frame0Color="#000"
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
+            <Depth1Frame7
+              depth4Frame0={require("../../assets/depth-4-frame-017.png")}
+              requestDetails="Chat with Liliam"
+              depth3Frame0BackgroundColor="#fff"
+              requestDetailsWidth={'auto'}
+              depth4Frame0FontFamily="BeVietnamPro-Bold"
+              depth4Frame0Color="#000"
+            />
           </TouchableOpacity>
           <View style={styles.depth1Frame1}>
             <View style={styles.depth2Frame0}>
@@ -93,12 +92,12 @@ const ChatInterface = () => {
           <Depth1Frame12 />
           <View style={styles.depth1Frame3} />
           <Depth1Frame
-            depth5Frame0={require("../assets/depth-5-frame-022.png")}
-            depth5Frame01={require("../assets/depth-5-frame-023.png")}
+            depth5Frame0={require("../../assets/depth-5-frame-022.png")}
+            depth5Frame01={require("../../assets/depth-5-frame-023.png")}
             search="Collaborations"
-            depth5Frame02={require("../assets/depth-5-frame-024.png")}
+            depth5Frame02={require("../../assets/depth-5-frame-024.png")}
             myBrands="Inbox"
-            depth5Frame03={require("../assets/depth-5-frame-025.png")}
+            depth5Frame03={require("../../assets/depth-5-frame-025.png")}
             propBorderColor="#ededed"
             propWidth={81}
             propWidth1={35}
@@ -124,105 +123,6 @@ const ChatInterface = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  scrollContentContainer: {
-    flexGrow: 1,
-  },
-  depth4FrameLayout: {
-    width: 2,
-    backgroundColor: Color.colorGainsboro_400,
-  },
-  dAgoTypo: {
-    textAlign: "left",
-    lineHeight: 24,
-    fontSize: FontSize.size_base,
-  },
-  depth4Frame0: {
-    height: 16,
-  },
-  depth4Frame1: {
-    borderRadius: Border.br_9xs,
-    backgroundColor: Color.colorGray_200,
-    width: 8,
-    height: 8,
-    marginTop: 4,
-  },
-  depth4Frame2: {
-    height: 40,
-    marginTop: 4,
-  },
-  depth3Frame0: {
-    width: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 72,
-  },
-  liliamJoinedThe: {
-    fontWeight: "500",
-    fontFamily: FontFamily.beVietnamProMedium,
-    color: Color.colorBlack,
-  },
-  depth5Frame0: {
-    alignSelf: "stretch",
-  },
-  depth4Frame01: {
-    width: 'auto',
-    height: 'auto',
-  },
-  dAgo: {
-    fontFamily: FontFamily.beVietnamProRegular,
-    color: Color.colorDimgray,
-  },
-  depth4Frame11: {
-    width: 'auto',
-    height: 24,
-  },
-  depth3Frame1: {
-    width: 310,
-    paddingHorizontal: 0,
-    paddingVertical: Padding.p_xs,
-    marginLeft: 8,
-    height: 72,
-  },
-  depth2Frame0: {
-    width: 358,
-    flexDirection: "row",
-    height: 72,
-  },
-  depth4Frame03: {
-    width: 'auto',
-    height: 24,
-  },
-  depth4Frame13: {
-    width: 'auto',
-    height: 24,
-  },
-  depth1Frame1: {
-    height: 216,
-    paddingHorizontal: Padding.p_base,
-    paddingVertical: 0,
-    width: 390,
-  },
-  depth1Frame3: {
-    height: 389,
-    width: 390,
-  },
-  depth1Frame5: {
-    height: 20,
-    width: 390,
-    backgroundColor: Color.colorWhite,
-  },
-  depth0Frame0: {
-    height: 844,
-    overflow: "hidden",
-    width: 390,
-    backgroundColor: Color.colorWhite,
-  },
-  chatinterface: {
-    flex: 1,
-    width: "100%",
-    backgroundColor: Color.colorWhite,
-  },
-});
+const styles = StyleSheet.create(chatStyle);
 
 export default ChatInterface;

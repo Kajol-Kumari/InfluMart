@@ -1,174 +1,174 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Pressable, ScrollView } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
-import {API_ENDPOINT} from '@env'
+import { BrandSignUp } from "../controller/signupController";
+import { Image } from 'expo-image';
+import * as ImagePicker from 'expo-image-picker';
 
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const { payload } = route.params;
 
   const registerBrand = async () => {
-    try {
-      const response = await fetch(`${API_ENDPOINT}/brands/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      if(response.status === 201){
-        navigation.navigate('AccountCreatedSuccessfullyNoti')
-      }else{
-        Alert.alert("ERROR",data.message);
-      }
-    } catch (error) {
-      Alert.alert("ERROR","Something went wrong");
+    await BrandSignUp(payload, navigation)
+  };
+
+  const [image, setImage] = React.useState(null)
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
   };
 
   return (
-    <View style={styles.brandaccountreviewnotification}>
-      <View style={styles.depth0Frame0}>
-      <TouchableOpacity onPress={() => navigation.navigate('OtpVerification')}>
+    <ScrollView style={{height:"100%",backgroundColor:Color.colorWhitesmoke_200}}>
+      <View style={styles.brandaccountreviewnotification}>
+        <View style={styles.depth0Frame0}>
+          <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('OtpVerification')}>
 
-        <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
-          <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
-            <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
-            <View style={styles.depth3Frame1}>
-              <View style={styles.depth4Frame0}>
-                <View style={styles.depth5Frame0}>
-                  <Text
-                    style={[
-                      styles.reviewYourRegistration,
-                      styles.createAccountTypo,
-                    ]}
-                  >
-                    Review
-                  </Text>
+            <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
+              <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
+                <View style={styles.depth4Frame0}>
+                  <View style={styles.depth5Frame0}>
+                    <Text
+                      style={[
+                        styles.reviewYourRegistration,
+                        styles.createAccountTypo,
+                      ]}
+                    >
+                      Review
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
-            <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
-              <View style={styles.depth4Frame01} />
-            </View>
-          </View>
-        </View>
-        </TouchableOpacity>
-        <Depth1Frame5 />
-        <View style={styles.depth1Frame2}>
-          <View style={styles.depth2Frame01}>
-            <View style={styles.depth3Frame01}>
-              <View style={styles.depth5Frame0}>
-                <Text style={[styles.emailId, styles.emailIdTypo]}>
-                  Email ID
-                </Text>
-              </View>
-            </View>
-            <View style={[styles.depth3Frame11, styles.depth3FrameFlexBox]}>
-              <View style={styles.frameLayout2}>
-                <View style={styles.frameLayout2}>
-                  <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                    {payload.email}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={styles.depth2Frame01}>
-            <View style={styles.depth3Frame02}>
-              <View style={styles.depth5Frame0}>
-                <Text style={[styles.emailId, styles.emailIdTypo]}>
-                  Password
-                </Text>
-              </View>
-            </View>
-            <View style={[styles.depth3Frame12, styles.frameLayout1]}>
-              <View style={styles.frameLayout1}>
-                <View style={styles.frameLayout1}>
-                  <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                    {payload.password}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame4}>
-          <View style={[styles.depth2Frame03, styles.depth2FramePosition]}>
-            <View style={styles.depth3Frame03}>
-              <View style={styles.depth4Frame06}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.brandType, styles.emailIdLayout]}>
-                    Brand type
-                  </Text>
-                </View>
-              </View>
-              <View style={[styles.depth4Frame1, styles.depth4FrameLayout]}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.selectBrandType, styles.emailIdTypo]}>
-                    Select brand type
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame1, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                {payload.category?.join(", ")}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame4}>
-          <View style={[styles.depth2Frame04, styles.depth2FramePosition]}>
-            <View style={styles.depth3Frame05}>
-              <View style={styles.depth4Frame07}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.brandType, styles.emailIdLayout]}>
-                    Username
-                  </Text>
-                </View>
-              </View>
-              <View style={[styles.depth4Frame11, styles.depth4FrameLayout]}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.selectBrandType, styles.emailIdTypo]}>
-                    Create a username
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={[styles.depth2Frame1, styles.frameLayout]}>
-            <View style={styles.frameLayout}>
-              <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                {payload.name}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.depth1Frame6} />
-        <View style={[styles.depth1Frame7, styles.depth1FrameLayout]}>
-        <TouchableOpacity onPress={registerBrand}>
-
-          <View style={[styles.depth2Frame05, styles.frameBg]}>
-            <View style={[styles.depth3Frame07, styles.frameBg]}>
-              <View style={styles.depth5Frame0}>
-                <Text style={[styles.createAccount, styles.emailIdLayout]}>
-                  Create account
-                </Text>
-              </View>
-            </View>
-          </View>
           </TouchableOpacity>
+          <View style={{ width: "100%" }}>
+            <View style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <Image source={image != null ? image : require("../assets/blank-profile.png")} contentFit="cover" style={{ width: 250, height: 250, margin: 20 }} />
+            </View>
+            <View style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", marginVertical: 5 }}>
+              <Pressable style={{ width: "40%" }} onPress={pickImage}>
+                <Text style={styles.uploadBtn}>Upload Image</Text>
+              </Pressable>
+              <Pressable style={{ width: "40%" }} onPress={() => { setImage(null) }}>
+                <Text style={styles.removeBtn}>Remove Image</Text>
+              </Pressable>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={styles.depth2Frame01}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.brandType, styles.emailIdLayout]}>
+                    Email ID
+                  </Text>
+                </View>
+              </View>
+              <View style={[styles.depth3Frame11, styles.depth3FrameFlexBox]}>
+                <View style={styles.frameLayout2}>
+                  <View style={styles.frameLayout2}>
+                    <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
+                      {payload.email}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={styles.depth2Frame01}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.brandType, styles.emailIdLayout]}>
+                    Password
+                  </Text>
+                </View>
+              </View>
+              <View style={[styles.depth3Frame12, styles.frameLayout1]}>
+                <View style={styles.frameLayout1}>
+                  <View style={styles.frameLayout1}>
+                    <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
+                      {payload.password}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth1Frame4}>
+            <View style={[styles.depth2Frame03, styles.depth2FramePosition]}>
+              <View style={styles.depth3Frame03}>
+                <View style={styles.depth4Frame06}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={[styles.brandType, styles.emailIdLayout]}>
+                      Brand type
+                    </Text>
+                  </View>
+                </View>
+                <View style={[styles.depth4Frame1, styles.depth4FrameLayout]}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={[styles.selectBrandType, styles.emailIdTypo]}>
+                      Select brand type
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <Text style={{ fontSize: FontSize.size_base, fontFamily: FontFamily.workSansRegular, textAlign: "right",width:"55%" }}>
+              {payload.category?.join(", ")}
+            </Text>
+          </View>
+          <View style={styles.depth1Frame4}>
+            <View style={[styles.depth2Frame04, styles.depth2FramePosition]}>
+              <View style={styles.depth3Frame05}>
+                <View style={styles.depth4Frame07}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={[styles.brandType, styles.emailIdLayout]}>
+                      Username
+                    </Text>
+                  </View>
+                </View>
+                <View style={[styles.depth4Frame11, styles.depth4FrameLayout]}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={[styles.selectBrandType, styles.emailIdTypo]}>
+                      Create a username
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <Text style={{ fontSize: FontSize.size_base, fontFamily: FontFamily.workSansRegular, textAlign: "right" }}>
+              {payload.name}
+            </Text>
+          </View>
+          <View style={[styles.depth1Frame7, styles.depth1FrameLayout]}>
+            <TouchableOpacity style={{ width: "100%" }} onPress={registerBrand}>
+              <View style={[styles.depth2Frame05, styles.frameBg]}>
+                <View style={[styles.depth3Frame07, styles.frameBg]}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={[styles.createAccount, styles.emailIdLayout]}>
+                      Create account
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.depth1Frame8} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -177,10 +177,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     height: 72,
     width: '100%',
+    backgroundColor: Color.colorWhitesmoke_200
   },
   depth2FrameLayout: {
     height: 48,
-    width: 358,
+    width: "100%",
     alignItems: "center",
     flexDirection: "row",
   },
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
   },
   emailIdTypo: {
     fontFamily: FontFamily.workSansRegular,
-    textAlign: "left",
+    textAlign: "left"
   },
   depth3FrameFlexBox: {
     marginLeft: 16,
@@ -204,16 +205,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   frameLayout1: {
-    width: 98,
+    width: "auto",
     height: 24,
   },
   depth2FramePosition: {
-    top: 14,
-    height: 45,
-    left: 16,
-    position: "absolute",
-    alignItems: "center",
-    flexDirection: "row",
+    width: "40%",
+    height:"auto",
+    flexDirection: "row"
   },
   emailIdLayout: {
     lineHeight: 24,
@@ -224,8 +222,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   frameLayout: {
-    width: 67,
+    width: "auto",
     height: 24,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
   },
   frameBg: {
     backgroundColor: Color.colorDodgerblue,
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     textAlign: "left",
     color: Color.colorGray_400,
+    marginTop: 20
   },
   depth5Frame0: {
     alignSelf: "stretch",
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame0: {
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
   },
@@ -278,9 +280,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontSize: FontSize.size_base,
     color: Color.colorGray_400,
+    fontWeight: "700"
   },
   depth3Frame01: {
-    width: 191,
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -289,6 +292,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
     color: Color.colorGray_400,
     alignSelf: "stretch",
+    width: "100%"
   },
   frameLayout2: {
     width: 'auto',
@@ -299,21 +303,20 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   depth2Frame01: {
-    top: 16,
-    height: 24,
-    left: 16,
-    position: "absolute",
-    alignItems: "center",
+    display: "flex",
     flexDirection: "row",
-    width: 358,
+    width: "100%",
+    paddingVertical: Padding.p_xl,
+    paddingHorizontal: Padding.p_base,
+    justifyContent: "space-between"
   },
   depth1Frame2: {
     height: 56,
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
   },
   depth3Frame02: {
-    width: 244,
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -342,24 +345,27 @@ const styles = StyleSheet.create({
     width: 'auto',
   },
   depth3Frame03: {
-    width: 122,
-    height: 45,
-    justifyContent: "center",
+    width: "auto",
+    height: "auto",
+    justifyContent: "start",
   },
   depth2Frame03: {
-    width: 199,
-    height: 45,
+    width: "auto",
+    height: "auto"
   },
   depth2Frame1: {
-    top: 24,
-    left: 307,
-    position: "absolute",
-    width: 67,
+    width: "70%"
   },
   depth1Frame4: {
-    height: 72,
-    width: 390,
+    height: "auto",
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
+    paddingVertical: Padding.p_xl,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: Padding.p_base,
+    gap: 10
   },
   depth4Frame07: {
     width: 130,
@@ -401,11 +407,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth1Frame7: {
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
+    backgroundColor: Color.colorWhite
   },
   depth1Frame8: {
     height: 20,
@@ -413,16 +420,37 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhitesmoke_100,
   },
   depth0Frame0: {
-    height: 844,
-    overflow: "hidden",
-    width: 390,
+    height: "auto",
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
   },
   brandaccountreviewnotification: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorWhitesmoke_100,
     flex: 1,
     width: "100%",
+    height: "auto",
+    paddingBottom:30
   },
+  uploadBtn: {
+    paddingVertical: 12,
+    fontSize: 15,
+    fontWeight: "700",
+    backgroundColor: Color.colorDodgerblue,
+    color: Color.colorWhitesmoke_100,
+    textAlign: "center",
+    borderRadius: Border.br_xs,
+    marginHorizontal: 10
+  },
+  removeBtn: {
+    paddingVertical: 12,
+    fontSize: 15,
+    fontWeight: "700",
+    backgroundColor: Color.colorAliceblue,
+    color: Color.colorBlack,
+    textAlign: "center",
+    borderRadius: Border.br_xs,
+    marginHorizontal: 10
+  }
 });
 
 export default BrandAccountSignupDataPreview;
