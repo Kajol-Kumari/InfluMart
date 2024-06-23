@@ -20,6 +20,7 @@ import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
+import FilterUI from './screens/FiltersUI'
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -128,75 +129,59 @@ const App = () => {
                 component={BrandAssosciated}
                 options={{ headerShown: false }}
               />
-
-              <Stack.Screen
-                name="AccountCreatedSuccessfullyNoti"
-                component={AccountCreatedSuccessfullyNoti}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FailedPaymentStatus"
-                component={FailedPaymentStatus}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Analytics"
-                component={Analytics}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="InfluencersList"
-                component={InfluencersList}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="InboxInterface"
-                component={InboxInterface}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="InfluencerSocialHandles"
-                component={AddHandles}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="PricePerPost"
-                component={PricePerPost}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="ChatInterface"
-                component={ChatInterface}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="UserProfile"
-                component={UserProfile}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="InfluencerRegistrationForm"
-                component={InfluencerRegistrationForm}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="UserProfilePhoto"
-                component={UserProfilePhoto}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="MaxFollowersNo"
-                component={MaxFollowersNo}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="PlanChooseInterface"
-                component={PlanChooseInterface}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
-          ) : null}
-        </NavigationContainer>
+            <Stack.Screen
+              name="AccountCreatedSuccessfullyNoti"
+              component={AccountCreatedSuccessfullyNoti}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="FailedPaymentStatus"
+              component={FailedPaymentStatus}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Analytics"
+              component={Analytics}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InfluencersList"
+              component={InfluencersList}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InboxInterface"
+              component={InboxInterface}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ChatInterface"
+              component={ChatInterface}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="UserProfile"
+              component={UserProfile}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InfluencerRegistrationForm"
+              component={InfluencerRegistrationForm}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PlanChooseInterface"
+              component={PlanChooseInterface}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="FilterUI"
+              component={FilterUI}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        ) : null}
+      </NavigationContainer>
       </AlertProvider>
     </>
   );

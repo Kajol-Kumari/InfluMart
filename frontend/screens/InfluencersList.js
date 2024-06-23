@@ -1,157 +1,142 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import Depth1Frame11 from "../components/Depth1Frame11";
 import Depth1Frame10 from "../components/Depth1Frame10";
 import Depth1Frame from "../components/Depth1Frame";
+import DropDown from "../shared/DropDown";
+import { useNavigation } from '@react-navigation/native'
 import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
+const InfluencerIcon = require("../assets/depth-3-frame-0.png");
+const BrandIcon = require("../assets/depth-3-frame-01.png")
+const BothIcon = require("../assets/depth-3-frame-02.png")
+const AllIcon = require("../assets/depth-3-frame-03.png")
 
 const InfluencersList = () => {
+
+  const navigation = useNavigation()
+
+  const [searchValue, setSearchValue] = React.useState("")
+
+  const [selected, setSelected] = React.useState([]);
+
+  const [showFloatButton, setShowFloatButton] = React.useState(true)
+  const [scrollOffset, setScrollOffset] = React.useState(0)
+
+  const FakeData = [
+    { key: "one", value: "One" },
+    { key: "two", value: "Two" },
+    { key: "three", value: "Three" },
+    { key: "four", value: "Four" },
+  ];
+
+  function handleScroll(event) {
+    const currentOffset = event.nativeEvent.contentOffset.y
+    const direction = (currentOffset > 0 && currentOffset > scrollOffset) ? 'down' : 'up'
+    const res = direction === 'up'
+    if (res !== showFloatButton) {
+      setShowFloatButton(res)
+    }
+    setScrollOffset(currentOffset)
+  }
+
   return (
-    <ScrollView style={styles.influencerslist} contentContainerStyle={styles.contentContainer}>
-      <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-        <Depth1Frame11 />
-        <View style={styles.depth1Frame1}>
-          <View style={styles.depth2Frame0}>
-            <Image
-              style={[styles.depth3Frame0, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-0.png")}
+    <View style={[styles.depth0Frame0, styles.frameLayout1]}>
+      <Depth1Frame11 style={styles.menuBar} onChange={setSearchValue} />
+      <View style={{ width: "100%", height: "95%",paddingBottom:80 }}>
+        <ScrollView onScroll={handleScroll} style={{ width: "100%", height: "100%" }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.depth1Frame1}>
+            <View style={{ height: "auto", display: "flex", flexDirection: "row", gap: 12, paddingEnd: 40, zIndex: 4 }}>
+              <DropDown icon={InfluencerIcon} name={"Influencers"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={BrandIcon} name={"Brands"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={BothIcon} name={"Both"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={AllIcon} name={"All"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+            </View>
+          </ScrollView>
+          <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-06.png")}
+              kylieCosmetics="Kylie Cosmetics"
+              beauty="Beauty"
             />
-            <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-07.png")}
+              kylieCosmetics="Huda Beauty"
+              beauty="Beauty"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-08.png")}
+              kylieCosmetics="Revolve"
+              beauty="Fashion"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-09.png")}
+              kylieCosmetics="Jen Atkin"
+              beauty="Hair"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-010.png")}
+              kylieCosmetics="Glossier"
+              beauty="Beauty"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-011.png")}
+              kylieCosmetics="Loreal"
+              beauty="Beauty"
+            />
+          </View>
+          <View style={[styles.depth1Frame8, styles.depth1FrameLayout]}>
+            <View style={styles.depth2Frame01}>
               <View style={styles.depth4Frame0}>
-                <Text style={styles.influencers}>Influencers</Text>
+                <Text style={[styles.trending, styles.filtersTypo]}>
+                  Trending
+                </Text>
               </View>
             </View>
-            <Image
-              style={[styles.depth3Frame2, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-2.png")}
+          </View>
+          <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-012.png")}
+              kylieCosmetics="Gymshark"
+              beauty="Fitness"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-013.png")}
+              kylieCosmetics="Lululemon"
+              beauty="Fitness"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-014.png")}
+              kylieCosmetics="Nike"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-015.png")}
+              kylieCosmetics="Adidas"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-016.png")}
+              kylieCosmetics="Puma"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-017.png")}
+              kylieCosmetics="Under Armour"
+              beauty="Fitness"
             />
           </View>
-          <View style={[styles.depth2Frame1, styles.depth2FrameSpaceBlock]}>
-            <Image
-              style={[styles.depth3Frame0, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-01.png")}
-            />
-            <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-              <View style={styles.depth4Frame0}>
-                <Text style={styles.influencers}>Brands</Text>
-              </View>
-            </View>
-            <Image
-              style={[styles.depth3Frame2, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-21.png")}
-            />
-          </View>
-          <View style={[styles.depth2Frame2, styles.depth2FrameSpaceBlock]}>
-            <Image
-              style={[styles.depth3Frame0, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-02.png")}
-            />
-            <View style={[styles.depth3Frame12, styles.depth3FrameLayout]}>
-              <View style={styles.depth4Frame0}>
-                <Text style={styles.influencers}>Both</Text>
-              </View>
-            </View>
-            <Image
-              style={[styles.depth3Frame2, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-22.png")}
-            />
-          </View>
-          <View style={[styles.depth2Frame3, styles.depth2FrameSpaceBlock]}>
-            <Image
-              style={[styles.depth3Frame0, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-03.png")}
-            />
-            <View style={[styles.depth3Frame13, styles.depth3FrameLayout]}>
-              <View style={styles.depth4Frame0}>
-                <Text style={styles.influencers}>All</Text>
-              </View>
-            </View>
-            <Image
-              style={[styles.depth3Frame2, styles.depth3FrameLayout1]}
-              contentFit="cover"
-              source={require("../assets/depth-3-frame-23.png")}
-            />
-          </View>
-        </View>
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-06.png")}
-          kylieCosmetics="Kylie Cosmetics"
-          beauty="Beauty"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-07.png")}
-          kylieCosmetics="Huda Beauty"
-          beauty="Beauty"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-08.png")}
-          kylieCosmetics="Revolve"
-          beauty="Fashion"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-09.png")}
-          kylieCosmetics="Jen Atkin"
-          beauty="Hair"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-010.png")}
-          kylieCosmetics="Glossier"
-          beauty="Beauty"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-011.png")}
-          kylieCosmetics="Loreal"
-          beauty="Beauty"
-        />
-        <View style={[styles.depth1Frame8, styles.depth1FrameLayout]}>
-          <View style={styles.depth2Frame01}>
-            <View style={styles.depth4Frame0}>
-              <Text style={[styles.trending, styles.filtersTypo]}>
-                Trending
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-012.png")}
-          kylieCosmetics="Gymshark"
-          beauty="Fitness"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-013.png")}
-          kylieCosmetics="Lululemon"
-          beauty="Fitness"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-014.png")}
-          kylieCosmetics="Nike"
-          beauty="Sports"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-015.png")}
-          kylieCosmetics="Adidas"
-          beauty="Sports"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-016.png")}
-          kylieCosmetics="Puma"
-          beauty="Sports"
-        />
-        <Depth1Frame10
-          depth5Frame0={require("../assets/depth-5-frame-017.png")}
-          kylieCosmetics="Under Armour"
-          beauty="Fitness"
-        />
-        <View style={[styles.depth1Frame16, styles.depth1FrameLayout]}>
-          <View style={[styles.depth2Frame02, styles.frameLayout]}>
+        </ScrollView>
+        <View style={[styles.depth1Frame16, styles.depth1FrameLayout, { opacity: showFloatButton ? 1 : 0.4 }]}>
+          <Pressable onPress={() => { navigation.navigate("FilterUI") }} onHoverIn={() => { setShowFloatButton(true) }} onHoverOut={() => { setShowFloatButton(false) }} style={[styles.depth2Frame02, styles.frameLayout]}>
             <View style={[styles.depth3Frame05, styles.frameLayout]}>
               <Image
                 style={styles.depth4Frame04}
@@ -166,36 +151,27 @@ const InfluencersList = () => {
                 </View>
               </View>
             </View>
-          </View>
+          </Pressable>
         </View>
-        <Depth1Frame
-          depth5Frame0={require("../assets/depth-5-frame-01.png")}
-          depth5Frame01={require("../assets/depth-5-frame-018.png")}
-          search="Campaigns"
-          depth5Frame02={require("../assets/depth-5-frame-019.png")}
-          myBrands="Messages"
-          depth5Frame03={require("../assets/depth-5-frame-020.png")}
-          propBorderColor="#f0f2f5"
-          propWidth={84}
-          propWidth1={35}
-          propFontFamily="BeVietnamPro-Medium"
-          propColor="#121217"
-          propWidth2={84}
-          propWidth3={69}
-          propFontFamily1="BeVietnamPro-Medium"
-          propColor1="#637087"
-          propWidth4={84}
-          propWidth5={60}
-          propFontFamily2="BeVietnamPro-Medium"
-          propColor2="#637087"
-          propWidth6={84}
-          propWidth7={40}
-          propFontFamily3="BeVietnamPro-Medium"
-          propColor3="#637087"
-        />
-        <View style={[styles.depth1Frame18, styles.frameLayout1]} />
       </View>
-    </ScrollView>
+      <Depth1Frame
+        depth5Frame0={require("../assets/depth-5-frame-01.png")}
+        depth5Frame01={require("../assets/depth-5-frame-018.png")}
+        search="Campaigns"
+        depth5Frame02={require("../assets/depth-5-frame-019.png")}
+        myBrands="Messages"
+        depth5Frame03={require("../assets/depth-5-frame-020.png")}
+        propBorderColor="#f0f2f5"
+        propFontFamily="BeVietnamPro-Medium"
+        propColor="#121217"
+        propFontFamily1="BeVietnamPro-Medium"
+        propColor1="#637087"
+        propFontFamily2="BeVietnamPro-Medium"
+        propColor2="#637087"
+        propFontFamily3="BeVietnamPro-Medium"
+        propColor3="#637087"
+      />
+    </View>
   );
 };
 
@@ -204,8 +180,9 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
+    height: "100%"
   },
   depth3FrameLayout1: {
     width: 20,
@@ -227,9 +204,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth1FrameLayout: {
-    height: 60,
+    height: "auto",
     flexDirection: "row",
-    width: 390,
+    width: "auto",
   },
   filtersTypo: {
     fontFamily: FontFamily.beVietnamProBold,
@@ -298,11 +275,10 @@ const styles = StyleSheet.create({
     width: 90,
   },
   depth1Frame1: {
-    height: 56,
+    height: "auto",
     padding: Padding.p_xs,
-    flexDirection: "row",
-    overflow: "hidden",
-    width: 390,
+    zIndex: 4,
+    overflow: "visible"
   },
   trending: {
     fontSize: FontSize.size_3xl,
@@ -358,23 +334,32 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   depth1Frame16: {
-    paddingHorizontal: 28,
-    paddingBottom: Padding.p_xl,
+    width: "auto",
     justifyContent: "flex-end",
     overflow: "hidden",
+    position: "absoulte",
+    bottom: 70,
+    right: 40,
+    zIndex:2
   },
   depth1Frame18: {
     height: 20,
   },
   depth0Frame0: {
-    height: 4133,
-    overflow: "hidden",
+    width: "100%",
+    height: "100%"
   },
   influencerslist: {
     flex: 1,
     width: "100%",
+    height: "100%",
     backgroundColor: Color.colorWhite,
   },
+  menuBar: {
+    position: "static",
+    top: 0,
+    zIndex: 5
+  }
 });
 
 export default InfluencersList;

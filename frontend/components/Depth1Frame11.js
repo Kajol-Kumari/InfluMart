@@ -1,29 +1,41 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 
-import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
+import { FontSize, FontFamily, Color, Padding, Border } from "../GlobalStyles";
 
-const Depth1Frame11 = () => {
+const Depth1Frame11 = ({ onChange, style }) => {
   const navigation = useNavigation();
 
+  const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false)
+
+  const handleSearch=()=>{
+    setIsSearchBarOpen(!isSearchBarOpen)
+  }
+
   return (
-    <View style={styles.depth1Frame0}>
+    <View style={[styles.depth1Frame0, style]}>
       <View style={styles.depth2Frame0}>
-        <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
-        <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
-
-        <View style={styles.depth3Frame1}>
-          <View style={styles.depth4Frame0}>
-            <View style={styles.depth5Frame0}>
-              <Text style={styles.marketplace}>Marketplace</Text>
-            </View>
-          </View>
-        </View>
-        </TouchableOpacity>
-
-        <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
+        {
+          isSearchBarOpen ?
+            <TextInput onChange={(e)=>{
+              onChange(e.target.value)
+            }} style={styles.SearchBar} placeholder="Search anything" /> :
+            <>
+              <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
+              <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+                <View style={styles.depth3Frame1}>
+                  <View style={styles.depth4Frame0}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={styles.marketplace}>Marketplace</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </>
+        }
+        <TouchableOpacity onPress={handleSearch} style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
           <View style={[styles.depth4Frame01, styles.depth3FrameLayout]}>
             <Image
               style={styles.depth5Frame01}
@@ -31,7 +43,7 @@ const Depth1Frame11 = () => {
               source={require("../assets/depth-5-frame-0.png")}
             />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -39,8 +51,8 @@ const Depth1Frame11 = () => {
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: 48,
-    height: 48,
+    width: "auto",
+    height: "auto",
   },
   depth3Frame0: {
     alignItems: "center",
@@ -63,9 +75,9 @@ const styles = StyleSheet.create({
     height: 23,
   },
   depth3Frame1: {
-    width: 262,
+    width: "auto",
     justifyContent: "center",
-    height: 23,
+    height: "auto",
     alignItems: "center",
     flexDirection: "row",
   },
@@ -82,20 +94,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    height: 48,
+    height: 50,
+    paddingHorizontal: Padding.p_base
   },
   depth1Frame0: {
     backgroundColor: Color.colorWhite,
-    width: 390,
-    height: 72,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
-    paddingTop: Padding.p_base,
-    paddingBottom: Padding.p_5xs,
+    paddingTop:Padding.p_base,
+    paddingBottom:Padding.p_5xs,
+    height:"auto"
   },
+  SearchBar: {
+    width: "80%",
+    paddingVertical: Padding.p_smi,
+    paddingHorizontal: Padding.p_base,
+    fontSize: FontSize.size_base,
+    color: Color.colorSteelblue_200,
+    backgroundColor: Color.colorAliceblue,
+    outlineStyle: "none",
+    borderRadius: Border.br_xs
+  }
 });
 
 export default Depth1Frame11;

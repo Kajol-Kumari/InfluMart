@@ -33,6 +33,7 @@ const Depth1Frame = ({
   propWidth7,
   propFontFamily3,
   propColor3,
+  style
 }) => {
   const navigation = useNavigation();
 
@@ -119,7 +120,7 @@ const Depth1Frame = ({
   }, [propFontFamily3, propColor3]);
 
   return (
-    <View style={[styles.depth1Frame13, depth1Frame13Style]}>
+    <View style={[styles.depth1Frame13, depth1Frame13Style,style]}>
       <View style={styles.depth2Frame0}>
         <View
           style={[
@@ -151,98 +152,98 @@ const Depth1Frame = ({
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('InfluencersList')}>
 
-        <View
-          style={[
-            styles.depth3Frame1,
-            styles.depth3FrameLayout,
-            depth3Frame1Style,
-          ]}
-        >
-          <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={depth5Frame01}
-            />
-          </View>
           <View
             style={[
-              styles.depth4Frame11,
-              styles.depth4FrameSpaceBlock,
-              depth4Frame11Style,
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame1Style,
             ]}
           >
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.search, styles.homeTypo, searchStyle]}>
-                {search}
-              </Text>
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={depth5Frame01}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame11,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame11Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, searchStyle]}>
+                  {search}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate('BrandsAssosciated')}>
 
-        <View
-          style={[
-            styles.depth3Frame1,
-            styles.depth3FrameLayout,
-            depth3Frame2Style,
-          ]}
-        >
-          <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={depth5Frame02}
-            />
-          </View>
           <View
             style={[
-              styles.depth4Frame12,
-              styles.depth4FrameSpaceBlock,
-              depth4Frame12Style,
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame2Style,
             ]}
           >
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.search, styles.homeTypo, myBrandsStyle]}>
-                {myBrands}
-              </Text>
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={depth5Frame02}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame12,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame12Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, myBrandsStyle]}>
+                  {myBrands}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity >
 
         <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
 
-        <View
-          style={[
-            styles.depth3Frame1,
-            styles.depth3FrameLayout,
-            depth3Frame3Style,
-          ]}
-        >
-          <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={depth5Frame03}
-            />
-          </View>
           <View
             style={[
-              styles.depth4Frame13,
-              styles.depth4FrameSpaceBlock,
-              depth4Frame13Style,
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame3Style,
             ]}
           >
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.search, styles.homeTypo, profileStyle]}>
-                Profile
-              </Text>
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={depth5Frame03}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame13,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame13Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, profileStyle]}>
+                  Profile
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -251,7 +252,7 @@ const Depth1Frame = ({
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: 90,
+    width: "auto",
     alignItems: "center",
     height: 55,
   },
@@ -272,6 +273,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0,
     fontSize: FontSize.size_xs,
+    width: "auto"
   },
   depth5Frame0: {
     height: 24,
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
   },
   depth4Frame0: {
     borderRadius: Border.br_base,
-    width: 48,
+    width: "auto",
     justifyContent: "center",
   },
   home: {
@@ -290,7 +292,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame1: {
-    width: 42,
+    width: "auto",
   },
   depth3Frame0: {
     alignItems: "center",
@@ -304,7 +306,7 @@ const styles = StyleSheet.create({
     color: Color.colorSlategray_300,
   },
   depth4Frame11: {
-    width: 48,
+    width: "auto",
   },
   depth3Frame1: {
     marginLeft: 8,
@@ -317,20 +319,25 @@ const styles = StyleSheet.create({
     width: 45,
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
+    display: "flex",
     flexDirection: "row",
     height: 54,
+    justifyContent: "space-around",
+    gap:20
   },
   depth1Frame13: {
     backgroundColor: Color.colorWhite,
     borderStyle: "solid",
     borderColor: Color.colorGhostwhite,
     borderTopWidth: 1,
-    width: 390,
-    height: 75,
+    width: "100%",
+    height: 80,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
+    position:"absolute",
+    bottom:0
   },
 });
 

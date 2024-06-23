@@ -40,11 +40,11 @@ const Depth1Frame10 = ({ depth5Frame0, kylieCosmetics, beauty }) => {
 const styles = StyleSheet.create({
   frameLayout2: {
     height: 316,
-    width: 390,
+    width: 360,
   },
   frameLayout1: {
-    height: 201,
-    width: 358,
+    height: 191,
+    width: 328,
   },
   frameLayout: {
     height: 24,
