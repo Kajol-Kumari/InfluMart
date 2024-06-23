@@ -13,14 +13,14 @@ import { Color } from "../../GlobalStyles";
 import MultipleSelectList from "../../shared/MultiSelect";
 import { SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
-
+import { useAlert } from "../../util/AlertContext";
 
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
-
+  const {showAlert} = useAlert();
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -43,18 +43,18 @@ const BrandRegistrationForm = ({ navigation }) => {
     };
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
-      Alert.alert("Error", "Please enter a valid email address");
+      showAlert("Brand SignUp Error", "Please enter a valid email address");
       return;
     }
     if (!email || !password || !selected.length || !username) {
-      Alert.alert("Error", "Please fill all the fields");
+      showAlert("Brand SignUp Error", "Please fill all the fields");
       return;
     }
     if (password.length < 8) {
-      Alert.alert("Error", "Password should be at least 8 characters long");
+      showAlert("Brand SignUp Error", "Password should be at least 8 characters long");
       return;
     }
-    await SendOtp(payload, navigation);
+    await SendOtp(payload, navigation,showAlert);
   };
 
   return (

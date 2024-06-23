@@ -12,9 +12,11 @@ import { BrandSignUp, InfluencerSignUp } from "../../controller/signupController
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { InfluencerConfirmAccountStyles } from "./InfluencerConfirmAccount.scss";
+import { useAlert } from "../../util/AlertContext";
+
 const InfluencerConfirmAccount = ({ route, navigation }) => {
   const payload = route.params.payload;
-
+  const { showAlert } = useAlert();
   const registerInfluencer = async () => {
     const userData = {
       ...payload,
@@ -27,7 +29,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       nickName: payload.userName,
       firstName: payload.userName,
     };
-    await InfluencerSignUp(userData, navigation)
+    await InfluencerSignUp(userData, navigation,showAlert)
   };
 
   const [image, setImage] = React.useState(null);
