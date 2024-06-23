@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
-import { Text, StyleSheet, View, ImageSourcePropType } from "react-native";
+import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Image } from "expo-image";
-import { FontSize, FontFamily, Color } from "../GlobalStyles";
+import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/core";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -13,6 +14,7 @@ const Depth1Frame2 = ({
   propBackgroundColor,
   propFontFamily,
   propColor,
+  to
 }) => {
   const depth1Frame8Style = useMemo(() => {
     return {
@@ -27,6 +29,8 @@ const Depth1Frame2 = ({
     };
   }, [propFontFamily, propColor]);
 
+  const navigation = useNavigation()
+
   return (
     <View style={[styles.depth1Frame8, depth1Frame8Style]}>
       <View style={styles.depth2Frame0}>
@@ -35,11 +39,13 @@ const Depth1Frame2 = ({
             <Text style={[styles.brands, brandsStyle]}>{brands}</Text>
           </View>
         </View>
-        <Image
-          style={styles.depth3Frame1}
-          contentFit="cover"
-          source={depth3Frame1}
-        />
+        <Pressable onPress={()=>{navigation.navigate(to)}}>
+          <Image
+            style={styles.depth3Frame1}
+            contentFit="cover"
+            source={depth3Frame1}
+          />
+        </Pressable>
       </View>
     </View>
   );
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth3Frame0: {
-    width: 314,
+    width: "auto",
     height: 24,
     overflow: "hidden",
   },
@@ -67,17 +73,16 @@ const styles = StyleSheet.create({
     height: 28,
   },
   depth2Frame0: {
-    position: "absolute",
-    top: 14,
-    left: 16,
-    width: 358,
+    width: "100%",
+    display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    height: 28,
+    paddingHorizontal: Padding.p_base
   },
   depth1Frame8: {
     backgroundColor: Color.colorWhite,
-    width: 'auto',
+    width: '100%',
     height: 56,
   },
 });

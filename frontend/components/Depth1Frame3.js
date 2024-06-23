@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text,TouchableOpacity } from "react-native";
 import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
   return (
     <View style={styles.depth1Frame5}>
       <View style={styles.depth2Frame0}>
-        <View style={styles.depth3Frame0}>
+        <TouchableOpacity style={styles.depth3Frame0}>
           <Image
             style={styles.depth4Frame0}
             contentFit="cover"
             source={require("../assets/depth-4-frame-02.png")}
           />
-        </View>
+        </TouchableOpacity>
         <View style={styles.depth3Frame1}>
           <View style={styles.depth4Frame01}>
             <View style={styles.depth5Frame0}>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   depth1Frame5: {
     backgroundColor: Color.colorWhite,
-    width: 390,
+    width: "100%",
     height: 90,
   },
 });

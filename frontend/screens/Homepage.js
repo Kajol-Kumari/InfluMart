@@ -11,16 +11,20 @@ import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 const Homepage = () => {
   const navigation = useNavigation();
 
+  const [searchValue, setSearchValue] = React.useState("")
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.homepage}>
-        <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <Depth1Frame4 />
+    <View style={styles.homepage}>
+      <View style={[styles.depth0Frame0, styles.frameLayout1]}>
+        <Depth1Frame4 onChange={(value) => {
+          setSearchValue(value)
+        }} />
+        <ScrollView style={{marginBottom:80}}>
           <View style={styles.frameLayout}>
             <View style={styles.frameLayout}>
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
                 <Image
-                  style={[styles.depth4Frame0, styles.frameLayout]}
+                  style={[styles.depth4Frame0]}
                   contentFit="cover"
                   source={require("../assets/depth-4-frame-01.png")}
                 />
@@ -52,14 +56,13 @@ const Homepage = () => {
           <View style={styles.depth1Frame4}>
             <View style={styles.depth2Frame03}>
               <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
+                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('BrandRegistrationForm')}>
                   <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
                     <View style={[styles.depth5Frame0, styles.frameBg1]}>
                       <View style={styles.depth2Frame01}>
                         <Text
                           style={[
-                            styles.brandRegistration,
-                            styles.registrationTypo,
+                            styles.brandRegistration
                           ]}
                         >
                           Brand Registration
@@ -70,7 +73,7 @@ const Homepage = () => {
                 </TouchableOpacity>
               </View>
               <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
-                <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
+                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
                   <View style={[styles.depth4Frame02, styles.frameBg]}>
                     <View style={[styles.depth5Frame01, styles.frameBg]}>
                       <View style={styles.depth2Frame01}>
@@ -111,6 +114,7 @@ const Homepage = () => {
           <Depth1Frame2
             brands="Brands"
             depth3Frame1={require("../assets/depth-3-frame-1.png")}
+            to={"BrandsAssosciated"}
           />
           <Depth1Frame2
             brands="Influencers"
@@ -118,6 +122,7 @@ const Homepage = () => {
             propBackgroundColor="#fff"
             propFontFamily="Lexend-Regular"
             propColor="#121217"
+            to={"InfluencersList"}
           />
           <View style={styles.depth1Frame7}>
             <View style={styles.depth2Frame05}>
@@ -129,37 +134,39 @@ const Homepage = () => {
             </View>
           </View>
           <Depth1Frame1 />
-          <Depth1Frame
-            depth5Frame0={require("../assets/depth-5-frame-01.png")}
-            depth5Frame01={require("../assets/depth-5-frame-02.png")}
-            search="Search"
-            depth5Frame02={require("../assets/depth-5-frame-03.png")}
-            myBrands="My Brands"
-            depth5Frame03={require("../assets/depth-5-frame-04.png")}
-          />
-          <View style={[styles.depth1Frame14, styles.frameLayout1]} />
-        </View>
+        </ScrollView>
+        <Depth1Frame
+          depth5Frame0={require("../assets/depth-5-frame-01.png")}
+          depth5Frame01={require("../assets/depth-5-frame-02.png")}
+          search="Search"
+          depth5Frame02={require("../assets/depth-5-frame-03.png")}
+          myBrands="My Brands"
+          depth5Frame03={require("../assets/depth-5-frame-04.png")}
+          style={styles.bottomBar}
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
+    width: "100%",
+    height: "100%"
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
   },
   frameLayout: {
     height: 218,
-    width: 390,
+    width: "100%",
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   welcomeToInflumartFlexBox: {
     textAlign: "left",
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     height: 48,
     alignItems: "center",
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -191,20 +198,18 @@ const styles = StyleSheet.create({
   },
   depth3FrameLayout: {
     height: 48,
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     flexDirection: "row",
+    paddingHorizontal: Padding.p_base
   },
   frameBg: {
     backgroundColor: Color.colorGhostwhite,
     overflow: "hidden",
   },
   depth4Frame0: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 0,
-    overflow: "hidden",
+    width: "100%",
+    height: 320
   },
   depth3Frame0: {
     overflow: "hidden",
@@ -222,7 +227,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth1Frame2: {
-    height: 67,
+    height: "auto",
     paddingTop: Padding.p_xl,
   },
   anOnboardingPlatform: {
@@ -238,9 +243,13 @@ const styles = StyleSheet.create({
     color: Color.colorWhite,
     lineHeight: 24,
     fontSize: FontSize.size_base,
+    letterSpacing: 0,
+    textAlign: "center",
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: "700",
   },
   depth5Frame0: {
-    width: 'auto',
+    width: '100%',
     height: 24,
   },
   depth4Frame01: {
@@ -263,7 +272,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     height: 48,
     alignItems: "center",
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -273,7 +282,7 @@ const styles = StyleSheet.create({
   depth2Frame03: {
     height: 108,
     alignItems: "center",
-    width: 358,
+    width: "100%",
   },
   depth1Frame4: {
     height: 132,
@@ -291,24 +300,29 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: '100%',
   },
   depth2Frame05: {
-    width: 157,
+    width: "auto",
     height: 23,
   },
   depth1Frame14: {
     height: 20,
   },
   depth0Frame0: {
-    height: 1318,
+    height: "100%",
     overflow: "hidden",
   },
   homepage: {
     flex: 1,
     width: "100%",
+    height: "100%",
     backgroundColor: Color.colorWhite,
   },
+  bottomBar: {
+    position: "absolute",
+    bottom: 0
+  }
 });
 
 export default Homepage;
