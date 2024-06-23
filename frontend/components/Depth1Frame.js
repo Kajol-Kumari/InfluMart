@@ -121,6 +121,7 @@ const Depth1Frame = ({
   return (
     <View style={[styles.depth1Frame13, depth1Frame13Style]}>
       <View style={styles.depth2Frame0}>
+     
         <View
           style={[
             styles.depth3Frame0,
@@ -128,29 +129,30 @@ const Depth1Frame = ({
             depth3Frame01Style,
           ]}
         >
-          <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={depth5Frame0}
-            />
-          </View>
-          <View
-            style={[
-              styles.depth4Frame1,
-              styles.depth4FrameSpaceBlock,
-              depth4Frame1Style,
-            ]}
-          >
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo, homeStyle]}>
-                Home
-              </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+            <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={depth5Frame0}
+              />
             </View>
-          </View>
+            <View
+              style={[
+                styles.depth4Frame1,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame1Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.home, styles.homeTypo, homeStyle]}>
+                  Home
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('InfluencersList')}>
-
+     
         <View
           style={[
             styles.depth3Frame1,
@@ -158,6 +160,7 @@ const Depth1Frame = ({
             depth3Frame1Style,
           ]}
         >
+          <TouchableOpacity onPress={() => navigation.navigate('InfluencersList')}>
           <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
             <Image
               style={styles.depth5Frame0}
@@ -178,11 +181,9 @@ const Depth1Frame = ({
               </Text>
             </View>
           </View>
+          </TouchableOpacity>
         </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate('BrandsAssosciated')}>
-
+      
         <View
           style={[
             styles.depth3Frame1,
@@ -190,6 +191,7 @@ const Depth1Frame = ({
             depth3Frame2Style,
           ]}
         >
+          <TouchableOpacity onPress={() => navigation.navigate('BrandsAssosciated')}>
           <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
             <Image
               style={styles.depth5Frame0}
@@ -210,11 +212,9 @@ const Depth1Frame = ({
               </Text>
             </View>
           </View>
+          </TouchableOpacity>
         </View>
-        </TouchableOpacity >
-
-        <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
-
+ 
         <View
           style={[
             styles.depth3Frame1,
@@ -222,28 +222,29 @@ const Depth1Frame = ({
             depth3Frame3Style,
           ]}
         >
-          <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={depth5Frame03}
-            />
-          </View>
-          <View
-            style={[
-              styles.depth4Frame13,
-              styles.depth4FrameSpaceBlock,
-              depth4Frame13Style,
-            ]}
-          >
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.search, styles.homeTypo, profileStyle]}>
-                Profile
-              </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={depth5Frame03}
+              />
             </View>
-          </View>
-        </View>
-        </TouchableOpacity>
+            <View
+              style={[
+                styles.depth4Frame13,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame13Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, profileStyle]}>
+                  Profile
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>      
       </View>
     </View>
   );
@@ -251,7 +252,7 @@ const Depth1Frame = ({
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: 90,
+    width: "100%",
     alignItems: "center",
     height: 55,
   },
@@ -279,7 +280,7 @@ const styles = StyleSheet.create({
   },
   depth4Frame0: {
     borderRadius: Border.br_base,
-    width: 48,
+    width: '100%',
     justifyContent: "center",
   },
   home: {
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame1: {
-    width: 42,
+    width: '100%',
   },
   depth3Frame0: {
     alignItems: "center",
@@ -298,35 +299,34 @@ const styles = StyleSheet.create({
   depth4Frame01: {
     paddingHorizontal: 0,
     paddingVertical: Padding.p_9xs,
-    width: 30,
+    width: '100%',
   },
   search: {
     color: Color.colorSlategray_300,
   },
   depth4Frame11: {
-    width: 48,
+    width: '100%',
   },
   depth3Frame1: {
     marginLeft: 8,
     alignItems: "center",
   },
   depth4Frame12: {
-    width: 70,
+    width: '100%',
   },
   depth4Frame13: {
-    width: 45,
+    width: '100%',
   },
   depth2Frame0: {
-    width: 358,
+    width: '25%',
     flexDirection: "row",
-    height: 54,
   },
   depth1Frame13: {
     backgroundColor: Color.colorWhite,
     borderStyle: "solid",
     borderColor: Color.colorGhostwhite,
     borderTopWidth: 1,
-    width: 390,
+    width: "100%",
     height: 75,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,

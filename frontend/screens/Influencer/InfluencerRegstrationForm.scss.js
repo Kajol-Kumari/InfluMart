@@ -2,18 +2,23 @@ import { Color, Padding, FontFamily, FontSize, Border } from "../../GlobalStyles
 
 export const InfluencerRegistrationFormStyles = {
   influencerRegistrationForm: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorWhitesmoke_100,
     flex: 1,
-    width: 390,
     padding: Padding.p_base,
   },
   header: {
-    paddingVertical: Padding.p_base,
     alignItems: "center",
+    marginBottom: 20,
+  },
+  heading: {
+    fontSize: FontSize.size_3xl,  
+    lineHeight: 32,               
+    color: Color.colorGray_100,
+    fontFamily: FontFamily.plusJakartaSansBold,
   },
   headerText: {
-    fontSize: FontSize.size_lg,
-    lineHeight: 23,
+    fontSize: FontSize.size_base,  
+    lineHeight: 32,               
     color: Color.colorGray_100,
     fontFamily: FontFamily.plusJakartaSansBold,
   },
@@ -22,25 +27,25 @@ export const InfluencerRegistrationFormStyles = {
   },
   fieldLabel: {
     fontFamily: FontFamily.plusJakartaSansMedium,
-    fontWeight: "500",
-    fontSize: FontSize.size_base,
+    fontSize: FontSize.size_sm,  
     color: Color.colorGray_100,
+    marginBottom: 8,
   },
   textInput: {
     borderRadius: Border.br_xs,
     backgroundColor: Color.colorAliceblue,
-    padding: Padding.p_base,
-    marginTop: Padding.p_5xs,
-    color: "#4F7A94",
+    paddingVertical: 14,
+    paddingHorizontal: Padding.p_base,
+    marginBottom: 16,
+    color: Color.colorSteelblue_200,
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansRegular,
   },
   sectionHeader: {
-    marginVertical: Padding.p_base,
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginBottom: 16,
     paddingHorizontal: Padding.p_xs,
   },
   icon: {
@@ -49,17 +54,26 @@ export const InfluencerRegistrationFormStyles = {
     marginLeft: 16,
   },
   sectionHeaderText: {
-    fontSize: FontSize.size_3xl,
-    lineHeight: 28,
+    fontSize: FontSize.size_base, 
+    lineHeight: 32,              
     color: Color.colorGray_100,
     fontFamily: FontFamily.plusJakartaSansBold,
+  },
+  dropdownContainer: {
+    width: "50%", // Adjust as per your design
+    marginBottom: 16,
+    borderRadius: Border.br_xs,
+    backgroundColor: Color.colorAliceblue,
+    paddingHorizontal: Padding.p_base,
+    paddingVertical: 14,
   },
   selectPlanButton: {
     backgroundColor: Color.colorSteelblue_100,
     borderRadius: Border.br_xs,
-    paddingVertical: Padding.p_base,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
     alignItems: "center",
-    marginVertical: Padding.p_base,
+    marginBottom: 20,
   },
   selectPlanButtonDisabled: {
     backgroundColor: "#F0F2F5",
@@ -71,5 +85,10 @@ export const InfluencerRegistrationFormStyles = {
     color: Color.colorWhitesmoke_200,
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansBold,
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 10,
+    padding: Padding.p_xs,
   },
 };

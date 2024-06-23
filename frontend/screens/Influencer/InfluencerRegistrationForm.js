@@ -8,23 +8,46 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import InfluPrice from "../signup/components/InfluPrice";
+import Dropdown from "./components/Dropdown";
 import HeadingDescToggle from "../signup/components/HeadingDescToggle";
+import { Ionicons } from '@expo/vector-icons';
+import InfluPrice from "../signup/components/InfluPrice";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
 
-const FormField = ({ label, value, setValue, secureTextEntry = false }) => (
+const FormField = ({ label, value, setValue, secureTextEntry = false, isPasswordField = false, togglePasswordVisibility }) => (
   <View style={styles.fieldContainer}>
     <Text style={styles.fieldLabel}>{label}</Text>
-    <TextInput
-      style={styles.textInput}
-      value={value}
-      onChangeText={setValue}
-      placeholder={label}
-      secureTextEntry={secureTextEntry}
-    />
+    <View style={styles.passwordContainer}>
+      <TextInput
+        style={styles.textInput}
+        value={value}
+        onChangeText={setValue}
+        placeholder={label}
+        secureTextEntry={secureTextEntry}
+      />
+      {isPasswordField && (
+        <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
+          <Ionicons name={secureTextEntry ? 'eye-off' : 'eye'} size={20} color="#778899" />
+        </TouchableOpacity>
+      )}
+    </View>
   </View>
 );
+
+const industryOptions = [
+  'Vlogger',
+  'Fashion Influencer',
+  'Lifestyle Vlogger',
+  'Tech Reviewer',
+  'Others',
+];
+
+const locationOptions = [
+  'Us',
+  'Canada',
+  'Others',
+];
 
 const InfluencerRegistrationForm = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
@@ -32,16 +55,18 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const [username, setUsername] = useState("");
   const [over18, setOver18] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [industryAssociation, setIndustryAssociation] = useState(false);
+  const [industryAssociation, setIndustryAssociation] = useState(null); // State for industry association
   const [location, setLocation] = useState("");
   const social = route.params?.social;
   const follower = route.params?.follower;
   const price = route.params?.price;
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    if (
+    // Check form validity based on state values
+    setIsFormValid(
       email &&
       password &&
       username &&
@@ -50,12 +75,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       agreedToTerms &&
       social &&
       follower &&
-      price
-    ) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
+      price &&
+      industryAssociation // Include industryAssociation in form validity check
+    );
   }, [
     email,
     password,
@@ -66,6 +88,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     social,
     follower,
     price,
+    industryAssociation,
   ]);
 
   const handleSelectPlan = async () => {
@@ -84,6 +107,10 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     await InfluencerVerify(payload, navigation);
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <ScrollView>
       <View style={styles.influencerRegistrationForm}>
@@ -91,7 +118,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           onPress={() => navigation.navigate("BrandorInfluencer")}
         >
           <View style={styles.header}>
-            <Text style={styles.headerText}>Sign up</Text>
+            <Text style={styles.heading}>Sign up</Text>
           </View>
         </TouchableOpacity>
 
@@ -100,7 +127,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           label="Password"
           value={password}
           setValue={setPassword}
-          secureTextEntry
+          secureTextEntry={!isPasswordVisible}
+          isPasswordField={true}
+          togglePasswordVisibility={togglePasswordVisibility}
         />
         <FormField label="Username" value={username} setValue={setUsername} />
 
@@ -174,11 +203,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionHeaderText}>Industry association</Text>
         </View>
-        <HeadingDescToggle
-          heading="I am a member of an industry association"
-          toggleOn={industryAssociation}
-          setToggleOn={setIndustryAssociation}
+        <Dropdown
+          options={industryOptions}
+          selectedValue={industryAssociation}
+          onSelect={setIndustryAssociation}
         />
+
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionHeaderText}>Price per post</Text>
           <TouchableOpacity
@@ -193,7 +223,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             />
           </TouchableOpacity>
         </View>
-        <FormField label={"Location"} value={location} setValue={setLocation} />
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionHeaderText}>Location</Text>
+        </View>
+        <Dropdown
+          options={locationOptions}
+          selectedValue={location}
+          onSelect={setLocation}
+        />
+        {/* <FormField value={location} setValue={setLocation} /> */}
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionHeaderText}>Subscription plans</Text>

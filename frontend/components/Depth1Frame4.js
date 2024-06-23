@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, Dimensions } from "react-native";
 import { FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
+
+const { width } = Dimensions.get('window');
 
 const Depth1Frame4 = () => {
   return (
@@ -10,22 +11,20 @@ const Depth1Frame4 = () => {
         <View style={[styles.depth3Frame0, styles.depth3FrameLayout]}>
           <Image
             style={styles.depth4Frame0}
-            contentFit="cover"
+            resizeMode="cover"
             source={require("../assets/depth-4-frame-0.png")}
           />
         </View>
         <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
           <View style={styles.depth4Frame01}>
-            <View style={styles.depth5Frame0}>
-              <Text style={styles.influmart}>Influmart</Text>
-            </View>
+            <Text style={styles.influmart}>Influmart</Text>
           </View>
         </View>
         <View style={styles.depth3FrameLayout}>
           <View style={[styles.depth4Frame02, styles.depth3FrameLayout]}>
             <Image
               style={styles.depth4Frame0}
-              contentFit="cover"
+              resizeMode="cover"
               source={require("../assets/depth-5-frame-0.png")}
             />
           </View>
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth3FrameLayout: {
-    width: 48,
+    width: width * 0.1, // Adjust width based on a percentage of the screen width
     flexDirection: "row",
     height: 48,
   },
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
   influmart: {
     fontSize: FontSize.size_lg,
     letterSpacing: 0,
-    lineHeight: 23,
+    lineHeight: 28, // Adjust line height for better readability
     fontWeight: "700",
     fontFamily: FontFamily.lexendBold,
     color: Color.colorGray_500,
@@ -67,12 +66,12 @@ const styles = StyleSheet.create({
   depth4Frame01: {
     width: 'auto',
     overflow: "hidden",
-    height: 23,
+    height: 28,
   },
   depth3Frame1: {
     width: 'auto',
     justifyContent: "center",
-    height: 23,
+    height: 28,
     alignItems: "center",
   },
   depth4Frame02: {
@@ -80,16 +79,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth2Frame0: {
-    width: 358,
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
     height: 48,
     flexDirection: "row",
   },
   depth1Frame0: {
     backgroundColor: Color.colorWhite,
-    width: 390,
-    height: 72,
+    width: width * 1, 
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,

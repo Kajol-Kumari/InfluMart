@@ -1,165 +1,179 @@
 import * as React from "react";
-import { ScrollView, Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Image, StyleSheet, View, Text, TouchableOpacity, Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Depth1Frame4 from "../components/Depth1Frame4";
 import Depth1Frame3 from "../components/Depth1Frame3";
 import Depth1Frame2 from "../components/Depth1Frame2";
 import Depth1Frame1 from "../components/Depth1Frame1";
 import Depth1Frame from "../components/Depth1Frame";
+import {
+  responsiveWidth,
+  responsiveScreenWidth,
+} from "react-native-responsive-dimensions";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
+
+const { width, height } = Dimensions.get('window');
 
 const Homepage = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.homepage}>
-        <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <Depth1Frame4 />
-          <View style={styles.frameLayout}>
+    <View style={[styles.container]}>
+      <Depth1Frame4 />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.homepage}>
+          <View style={[styles.depth0Frame0, styles.frameLayout1]}>
             <View style={styles.frameLayout}>
-              <View style={[styles.depth3Frame0, styles.frameLayout]}>
-                <Image
-                  style={[styles.depth4Frame0, styles.frameLayout]}
-                  contentFit="cover"
-                  source={require("../assets/depth-4-frame-01.png")}
-                />
+              <View style={styles.frameLayout}>
+                <View style={[styles.depth3Frame0, styles.frameLayout]}>
+                  <Image
+                    style={[styles.depth4Frame0, styles.frameLayout]}
+                    contentFit="cover"
+                    source={require("../assets/depth-4-frame-01.png")}
+                  />
+                </View>
               </View>
             </View>
-          </View>
-          <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[
-                  styles.welcomeToInflumart,
-                  styles.welcomeToInflumartFlexBox,
-                ]}
-              >
-                Welcome to Influmart
-              </Text>
-            </View>
-          </View>
-          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[styles.anOnboardingPlatform, styles.registrationLayout]}
-              >
-                An onboarding platform for brands and influencers. Join the best
-                brands and influencers in the world.
-              </Text>
-            </View>
-          </View>
-          <View style={styles.depth1Frame4}>
-            <View style={styles.depth2Frame03}>
-              <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
-                  <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
-                    <View style={[styles.depth5Frame0, styles.frameBg1]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.brandRegistration,
-                            styles.registrationTypo,
-                          ]}
-                        >
-                          Brand Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
-                <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
-                  <View style={[styles.depth4Frame02, styles.frameBg]}>
-                    <View style={[styles.depth5Frame01, styles.frameBg]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.influencerRegistration,
-                            styles.registrationTypo,
-                          ]}
-                        >
-                          Influencer Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <Depth1Frame3
-            contactUs="Contact us"
-            sanFranciscoCA="San Francisco, CA"
-            contactinflumartcom="contact@influmart.com"
-          />
-          <Depth1Frame3
-            contactUs="About"
-            sanFranciscoCA="Learn more"
-            contactinflumartcom="Get started"
-          />
-          <View style={styles.depth1Frame7}>
-            <View style={styles.depth2Frame04}>
+            <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
               <View style={styles.depth2Frame01}>
-                <Text style={[styles.services, styles.registrationTypo]}>
-                  Services
+                <Text
+                  style={[
+                    styles.welcomeToInflumart,
+                    styles.welcomeToInflumartFlexBox,
+                  ]}
+                >
+                  Welcome to Influmart
                 </Text>
               </View>
             </View>
-          </View>
-          <Depth1Frame2
-            brands="Brands"
-            depth3Frame1={require("../assets/depth-3-frame-1.png")}
-          />
-          <Depth1Frame2
-            brands="Influencers"
-            depth3Frame1={require("../assets/depth-3-frame-1.png")}
-            propBackgroundColor="#fff"
-            propFontFamily="Lexend-Regular"
-            propColor="#121217"
-          />
-          <View style={styles.depth1Frame7}>
-            <View style={styles.depth2Frame05}>
+            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
               <View style={styles.depth2Frame01}>
-                <Text style={[styles.services, styles.registrationTypo]}>
-                  Recent Highlights
+                <Text
+                  style={[styles.anOnboardingPlatform, styles.registrationLayout]}
+                >
+                  An onboarding platform for brands and influencers. Join the best
+                  brands and influencers in the world.
                 </Text>
               </View>
             </View>
+            <View style={styles.depth1Frame4}>
+              <View style={styles.depth2Frame03}>
+                <View style={styles.depth3FrameLayout}>
+                  <TouchableOpacity onPress={() => navigation.navigate('BrandRegistrationForm')}>
+                    <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
+                      <View style={[styles.depth5Frame0, styles.frameBg1]}>
+                        <View style={styles.depth2Frame01}>
+                          <Text
+                            style={[
+                              styles.brandRegistration,
+                              styles.registrationTypo,
+                            ]}
+                          >
+                            Brand Registration
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
+                  <TouchableOpacity onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
+                    <View style={[styles.depth4Frame02, styles.frameBg]}>
+                      <View style={[styles.depth5Frame01, styles.frameBg]}>
+                        <View style={styles.depth2Frame01}>
+                          <Text
+                            style={[
+                              styles.influencerRegistration,
+                              styles.registrationTypo,
+                            ]}
+                          >
+                            Influencer Registration
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <Depth1Frame3
+              contactUs="Contact us"
+              sanFranciscoCA="San Francisco, CA"
+              contactinflumartcom="contact@influmart.com"
+            />
+            <Depth1Frame3
+              contactUs="About"
+              sanFranciscoCA="Learn more"
+              contactinflumartcom="Get started"
+            />
+            <View style={styles.depth1Frame7}>
+              <View style={styles.depth2Frame04}>
+                <View style={styles.depth2Frame01}>
+                  <Text style={[styles.services, styles.registrationTypo]}>
+                    Services
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Depth1Frame2
+              brands="Brands"
+              depth3Frame1={require("../assets/depth-3-frame-1.png")}
+            />
+            <Depth1Frame2
+              brands="Influencers"
+              depth3Frame1={require("../assets/depth-3-frame-1.png")}
+              propBackgroundColor="#fff"
+              propFontFamily="Lexend-Regular"
+              propColor="#121217"
+            />
+            <View style={styles.depth1Frame7}>
+              <View style={styles.depth2Frame05}>
+                <View style={styles.depth2Frame01}>
+                  <Text style={[styles.services, styles.registrationTypo]}>
+                    Recent Highlights
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Depth1Frame1 />
+           
           </View>
-          <Depth1Frame1 />
-          <Depth1Frame
-            depth5Frame0={require("../assets/depth-5-frame-01.png")}
-            depth5Frame01={require("../assets/depth-5-frame-02.png")}
-            search="Search"
-            depth5Frame02={require("../assets/depth-5-frame-03.png")}
-            myBrands="My Brands"
-            depth5Frame03={require("../assets/depth-5-frame-04.png")}
-          />
-          <View style={[styles.depth1Frame14, styles.frameLayout1]} />
         </View>
+      </ScrollView>
+      <View style={styles.stickyBottom}>
+        <Depth1Frame
+          depth5Frame0={require("../assets/depth-5-frame-01.png")}
+          depth5Frame01={require("../assets/depth-5-frame-02.png")}
+          search="Search"
+          depth5Frame02={require("../assets/depth-5-frame-03.png")}
+          myBrands="My Brands"
+          depth5Frame03={require("../assets/depth-5-frame-04.png")}
+        />
       </View>
-    </ScrollView>
+    </View> 
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
   scrollContainer: {
     flexGrow: 1,
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
   },
   frameLayout: {
-    height: 218,
-    width: 390,
+    height: responsiveScreenWidth(60),
+    width:  responsiveWidth(100),
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: width, 
   },
   welcomeToInflumartFlexBox: {
     textAlign: "left",
@@ -175,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     height: 48,
     alignItems: "center",
-    width: 358,
+    width: width - 32, // Adjust width based on screen width
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -191,7 +205,7 @@ const styles = StyleSheet.create({
   },
   depth3FrameLayout: {
     height: 48,
-    width: 358,
+    width: width - 32, // Adjust width based on screen width
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -263,7 +277,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     height: 48,
     alignItems: "center",
-    width: 358,
+    width: width - 32, // Adjust width based on screen width
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -273,7 +287,7 @@ const styles = StyleSheet.create({
   depth2Frame03: {
     height: 108,
     alignItems: "center",
-    width: 358,
+    width: width - 32, // Adjust width based on screen width
   },
   depth1Frame4: {
     height: 132,
@@ -291,23 +305,31 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: width, // Adjust width based on screen width
   },
   depth2Frame05: {
     width: 157,
     height: 23,
   },
-  depth1Frame14: {
-    height: 20,
-  },
+  // depth1Frame14: {
+  //   height: 20,
+  // },
   depth0Frame0: {
-    height: 1318,
+    // height: 1318,
     overflow: "hidden",
   },
   homepage: {
     flex: 1,
     width: "100%",
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorAliceblue,
+    paddingBottom: 75,
+  },
+  stickyBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 9999,
   },
 });
 
