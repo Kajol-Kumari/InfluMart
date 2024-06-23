@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingTop:Padding.p_base,
     paddingBottom:Padding.p_5xs,
-    marginTop:Padding.p_smi,
     height:"auto"
   },
   SearchBar: {

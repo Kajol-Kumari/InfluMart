@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     borderColor: Color.colorGhostwhite,
     borderTopWidth: 1,
     width: "100%",
-    height: "auto",
+    height: 80,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,

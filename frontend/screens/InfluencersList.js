@@ -43,115 +43,117 @@ const InfluencersList = () => {
   return (
     <View style={[styles.depth0Frame0, styles.frameLayout1]}>
       <Depth1Frame11 style={styles.menuBar} onChange={setSearchValue} />
-      <ScrollView onScroll={handleScroll} style={{ width: "100%", height: "100%", marginBottom: 70 }}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.depth1Frame1}>
-          <View style={{ height: "auto", display: "flex", flexDirection: "row", gap: 12, paddingEnd: 40, zIndex: 4 }}>
-            <DropDown icon={InfluencerIcon} name={"Influencers"} items={FakeData} selectedValue={(value) => {
-              console.log(value)
-            }} />
-            <DropDown icon={BrandIcon} name={"Brands"} items={FakeData} selectedValue={(value) => {
-              console.log(value)
-            }} />
-            <DropDown icon={BothIcon} name={"Both"} items={FakeData} selectedValue={(value) => {
-              console.log(value)
-            }} />
-            <DropDown icon={AllIcon} name={"All"} items={FakeData} selectedValue={(value) => {
-              console.log(value)
-            }} />
-          </View>
-        </ScrollView>
-        <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-06.png")}
-            kylieCosmetics="Kylie Cosmetics"
-            beauty="Beauty"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-07.png")}
-            kylieCosmetics="Huda Beauty"
-            beauty="Beauty"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-08.png")}
-            kylieCosmetics="Revolve"
-            beauty="Fashion"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-09.png")}
-            kylieCosmetics="Jen Atkin"
-            beauty="Hair"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-010.png")}
-            kylieCosmetics="Glossier"
-            beauty="Beauty"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-011.png")}
-            kylieCosmetics="Loreal"
-            beauty="Beauty"
-          />
-        </View>
-        <View style={[styles.depth1Frame8, styles.depth1FrameLayout]}>
-          <View style={styles.depth2Frame01}>
-            <View style={styles.depth4Frame0}>
-              <Text style={[styles.trending, styles.filtersTypo]}>
-                Trending
-              </Text>
+      <View style={{ width: "100%", height: "95%",paddingBottom:80 }}>
+        <ScrollView onScroll={handleScroll} style={{ width: "100%", height: "100%" }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.depth1Frame1}>
+            <View style={{ height: "auto", display: "flex", flexDirection: "row", gap: 12, paddingEnd: 40, zIndex: 4 }}>
+              <DropDown icon={InfluencerIcon} name={"Influencers"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={BrandIcon} name={"Brands"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={BothIcon} name={"Both"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
+              <DropDown icon={AllIcon} name={"All"} items={FakeData} selectedValue={(value) => {
+                console.log(value)
+              }} />
             </View>
-          </View>
-        </View>
-        <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-012.png")}
-            kylieCosmetics="Gymshark"
-            beauty="Fitness"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-013.png")}
-            kylieCosmetics="Lululemon"
-            beauty="Fitness"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-014.png")}
-            kylieCosmetics="Nike"
-            beauty="Sports"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-015.png")}
-            kylieCosmetics="Adidas"
-            beauty="Sports"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-016.png")}
-            kylieCosmetics="Puma"
-            beauty="Sports"
-          />
-          <Depth1Frame10
-            depth5Frame0={require("../assets/depth-5-frame-017.png")}
-            kylieCosmetics="Under Armour"
-            beauty="Fitness"
-          />
-        </View>
-      </ScrollView>
-      <Pressable onPress={() => { navigation.navigate("FilterUI") }} style={[styles.depth1Frame16, styles.depth1FrameLayout, { opacity: showFloatButton ? 1 : 0.4 }]}>
-        <View style={[styles.depth2Frame02, styles.frameLayout]}>
-          <View style={[styles.depth3Frame05, styles.frameLayout]}>
-            <Image
-              style={styles.depth4Frame04}
-              contentFit="cover"
-              source={require("../assets/depth-4-frame-015.png")}
+          </ScrollView>
+          <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-06.png")}
+              kylieCosmetics="Kylie Cosmetics"
+              beauty="Beauty"
             />
-            <View style={[styles.depth4Frame1, styles.depth3FrameLayout]}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-07.png")}
+              kylieCosmetics="Huda Beauty"
+              beauty="Beauty"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-08.png")}
+              kylieCosmetics="Revolve"
+              beauty="Fashion"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-09.png")}
+              kylieCosmetics="Jen Atkin"
+              beauty="Hair"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-010.png")}
+              kylieCosmetics="Glossier"
+              beauty="Beauty"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-011.png")}
+              kylieCosmetics="Loreal"
+              beauty="Beauty"
+            />
+          </View>
+          <View style={[styles.depth1Frame8, styles.depth1FrameLayout]}>
+            <View style={styles.depth2Frame01}>
               <View style={styles.depth4Frame0}>
-                <Text style={[styles.filters, styles.filtersTypo]}>
-                  Filters
+                <Text style={[styles.trending, styles.filtersTypo]}>
+                  Trending
                 </Text>
               </View>
             </View>
           </View>
+          <View style={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "start" }}>
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-012.png")}
+              kylieCosmetics="Gymshark"
+              beauty="Fitness"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-013.png")}
+              kylieCosmetics="Lululemon"
+              beauty="Fitness"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-014.png")}
+              kylieCosmetics="Nike"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-015.png")}
+              kylieCosmetics="Adidas"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-016.png")}
+              kylieCosmetics="Puma"
+              beauty="Sports"
+            />
+            <Depth1Frame10
+              depth5Frame0={require("../assets/depth-5-frame-017.png")}
+              kylieCosmetics="Under Armour"
+              beauty="Fitness"
+            />
+          </View>
+        </ScrollView>
+        <View style={[styles.depth1Frame16, styles.depth1FrameLayout, { opacity: showFloatButton ? 1 : 0.4 }]}>
+          <Pressable onPress={() => { navigation.navigate("FilterUI") }} onHoverIn={() => { setShowFloatButton(true) }} onHoverOut={() => { setShowFloatButton(false) }} style={[styles.depth2Frame02, styles.frameLayout]}>
+            <View style={[styles.depth3Frame05, styles.frameLayout]}>
+              <Image
+                style={styles.depth4Frame04}
+                contentFit="cover"
+                source={require("../assets/depth-4-frame-015.png")}
+              />
+              <View style={[styles.depth4Frame1, styles.depth3FrameLayout]}>
+                <View style={styles.depth4Frame0}>
+                  <Text style={[styles.filters, styles.filtersTypo]}>
+                    Filters
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </Pressable>
         </View>
-      </Pressable>
+      </View>
       <Depth1Frame
         depth5Frame0={require("../assets/depth-5-frame-01.png")}
         depth5Frame01={require("../assets/depth-5-frame-018.png")}
@@ -202,9 +204,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth1FrameLayout: {
-    height: 60,
+    height: "auto",
     flexDirection: "row",
-    width: 390,
+    width: "auto",
   },
   filtersTypo: {
     fontFamily: FontFamily.beVietnamProBold,
@@ -332,13 +334,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   depth1Frame16: {
-    paddingHorizontal: 28,
-    paddingBottom: Padding.p_xl,
+    width: "auto",
     justifyContent: "flex-end",
     overflow: "hidden",
-    position: "absolute",
-    bottom: 80,
-    right: 10
+    position: "absoulte",
+    bottom: 70,
+    right: 40,
+    zIndex:2
   },
   depth1Frame18: {
     height: 20,
