@@ -1,8 +1,7 @@
 import { API_ENDPOINT } from "@env";
 import axios from "axios";
-import { Alert } from "react-native";
 
-const getSubscriptionPlans = async (payload) => {
+const getSubscriptionPlans = async (payload,showAlert) => {
   try {
     const response = await axios.post(
       `${API_ENDPOINT}/subscriptions/subscription-plans`,
@@ -12,28 +11,28 @@ const getSubscriptionPlans = async (payload) => {
     if (response.status == 200) {
       return data.charges;
     } else {
-      Alert.alert("Error", data.message);
+      showAlert("Influencer SignUp Error", data.message);
     }
   } catch (error) {
-    Alert.alert("Error", "Something went wrong. Please try again.");
+    showAlert("Influencer SignUp Error", "Something went wrong. Please try again.");
   }
 };
 
-const subscribe = async (subscribeData,payload, navigation) => {
+const subscribe = async (subscribeData,payload, navigation,showAlert) => {
   try {
     const response = await axios.post(`${API_ENDPOINT}/subscriptions/subscription`, subscribeData);
     if (response.status === 201) {
       navigation.navigate("InfluencerConfirmAccount", { payload });
     } else {
       const data = await response.data;
-      Alert.alert("Error", data.message);
+      showAlert("Influencer SignUp Error", data.message);
     }
   } catch (error) {
-    Alert.alert("Error", "Something went wrong. Please try again.");
+    showAlert("Influencer SignUp Error", "Something went wrong. Please try again.");
   }
 };
 
-const payment = async (payload, navigation) => {
+const payment = async (payload, navigation,showAlert) => {
   const { planId, paymentMethod } = payload;
   try {
     const response = await axios.post(`${API_ENDPOINT}/subscriptions/payment`, {
@@ -44,10 +43,10 @@ const payment = async (payload, navigation) => {
       navigation.navigate("PaymentSuccess");
     } else {
       const data = await response.data;
-      Alert.alert("Error", data.message);
+      showAlert("Payment Error", data.message);
     }
   } catch (error) {
-    Alert.alert("Error", "Something went wrong. Please try again.");
+    showAlert("Payment Error", "Something went wrong. Please try again.");
   }
 }
 

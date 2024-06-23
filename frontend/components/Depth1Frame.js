@@ -33,6 +33,7 @@ const Depth1Frame = ({
   propWidth7,
   propFontFamily3,
   propColor3,
+  style
 }) => {
   const navigation = useNavigation();
 
@@ -119,7 +120,7 @@ const Depth1Frame = ({
   }, [propFontFamily3, propColor3]);
 
   return (
-    <View style={[styles.depth1Frame13, depth1Frame13Style]}>
+    <View style={[styles.depth1Frame13, depth1Frame13Style,style]}>
       <View style={styles.depth2Frame0}>
      
         <View
@@ -252,7 +253,7 @@ const Depth1Frame = ({
 
 const styles = StyleSheet.create({
   depth3FrameLayout: {
-    width: "100%",
+    width: 90,
     alignItems: "center",
     height: 55,
   },
@@ -273,6 +274,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0,
     fontSize: FontSize.size_xs,
+    width: "auto"
   },
   depth5Frame0: {
     height: 24,
@@ -280,7 +282,7 @@ const styles = StyleSheet.create({
   },
   depth4Frame0: {
     borderRadius: Border.br_base,
-    width: '100%',
+    width: 48,
     justifyContent: "center",
   },
   home: {
@@ -291,7 +293,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame1: {
-    width: '100%',
+    width: 42,
   },
   depth3Frame0: {
     alignItems: "center",
@@ -305,7 +307,7 @@ const styles = StyleSheet.create({
     color: Color.colorSlategray_300,
   },
   depth4Frame11: {
-    width: '100%',
+    width: 48,
   },
   depth3Frame1: {
     marginLeft: 8,
@@ -318,19 +320,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   depth2Frame0: {
-    width: '25%',
+    width: 358,
     flexDirection: "row",
+    height: 54,
   },
   depth1Frame13: {
     backgroundColor: Color.colorWhite,
     borderStyle: "solid",
     borderColor: Color.colorGhostwhite,
     borderTopWidth: 1,
-    width: "100%",
+    width: 390,
     height: 75,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
+    position:"absolute",
+    bottom:0
   },
 });
 

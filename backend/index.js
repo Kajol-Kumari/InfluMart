@@ -48,6 +48,9 @@ app.use("/brands", brandRoutes);
 
 app.use('/api', collaborationRoutes);
 
+// Mount the connect routes on a specific path
+app.use("/connection",connectRouter)
+
 // Home route
 app.get("/", (_req, res) => {
   res

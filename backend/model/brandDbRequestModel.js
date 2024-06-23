@@ -29,7 +29,8 @@ const brandSchema = new mongoose.Schema({
   description: {
     type: String,
     default: "N/A",
-  }
+  },
+  messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

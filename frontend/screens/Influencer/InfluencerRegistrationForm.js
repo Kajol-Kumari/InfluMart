@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import InfluPrice from "../signup/components/InfluPrice";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
+import { useAlert } from "../../util/AlertContext";
 
 const FormField = ({ label, value, setValue, secureTextEntry = false, isPasswordField = false, togglePasswordVisibility }) => (
   <View style={styles.fieldContainer}>
@@ -60,6 +61,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const social = route.params?.social;
   const follower = route.params?.follower;
   const price = route.params?.price;
+  const { showAlert } = useAlert();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -104,7 +106,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       price,
       location,
     };
-    await InfluencerVerify(payload, navigation);
+    await InfluencerVerify(payload, navigation,showAlert);
   };
 
   const togglePasswordVisibility = () => {

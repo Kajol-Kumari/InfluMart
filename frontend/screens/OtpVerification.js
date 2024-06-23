@@ -9,11 +9,13 @@ import {
 } from "react-native";
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
 import { verifyOTP } from "../controller/signupController";
+import { useAlert } from "../util/AlertContext";
 
 const OtpVerification = ({ route, navigation }) => {
   const { payload } = route.params;
   const [otp, setOtp] = React.useState(["", "", "", "", "", ""]);
   const inputs = React.useRef([]);
+  const {showAlert} = useAlert();
   const [error, setError] = React.useState(false);
   const handleChange = (text, index) => {
     const newOtp = [...otp];
@@ -36,7 +38,7 @@ const OtpVerification = ({ route, navigation }) => {
       return;
     }
     const _otp = otp.join("");
-    await verifyOTP(_otp, payload, navigation);
+    await verifyOTP(_otp, payload, navigation,showAlert);
   };
 
   return (
