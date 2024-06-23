@@ -5,10 +5,11 @@ import { Color} from "../../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
 import { handleBrandLogin } from '../../controller/loginController'
 import {loginStyle} from './LoginStyle'
+import { useAlert } from "../../util/AlertContext";
 
 const LoginPageBrand = () => {
   const navigation = useNavigation();
-
+  const {showAlert} = useAlert();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -78,13 +79,13 @@ const LoginPageBrand = () => {
           <TouchableOpacity style={{ width: "100%" }} onPress={async () => {
             let result = await handleBrandLogin(email, password)
             if (result.success) {
-              Alert.alert("Success", result.message)
+              showAlert("Success", result.message)
               navigation.navigate("BrandProfile")
               setEmail("")
               setPassword("")
             }
             else
-              Alert.alert("Error", result.message)
+              showAlert("Error", result.message)
           }}>
             <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>
               <View style={[styles.depth5Frame03, styles.frameBg1]}>

@@ -33,11 +33,6 @@ const influencerAuthenticationMiddleware = require("./middleware/influencers/inf
 const influencerLoggingMiddleware = require("./middleware/influencers/influencerLoggingMiddleware");
 const { getSocialData } = require("./controllers/influencerController");
 
-// Middleware for Influencers
-app.use("/influencers", influencerAuthenticationMiddleware); // Authentication for influencers
-app.use("/influencers", influencerAuthorizationMiddleware); // Authorization for influencers
-app.use("/influencers", influencerLoggingMiddleware); // Logging for influencer-specific activities
-
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
 
@@ -52,6 +47,9 @@ app.use("/otp",otpRouter);
 app.use("/brands", brandRoutes);
 
 app.use('/api', collaborationRoutes);
+
+// Mount the connect routes on a specific path
+app.use("/connection",connectRouter)
 
 // Home route
 app.get("/", (_req, res) => {

@@ -14,8 +14,8 @@ import InfluencersList from "./screens/InfluencersList";
 import InboxInterface from "./screens/inbox/InboxInterface";
 import ChatInterface from "./screens/chat/ChatInterface";
 import UserProfile from "./screens/UserProfile";
-import InfluencerRegistrationForm from "./screens/InfluencerRegistrationForm";
-import PlanChooseInterface from "./screens/PlanChooseInterface";
+import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrationForm";
+import PlanChooseInterface from "./screens/Influencer/PlanChooseInterface";
 import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
@@ -26,6 +26,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
 import BrandRegistrationForm from "./screens/signup/BrandRegistrationForm";
+import AddHandles from "./screens/Influencer/components/AddHandles";
+import PricePerPost from "./screens/Influencer/components/PricePerPost";
+import UserProfilePhoto from "./screens/Influencer/components/UserProfilePhoto";
+import MaxFollowersNo from "./screens/Influencer/components/MaxFollowersNo";
+import InfluencerConfirmAccount from "./screens/Influencer/InfluencerConfirmAccount";
+import { AlertProvider } from "./util/AlertContext";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -57,67 +63,72 @@ const App = () => {
 
   return (
     <>
-      <NavigationContainer>
-        {hideSplashScreen ? (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
-              name="Homepage"
-              component={Homepage}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="BrandorInfluencer"
-              component={BrandorInfluencer}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="BrandAccountReviewNotification"
-              component={BrandAccountSignupDataPreview}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="BrandRegistrationForm"
-              component={BrandRegistrationForm}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="OtpVerification"
-              component={OtpVerification}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="AdminPanel"
-              component={AdminPanel}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="LoginPage"
-              component={LoginPage}
-              options={{ headerShown: false }}
-            />
+      <AlertProvider>
+        <NavigationContainer>
+          {hideSplashScreen ? (
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen
-              name="BrandProfile"
-              component={BrandProfile}
-              options={{ headerShown: false }}
-            />
+                name="Homepage"
+                component={Homepage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="BrandorInfluencer"
+                component={BrandorInfluencer}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="BrandAccountReviewNotification"
+                component={BrandAccountSignupDataPreview}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerConfirmAccount"
+                component={InfluencerConfirmAccount}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="BrandRegistrationForm"
+                component={BrandRegistrationForm}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OtpVerification"
+                component={OtpVerification}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AdminPanel"
+                component={AdminPanel}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="LoginPage"
+                component={LoginPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="BrandProfile"
+                component={BrandProfile}
+                options={{ headerShown: false }}
+              />
 
               <Stack.Screen
-              name="LoginPageBrands"
-              component={LoginPageBrand}
-              options={{ headerShown: false }}
-            />
+                name="LoginPageBrands"
+                component={LoginPageBrand}
+                options={{ headerShown: false }}
+              />
 
-            <Stack.Screen
-              name="FriendRequestPage"
-              component={FriendRequestPage}
-              options={{ headerShown: false }}
-            />
-                        <Stack.Screen
-              name="BrandsAssosciated"
-              component={BrandAssosciated}
-              options={{ headerShown: false }}
-            />
-
+              <Stack.Screen
+                name="FriendRequestPage"
+                component={FriendRequestPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="BrandsAssosciated"
+                component={BrandAssosciated}
+                options={{ headerShown: false }}
+              />
             <Stack.Screen
               name="AccountCreatedSuccessfullyNoti"
               component={AccountCreatedSuccessfullyNoti}
@@ -171,6 +182,7 @@ const App = () => {
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
+      </AlertProvider>
     </>
   );
 };
