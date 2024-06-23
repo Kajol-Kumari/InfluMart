@@ -6,10 +6,11 @@ import {handleInfluencerLogin} from '../../controller/loginController';
 import {loginStyle} from './LoginStyle';
 
 import { Color} from "../../GlobalStyles";
+import { useAlert } from "../../util/AlertContext";
 
 const LoginPage = () => {
   const navigation = useNavigation();
-
+  const {showAlert} = useAlert();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -78,13 +79,13 @@ const LoginPage = () => {
         <TouchableOpacity style={{ width: "100%" }} onPress={async()=>{
           let result=await handleInfluencerLogin(username,password)
           if(result.success){
-              Alert.alert("Success",result.message)
+              showAlert("Success",result.message)
               navigation.navigate("UserProfile")
               setUsername("")
               setPassword("")
           }
           else
-            Alert.alert("Error",result.message)
+            showAlert("Error",result.message)
         }}>
           <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>
             <View style={[styles.depth5Frame03, styles.frameBg1]}>

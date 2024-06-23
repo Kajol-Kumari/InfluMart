@@ -11,12 +11,14 @@ import PlanBox from "../../shared/PlansBox";
 import { getSubscriptionPlans, subscribe } from "../../controller/subscriptionController";
 import { generateSubscriptionDates } from "../../util/subscriptionDate";
 import { PlanChooseInterfaceStyles } from "./PlanChooseInterface.scss";
+import { useAlert } from "../../util/AlertContext";
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
   const payload = route.params?.payload;
   const [planData, setPlanData] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const { showAlert } = useAlert();
   const handleSelectPlan = async () => {
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
@@ -29,7 +31,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
       paymentMode: "",
       transactionDate: _data.transactionDate,
     };
-    await subscribe(subscription, payload, navigation);
+    await subscribe(subscription, payload, navigation,showAlert);
   };
   useEffect(() => {
     const getPlans = async () => {

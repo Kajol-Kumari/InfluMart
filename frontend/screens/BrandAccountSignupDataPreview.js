@@ -5,13 +5,14 @@ import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
 import { BrandSignUp } from "../controller/signupController";
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
+import { useAlert } from "../util/AlertContext";
 
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const { payload } = route.params;
-
+  const {showAlert} = useAlert();
   const registerBrand = async () => {
-    await BrandSignUp(payload, navigation)
+    await BrandSignUp(payload, navigation,showAlert)
   };
 
   const [image, setImage] = React.useState(null)

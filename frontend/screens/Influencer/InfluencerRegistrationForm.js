@@ -12,6 +12,7 @@ import InfluPrice from "../signup/components/InfluPrice";
 import HeadingDescToggle from "../signup/components/HeadingDescToggle";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
+import { useAlert } from "../../util/AlertContext";
 
 const FormField = ({ label, value, setValue, secureTextEntry = false }) => (
   <View style={styles.fieldContainer}>
@@ -37,7 +38,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const social = route.params?.social;
   const follower = route.params?.follower;
   const price = route.params?.price;
-
+  const { showAlert } = useAlert();
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       price,
       location,
     };
-    await InfluencerVerify(payload, navigation);
+    await InfluencerVerify(payload, navigation,showAlert);
   };
 
   return (
