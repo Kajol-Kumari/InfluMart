@@ -4,15 +4,6 @@ const bcrypt = require("bcrypt"); // For password hashing
 // Signup a brand
 exports.signup = async (req, res) => {
   const { name, email, password, category } = req.body;
-  const existingBrand = await Brand.findOne({ email});
-  const nameTaken = await Brand.findOne({name})
-  if(existingBrand){
-    return res.status(400).json({message: "Brand already exists"});
-  }
-
-  if(nameTaken){
-    return res.status(400).json({message: "Brand name already taken"});
-  }
   
   const hashedPassword = await bcrypt.hash(password, 10);
   const brand = new Brand({
@@ -20,6 +11,7 @@ exports.signup = async (req, res) => {
     email,
     password: hashedPassword,
     category,
+    profileUrl: req.file?.path,
   });
   brand
     .save()

@@ -39,6 +39,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const follower = route.params?.follower;
   const price = route.params?.price;
   const { showAlert } = useAlert();
+  const photo = route.params?.photo
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       follower,
       price,
       location,
+      profileUrl: photo,
     };
     await InfluencerVerify(payload, navigation,showAlert);
   };
@@ -112,6 +114,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               navigation.navigate("InfluencerSocialHandles", {
                 price,
                 follower,
+                photo
               })
             }
           >
@@ -144,7 +147,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("MaxFollowersNo", { price, social })
+              navigation.navigate("MaxFollowersNo", { price, social, photo })
             }
           >
             <Image
@@ -184,7 +187,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           <Text style={styles.sectionHeaderText}>Price per post</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("PricePerPost", { social, follower })
+              navigation.navigate("PricePerPost", { social, follower, photo })
             }
           >
             <Image
