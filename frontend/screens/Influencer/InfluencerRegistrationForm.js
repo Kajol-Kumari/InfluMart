@@ -13,6 +13,7 @@ import HeadingDescToggle from "../signup/components/HeadingDescToggle";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
 import { useAlert } from "../../util/AlertContext";
+import { Color } from "../../GlobalStyles";
 
 const FormField = ({ label, value, setValue, secureTextEntry = false }) => (
   <View style={styles.fieldContainer}>
@@ -86,7 +87,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <View style={{width:"100%",height:"100%"}}>
+    <ScrollView style={{backgroundColor:Color.colorWhite}}>
       <View style={styles.influencerRegistrationForm}>
         <TouchableOpacity
           onPress={() => navigation.navigate("BrandorInfluencer")}
@@ -221,6 +223,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </View>
   );
 };
 

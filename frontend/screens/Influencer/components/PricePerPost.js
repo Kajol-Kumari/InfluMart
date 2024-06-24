@@ -54,7 +54,7 @@ const PricePerPost = ({ route, navigation }) => {
   const social = route.params?.social
   const follower = route.params?.follower
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <View style={styles.pricePerPostContainer}>
         <View style={styles.header}>
           <TouchableOpacity
@@ -67,6 +67,7 @@ const PricePerPost = ({ route, navigation }) => {
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>Set your prices</Text>
+          <View style={{width:20,height:20}}></View>
         </View>
         <PlatformPrice
           platform="Instagram"

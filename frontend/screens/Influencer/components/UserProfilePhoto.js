@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity,ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { UserProfilePhotoStyles } from "./UserProfilePhoto.scss";
 
-const UserProfilePhoto = ({route,navigation}) => {
+const UserProfilePhoto = ({ route, navigation }) => {
   const social = route.params?.social;
   const follower = route.params?.follower;
   const price = route.params?.price;
@@ -45,16 +45,17 @@ const UserProfilePhoto = ({route,navigation}) => {
   ];
 
   return (
-    <View style={styles.userProfilePhoto}>
+    <ScrollView style={styles.userProfilePhoto}>
       <View style={styles.header}>
-      <TouchableOpacity onPress={()=>navigation.navigate("InfluencerRegistrationForm",{social,price,follower})}>
-        <Image
-          style={styles.profileImage}
-          contentFit="cover"
-          source={require("../../../assets/cross_symbol.png")}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("InfluencerRegistrationForm", { social, price, follower })}>
+          <Image
+            style={styles.profileImage}
+            contentFit="cover"
+            source={require("../../../assets/cross_symbol.png")}
+          />
         </TouchableOpacity>
         <Text style={styles.profilePhotoText}>Profile Photo</Text>
+        <View style={{ width: 24, height: 24 }}></View>
       </View>
       <Text style={styles.sectionTitle}>What makes a good profile photo?</Text>
       {tips.map((tip, index) => (
@@ -82,7 +83,7 @@ const UserProfilePhoto = ({route,navigation}) => {
           <Text style={[styles.buttonText, styles.takePhotoButtonText]}>Take Photo</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
