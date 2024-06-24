@@ -23,6 +23,7 @@ const brandRoutes = require("./routes/brandRoutes");
 const subscriptionRouter = require("./routes/subscriptionRouter");
 const otpRouter = require("./routes/otpRoutes");
 const collaborationRoutes = require('./routes/collaborationRoutes');
+const connectRouter = require('./routes/connectionRoutes');
 const brandAuthorizationMiddleware = require("./middleware/brands/brandAuthorizationMiddleware");
 const brandAuthenticationMiddleware = require("./middleware/brands/brandAuthenticationMiddleware");
 const brandValidationMiddleware = require("./middleware/brands/brandValidationMiddleware");
@@ -49,7 +50,7 @@ app.use("/brands", brandRoutes);
 app.use('/api', collaborationRoutes);
 
 // Mount the connect routes on a specific path
-app.use("/connection",connectRouter)
+app.use("/connection", connectRouter)
 
 // Home route
 app.get("/", (_req, res) => {
