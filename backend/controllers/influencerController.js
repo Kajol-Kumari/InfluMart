@@ -89,6 +89,7 @@ exports.signup = async (req, res) => {
       fbData: [fbData],
       ytData: [ytData],
       tracked: track,
+      profileUrl: req.file?.path,
     });
 
     // Save the influencer data to the database

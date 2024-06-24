@@ -93,6 +93,26 @@ const App = () => {
                 options={{ headerShown: false }}
               />
               <Stack.Screen
+                name="InfluencerSocialHandles"
+                component={AddHandles}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserProfilePhoto"
+                component={UserProfilePhoto}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="MaxFollowersNo"
+                component={MaxFollowersNo}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="PricePerPost"
+                component={PricePerPost}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="OtpVerification"
                 component={OtpVerification}
                 options={{ headerShown: false }}

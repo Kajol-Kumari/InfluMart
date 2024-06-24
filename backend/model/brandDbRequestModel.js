@@ -31,6 +31,10 @@ const brandSchema = new mongoose.Schema({
     default: "N/A",
   },
   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+  profileUrl: {
+    type: String,
+    default: "",
+  },
 });
 
 const Brand = mongoose.model("Brand", brandSchema);
