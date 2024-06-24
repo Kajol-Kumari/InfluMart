@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,16 +7,18 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import { Padding, FontFamily, FontSize, Color, Border } from "../../GlobalStyles";
-import { BrandSignUp, InfluencerSignUp } from "../../controller/signupController";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
-import { InfluencerConfirmAccountStyles } from "./InfluencerConfirmAccount.scss";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { useAlert } from "../../util/AlertContext";
-
+import { InfluencerSignUp } from "../../controller/signupController";
+import { InfluencerConfirmAccountStyles } from "./InfluencerConfirmAccount.scss";
 const InfluencerConfirmAccount = ({ route, navigation }) => {
-  const payload = route.params.payload;
+  const { payload } = route.params;
   const { showAlert } = useAlert();
+  const [showPassword, setShowPassword] = useState(false);
+  const [image, setImage] = useState(payload.profileUrl?.uri);
+
   const registerInfluencer = async () => {
     const userData = {
       ...payload,
@@ -29,14 +31,11 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       nickName: payload.userName,
       firstName: payload.userName,
     };
-    await InfluencerSignUp(userData, navigation,showAlert)
+    await InfluencerSignUp(userData, navigation, showAlert);
   };
 
-
-  const [image, setImage] = React.useState(payload.profileUrl?.uri);
-
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [1, 1],
@@ -48,162 +47,60 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView
-      style={{ height: "100%", backgroundColor: Color.colorWhitesmoke_200 }}
-    >
-      <View style={styles.brandaccountreviewnotification}>
-        <View style={styles.depth0Frame0}>
-          <TouchableOpacity
-            style={{ width: "100%" }}
-            onPress={() => navigation.navigate("OtpVerification")}
-          >
-            <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
-              <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
-                <View style={styles.depth4Frame0}>
-                  <View style={styles.depth5Frame0}>
-                    <Text
-                      style={[
-                        styles.reviewYourRegistration,
-                        styles.createAccountTypo,
-                      ]}
-                    >
-                      Review
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <View style={{ width: "100%" }}>
-            <View
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                source={
-                  image != null ? image : require("../../assets/blank-profile.png")
-                }
-                contentFit="cover"
-                style={{ width: 250, height: 250, margin: 20 }}
-              />
-            </View>
-            <View
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                marginVertical: 5,
-              }}
-            >
-              <Pressable style={{ width: "40%" }} onPress={pickImage}>
-                <Text style={styles.uploadBtn}>Upload Image</Text>
-              </Pressable>
-              <Pressable
-                style={{ width: "40%" }}
-                onPress={() => {
-                  setImage(null);
-                }}
-              >
-                <Text style={styles.removeBtn}>Remove Image</Text>
-              </Pressable>
-            </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <TouchableOpacity
+          style={styles.fullWidth}
+          onPress={() => navigation.navigate("OtpVerification")}
+        >
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Review</Text>
           </View>
-          <View style={styles.depth1Frame2}>
-            <View style={styles.depth2Frame01}>
-              <View style={styles.depth3Frame01}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.brandType, styles.emailIdLayout]}>
-                    Email ID
-                  </Text>
-                </View>
-              </View>
-              <View style={[styles.depth3Frame11, styles.depth3FrameFlexBox]}>
-                <View style={styles.frameLayout2}>
-                  <View style={styles.frameLayout2}>
-                    <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                      {payload.email}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+        </TouchableOpacity>
+        <View style={styles.fullWidth}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={
+                image ? { uri: image } : require("../../assets/blank-profile.png")
+              }
+              contentFit="cover"
+              style={styles.profileImage}
+            />
           </View>
-          <View style={styles.depth1Frame2}>
-            <View style={styles.depth2Frame01}>
-              <View style={styles.depth3Frame02}>
-                <View style={styles.depth5Frame0}>
-                  <Text style={[styles.brandType, styles.emailIdLayout]}>
-                    Password
-                  </Text>
-                </View>
-              </View>
-              <View style={[styles.depth3Frame12, styles.frameLayout1]}>
-                <View style={styles.frameLayout1}>
-                  <View style={styles.frameLayout1}>
-                    <Text style={[styles.sophiagetglocom, styles.emailIdTypo]}>
-                      {payload.password}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button} onPress={pickImage}>
+              <Text style={styles.uploadBtn}>Upload Image</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={() => setImage(null)}>
+              <Text style={styles.removeBtn}>Remove Image</Text>
+            </Pressable>
           </View>
-          <View style={styles.depth1Frame4}>
-            <View style={[styles.depth2Frame04, styles.depth2FramePosition]}>
-              <View style={styles.depth3Frame05}>
-                <View style={styles.depth4Frame07}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.brandType, styles.emailIdLayout]}>
-                      Username
-                    </Text>
-                  </View>
-                </View>
-                <View style={[styles.depth4Frame11, styles.depth4FrameLayout]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.selectBrandType, styles.emailIdTypo]}>
-                      Create a username
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <Text
-              style={{
-                fontSize: FontSize.size_base,
-                fontFamily: FontFamily.workSansRegular,
-                textAlign: "right",
-              }}
-            >
-              {payload.userName}
-            </Text>
-          </View>
-          <View style={[styles.depth1Frame7, styles.depth1FrameLayout]}>
-            <TouchableOpacity
-              style={{ width: "100%" }}
-              onPress={registerInfluencer}
-            >
-              <View style={[styles.depth2Frame05, styles.frameBg]}>
-                <View style={[styles.depth3Frame07, styles.frameBg]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.createAccount, styles.emailIdLayout]}>
-                      Create account
-                    </Text>
-                  </View>
-                </View>
-              </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.label}>Email ID</Text>
+          <Text style={styles.value}>{payload.email}</Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.passwordContainer}>
+            <Text style={styles.value}>{showPassword ? payload.password : "********"}</Text>
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <Icon name={showPassword ? "eye" : "eye-slash"} size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.label}>Username</Text>
+          <Text style={styles.value}>{payload.userName}</Text>
+        </View>
+        <TouchableOpacity style={styles.createAccountContainer} onPress={registerInfluencer}>
+          <Text style={styles.createAccount}>Create account</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
 
-export default InfluencerConfirmAccount;
-
 const styles = StyleSheet.create(InfluencerConfirmAccountStyles);
+
+export default InfluencerConfirmAccount;

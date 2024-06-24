@@ -61,6 +61,16 @@ export const InfluencerRegistrationFormStyles = {
     alignItems: "center",
     marginVertical: Padding.p_base,
   },
+  loginFrame: {
+    height: 60,
+    justifyContent: "center",
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+  },
+  loginText: {
+    color: Color.colorDodgerblue,
+  },
   selectPlanButtonDisabled: {
     backgroundColor: "#F0F2F5",
   },

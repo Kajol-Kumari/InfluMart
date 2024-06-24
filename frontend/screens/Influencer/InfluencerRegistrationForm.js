@@ -222,6 +222,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.loginFrame}>
+            <Text>Already have account? </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginPage")}
+            >
+              <Text style={styles.loginText}>Login</Text>
+            </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

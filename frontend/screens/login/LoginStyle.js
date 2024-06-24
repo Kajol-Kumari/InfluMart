@@ -18,6 +18,16 @@ export const loginStyle={
       alignItems: "center",
       flexDirection: "row",
     },
+    loginFrame: {
+      height: 60,
+      justifyContent: "center",
+      flexDirection: "row",
+      width: "100%",
+      alignItems: "center",
+    },
+    loginText:{ 
+      color: Color.colorDodgerblue 
+    },
     frameLayout1: {
       width: 48,
       height: 48,

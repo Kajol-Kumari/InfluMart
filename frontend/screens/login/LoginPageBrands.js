@@ -107,6 +107,14 @@ const LoginPageBrand = () => {
               </View>
             </View>
           </TouchableOpacity>
+          <View style={styles.loginFrame}>
+            <Text>Create a new Account? </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("BrandRegistrationForm")}
+            >
+              <Text style={styles.loginText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
