@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity,ScrollView } from "react-native";
 import { Color, Padding, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,13 +8,12 @@ const AccountCreatedSuccessfullyNoti = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.accountcreatedsuccessfullynoti}>
+    <ScrollView style={styles.accountcreatedsuccessfullynoti}>
       <View style={[styles.depth0Frame0, styles.frameLayout]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
+      <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('Homepage')}>
 
         <View style={[styles.depth1Frame0, styles.depth1FrameLayout]}>
           <View style={[styles.depth2Frame0, styles.depth2FrameLayout]}>
-            <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
             <View style={[styles.depth3Frame1, styles.depth3FrameFlexBox]}>
               <View style={styles.depth4Frame0}>
                 <View style={styles.depth5Frame0}>
@@ -23,9 +22,6 @@ const AccountCreatedSuccessfullyNoti = () => {
                   </Text>
                 </View>
               </View>
-            </View>
-            <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
-              <View style={[styles.depth4Frame01, styles.depth3FrameLayout]} />
             </View>
           </View>
         </View>
@@ -47,7 +43,7 @@ const AccountCreatedSuccessfullyNoti = () => {
         <View style={[styles.depth1Frame3, styles.depth3FrameFlexBox]}>
           <View style={[styles.depth2Frame03, styles.depth2FrameLayout]}>
             <View style={[styles.depth3Frame01, styles.depth3FrameFlexBox]}>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginPageBrands')}>
+            <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('LoginPageBrands')}>
 
               <View style={[styles.depth4Frame02, styles.frameBg]}>
                 <View style={[styles.depth5Frame01, styles.frameBg]}>
@@ -64,23 +60,23 @@ const AccountCreatedSuccessfullyNoti = () => {
         </View>
         <View style={[styles.depth1Frame4, styles.frameLayout]} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   frameLayout: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_200,
   },
   depth1FrameLayout: {
     paddingHorizontal: Padding.p_base,
     height: 72,
-    width: 390,
+    width: "100%",
   },
   depth2FrameLayout: {
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth3FrameLayout: {
     width: 48,
@@ -100,7 +96,7 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_xs,
     alignItems: "center",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   yourAccountHasFlexBox: {
     textAlign: "center",
@@ -133,7 +129,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame1: {
-    width: 262,
+    width: "100%",
     height: 23,
     alignItems: "center",
   },
@@ -183,11 +179,11 @@ const styles = StyleSheet.create({
   },
   clickHereTo: {
     color: Color.colorWhitesmoke_200,
-    textAlign: "left",
+    textAlign: "center",
     letterSpacing: 0,
     fontFamily: FontFamily.manropeBold,
     fontWeight: "700",
-    fontSize: FontSize.size_base,
+    fontSize: FontSize.size_base
   },
   depth5Frame01: {
     height: 'auto',
@@ -201,11 +197,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth3Frame01: {
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth2Frame03: {
     alignItems: "center",
@@ -214,19 +210,19 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
     height: 72,
-    width: 390,
+    width: "100%",
   },
   depth1Frame4: {
     height: 20,
   },
   depth0Frame0: {
-    height: 844,
+    height: "100%",
     overflow: "hidden",
   },
   accountcreatedsuccessfullynoti: {
-    backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
+    backgroundColor: Color.colorWhitesmoke_200,
   },
 });
 

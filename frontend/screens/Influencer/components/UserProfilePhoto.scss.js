@@ -90,4 +90,13 @@ export const UserProfilePhotoStyles = {
   takePhotoButtonText: {
     color: Color.colorWhite,
   },
+  previewContainer: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  selectedImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
 };

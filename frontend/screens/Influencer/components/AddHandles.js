@@ -59,6 +59,7 @@ const AddHandles = ({ route, navigation }) => {
   const [tiktok, setTiktok] = useState("");
   const price = route.params?.price;
   const follower = route.params?.follower;
+  const photo = route.params?.photo
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -68,7 +69,7 @@ const AddHandles = ({ route, navigation }) => {
           <Text style={styles.headerText}>Add Accounts</Text>
           <View style={styles.headerIcon}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("InfluencerRegistrationForm",{price,follower})}
+              onPress={() => navigation.navigate("InfluencerRegistrationForm",{price,follower,photo})}
             >
               <Image
                 style={styles.headerImage}
@@ -123,6 +124,7 @@ const AddHandles = ({ route, navigation }) => {
               },
               price,
               follower,
+              photo
             })
           }
         >

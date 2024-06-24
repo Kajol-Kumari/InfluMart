@@ -49,7 +49,7 @@ export const InfluencerRegistrationFormStyles = {
     marginLeft: 16,
   },
   sectionHeaderText: {
-    fontSize: FontSize.size_3xl,
+    fontSize: FontSize.size_base,
     lineHeight: 28,
     color: Color.colorGray_100,
     fontFamily: FontFamily.plusJakartaSansBold,

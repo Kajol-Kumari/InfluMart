@@ -33,6 +33,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
   const [platform, setPlatform] = React.useState("");
   const price = route.params?.price;
   const social = route.params?.social;
+  const photo = route.params?.photo
 
   return (
     <ScrollView style={styles.container}>
@@ -43,6 +44,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
               navigation.navigate("InfluencerRegistrationForm", {
                 price,
                 social,
+                photo
               })
             }
           >
@@ -88,6 +90,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
             follower: { platform: platform, value: value },
             price,
             social,
+            photo
           })
         }
       >

@@ -7,6 +7,9 @@ var cookies = require("cookie-parser");
 const app = express();
 const server = http.Server(app);
 
+// Making uploads folder public
+app.use(express.static('uploads'));
+
 // CORS
 app.use(cors());
 
@@ -24,14 +27,6 @@ const subscriptionRouter = require("./routes/subscriptionRouter");
 const otpRouter = require("./routes/otpRoutes");
 const collaborationRoutes = require('./routes/collaborationRoutes');
 const connectRouter = require('./routes/connectionRoutes');
-const brandAuthorizationMiddleware = require("./middleware/brands/brandAuthorizationMiddleware");
-const brandAuthenticationMiddleware = require("./middleware/brands/brandAuthenticationMiddleware");
-const brandValidationMiddleware = require("./middleware/brands/brandValidationMiddleware");
-const brandLoggingMiddleware = require("./middleware/brands/brandLoggingMiddleware");
-const influencerAuthorizationMiddleware = require("./middleware/influencers/influencerAuthorizationMiddleware");
-const influencerAuthenticationMiddleware = require("./middleware/influencers/influencerAuthenticationMiddleware");
-
-const influencerLoggingMiddleware = require("./middleware/influencers/influencerLoggingMiddleware");
 const { getSocialData } = require("./controllers/influencerController");
 
 // Mount the influencer routes on a specific path

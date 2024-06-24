@@ -357,8 +357,8 @@ const styles = StyleSheet.create({
     height: 54,
     flexDirection: "row",
     display: "flex",
-    justifyContent: "center",
-    width: "auto",
+    justifyContent: "space-evenly",
+    width: "100%",
     gap:40
   },
   depth1Frame3: {
