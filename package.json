@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "oauth": "^0.10.0"
+  }
+}

@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 const mongoose = require("mongoose");
 const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
+const { verifyInstagram, verifyYouTube, verifyFacebook, verifyTwitter } = require("./socialsverification");
 
 
 exports.verifyUser = async (req,res) =>{
@@ -62,6 +63,15 @@ exports.signup = async (req, res) => {
     if (existingInfluencer) {
       // If an influencer with the same userName exists, return a 400 Bad Request response
       return res.status(400).json({ message: "Username is already in use" });
+    }
+
+    const isInstaVerified = await verifyInstagram(influencerData.instaProfile);
+    const isYouTubeVerified = await verifyYouTube(influencerData.youtubeChannel);
+    const isFacebookVerified = await verifyFacebook(influencerData.facebookProfile);
+    const isTwitterVerified = await verifyTwitter(influencerData.twitterProfile);
+
+    if (!isInstaVerified || !isYouTubeVerified || !isFacebookVerified || !isTwitterVerified) {
+      return res.status(400).json({ message: 'Social profile verification failed' });
     }
 
     // Hash the password before saving it to the database
