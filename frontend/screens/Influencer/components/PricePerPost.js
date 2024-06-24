@@ -53,12 +53,13 @@ const PricePerPost = ({ route, navigation }) => {
   const [tiktok, setTiktok] = React.useState("");
   const social = route.params?.social
   const follower = route.params?.follower
+  const photo = route.params?.photo
   return (
     <ScrollView>
       <View style={styles.pricePerPostContainer}>
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("InfluencerRegistrationForm",{social,follower})}
+            onPress={() => navigation.navigate("InfluencerRegistrationForm",{social,follower,photo})}
           >
             <Image
               style={styles.headerIcon}
@@ -110,7 +111,7 @@ const PricePerPost = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("InfluencerRegistrationForm", {
               price: { ig: instagram, yt: youtube, tr: twitter, tt: tiktok },
-              social,follower
+              social,follower,photo
             })
           }
         >

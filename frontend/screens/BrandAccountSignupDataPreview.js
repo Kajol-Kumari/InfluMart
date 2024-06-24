@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Pressable, ScrollView } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Pressable, ScrollView, Platform } from "react-native";
 import Depth1Frame5 from "../components/Depth1Frame5";
 import { Padding, FontFamily, FontSize, Color, Border } from "../GlobalStyles";
 import { BrandSignUp } from "../controller/signupController";
@@ -9,27 +9,50 @@ import { useAlert } from "../util/AlertContext";
 
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
-  const { payload } = route.params;
+  const payload = route.params?.payload;
+  const [selectedImage, setSelectedImage] = React.useState(null);
+  const [photo, setPhoto] = React.useState(null);
   const {showAlert} = useAlert();
   const registerBrand = async () => {
-    await BrandSignUp(payload, navigation,showAlert)
+    await BrandSignUp({...payload,image:photo}, navigation,showAlert)
   };
 
-  const [image, setImage] = React.useState(null)
+  const requestPermission = async () => {
+    if (Platform.OS !== "web") {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permission to access media library is required!");
+        return false;
+      }
+    }
+    return true;
+  };
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+  const handleUploadPhoto = async () => {
+    const permission = await requestPermission();
+    if (!permission) return;
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
+      setSelectedImage(result.assets[0].uri);
+      let localUri = result.assets[0].uri;
+      let filename = localUri.split('/').pop();
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? `image/${match[1]}` : `image`;
+      setPhoto({
+        uri: localUri,
+        name: filename,
+        type: type
+      })
+      
+    } 
   };
 
   return (
@@ -57,10 +80,10 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
           </TouchableOpacity>
           <View style={{ width: "100%" }}>
             <View style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <Image source={image != null ? image : require("../assets/blank-profile.png")} contentFit="cover" style={{ width: 250, height: 250, margin: 20 }} />
+              <Image source={selectedImage != null ? selectedImage : require("../assets/blank-profile.png")} contentFit="cover" style={{ width: 250, height: 250, margin: 20 }} />
             </View>
             <View style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", marginVertical: 5 }}>
-              <Pressable style={{ width: "40%" }} onPress={pickImage}>
+              <Pressable style={{ width: "40%" }} onPress={()=>handleUploadPhoto()}>
                 <Text style={styles.uploadBtn}>Upload Image</Text>
               </Pressable>
               <Pressable style={{ width: "40%" }} onPress={() => { setImage(null) }}>

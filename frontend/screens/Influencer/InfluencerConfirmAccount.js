@@ -32,7 +32,8 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
     await InfluencerSignUp(userData, navigation,showAlert)
   };
 
-  const [image, setImage] = React.useState(null);
+
+  const [image, setImage] = React.useState(payload.profileUrl?.uri);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,7 +43,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       quality: 1,
     });
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImage(result.as.uri);
     }
   };
 

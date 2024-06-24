@@ -37,6 +37,10 @@ const brandSignUpValidate = async (req, res, next) => {
   if (existingBrand) {
     return res.status(400).json({ message: "Brand already exists" });
   }
+  const nameTaken = await Brand.findOne({name:name})
+  if(nameTaken){
+    return res.status(400).json({message: "Brand name already taken"});
+  }
   // all checks passed, continue processing the request
   next();
 };
