@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   depth1Frame0: {
     backgroundColor: Color.colorWhitesmoke_100,
-    width: 390,
+    width: "100%",
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
