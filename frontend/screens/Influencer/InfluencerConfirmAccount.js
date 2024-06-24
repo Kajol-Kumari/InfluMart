@@ -43,7 +43,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       quality: 1,
     });
     if (!result.canceled) {
-      setImage(result.as.uri);
+      setImage(result.assets[0].uri);
     }
   };
 
