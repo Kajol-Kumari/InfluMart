@@ -154,6 +154,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
             />
           </TouchableOpacity>
           <Text style={styles.profilePhotoText}>Profile Photo</Text>
+          <View style={{width:20,height:20}}></View>
         </View>
         {selectedImage && (
           <View style={styles.previewContainer}>
