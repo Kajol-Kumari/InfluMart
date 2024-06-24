@@ -1,23 +1,22 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text,ScrollView,TouchableOpacity } from "react-native";
 import Depth1Frame7 from "../components/Depth1Frame7";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 
 const FailedPaymentStatus = () => {
   return (
-    <View style={styles.failedpaymentstatus}>
+    <ScrollView style={styles.failedpaymentstatus}>
       <View style={[styles.depth0Frame0, styles.frameBg1]}>
         <Depth1Frame7
           depth4Frame0={require("../assets/depth-4-frame-07.png")}
           requestDetails="Payment failed"
           depth3Frame0BackgroundColor="#f7fafa"
-          requestDetailsWidth={126}
           depth4Frame0FontFamily="Manrope-Bold"
           depth4Frame0Color="#0d141c"
         />
         <View style={styles.depth1Frame1}>
-          <View style={[styles.depth2Frame0, styles.frameLayout]}>
+          <View style={[styles.frameLayout]}>
             <View style={styles.frameLayout}>
               <Image
                 style={[styles.depth4Frame0, styles.frameLayout]}
@@ -42,7 +41,7 @@ const FailedPaymentStatus = () => {
           </View>
         </View>
         <View style={styles.depth1Frame4}>
-          <View style={[styles.depth2Frame03, styles.frameBg]}>
+          <TouchableOpacity style={[styles.depth2Frame03, styles.frameBg]}>
             <View style={[styles.depth3Frame01, styles.frameBg]}>
               <View style={styles.depth2Frame01}>
                 <Text style={[styles.tryAgain, styles.tryAgainTypo]}>
@@ -50,27 +49,30 @@ const FailedPaymentStatus = () => {
                 </Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={[styles.depth1Frame5, styles.frameBg1]} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   frameBg1: {
     backgroundColor: Color.colorWhitesmoke_200,
-    width: 390,
+    width: "100%",
   },
   frameLayout: {
-    height: 358,
-    width: 358,
+    height: 325,
+    width: 325,
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"center"
   },
   tryAgainTypo: {
     lineHeight: 24,
@@ -85,14 +87,13 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     overflow: "hidden",
   },
-  depth2Frame0: {
-    position: "absolute",
-    top: 16,
-    left: 16,
-  },
   depth1Frame1: {
-    height: 390,
-    width: 390,
+    height: "auto",
+    width: "100%",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"center",
+    paddingBottom:Padding.p_base
   },
   yourPaymentDidnt: {
     fontSize: FontSize.size_3xl,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_xl,
     paddingVertical: 0,
     flexDirection: "row",
-    width: 358,
+    width: "100%",
     backgroundColor: Color.colorCornflowerblue,
   },
   depth1Frame4: {
@@ -146,21 +147,22 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth1Frame5: {
     height: 20,
     width: 390,
   },
   depth0Frame0: {
-    height: 844,
+    height: "100%",
     overflow: "hidden",
-    width: 390,
+    width: "100%",
   },
   failedpaymentstatus: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorWhitesmoke_200,
     flex: 1,
     width: "100%",
+    height:"100%"
   },
 });
 
