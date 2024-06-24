@@ -26,14 +26,14 @@ const InfluPrice = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 300,
+    width: 320,
     height: 143,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: "auto",
   },
   innerContainer: {
-    width: 358,
+    width: 320,
     height: 119,
     borderColor: Color.colorGainsboro_500,
     borderWidth: 1,

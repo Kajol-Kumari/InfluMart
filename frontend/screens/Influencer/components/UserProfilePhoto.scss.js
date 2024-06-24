@@ -5,12 +5,13 @@ export const UserProfilePhotoStyles = {
     flex: 1,
     backgroundColor: Color.colorWhite,
     padding: Padding.p_base,
-    width: 390,
+    width: "100%"
   },
   header: {
     flexDirection: "row",
+    justifyContent:"space-between",
     alignItems: "center",
-    marginBottom: Padding.p_base,
+    marginVertical: Padding.p_base,
   },
   profileImage: {
     width: 20,
@@ -27,7 +28,7 @@ export const UserProfilePhotoStyles = {
   sectionTitle: {
     fontSize: FontSize.size_3xl,
     fontFamily: FontFamily.beVietnamProBold,
-    marginBottom: Padding.p_base,
+    marginVertical: Padding.p_base,
     lineHeight: 28,
   },
   tipContainer: {
@@ -63,6 +64,8 @@ export const UserProfilePhotoStyles = {
     justifyContent: "center",
     marginTop: Padding.p_base,
     gap: Padding.p_base,
+    width:"100%",
+    paddingHorizontal:Padding.p_base
   },
   button: {
     height: 40,
@@ -71,6 +74,7 @@ export const UserProfilePhotoStyles = {
     alignItems: "center",
     paddingHorizontal: Padding.p_base,
     marginHorizontal: Padding.p_2xs,
+    width:"50%"
   },
   uploadButton: {
     backgroundColor: "#F0F2F5",

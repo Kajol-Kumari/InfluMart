@@ -22,7 +22,7 @@ const FormField = ({
     setVerifiedAccounts((prev) => [...prev, platform]);
   };
   return (
-    <View>
+    <View style={styles.formField}>
       <View style={styles.fieldContainer}>
         <Text style={styles.fieldLabel}>{label}</Text>
         <TextInput
@@ -62,9 +62,10 @@ const AddHandles = ({ route, navigation }) => {
   const photo = route.params?.photo
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.header}>
+          <View style={{width:24,height:24}}></View>
           <Text style={styles.headerText}>Add Accounts</Text>
           <View style={styles.headerIcon}>
             <TouchableOpacity

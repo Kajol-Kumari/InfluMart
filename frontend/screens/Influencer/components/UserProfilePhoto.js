@@ -126,8 +126,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
   ];
 
   return (
-    <ScrollView>
-      <View style={styles.userProfilePhoto}>
+<ScrollView style={styles.userProfilePhoto}>
         {Platform.OS === "web" && (
           <input
             id="fileInput"
@@ -155,6 +154,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
             />
           </TouchableOpacity>
           <Text style={styles.profilePhotoText}>Profile Photo</Text>
+          <View style={{width:20,height:20}}></View>
         </View>
         {selectedImage && (
           <View style={styles.previewContainer}>
@@ -201,7 +201,6 @@ const UserProfilePhoto = ({ route, navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
     </ScrollView>
   );
 };

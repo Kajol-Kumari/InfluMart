@@ -5,13 +5,14 @@ export const MaxFollowersNoStyles = {
     flex: 1,
     backgroundColor: Color.colorWhite,
     padding: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   header: {
     marginBottom: Padding.p_base,
   },
   addAccountButton: {
     flexDirection: "row",
+    justifyContent:"space-between",
     alignItems: "center",
     padding: Padding.p_base,
     backgroundColor: Color.colorWhitesmoke,
@@ -28,7 +29,7 @@ export const MaxFollowersNoStyles = {
     fontFamily: FontFamily.beVietnamProBold,
     fontWeight: "700",
     textAlign: "center",
-    width: "80%",
+    width: "auto",
   },
   accountContainer: {
     flexDirection: "row",
@@ -68,6 +69,7 @@ export const MaxFollowersNoStyles = {
     marginBottom: Padding.p_base,
     justifyContent: "center",
     alignItems: "center",
+    width:"100%"
   },
   enterFollowerCountText: {
     borderRadius: Border.br_xs,
@@ -78,7 +80,7 @@ export const MaxFollowersNoStyles = {
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansRegular,
     borderWidth: 2,
-    width: 250,
+    width: "90%",
   },
   confirmButton: {
     backgroundColor: "#388fe6",

@@ -1,6 +1,9 @@
 import { Padding, FontFamily, FontSize, Border, Color } from "../../../GlobalStyles";
 
 export const AddHandlesStyles = {
+  formField:{
+    marginBottom:Padding.p_base
+  },
   fieldContainer: {
     marginVertical: Padding.p_xs,
     paddingHorizontal: Padding.p_xs,
@@ -26,14 +29,16 @@ export const AddHandlesStyles = {
   },
   container: {
     flex: 1,
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
+    paddingHorizontal:8
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     padding: Padding.p_base,
     backgroundColor: Color.colorWhite,
+    marginTop:Padding.p_base
   },
   headerText: {
     fontSize: 18,
@@ -41,7 +46,7 @@ export const AddHandlesStyles = {
     textAlign: "center",
     fontFamily: FontFamily.plusJakartaSansBold,
     fontWeight: "700",
-    width: "100%",
+    width: "auto",
   },
   headerIcon: {
     justifyContent: "center",
@@ -92,4 +97,7 @@ export const AddHandlesStyles = {
     fontFamily: FontFamily.plusJakartaSansBold,
     fontWeight: "700",
   },
+  scrollView:{
+    backgroundColor:Color.colorWhite
+  }
 };
