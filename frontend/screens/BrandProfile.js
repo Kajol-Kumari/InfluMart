@@ -68,7 +68,6 @@ const BrandProfile = ({ navigation }) => {
     }
   }, [brandId, token]);
 
-  console.log(minimumRequirements);
 
   return (
     <ScrollView style={styles.container}>
@@ -112,7 +111,7 @@ const BrandProfile = ({ navigation }) => {
           </View>
         </View>
 
-        {analytics && (
+        
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Campaign Insights</Text>
             <View style={styles.insightContainer}>
@@ -127,7 +126,7 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Engagement Rate</Text>
                 <Text style={styles.insightText}>Higher than average</Text>
                 <Text style={styles.insightText}>
-                  {analytics?.averageEngagementRate}%
+                  {analytics?.averageEngagementRate?`${analytics?.averageEngagementRate} %` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -143,7 +142,7 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Post Frequency</Text>
                 <Text style={styles.insightText}>Average</Text>
                 <Text style={styles.insightText}>
-                  {formatNumber(analytics?.averagePostFrequency)} posts per week
+                  {analytics?.averagePostFrequency?`${formatNumber(analytics?.averagePostFrequency)} posts per week`: "N/A"}
                 </Text>
               </View>
             </View>
@@ -159,14 +158,12 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Follower Growth</Text>
                 <Text style={styles.insightText}>Higher than average</Text>
                 <Text style={styles.insightText}>
-                  {analytics?.averageGrowthValue}%
+                  {analytics?.averageGrowthValue ? `${analytics?.averageGrowthValue} %`: "N/A"}
                 </Text>
               </View>
             </View>
           </View>
-        )}
 
-        {minimumRequirements && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Collaboration Requirements</Text>
             <View style={styles.requirementContainer}>
@@ -180,7 +177,7 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Minimum Followers</Text>
                 <Text style={styles.requirementText}>
-                  {formatNumber(minimumRequirements?.minimumFollowers)}
+                  {minimumRequirements?.minimumFollowers ? `${formatNumber(minimumRequirements?.minimumFollowers)}`: "N/A"}
                 </Text>
               </View>
             </View>
@@ -195,7 +192,7 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Average Likes</Text>
                 <Text style={styles.requirementText}>
-                  {formatNumber(minimumRequirements?.minimumLikes)}
+                  {minimumRequirements?.minimumLikes ? `${formatNumber(minimumRequirements?.minimumLikes)}`: "N/A"}
                 </Text>
               </View>
             </View>
@@ -210,14 +207,13 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Post Frequency</Text>
                 <Text style={styles.requirementText}>
-                  At least{" "}
-                  {formatNumber(minimumRequirements?.minimumPostFrequency)}{" "}
-                  posts per week
+                  
+                  {minimumRequirements?.minimumPostFrequency ? `At least ${formatNumber(minimumRequirements?.minimumPostFrequency)} posts per week`:"N/A"}
+                  
                 </Text>
               </View>
             </View>
           </View>
-        )}
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Collaboration Count</Text>
@@ -230,7 +226,7 @@ const BrandProfile = ({ navigation }) => {
               />
             </View>
             <Text style={styles.collabCount}>
-              {formatNumber(collaborationCount)}
+              {collaborationCount?`${formatNumber(collaborationCount)}`: "N/A"}
             </Text>
           </View>
         </View>
