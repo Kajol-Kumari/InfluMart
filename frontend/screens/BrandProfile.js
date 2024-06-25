@@ -17,6 +17,7 @@ import { useAlert } from "../util/AlertContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatNumber } from "../helpers/GraphData";
 import { BrandProfileStyles } from "./BrandProfile.scss";
+import { getBrandProfile } from "../controller/brandController";
 
 const BrandProfile = ({ navigation }) => {
   const { showAlert } = useAlert();
@@ -26,6 +27,7 @@ const BrandProfile = ({ navigation }) => {
   const [minimumRequirements, setMinimumRequirements] = useState(null);
   const [collaborationCount, setCollaborationCount] = useState(0);
   const { width } = useWindowDimensions(); 
+  const [brand, setBrand] = useState(null);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -65,6 +67,7 @@ const BrandProfile = ({ navigation }) => {
         .catch((error) =>
           console.error("Error fetching minimum requirements:", error)
         );
+        getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
     }
   }, [brandId, token]);
 
@@ -85,27 +88,33 @@ const BrandProfile = ({ navigation }) => {
               <Text style={styles.headerTitle}>Profile</Text>
             </View>
           </TouchableOpacity>
-          <View style={[width>900 ? styles.profileContainer : styles.profileRow ]}>
+          <View style={[styles.profileContainer]}>
             <View style={styles.profileImageContainer}>
               <Image
                 style={styles.profileImage}
                 resizeMode="cover"
-                source={require("../assets/brandDp.png")}
+                source={
+                  brand?.profileUrl
+                    ? {
+                        uri: brand?.profileUrl,
+                      }
+                    : require("../assets/blank-profile.png")
+                }
               />
             </View>
             <View style={styles.profileInfoContainer}>
-              <Text style={styles.brandName}>Nike</Text>
+              <Text style={styles.brandName}>{brand?.name}</Text>
               <Text style={styles.brandDetails}>
-                Apparel & Fashion, 10M followers
+              {brand?.category || "N/A"}
               </Text>
             </View>
 
             <View style={styles.actionButtons}>
               <TouchableOpacity style={[styles.button, styles.followButton]}>
-                <Text style={styles.followButtonText}>Follow</Text>
+                <Text style={styles.followButtonText}>Settings</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, styles.messageButton]}>
-                <Text style={styles.buttonText}>Message</Text>
+                <Text style={styles.buttonText}>inbox</Text>
               </TouchableOpacity>
             </View>
           </View>

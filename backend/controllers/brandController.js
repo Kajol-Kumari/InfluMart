@@ -55,13 +55,30 @@ exports.login = async (req, res) => {
   }
 };
 
-// Get brand's profile (requires authentication)
-exports.getProfile = (req, res) => {
-  // Retrieve the authenticated brand's profile
-  // Replace this with your authentication logic
-  const brand = req.brand;
+// Get brand's profile
+exports.getProfile = async (req, res) => {
+  const brandId = req.params.brandId;
 
-  res.status(200).json({ brand });
+  try {
+    const brand = await Brand.findById(brandId);
+
+    if (!brand) {
+      return res.status(404).json({ message: 'Brand not found' });
+    }
+
+    res.status(200).json({
+      message: 'Brand profile fetched successfully',
+      brand: {
+        name: brand.name,
+        email: brand.email,
+        category: brand.category,
+        profileUrl: brand.profileUrl,
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching brand profile:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
 // Update brand's profile (requires authentication)

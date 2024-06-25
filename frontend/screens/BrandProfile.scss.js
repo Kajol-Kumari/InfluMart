@@ -20,12 +20,6 @@ export const BrandProfileStyles = {
       marginLeft: 10,
     },
     profileContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginTop: 20,
-      paddingHorizontal: 20,
-    },
-    profileRow: {
       flexDirection: "column",
       alignItems: "flex-start",
       marginTop: 20,
