@@ -264,4 +264,9 @@ export const signupStyles = {
       flex: 1,
       color: Color.colorSteelblue_200,
     },
+    password:{
+      position:"absolute",
+      top:18,
+      right:18
+    },
   }

@@ -61,6 +61,16 @@ export const InfluencerRegistrationFormStyles = {
     alignItems: "center",
     marginVertical: Padding.p_base,
   },
+  loginFrame: {
+    height: 60,
+    justifyContent: "center",
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+  },
+  loginText: {
+    color: Color.colorDodgerblue,
+  },
   selectPlanButtonDisabled: {
     backgroundColor: "#F0F2F5",
   },
@@ -71,5 +81,10 @@ export const InfluencerRegistrationFormStyles = {
     color: Color.colorWhitesmoke_200,
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansBold,
+  },
+  password:{
+    position:"absolute",
+    top:23,
+    right:18
   },
 };

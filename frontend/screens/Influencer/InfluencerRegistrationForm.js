@@ -14,17 +14,29 @@ import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
 import { useAlert } from "../../util/AlertContext";
 import { Color } from "../../GlobalStyles";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const FormField = ({ label, value, setValue, secureTextEntry = false }) => (
+const FormField = ({ label, value, setValue, secureTextEntry = false, showPassword, setShowPassword }) => (
   <View style={styles.fieldContainer}>
     <Text style={styles.fieldLabel}>{label}</Text>
-    <TextInput
-      style={styles.textInput}
-      value={value}
-      onChangeText={setValue}
-      placeholder={label}
-      secureTextEntry={secureTextEntry}
-    />
+    <View style={secureTextEntry}>
+      <TextInput
+        style={styles.textInput}
+        value={value}
+        onChangeText={setValue}
+        placeholder={label}
+        secureTextEntry={secureTextEntry && !showPassword}
+      />
+      {secureTextEntry && (
+        <TouchableOpacity style={styles.password} onPress={() => setShowPassword(!showPassword)}>
+          <Icon
+            name={showPassword ? "eye-off" : "eye"}
+            size={20}
+            color="gray"
+          />
+        </TouchableOpacity>
+      )}
+    </View>
   </View>
 );
 
@@ -40,8 +52,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const follower = route.params?.follower;
   const price = route.params?.price;
   const { showAlert } = useAlert();
-  const photo = route.params?.photo
+  const photo = route.params?.photo;
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (
@@ -85,7 +98,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       location,
       profileUrl: photo,
     };
-    await InfluencerVerify(payload, navigation,showAlert);
+    await InfluencerVerify(payload, navigation, showAlert);
   };
 
   return (
@@ -100,14 +113,16 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <FormField label="Email" value={email} setValue={setEmail} />
-        <FormField
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          secureTextEntry
-        />
-        <FormField label="Username" value={username} setValue={setUsername} />
+          <FormField label="Email" value={email} setValue={setEmail} />
+          <FormField
+            label="Password"
+            value={password}
+            setValue={setPassword}
+            secureTextEntry
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+          <FormField label="Username" value={username} setValue={setUsername} />
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionHeaderText}>Add social profiles</Text>
@@ -224,6 +239,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.loginFrame}>
+            <Text>Already have account? </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginPage")}
+            >
+              <Text style={styles.loginText}>Login</Text>
+            </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
     </View>

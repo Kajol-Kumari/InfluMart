@@ -14,13 +14,15 @@ import MultipleSelectList from "../../shared/MultiSelect";
 import { SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 
 const BrandRegistrationForm = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
-  const {showAlert} = useAlert();
+  const { showAlert } = useAlert();
+  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -34,7 +36,6 @@ const BrandRegistrationForm = ({ navigation }) => {
   ];
 
   const handleSubmit = async () => {
-    // Construct the payload
     const payload = {
       email,
       password,
@@ -54,7 +55,7 @@ const BrandRegistrationForm = ({ navigation }) => {
       showAlert("Brand SignUp Error", "Password should be at least 8 characters long");
       return;
     }
-    await SendOtp(payload, navigation,showAlert);
+    await SendOtp(payload, navigation, showAlert);
   };
 
   return (
@@ -111,18 +112,23 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Password</Text>
                 </View>
-                <View style={styles.depth4Frame1}>
-                  <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
+                  <View style={[styles.depth5Frame01, styles.depth5FrameBg, { flex: 1 }]}>
                     <TextInput
                       style={styles.textInput}
                       value={password}
                       onChangeText={setPassword}
                       placeholder="Password"
-                      secureTextEntry
+                      secureTextEntry={!showPassword}
                     />
+                  <TouchableOpacity style={styles.password} onPress={() => setShowPassword(!showPassword)}>
+                    <Icon
+                      name={showPassword ? "eye-off" : "eye"}
+                      size={20}
+                      color="gray"
+                    />
+                  </TouchableOpacity>
                   </View>
                 </View>
-              </View>
             </View>
           </View>
           <View style={styles.depth1Frame2}>
@@ -196,6 +202,12 @@ const BrandRegistrationForm = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create(signupStyles);
+const styles = StyleSheet.create({
+  ...signupStyles,
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
 
 export default BrandRegistrationForm;
