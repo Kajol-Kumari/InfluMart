@@ -19,7 +19,7 @@ const getBrandProfile = async (brandId, showAlert) => {
         ...data.brand,
         category: JSON.parse(data.brand.category).join(", "),
         profileUrl: data.brand.profileUrl.includes("uploads")
-          ? `${API_ENDPOINT}/${data.brand.profileUrl.replace(/\\/g, "/")}`
+          ? `${API_ENDPOINT}/${data.brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,
       };
       return brand;

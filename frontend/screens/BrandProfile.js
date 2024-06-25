@@ -93,7 +93,13 @@ const BrandProfile = ({ navigation }) => {
               <Image
                 style={styles.profileImage}
                 resizeMode="cover"
-                source={brand?.profileUrl || require("../assets/blank-profile.png")}
+                source={
+                  brand?.profileUrl
+                    ? {
+                        uri: brand?.profileUrl,
+                      }
+                    : require("../assets/blank-profile.png")
+                }
               />
             </View>
             <View style={styles.profileInfoContainer}>
