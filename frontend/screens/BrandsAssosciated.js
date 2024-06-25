@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   depth1Frame0: {
-    paddingTop: 30,
+    paddingTop: 16,
     paddingBottom: Padding.p_5xs,
     position: "relative",
     top: 0,

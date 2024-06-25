@@ -1,6 +1,6 @@
 import * as React from "react";
-import { StyleSheet, View, Text , TouchableOpacity} from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Color, Padding, FontFamily, Border, FontSize } from "../GlobalStyles";
 
@@ -10,21 +10,29 @@ const BrandorInfluencer = () => {
   return (
     <View style={styles.brandorinfluencer}>
       <View style={[styles.depth0Frame0, styles.frameLayout]}>
-      <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('Homepage')}>
+        <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('Homepage')}>
 
-        <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock1]}>
-          <View style={styles.depth2Frame0}>
-            <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-              <View style={styles.depth4Frame0}>
+          <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock1]}>
+            <View style={styles.depth2Frame0}>
+              <View style={styles.depth3Frame0}>
+                <Image
+                  style={styles.depth4Frame0}
+                  contentFit="cover"
+                  source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
+                />
+              </View>
+              <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
                 <View style={styles.depth5Frame0}>
                   <Text style={[styles.joinTheFun, styles.brandTypo]}>
                     Join the Community
                   </Text>
                 </View>
               </View>
+              <View style={styles.depth3Frame2}>
+                <View style={styles.depth4Frame02} />
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
         <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame01}>
@@ -35,32 +43,32 @@ const BrandorInfluencer = () => {
         </View>
         <View style={[styles.depth1Frame2, styles.frameFlexBox]}>
           <View style={styles.depth2Frame02}>
-          <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('LoginPageBrands')}>
+            <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('LoginPageBrands')}>
 
-            <View style={styles.depth3FrameLayout}>
-              <View style={[styles.depth4Frame02, styles.depth4FrameLayout]}>
-                <View style={[styles.depth5Frame01, styles.frameBg1]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.brand, styles.brandLayout]}>
-                      Brand
-                    </Text>
+              <View style={styles.depth3FrameLayout}>
+                <View style={[styles.depth4Frame02, styles.depth4FrameLayout]}>
+                  <View style={[styles.depth5Frame01, styles.frameBg1]}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.brand, styles.brandLayout]}>
+                        Brand
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{width:"100%"}} onPress={() => navigation.navigate('LoginPage')}>
-            <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
-              <View style={[styles.depth4Frame03, styles.frameBg]}>
-                <View style={[styles.depth5Frame02, styles.frameBg]}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.influencer, styles.brandLayout]}>
-                      Influencer
-                    </Text>
+            <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('LoginPage')}>
+              <View style={[styles.depth3Frame11, styles.depth3FrameLayout]}>
+                <View style={[styles.depth4Frame03, styles.frameBg]}>
+                  <View style={[styles.depth5Frame02, styles.frameBg]}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.influencer, styles.brandLayout]}>
+                        Influencer
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
             </TouchableOpacity>
 
           </View>
@@ -91,7 +99,6 @@ const styles = StyleSheet.create({
     height: 48,
   },
   frameFlexBox: {
-    width:"100%",
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interBold,
     fontWeight: "700",
     letterSpacing: 0,
-    width:"100%"
+    width: "100%",
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_xs,
@@ -125,7 +132,7 @@ const styles = StyleSheet.create({
   brandLayout: {
     lineHeight: 21,
     fontSize: FontSize.size_sm,
-    width:"100%"
+    width: "100%",
   },
   depth3FrameLayout: {
     height: 40,
@@ -138,27 +145,27 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame0: {
-    width:"100%",
+    width: 48,
     alignItems: "center",
+    flexDirection: "row",
+    height: 48,
   },
   joinTheFun: {
     fontSize: FontSize.size_lg,
     lineHeight: 23,
     color: Color.colorGray_400,
-    width:"100%",
-    textAlign:"center"
+    textAlign: "center",
   },
+
   depth5Frame0: {
-    width:"100%",
+    width: "100%",
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: '100%',
-    height: 23,
-    overflow: "hidden",
+    height: 24,
+    width: 24,
   },
   depth3Frame1: {
-    width: "100%",
     height: 23,
     alignItems: "center",
   },
@@ -167,7 +174,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth3Frame2: {
+    width: 48,
     flexDirection: "row",
+    height: 48,
   },
   depth2Frame0: {
     justifyContent: "space-between",
@@ -177,13 +186,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   depth1Frame0: {
-    width:"100%",
+    width: "100%",
     height: 72,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
     backgroundColor: Color.colorWhitesmoke_100,
     paddingHorizontal: Padding.p_base,
-    marginTop:20
   },
   areYouA: {
     fontSize: FontSize.size_3xl,
@@ -199,9 +207,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth1Frame1: {
-    height: 'auto',
+    height: "auto",
     paddingTop: Padding.p_xl,
-    width:"100%"
+    width: "100%",
   },
   brand: {
     color: Color.colorWhitesmoke_100,
@@ -209,10 +217,10 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interBold,
     fontWeight: "700",
     letterSpacing: 0,
-    width:"100%"
+    width: "100%",
   },
   depth5Frame01: {
-    width: '100%',
+    width: "100%",
     height: 21,
   },
   depth4Frame02: {
@@ -227,7 +235,7 @@ const styles = StyleSheet.create({
     color: Color.colorGray_400,
   },
   depth5Frame02: {
-    width: 'auto',
+    width: "auto",
     height: 21,
   },
   depth4Frame03: {
@@ -260,9 +268,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   depth1Frame3: {
-    height: 'auto',
+    height: "auto",
     paddingTop: Padding.p_9xs,
-    width:"100%"
+    width: "100%",
   },
   depth1Frame4: {
     height: 20,
@@ -270,13 +278,13 @@ const styles = StyleSheet.create({
   depth0Frame0: {
     height: "100%",
     overflow: "scroll",
-    width:"100%"
+    width: "100%",
   },
   brandorinfluencer: {
     backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
-    height:"100%"
+    height: "100%",
   },
 });
 

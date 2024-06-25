@@ -52,7 +52,10 @@ const BrandRegistrationForm = ({ navigation }) => {
       return;
     }
     if (password.length < 8) {
-      showAlert("Brand SignUp Error", "Password should be at least 8 characters long");
+      showAlert(
+        "Brand SignUp Error",
+        "Password should be at least 8 characters long"
+      );
       return;
     }
     await SendOtp(payload, navigation, showAlert);
@@ -72,7 +75,16 @@ const BrandRegistrationForm = ({ navigation }) => {
                     source={require("../../assets/depth-4-frame-07.png")}
                   />
                 </View>
-                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
+                <View
+                  style={[styles.depth4Frame1, styles.depth1FrameSpaceBlock]}
+                >
+                  <View>
+                    <Text style={styles.createAnAccount}>
+                      Create a Brand account
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.frameFlexBox}>
                   <View style={[styles.depth4Frame01, styles.frameLayout1]}>
                     <View style={[styles.depth5Frame0, styles.frameLayout1]} />
                   </View>
@@ -80,11 +92,6 @@ const BrandRegistrationForm = ({ navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
-          <View style={[styles.depth1Frame1, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text style={styles.createAnAccount}>Create a Brand account</Text>
-            </View>
-          </View>
           <View style={styles.depth1Frame2}>
             <View style={[styles.depth2Frame02, styles.frameLayout]}>
               <View style={styles.frameLayout}>
@@ -112,23 +119,32 @@ const BrandRegistrationForm = ({ navigation }) => {
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Password</Text>
                 </View>
-                  <View style={[styles.depth5Frame01, styles.depth5FrameBg, { flex: 1 }]}>
-                    <TextInput
-                      style={styles.textInput}
-                      value={password}
-                      onChangeText={setPassword}
-                      placeholder="Password"
-                      secureTextEntry={!showPassword}
-                    />
-                  <TouchableOpacity style={styles.password} onPress={() => setShowPassword(!showPassword)}>
+                <View
+                  style={[
+                    styles.depth5Frame01,
+                    styles.depth5FrameBg,
+                    { flex: 1 },
+                  ]}
+                >
+                  <TextInput
+                    style={styles.textInput}
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder="Password"
+                    secureTextEntry={!showPassword}
+                  />
+                  <TouchableOpacity
+                    style={styles.password}
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
                     <Icon
                       name={showPassword ? "eye-off" : "eye"}
                       size={20}
                       color="gray"
                     />
                   </TouchableOpacity>
-                  </View>
                 </View>
+              </View>
             </View>
           </View>
           <View style={styles.depth1Frame2}>
@@ -173,7 +189,10 @@ const BrandRegistrationForm = ({ navigation }) => {
           <View style={styles.depth1Frame6}>
             <View style={styles.depth2Frame06}>
               <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity style={{width:"100%"}} onPress={handleSubmit}>
+                <TouchableOpacity
+                  style={{ width: "100%" }}
+                  onPress={handleSubmit}
+                >
                   <View style={[styles.depth4Frame07, styles.frameBg]}>
                     <View style={[styles.depth5Frame06, styles.frameBg]}>
                       <View style={styles.depth7Frame0}>
@@ -205,8 +224,8 @@ const BrandRegistrationForm = ({ navigation }) => {
 const styles = StyleSheet.create({
   ...signupStyles,
   passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

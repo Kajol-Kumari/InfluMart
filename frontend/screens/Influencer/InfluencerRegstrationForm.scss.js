@@ -10,12 +10,19 @@ export const InfluencerRegistrationFormStyles = {
   header: {
     paddingVertical: Padding.p_base,
     alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     fontSize: FontSize.size_lg,
     lineHeight: 23,
     color: Color.colorGray_100,
     fontFamily: FontFamily.plusJakartaSansBold,
+  },
+  headerNavigation: {
+    height: 24,
+    width: 24,
   },
   fieldContainer: {
     marginVertical: Padding.p_xs,
@@ -82,9 +89,9 @@ export const InfluencerRegistrationFormStyles = {
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansBold,
   },
-  password:{
-    position:"absolute",
-    top:23,
-    right:18
+  password: {
+    position: "absolute",
+    top: 23,
+    right: 18,
   },
 };

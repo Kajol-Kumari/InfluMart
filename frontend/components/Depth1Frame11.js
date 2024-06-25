@@ -8,33 +8,45 @@ import { FontSize, FontFamily, Color, Padding, Border } from "../GlobalStyles";
 const Depth1Frame11 = ({ onChange, style }) => {
   const navigation = useNavigation();
 
-  const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false)
+  const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false);
 
-  const handleSearch=()=>{
-    setIsSearchBarOpen(!isSearchBarOpen)
-  }
+  const handleSearch = () => {
+    setIsSearchBarOpen(!isSearchBarOpen);
+  };
 
   return (
     <View style={[styles.depth1Frame0, style]}>
       <View style={styles.depth2Frame0}>
-        {
-          isSearchBarOpen ?
-            <TextInput onChange={(e)=>{
-              onChange(e.target.value)
-            }} style={styles.SearchBar} placeholder="Search anything" /> :
-            <>
-              <View style={[styles.depth3Frame0, styles.depth3FrameLayout]} />
-              <TouchableOpacity onPress={() => navigation.navigate('Homepage')}>
-                <View style={styles.depth3Frame1}>
-                  <View style={styles.depth4Frame0}>
-                    <View style={styles.depth5Frame0}>
-                      <Text style={styles.marketplace}>Marketplace</Text>
-                    </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+          <View style={styles.BackArrow}>
+            <Image
+              style={styles.depth4Frame0}
+              contentFit="cover"
+              source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
+            />
+          </View>
+        </TouchableOpacity>
+        {isSearchBarOpen ? (
+          <TextInput
+            onChange={(e) => {
+              onChange(e.target.value);
+            }}
+            style={styles.SearchBar}
+            placeholder="Search anything"
+          />
+        ) : (
+          <>
+            <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+              <View style={styles.depth3Frame1}>
+                <View style={styles.depth4Frame0}>
+                  <View style={styles.depth5Frame0}>
+                    <Text style={styles.marketplace}>Marketplace</Text>
                   </View>
                 </View>
-              </TouchableOpacity>
-            </>
-        }
+              </View>
+            </TouchableOpacity>
+          </>
+        )}
         <TouchableOpacity onPress={handleSearch} style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
           <View style={[styles.depth4Frame01, styles.depth3FrameLayout]}>
             <Image
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   depth4Frame0: {
-    width: 'auto',
+    width: "auto",
     overflow: "hidden",
     height: 23,
   },
@@ -99,15 +111,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 50,
-    paddingHorizontal: Padding.p_base
+    paddingHorizontal: Padding.p_base,
   },
   depth1Frame0: {
     backgroundColor: Color.colorWhite,
     width: "100%",
     paddingHorizontal: Padding.p_base,
-    paddingTop:Padding.p_base,
-    paddingBottom:Padding.p_5xs,
-    height:"auto"
+    paddingTop: Padding.p_base,
+    paddingBottom: Padding.p_5xs,
+    height: "auto",
+  },
+  BackArrow: {
+    width: 24,
+    height: 24,
+    marginLeft: -16,
   },
   SearchBar: {
     width: "80%",
@@ -117,8 +134,8 @@ const styles = StyleSheet.create({
     color: Color.colorSteelblue_200,
     backgroundColor: Color.colorAliceblue,
     outlineStyle: "none",
-    borderRadius: Border.br_xs
-  }
+    borderRadius: Border.br_xs,
+  },
 });
 
 export default Depth1Frame11;
