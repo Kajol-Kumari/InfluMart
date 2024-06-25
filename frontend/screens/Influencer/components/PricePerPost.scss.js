@@ -1,8 +1,11 @@
 import { Padding, Color, FontFamily, FontSize, Border } from "../../../GlobalStyles";
 
 export const PricePerPostStyles = {
+  scrollView:{
+    backgroundColor: Color.colorWhite,
+  },
   pricePerPostContainer: {
-    width: 390,
+    width: "100%",
     flex: 1,
     backgroundColor: Color.colorWhite,
     padding: Padding.p_base,
@@ -12,6 +15,7 @@ export const PricePerPostStyles = {
     alignItems: "center",
     marginVertical: Padding.p_base,
     textAlign: "center",
+    justifyContent:"space-between"
   },
   headerIcon: {
     width: 24,
@@ -23,7 +27,7 @@ export const PricePerPostStyles = {
     fontFamily: FontFamily.plusJakartaSansBold,
     fontWeight: "700",
     textAlign: "center",
-    width: "94%",
+    width: "auto",
   },
   depth1FrameSpaceBlock: {
     paddingVertical: Padding.p_xs,

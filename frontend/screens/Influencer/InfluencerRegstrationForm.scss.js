@@ -4,7 +4,7 @@ export const InfluencerRegistrationFormStyles = {
   influencerRegistrationForm: {
     backgroundColor: Color.colorWhite,
     flex: 1,
-    width: 390,
+    width: "100%",
     padding: Padding.p_base,
   },
   header: {

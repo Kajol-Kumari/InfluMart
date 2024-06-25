@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  ScrollView
 } from "react-native";
 import { Image } from "expo-image";
 import { MaxFollowersNoStyles } from "./MaxFollowers.scss";
@@ -35,7 +36,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
   const photo = route.params?.photo
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.addAccountButton}>
           <TouchableOpacity
@@ -54,6 +55,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
             />
           </TouchableOpacity>
           <Text style={styles.addAccountText}>Add a social account</Text>
+          <View style={{width:20,height:20}}></View>
         </View>
       </View>
       {socialAccounts.map((account, index) => (
@@ -94,7 +96,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
       >
         <Text style={styles.confirmButtonText}>Confirm</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

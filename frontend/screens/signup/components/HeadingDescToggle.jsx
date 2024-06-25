@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: 360,
+    width: "100%",
     marginVertical: 10,
   },
   textContainer: {
     flex: 1,
+    paddingEnd:4
   },
   heading: {
     fontSize: FontSize.size_base,
