@@ -1,30 +1,37 @@
-const Brand = require("../../model/brands");
 
-// check if the brand is loggedIn or not
+const jwt = require("jsonwebtoken");
+const { promisify } = require("util");
+const { JWT_SECRET_KEY } = require("../../config/dbConfig");
+const Brand = require("../../model/brandDbRequestModel");
+
 const brandAuthenticationMiddleware = async (req, res, next) => {
-  if (req.cookies.jwt) {
-    try {
-      // 1) verify the token
-      const decoded = await promisify(jwt.verify)(
-        req.cookies.jwt,
-        process.env.JWT_SECRET_KEY
-      );
-
-      // 2) check if the brand still exists
-      const currentBrand = await Brand.findById(decoded.id);
-      if (!currentBrand) {
-        // Brand doesn't exist, so consider it an unauthenticated request
-        return next();
-      }
-
-      // THERE IS A LOGGED IN BRAND
-      res.locals.brand = currentBrand;
-      return next();
-    } catch (err) {
-      return res.status(401).json({ message: "Authentication failed" });
-    }
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
-  return res.status(401).json({ message: "Unauthenticated. Please login"})
+
+  // Extract token from header
+  const token = authHeader.split(' ')[1];
+
+  try {
+    // Verify token
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY);
+
+    // Check if brand exists
+    const brand = await Brand.findById(decoded.brandId);
+    
+    if (!brand) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    // Attach brand information to request object
+    req.brand = brand;
+    next();
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
 };
 
 module.exports = brandAuthenticationMiddleware;
