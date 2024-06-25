@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button } from "react-native";
-import { Color, Padding, FontSize, FontFamily } from "../GlobalStyles";
+import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
 
 const AdminPanel = () => {
@@ -24,368 +24,364 @@ const AdminPanel = () => {
     <ScrollView style={styles.scrollView}>
       <View style={styles.adminpanel}>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
-            <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame0}>
-                <View style={[styles.depth3Frame0, styles.depth3FrameLayout]}>
-                  <Image
-                    style={styles.depth4Frame0}
-                    contentFit="cover"
-                    source={require("../assets/adminPanelBack.png")}
-                  />
-                </View>
-                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-                  <View style={styles.depth4Frame01}>
-                    <View style={styles.depth5Frame0}>
-                      <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                        Account settings
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
-                  <View style={[styles.depth4Frame02, styles.depth3FrameLayout]} />
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Logout')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame01}>
-                <View style={styles.depth3Frame01}>
+          <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame0}>
+              <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={[styles.depth3Frame0, styles.depth3FrameLayout]}>
+                <Image
+                  style={styles.depth4Frame0}
+                  contentFit="cover"
+                  source={require("../assets/adminPanelBack.png")}
+                />
+              </TouchableOpacity>
+              <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
+                <View style={styles.depth4Frame01}>
                   <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Logout
+                    <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                      Account settings
                     </Text>
                   </View>
                 </View>
               </View>
+              <View style={[styles.depth3Frame2, styles.depth3FrameLayout]}>
+                <View style={[styles.depth4Frame02, styles.depth3FrameLayout]} />
+              </View>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Manage profile')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Manage profile
-                    </Text>
-                  </View>
+          <View style={[styles.depth1Frame1, styles.frameLayout1,{marginBottom:Padding.p_base}]}>
+            <View style={styles.depth2Frame01}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Logout
+                  </Text>
                 </View>
+              </View>
+              <TouchableOpacity style={styles.logoutBtn} onPress={() => handleOptionPress('Logout')}>
+                <Text style={{ fontSize: FontSize.size_sm, fontWeight: "500" }}>Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Manage profile
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Manage profile')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Password & security')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame03}>
+
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame03}>
+              <TouchableOpacity onPress={() => handleOptionPress('Password & security')} style={styles.depth5Frame0}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Password & security
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Password & security
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Change password
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Change password')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Change password
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Change password')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-11.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('2-Step Verification')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      2-Step Verification
-                    </Text>
-                  </View>
+
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    2-Step Verification
+                  </Text>
                 </View>
+              </View>
+              <TouchableOpacity onPress={() => handleOptionPress('2-Step Verification')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-11.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Security question')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Security question
-                    </Text>
-                  </View>
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Security question
+                  </Text>
                 </View>
+              </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Security question')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-11.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Subscription')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame07}>
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame07}>
+              <TouchableOpacity style={styles.depth5Frame0} onPress={() => handleOptionPress('Subscription')}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Subscription
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Subscription
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Manage subscription
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Manage subscription')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Manage subscription
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Manage subscription')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Privacy')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame09}>
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame09}>
+              <TouchableOpacity style={styles.depth5Frame0} onPress={() => handleOptionPress('Privacy')}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Privacy
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Privacy
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    View featured content
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('View featured content')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      View featured content
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('View featured content')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-11.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Social media')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame011}>
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame011}>
+              <TouchableOpacity style={styles.depth5Frame0} onPress={() => handleOptionPress('Social media')}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Social media
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Social media
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Edit social media handles
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Edit social media handles')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Edit social media handles
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Edit social media handles')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Billing')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame013}>
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame013}>
+              <TouchableOpacity style={styles.depth5Frame0} onPress={() => handleOptionPress('Billing')}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Billing
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Billing
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Change pricing plan
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Change pricing plan')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Change pricing plan
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Change pricing plan')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-11.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Support')}>
-            <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-              <View style={styles.depth2Frame015}>
+          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.depth2Frame015}>
+              <TouchableOpacity style={styles.depth5Frame0} onPress={() => handleOptionPress('Support')}>
+                <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
+                  Support
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
                 <View style={styles.depth5Frame0}>
-                  <Text style={[styles.accountSettings, styles.logoutFlexBox]}>
-                    Support
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Help center
                   </Text>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => handleOptionPress('Help center')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Help center
-                    </Text>
-                  </View>
-                </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Help center')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Contact us')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Contact us
-                    </Text>
-                  </View>
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Contact us
+                  </Text>
                 </View>
+              </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Contact us')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity onPress={() => handleOptionPress('Enter Password')}>
-            <View style={[styles.depth1Frame1, styles.frameLayout1]}>
-              <View style={styles.depth2Frame02}>
-                <View style={styles.depth3Frame02}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.logout, styles.logoutFlexBox]}>
-                      Delete account
-                    </Text>
-                  </View>
+          <View style={[styles.depth1Frame1, styles.frameLayout1]}>
+            <View style={styles.depth2Frame02}>
+              <View style={styles.depth3Frame02}>
+                <View style={styles.depth5Frame0}>
+                  <Text style={[styles.logout, styles.logoutFlexBox]}>
+                    Delete account
+                  </Text>
                 </View>
+              </View>
+              <TouchableOpacity onPress={() => handleOptionPress('Enter Password')}>
                 <Image
                   style={styles.depth3Frame12}
                   contentFit="cover"
                   source={require("../assets/depth-3-frame-1.png")}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
 
           <View style={[styles.depth1Frame19, styles.frameLayout1]} />
         </View>
       </View>
 
       <Modal
-  animationType="fade"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <View style={styles.modalBackground}>
-    <View style={styles.modalView}>
-      <Text style={styles.modalText}> {selectedOption}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder={`Enter new ${selectedOption}`}
-        value={inputValue}
-        onChangeText={setInputValue}
-      />
-      <Button title="Save" onPress={handleSave} />
-      <Button title="Cancel" onPress={() => setModalVisible(false)} />
-    </View>
-  </View>
-</Modal>
-    </ScrollView>
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}> {selectedOption}</Text>
+            <TextInput
+              style={styles.input}
+              placeholder={`Enter new ${selectedOption}`}
+              value={inputValue}
+              onChangeText={setInputValue}
+            />
+            <Button title="Save" onPress={handleSave} />
+            <Button title="Cancel" onPress={() => setModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
+    </ScrollView >
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
     flexGrow: 1,
+    backgroundColor: Color.colorWhite
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
   },
   depth1FrameSpaceBlock: {
     paddingBottom: Padding.p_5xs,
     paddingTop: Padding.p_base,
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   depth3FrameLayout: {
     width: 48,
@@ -432,7 +428,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame1: {
-    width: 262,
+    width: "auto",
     height: 23,
   },
   depth4Frame02: {
@@ -447,7 +443,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: 48,
-    width: 358,
+    width: "100%",
   },
   depth1Frame0: {
     height: 72,
@@ -459,9 +455,9 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interRegular,
   },
   depth3Frame01: {
-    width: 258,
-    height: 24,
-    overflow: "hidden",
+    width: "auto",
+    height: "auto",
+    overflow: "hidden"
   },
   logout1: {
     fontSize: 14,
@@ -490,21 +486,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   depth2Frame01: {
-    top: 12,
-    height: 32,
-    left: 16,
-    position: "absolute",
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: Padding.p_base
   },
   depth1Frame1: {
     height: 44,
   },
   depth3Frame02: {
-    width: 314,
+    width: "auto",
     height: 24,
     overflow: "hidden",
+  },
+  logoutBtn: {
+    paddingHorizontal: Padding.p_xl,
+    paddingVertical: Padding.p_5xs,
+    backgroundColor: Color.colorWhitesmoke_300,
+    borderRadius: Border.br_base
   },
   depth3Frame12: {
     width: 28,
@@ -512,13 +512,11 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   depth2Frame02: {
-    top: 14,
-    height: 28,
-    left: 16,
-    position: "absolute",
     alignItems: "center",
     flexDirection: "row",
-    width: 358,
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: Padding.p_base
   },
   depth2Frame03: {
     width: 'auto',
@@ -552,7 +550,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   depth0Frame0: {
-    height: 1043,
+    height: "auto",
     overflow: "hidden",
   },
   adminpanel: {
