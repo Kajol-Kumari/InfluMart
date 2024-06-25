@@ -82,4 +82,9 @@ export const InfluencerRegistrationFormStyles = {
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansBold,
   },
+  password:{
+    position:"absolute",
+    top:23,
+    right:18
+  },
 };

@@ -257,4 +257,8 @@ export const loginStyle={
       height: "100%",
       paddingTop: 20
     },
+    passwordContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    }
   }
