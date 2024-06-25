@@ -34,9 +34,7 @@ router.post("/login", login);
 
 // Get brand's profile
 router.get(
-  "/profile",
-  brandAuthenticationMiddleware,
-  brandAuthorizationMiddleware,
+  "/profile/:brandId",brandAuthenticationMiddleware,
   getProfile
 );
 
