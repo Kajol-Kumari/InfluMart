@@ -96,25 +96,31 @@ exports.updateProfile = async (req, res) => {
     description: description || undefined,
   };
 
-  // Handle password separately
-  if (password) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    updatedFields.password = hashedPassword;
-  }
-
-  // Handle profile picture update
-  if (req.file) {
-    updatedFields.profileUrl = req.file.path;
-  }
-  
-  Object.keys(updatedFields).forEach(key => updatedFields[key] === undefined && delete updatedFields[key]);
-
   try {
-    const updatedBrand = await Brand.findByIdAndUpdate(brandId, updatedFields, { new: true });
+    const brand = await Brand.findById(brandId);
 
-    if (!updatedBrand) {
+    if (!brand) {
       return res.status(404).json({ message: 'Brand not found' });
     }
+
+    // Handle password separately
+    if (password) {
+      const isSamePassword = await bcrypt.compare(password, brand.password);
+      if (isSamePassword) {
+        return res.status(400).json({ message: 'New password cannot be the same as the old password' });
+      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updatedFields.password = hashedPassword;
+    }
+
+    // Handle profile picture update
+    if (req.file) {
+      updatedFields.profileUrl = req.file.path;
+    }
+
+    Object.keys(updatedFields).forEach(key => updatedFields[key] === undefined && delete updatedFields[key]);
+
+    const updatedBrand = await Brand.findByIdAndUpdate(brandId, updatedFields, { new: true });
 
     res.status(200).json({
       message: 'Brand profile updated successfully',
