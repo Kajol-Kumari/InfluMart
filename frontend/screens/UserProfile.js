@@ -17,7 +17,7 @@ const UserProfile = () => {
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.userprofile}>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+        <TouchableOpacity >
 
           <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
             <View style={[styles.depth2Frame0, styles.frameFlexBox]}>

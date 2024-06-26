@@ -1,4 +1,3 @@
-
 import * as ImagePicker from "expo-image-picker";
 import { Platform } from "react-native";
 
@@ -31,15 +30,24 @@ const launchImagePicker = async (type) => {
 export const handleImageSelection = async (type) => {
   const permission = await requestPermission(type);
   if (!permission) return { canceled: true, error: "Permission denied" };
-  
+
   const result = await launchImagePicker(type);
   if (result.canceled) return result;
 
-  const { uri } = result.assets[0];
-  const filename = uri.split("/").pop();
-  const match = /\.(\w+)$/.exec(filename);
-  const fileType = match ? `image/${match[1]}` : `image`;
+  let uri, filename, fileType;
 
+  if (Platform.OS === "web") {
+    // For web, result.uri contains a base64 encoded string
+    uri = result.assets[0].uri;
+    filename = result.assets[0].fileName; 
+    fileType = result.assets[0].mimeType;
+  } else {
+    // For iOS and Android
+    uri = result.assets[0].uri;
+    filename = uri.split("/").pop();
+    const match = /\.(\w+)$/.exec(filename);
+    fileType = match ? `image/${match[1]}` : `image`;
+  }
   return {
     uri,
     name: filename,

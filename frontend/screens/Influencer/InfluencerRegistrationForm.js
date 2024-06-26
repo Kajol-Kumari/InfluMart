@@ -93,7 +93,17 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     follower,
     price,
   ]);
-
+  useEffect(() => {
+    if(!route.params){
+      setEmail('')
+      setPassword('')
+      setUsername('')
+      setOver18(false)
+      setAgreedToTerms(false)
+      setIndustryAssociation(false)
+      setLocation('')
+    }
+  },[route.params])
   const handleSelectPlan = async () => {
     const payload = {
       email,
@@ -148,6 +158,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   price,
                   follower,
                   photo,
+                  social,
                 })
               }
             >
@@ -166,6 +177,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   price,
                   follower,
                   social,
+                  photo
                 })
               }
             >
@@ -180,7 +192,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("MaxFollowersNo", { price, social, photo })
+                navigation.navigate("MaxFollowersNo", { price, social, photo, follower })
               }
             >
               <Image
@@ -220,7 +232,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             <Text style={styles.sectionHeaderText}>Price per post</Text>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("PricePerPost", { social, follower, photo })
+                navigation.navigate("PricePerPost", { social, follower, photo, price })
               }
             >
               <Image

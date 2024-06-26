@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -60,6 +60,16 @@ const AddHandles = ({ route, navigation }) => {
   const price = route.params?.price;
   const follower = route.params?.follower;
   const photo = route.params?.photo
+  useEffect(() => {
+    if (route.params?.social) {
+      const { ig, tw, fb, yt, tt } = route.params.social;
+      if (ig) setInstagram(ig);
+      if (tw) setTwitter(tw);
+      if (fb) setFacebook(fb);
+      if (yt) setYoutube(yt);
+      if (tt) setTiktok(tt);
+    }
+  }, [route.params]);
 
   return (
     <ScrollView style={styles.scrollView}>
