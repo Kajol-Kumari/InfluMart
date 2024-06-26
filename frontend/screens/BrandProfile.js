@@ -86,6 +86,7 @@ const BrandProfile = ({ navigation }) => {
                 source={require("../assets/depth-4-frame-Backarrow3x.png")}
               />
               <Text style={styles.headerTitle}>Profile</Text>
+              <view style={styles.backArrow}></view>
             </View>
           </TouchableOpacity>
           <View style={[styles.profileContainer]}>

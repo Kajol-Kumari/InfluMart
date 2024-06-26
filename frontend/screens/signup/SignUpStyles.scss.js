@@ -13,7 +13,6 @@ export const signupStyles = {
     },
     depth1FrameSpaceBlock: {
       paddingHorizontal: Padding.p_base,
-      width: "100%",
     },
     frameFlexBox: {
       justifyContent: "space-between",
@@ -90,10 +89,6 @@ export const signupStyles = {
     depth4Frame01: {
       flexDirection: "row",
     },
-    depth3Frame1: {
-      width: 310,
-      paddingLeft: Padding.p_243xl,
-    },
     depth2Frame0: {
       width: "100%",
     },
@@ -160,7 +155,7 @@ export const signupStyles = {
       height: 56,
       alignItems: "center",
       flexDirection: "row",
-      width: "100%",
+      //width: "100%",
     },
     depth2Frame02: {
       width:"100%",

@@ -2,9 +2,9 @@ import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { Color } from "../../GlobalStyles";
-import { useNavigation } from '@react-navigation/native';
-import { handleBrandLogin } from '../../controller/loginController'
-import { loginStyle } from './LoginStyle'
+import { useNavigation } from "@react-navigation/native";
+import { handleBrandLogin } from "../../controller/loginController";
+import { loginStyle } from "./LoginStyle";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -16,8 +16,16 @@ const LoginPageBrand = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <ScrollView style={{ width: '100%', height: "100%", paddingTop: 30, backgroundColor: Color.colorWhitesmoke_100 }}>
-      <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+    <ScrollView
+      style={{
+        width: "100%",
+        height: "100%",
+        backgroundColor: Color.colorWhitesmoke_100,
+      }}
+    >
+      <TouchableOpacity
+        onPress={() => navigation.navigate("BrandorInfluencer")}
+      >
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
             <View style={[styles.depth3Frame0, styles.frameLayout1]}>
@@ -27,6 +35,11 @@ const LoginPageBrand = () => {
                 source={require("../../assets/depth-4-frame-07.png")}
               />
             </View>
+            <View style={styles.depth1Frame1}>
+              <View style={styles.depth2Frame01}>
+                <Text style={styles.welcomeBack}>Welcome back!</Text>
+              </View>
+            </View>
             <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
               <View style={[styles.depth4Frame01, styles.frameLayout1]}>
                 <View style={[styles.depth5Frame0, styles.frameLayout1]} />
@@ -35,15 +48,12 @@ const LoginPageBrand = () => {
           </View>
         </View>
       </TouchableOpacity>
-      <View style={styles.depth1Frame1}>
-        <View style={styles.depth2Frame01}>
-          <Text style={styles.welcomeBack}>Welcome back!</Text>
-        </View>
-      </View>
+
       <View style={{ margin: 15 }}>
         <View style={styles.depth2Frame01}>
           <Text style={styles.getReadyTo}>
-            Get Influencers of your choice. Please log in to your brand account to continue.
+            Get Influencers of your choice. Please log in to your brand account
+            to continue.
           </Text>
         </View>
       </View>
@@ -53,7 +63,7 @@ const LoginPageBrand = () => {
             <View style={styles.depth2Frame01}>
               <TextInput
                 placeholder="Email"
-                textContentType='emailAddress'
+                textContentType="emailAddress"
                 style={[styles.email, styles.emailClr]}
                 value={email}
                 onChangeText={setEmail}
@@ -70,12 +80,14 @@ const LoginPageBrand = () => {
                 <TextInput
                   placeholder="Password"
                   secureTextEntry={!showPassword}
-                  textContentType='password'
+                  textContentType="password"
                   style={[styles.email, styles.emailClr, { flex: 1 }]}
                   value={password}
                   onChangeText={setPassword}
                 />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
                   <Icon
                     name={showPassword ? "eye-off" : "eye"}
                     size={20}
@@ -99,14 +111,14 @@ const LoginPageBrand = () => {
           <TouchableOpacity
             style={{ width: "100%" }}
             onPress={async () => {
-              let result = await handleBrandLogin(email, password)
+              let result = await handleBrandLogin(email, password);
               if (result.success) {
-                showAlert("Success", result.message)
-                navigation.navigate("BrandProfile")
-                setEmail("")
-                setPassword("")
+                showAlert("Success", result.message);
+                navigation.navigate("BrandProfile");
+                setEmail("");
+                setPassword("");
               } else {
-                showAlert("Error", result.message)
+                showAlert("Error", result.message);
               }
             }}
           >

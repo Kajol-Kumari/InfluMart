@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = React.useState(false); // State to manage password visibility
 
   return (
-    <ScrollView style={{ width: '100%', height: "100%", paddingTop: 30, backgroundColor: Color.colorWhitesmoke_100 }}>
+    <ScrollView style={{ width: '100%', height: "100%", backgroundColor: Color.colorWhitesmoke_100 }}>
       <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
@@ -27,6 +27,11 @@ const LoginPage = () => {
                 source={require("../../assets/depth-4-frame-07.png")}
               />
             </View>
+            <View style={styles.depth1Frame1}>
+              <View style={styles.depth2Frame01}>
+                <Text style={styles.welcomeBack}>Welcome back!</Text>
+              </View>
+            </View>
             <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
               <View style={[styles.depth4Frame01, styles.frameLayout1]}>
                 <View style={[styles.depth5Frame0, styles.frameLayout1]} />
@@ -35,11 +40,6 @@ const LoginPage = () => {
           </View>
         </View>
       </TouchableOpacity>
-      <View style={styles.depth1Frame1}>
-        <View style={styles.depth2Frame01}>
-          <Text style={styles.welcomeBack}>Welcome back!</Text>
-        </View>
-      </View>
       <View style={{ margin: 15 }}>
         <View style={styles.depth2Frame01}>
           <Text style={styles.getReadyTo}>
