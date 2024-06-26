@@ -87,24 +87,29 @@ exports.updateProfile = async (req, res) => {
   const brandId = req.params.brandId;
   const { name, email, password, category, location, website, description } = req.body;
 
+  const updatedFields = {
+    name: name || undefined,
+    email: email || undefined,
+    category: category || undefined,
+    location: location || undefined,
+    website: website || undefined,
+    description: description || undefined,
+  };
+
+  // Handle password separately
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    updatedFields.password = hashedPassword;
+  }
+
+  // Handle profile picture update
+  if (req.file) {
+    updatedFields.profileUrl = req.file.path;
+  }
+  
+  Object.keys(updatedFields).forEach(key => updatedFields[key] === undefined && delete updatedFields[key]);
+
   try {
-    const updatedFields = {
-      name: name || undefined,
-      email: email || undefined,
-      category: category || undefined,
-      location: location || undefined,
-      website: website || undefined,
-      description: description || undefined,
-    };
-
-    // Handle password separately
-    if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      updatedFields.password = hashedPassword;
-    }
-
-    Object.keys(updatedFields).forEach(key => updatedFields[key] === undefined && delete updatedFields[key]);
-
     const updatedBrand = await Brand.findByIdAndUpdate(brandId, updatedFields, { new: true });
 
     if (!updatedBrand) {
