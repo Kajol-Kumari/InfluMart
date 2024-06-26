@@ -20,8 +20,8 @@ import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
 import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
-import FilterUI from './screens/FiltersUI'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import FilterUI from "./screens/FiltersUI";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
@@ -56,7 +56,7 @@ const App = () => {
     "PlusJakartaSans-Bold": require("./assets/fonts/PlusJakartaSans-Bold.ttf"),
     "PlusJakartaSans-ExtraBold": require("./assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
   });
-  const [initialRoute, setInitialRoute] = React.useState('Login');
+  const [initialRoute, setInitialRoute] = React.useState("Login");
 
   React.useEffect(() => {
     checkTokenValidity();
@@ -64,21 +64,25 @@ const App = () => {
 
   const checkTokenValidity = async () => {
     try {
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem("token");
       if (token) {
         const decodedToken = jwtDecode(token);
         const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
         if (decodedToken.exp && decodedToken.exp > currentTime) {
           // Token exists and not expired, navigate to Homepage or other authenticated screens
-          setInitialRoute('UserProfile');
+          if (decodedToken?.brandId) {
+            setInitialRoute("BrandProfile");
+          } else {
+            setInitialRoute("UserProfile");
+          }
         } else {
-          setInitialRoute('Homepage');
+          setInitialRoute("Homepage");
         }
       } else {
-        setInitialRoute('Homepage');
+        setInitialRoute("Homepage");
       }
     } catch (error) {
-      console.error('Error checking token:', error);
+      console.error("Error checking token:", error);
     }
   };
 
@@ -91,7 +95,10 @@ const App = () => {
       <AlertProvider>
         <NavigationContainer>
           {hideSplashScreen ? (
-            <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+              initialRouteName={initialRoute}
+              screenOptions={{ headerShown: false }}
+            >
               <Stack.Screen
                 name="Homepage"
                 component={Homepage}
@@ -174,59 +181,59 @@ const App = () => {
                 component={BrandAssosciated}
                 options={{ headerShown: false }}
               />
-            <Stack.Screen
-              name="AccountCreatedSuccessfullyNoti"
-              component={AccountCreatedSuccessfullyNoti}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="FailedPaymentStatus"
-              component={FailedPaymentStatus}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Analytics"
-              component={Analytics}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InfluencersList"
-              component={InfluencersList}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InboxInterface"
-              component={InboxInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ChatInterface"
-              component={ChatInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="UserProfile"
-              component={UserProfile}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InfluencerRegistrationForm"
-              component={InfluencerRegistrationForm}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="PlanChooseInterface"
-              component={PlanChooseInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="FilterUI"
-              component={FilterUI}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        ) : null}
-      </NavigationContainer>
+              <Stack.Screen
+                name="AccountCreatedSuccessfullyNoti"
+                component={AccountCreatedSuccessfullyNoti}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FailedPaymentStatus"
+                component={FailedPaymentStatus}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Analytics"
+                component={Analytics}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencersList"
+                component={InfluencersList}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InboxInterface"
+                component={InboxInterface}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="ChatInterface"
+                component={ChatInterface}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserProfile"
+                component={UserProfile}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerRegistrationForm"
+                component={InfluencerRegistrationForm}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="PlanChooseInterface"
+                component={PlanChooseInterface}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FilterUI"
+                component={FilterUI}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          ) : null}
+        </NavigationContainer>
       </AlertProvider>
     </>
   );
