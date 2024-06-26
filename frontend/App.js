@@ -22,7 +22,7 @@ import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
 import FilterUI from './screens/FiltersUI'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
@@ -65,7 +65,6 @@ const App = () => {
   const checkTokenValidity = async () => {
     try {
       const token = await AsyncStorage.getItem('token');
-      
       if (token) {
         const decodedToken = jwtDecode(token);
         const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
