@@ -8,6 +8,8 @@ const {
   login,
   getProfile,
   updateProfile,
+  deleteProfile,
+  getAllBrands,
 } = require("../controllers/brandController");
 const brandAuthenticationMiddleware = require("../middleware/brands/brandAuthenticationMiddleware");
 const brandSignUpValidate = require("../middleware/brands/validations/brandSignUpValidate");
@@ -40,10 +42,15 @@ router.get(
 
 // Update brand's profile
 router.put(
-  "/profile",
-  brandAuthenticationMiddleware,
-  brandAuthorizationMiddleware,
+  "/profile/:brandId",brandAuthenticationMiddleware,upload.single("image"),
   updateProfile
 );
 
+// Delete brand's profile
+router.delete(
+  "/profile/:brandId",brandAuthenticationMiddleware,
+  deleteProfile
+);
+
+router.get("/getAllBrands", getAllBrands);
 module.exports = router;
