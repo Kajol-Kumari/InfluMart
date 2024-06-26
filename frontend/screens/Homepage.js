@@ -9,8 +9,6 @@ import Depth1Frame from "../components/Depth1Frame";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 
 const Homepage = ({route,navigation}) => {
-  const isLogin = route.params?.isLogin;
-  const brand = route.params?.brand;
   const [searchValue, setSearchValue] = React.useState("")
 
   return (
@@ -56,7 +54,7 @@ const Homepage = ({route,navigation}) => {
           <View style={styles.depth1Frame4}>
             <View style={styles.depth2Frame03}>
               <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity style={{ width: "100%" }} onPress={() => !isLogin && navigation.navigate('BrandRegistrationForm')}>
+                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('BrandRegistrationForm')}>
                   <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
                     <View style={[styles.depth5Frame0, styles.frameBg1]}>
                       <View style={styles.depth2Frame01}>
@@ -65,7 +63,7 @@ const Homepage = ({route,navigation}) => {
                             styles.brandRegistration
                           ]}
                         >
-                          {isLogin ? `Hello ${brand}` : "Brand Registration"}
+                          Brand Registration
                         </Text>
                       </View>
                     </View>
@@ -73,7 +71,7 @@ const Homepage = ({route,navigation}) => {
                 </TouchableOpacity>
               </View>
               <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
-                <TouchableOpacity style={{ width: "100%" }} onPress={() => !isLogin && navigation.navigate('InfluencerRegistrationForm')}>
+                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
                   <View style={[styles.depth4Frame02, styles.frameBg]}>
                     <View style={[styles.depth5Frame01, styles.frameBg]}>
                       <View style={styles.depth2Frame01}>
