@@ -173,7 +173,7 @@ exports.getAllBrands = async (req, res) => {
 // Define cron job to delete expired OTPs older than 1 hour
 cron.schedule('0 * * * *', async () => {
   try {
-    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // Current time minus 1 hour
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
     const result = await OTP.deleteMany({ otpExpires: { $lt: oneHourAgo } });
 
     console.log(`Deleted ${result.deletedCount} expired OTPs`);

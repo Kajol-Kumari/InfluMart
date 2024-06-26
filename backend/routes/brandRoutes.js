@@ -42,7 +42,7 @@ router.get(
 
 // Update brand's profile
 router.put(
-  "/profile/:brandId",brandAuthenticationMiddleware,
+  "/profile/:brandId",brandAuthenticationMiddleware,upload.single("image"),
   updateProfile
 );
 
