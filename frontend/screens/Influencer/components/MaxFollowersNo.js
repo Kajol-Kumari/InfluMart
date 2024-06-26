@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -34,7 +34,13 @@ const MaxFollowersNo = ({ route, navigation }) => {
   const price = route.params?.price;
   const social = route.params?.social;
   const photo = route.params?.photo
-
+  useEffect(() => {
+    if (route.params?.follower) {
+      const { platform, value } = route.params.follower;
+      setPlatform(platform);
+      setValue(value.toString());
+    }
+  }, [route.params]);
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>

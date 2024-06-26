@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Image } from "expo-image";
 import {
   StyleSheet,
@@ -16,12 +16,13 @@ import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 
-const BrandRegistrationForm = ({ navigation }) => {
+const BrandRegistrationForm = ({ route,navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
   const { showAlert } = useAlert();
+  const payload = route.params?.payload;
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
   const data = [
     { key: "grocery", value: "Grocery" },
@@ -34,6 +35,18 @@ const BrandRegistrationForm = ({ navigation }) => {
     { key: "education", value: "Education" },
     { key: "others", value: "Others" },
   ];
+  const clearForm = useCallback(() => {
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setSelected([]);
+  }, []);
+
+  // Listen for navigation focus to clear form data
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", clearForm);
+    return unsubscribe;
+  }, [navigation, clearForm]);
 
   const handleSubmit = async () => {
     const payload = {
@@ -161,6 +174,8 @@ const BrandRegistrationForm = ({ navigation }) => {
                       setSelected={(val) => setSelected(val)}
                       data={data}
                       save="value"
+                      selectedval={selected}
+                      setSelectedVal={setSelected}
                     />
                   </View>
                 </View>

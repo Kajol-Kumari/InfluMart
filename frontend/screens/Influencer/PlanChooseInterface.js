@@ -38,7 +38,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
       const data = await getSubscriptionPlans({
         platform: payload.follower.platform,
         followers: payload.follower.value,
-      });
+      },showAlert);
       setPlanData(data);
     };
 
