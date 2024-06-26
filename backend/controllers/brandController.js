@@ -3,7 +3,8 @@ const { DOESNT_EXIST } = require("../constant/constants");
 const Brand = require("../model/brandDbRequestModel");
 const bcrypt = require("bcrypt"); // For password hashing
 const jwt = require('jsonwebtoken');
-
+const cron = require('node-cron');
+const OTP = require("../model/otp");
 
 // Signup a brand
 exports.signup = async (req, res) => {
@@ -82,13 +83,102 @@ exports.getProfile = async (req, res) => {
 };
 
 // Update brand's profile (requires authentication)
-exports.updateProfile = (req, res) => {
-  const brand = req.brand;
+exports.updateProfile = async (req, res) => {
+  const brandId = req.params.brandId;
+  const { name, email, password, category, location, website, description } = req.body;
 
-  // Update brand's profile fields as needed
-  // For simplicity, we assume you have an updatedBrand object
+  try {
+    const updatedFields = {
+      name: name || undefined,
+      email: email || undefined,
+      category: category || undefined,
+      location: location || undefined,
+      website: website || undefined,
+      description: description || undefined,
+    };
 
-  Object.assign(brand, updatedBrand);
+    // Handle password separately
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updatedFields.password = hashedPassword;
+    }
 
-  res.status(200).json({ message: "Profile updated successfully", brand });
+    Object.keys(updatedFields).forEach(key => updatedFields[key] === undefined && delete updatedFields[key]);
+
+    const updatedBrand = await Brand.findByIdAndUpdate(brandId, updatedFields, { new: true });
+
+    if (!updatedBrand) {
+      return res.status(404).json({ message: 'Brand not found' });
+    }
+
+    res.status(200).json({
+      message: 'Brand profile updated successfully',
+      brand: {
+        name: updatedBrand.name,
+        email: updatedBrand.email,
+        category: updatedBrand.category,
+        location: updatedBrand.location,
+        website: updatedBrand.website,
+        description: updatedBrand.description,
+        profileUrl: updatedBrand.profileUrl,
+      },
+    });
+  } catch (error) {
+    console.error('Error updating brand profile:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 };
+
+// Delete brand's profile (requires authentication)
+exports.deleteProfile = async (req, res) => {
+  const brandId = req.params.brandId;
+
+  try {
+    const deletedBrand = await Brand.findByIdAndDelete(brandId);
+
+    if (!deletedBrand) {
+      return res.status(404).json({ message: 'Brand not found' });
+    }
+    res.status(200).json({ message: 'Brand profile deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting brand profile:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Fetch list of all brands (excluding passwords)
+exports.getAllBrands = async (req, res) => {
+  try {
+    const brands = await Brand.find({}, '-password'); // Exclude password field
+
+    res.status(200).json({
+      message: 'List of all brands fetched successfully',
+      brands: brands.map(brand => ({
+        _id: brand._id,
+        name: brand.name,
+        email: brand.email,
+        category: brand.category,
+        location: brand.location,
+        website: brand.website,
+        description: brand.description,
+        profileUrl: brand.profileUrl,
+      })),
+    });
+  } catch (error) {
+    console.error('Error fetching brands:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Define cron job to delete expired OTPs older than 1 hour
+cron.schedule('0 * * * *', async () => {
+  try {
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // Current time minus 1 hour
+    const result = await OTP.deleteMany({ otpExpires: { $lt: oneHourAgo } });
+
+    console.log(`Deleted ${result.deletedCount} expired OTPs`);
+  } catch (error) {
+    console.error('Error deleting expired OTPs:', error);
+  }
+});
+
