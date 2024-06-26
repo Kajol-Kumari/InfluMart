@@ -22,6 +22,8 @@ const OtpVerification = ({ route, navigation }) => {
   React.useEffect(() => {
     if (!payload) {
       setOtp(["", "", "", "", "", ""]);
+      showAlert("Alert", "Please enter your detail again")
+      navigation.navigate("BrandRegistrationForm");
     }
   }, [payload]);
 
@@ -69,37 +71,30 @@ const OtpVerification = ({ route, navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
-          {!payload ? (
-            <View>
-              <Text>Please navigate back and enter your details again.</Text>
+
+          <View style={styles.depth1Frame1}>
+            <View style={styles.depth2Frame01}>
+              <Text style={[styles.enterTheCode, styles.nextTypo]}>
+                Enter the code sent to your email
+              </Text>
             </View>
-          ) : (
-            <>
-              <View style={styles.depth1Frame1}>
-                <View style={styles.depth2Frame01}>
-                  <Text style={[styles.enterTheCode, styles.nextTypo]}>
-                    Enter the code sent to your email
-                  </Text>
-                </View>
-              </View>
-              <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-                <View style={styles.otpContainer}>
-                  {otp.map((digit, index) => (
-                    <TextInput
-                      key={index}
-                      ref={(ref) => (inputs.current[index] = ref)}
-                      value={digit}
-                      onChangeText={(text) => handleChange(text, index)}
-                      onKeyPress={(e) => handleKeyPress(e, index)}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      style={[styles.otpInput, error && { borderColor: "red" }]}
-                    />
-                  ))}
-                </View>
-              </View>
-            </>
-          )}
+          </View>
+          <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
+            <View style={styles.otpContainer}>
+              {otp.map((digit, index) => (
+                <TextInput
+                  key={index}
+                  ref={(ref) => (inputs.current[index] = ref)}
+                  value={digit}
+                  onChangeText={(text) => handleChange(text, index)}
+                  onKeyPress={(e) => handleKeyPress(e, index)}
+                  keyboardType="numeric"
+                  maxLength={1}
+                  style={[styles.otpInput, error && { borderColor: "red" }]}
+                />
+              ))}
+            </View>
+          </View>
         </View>
         <View style={[styles.depth1Frame4, styles.depth1FrameSpaceBlock]}>
           <TouchableOpacity onPress={handleNext}>
