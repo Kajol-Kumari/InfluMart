@@ -226,11 +226,11 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.termsText}>
                 By joining, you agree to our
               </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"tos",navigate:"BrandRegistrationForm"})}>
+              <TouchableOpacity onPress={()=>navigation.navigate("TosScreen",{navigate:"BrandRegistrationForm"})}>
                 <Text style={styles.linkText}>Terms of Service</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"pp",navigate:"BrandRegistrationForm"})}>
+              <TouchableOpacity onPress={()=>navigation.navigate("PPScreen",{navigate:"BrandRegistrationForm"})}>
                 <Text style={styles.linkText}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>

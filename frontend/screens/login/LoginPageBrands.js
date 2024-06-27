@@ -143,11 +143,11 @@ const LoginPageBrand = () => {
               <Text style={styles.termsText}>
                 By joining, you agree to our{" "}
               </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"tos",navigate:"LoginPageBrands"})}>
+              <TouchableOpacity onPress={()=>navigation.navigate("TosScreen",{navigate:"LoginPageBrands"})}>
                 <Text style={styles.linkText}>Terms of Service</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"pp",navigate:"LoginPageBrands"})}>
+              <TouchableOpacity onPress={()=>navigation.navigate("PPScreen",{navigate:"LoginPageBrands"})}>
                 <Text style={styles.linkText}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>

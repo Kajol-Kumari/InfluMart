@@ -100,11 +100,11 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
         </TouchableOpacity>
         <View style={styles.termsContainer}>
           <Text style={styles.termsText}>By joining, you agree to our </Text>
-          <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"tos",navigate:"InfluencerConfirmAccount"})}>
+          <TouchableOpacity onPress={()=>navigation.navigate("TosScreen",{navigate:"InfluencerConfirmAccount"})}>
             <Text style={styles.linkText}>Terms of Service</Text>
           </TouchableOpacity>
           <Text style={styles.termsText}> and </Text>
-          <TouchableOpacity onPress={()=>navigation.navigate("TosPrivacyPolicy",{type:"pp",navigate:"InfluencerConfirmAccount"})}>
+          <TouchableOpacity onPress={()=>navigation.navigate("PPScreen",{navigate:"InfluencerConfirmAccount"})}>
             <Text style={styles.linkText}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>
