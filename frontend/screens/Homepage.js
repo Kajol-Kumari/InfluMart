@@ -8,9 +8,7 @@ import Depth1Frame1 from "../components/Depth1Frame1";
 import Depth1Frame from "../components/Depth1Frame";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 
-const Homepage = () => {
-  const navigation = useNavigation();
-
+const Homepage = ({route,navigation}) => {
   const [searchValue, setSearchValue] = React.useState("")
 
   return (

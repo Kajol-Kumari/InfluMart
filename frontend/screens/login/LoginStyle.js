@@ -7,7 +7,17 @@ export const loginStyle = {
     height: "100%",
     alignItems: "center",
   },
-
+  termsText: {
+    fontFamily: FontFamily.interRegular,
+    color: Color.colorSteelblue_200,
+    textAlign: "center",
+  },
+  linkText: {
+    fontFamily: FontFamily.interBold,
+    color: Color.colorDodgerblue,
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
   frameLayout2: {
     width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
@@ -19,11 +29,12 @@ export const loginStyle = {
     flexDirection: "row",
   },
   loginFrame: {
-    height: 60,
     justifyContent: "center",
     flexDirection: "row",
     width: "100%",
+    marginBottom: 14,
     alignItems: "center",
+    flexWrap: "wrap",
   },
   loginText: {
     color: Color.colorDodgerblue,

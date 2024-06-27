@@ -76,7 +76,6 @@ const BrandProfile = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.header}>
-
           <View style={styles.headerContent}>
             <TouchableOpacity
               onPress={() => navigation.navigate("LoginPageBrands")}

@@ -54,6 +54,15 @@ const PricePerPost = ({ route, navigation }) => {
   const social = route.params?.social
   const follower = route.params?.follower
   const photo = route.params?.photo
+  React.useEffect(() => {
+    if (route.params?.price) {
+      const { ig, yt, tr, tt } = route.params.price;
+      setInstagram(ig.toString());
+      setYoutube(yt.toString());
+      setTwitter(tr.toString());
+      setTiktok(tt.toString());
+    }
+  }, [route.params]);
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.pricePerPostContainer}>

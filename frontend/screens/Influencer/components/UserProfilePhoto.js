@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -19,6 +19,15 @@ const UserProfilePhoto = ({ route, navigation }) => {
   const follower = route.params?.follower;
   const price = route.params?.price;
   const [photo, setPhoto] = useState(null);
+  useEffect(() => {
+    if (route.params) {
+      const { photo } = route.params;
+      if (photo && photo.uri) {
+        setSelectedImage(photo.uri);
+        setPhoto(photo);
+      }
+    }
+  }, [route.params]);
 
   const handleImagePick = async (type) => {
     const result = await handleImageSelection(type);
@@ -128,6 +137,11 @@ const UserProfilePhoto = ({ route, navigation }) => {
             <Text style={[styles.buttonText, styles.takePhotoButtonText]}>Take Photo</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.confirmButtonContainer}>
+        <TouchableOpacity style={styles.confirmButton}>
+          <Text style={styles.confirmButtonText}>Confirm</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
