@@ -99,4 +99,26 @@ export const UserProfilePhotoStyles = {
     height: 200,
     borderRadius: 100,
   },
+  confirmButtonContainer: {
+    margin: "auto",
+    width: "90%",
+    marginTop: "10%",
+  },
+  confirmButton: {
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Color.colorDodgerblue,
+    borderRadius: Border.br_xs,
+    paddingHorizontal: Padding.p_base,
+  },
+  confirmButtonText: {
+    color: Color.colorWhitesmoke_100,
+    fontFamily: FontFamily.interBold,
+    fontSize: FontSize.size_sm,
+    fontWeight: "700",
+    letterSpacing: 0,
+    lineHeight: 21,
+    textAlign: "left",
+  },
 };
