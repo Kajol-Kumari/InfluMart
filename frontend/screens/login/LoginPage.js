@@ -124,7 +124,7 @@ const LoginPage = () => {
                 By joining, you agree to our{" "}
               </Text>
               <TouchableOpacity>
-                <Text style={styles.linkText}>Terms of conditions</Text>
+                <Text style={styles.linkText}>Terms of Service</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
               <TouchableOpacity>
