@@ -137,6 +137,11 @@ const UserProfilePhoto = ({ route, navigation }) => {
             <Text style={[styles.buttonText, styles.takePhotoButtonText]}>Take Photo</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.confirmButtonContainer}>
+        <TouchableOpacity style={styles.confirmButton}>
+          <Text style={styles.confirmButtonText}>Confirm</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };

@@ -34,6 +34,11 @@ import MaxFollowersNo from "./screens/Influencer/components/MaxFollowersNo";
 import InfluencerConfirmAccount from "./screens/Influencer/InfluencerConfirmAccount";
 import { AlertProvider } from "./util/AlertContext";
 import InfluencerAccountSuccess from "./screens/Influencer/InfluencerAccountSuccess";
+import InfluencerLogOutPage from "./screens/Influencer/Settings/InfluencerLogout";
+import InfluencerDeleteAccountPage from "./screens/Influencer/Settings/Support/InfluencerDeleteAccount";
+import InfluencerContactUs from "./screens/Influencer/Settings/Support/InfluencerContactUs";
+import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/InfluencerHelpCenter";
+import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -153,6 +158,31 @@ const App = () => {
               <Stack.Screen
                 name="AdminPanel"
                 component={AdminPanel}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerLogoutPage"
+                component={InfluencerLogOutPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerAccountDeletePage"
+                component={InfluencerDeleteAccountPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerContactUsPage"
+                component={InfluencerContactUs}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerHelpCenterPage"
+                component={InfluencerHelpCenter}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerManageAccountPage"
+                component={InfluencerManageAccount}
                 options={{ headerShown: false }}
               />
               <Stack.Screen
