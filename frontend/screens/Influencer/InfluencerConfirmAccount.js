@@ -14,10 +14,10 @@ import { useAlert } from "../../util/AlertContext";
 import { InfluencerSignUp } from "../../controller/signupController";
 import { InfluencerConfirmAccountStyles } from "./InfluencerConfirmAccount.scss";
 const InfluencerConfirmAccount = ({ route, navigation }) => {
-  const { payload } = route.params;
+  const payload = route.params?.payload;
   const { showAlert } = useAlert();
   const [showPassword, setShowPassword] = useState(false);
-  const [image, setImage] = useState(payload.profileUrl?.uri);
+  const [image, setImage] = useState(payload?.profileUrl?.uri);
 
   const registerInfluencer = async () => {
     const userData = {
@@ -61,7 +61,9 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                image ? { uri: image } : require("../../assets/blank-profile.png")
+                image
+                  ? { uri: image }
+                  : require("../../assets/blank-profile.png")
               }
               contentFit="cover"
               style={styles.profileImage}
@@ -96,6 +98,16 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
         <TouchableOpacity style={styles.createAccountContainer} onPress={registerInfluencer}>
           <Text style={styles.createAccount}>Create account</Text>
         </TouchableOpacity>
+        <View style={styles.termsContainer}>
+          <Text style={styles.termsText}>By joining, you agree to our </Text>
+          <TouchableOpacity>
+            <Text style={styles.linkText}>Terms of conditions</Text>
+          </TouchableOpacity>
+          <Text style={styles.termsText}> and </Text>
+          <TouchableOpacity>
+            <Text style={styles.linkText}>Privacy Policy</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

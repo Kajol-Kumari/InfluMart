@@ -16,7 +16,7 @@ import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 
-const BrandRegistrationForm = ({ route,navigation }) => {
+const BrandRegistrationForm = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -219,17 +219,30 @@ const BrandRegistrationForm = ({ route,navigation }) => {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={styles.loginFrame}>
-                <Text>Already have account? </Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("LoginPageBrands")}
-                >
-                  <Text style={{ color: Color.colorDodgerblue }}>Login</Text>
-                </TouchableOpacity>
-              </View>
             </View>
           </View>
-          <View style={[styles.depth1Frame7, styles.frameLayout2]} />
+          <View>
+            <View style={styles.loginFrame}>
+              <Text style={styles.termsText}>
+                By joining, you agree to our
+              </Text>
+              <TouchableOpacity>
+                <Text style={styles.linkText}>Terms of conditions</Text>
+              </TouchableOpacity>
+              <Text style={styles.termsText}> and </Text>
+              <TouchableOpacity>
+                <Text style={styles.linkText}>Privacy Policy</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.loginFrame}>
+              <Text>Already have account? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("LoginPageBrands")}
+              >
+                <Text style={{ color: Color.colorDodgerblue }}>Login</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     </ScrollView>
