@@ -33,6 +33,7 @@ import UserProfilePhoto from "./screens/Influencer/components/UserProfilePhoto";
 import MaxFollowersNo from "./screens/Influencer/components/MaxFollowersNo";
 import InfluencerConfirmAccount from "./screens/Influencer/InfluencerConfirmAccount";
 import { AlertProvider } from "./util/AlertContext";
+import InfluencerAccountSuccess from "./screens/Influencer/InfluencerAccountSuccess";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -152,6 +153,11 @@ const App = () => {
               <Stack.Screen
                 name="AdminPanel"
                 component={AdminPanel}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InfluencerAccountSuccess"
+                component={InfluencerAccountSuccess}
                 options={{ headerShown: false }}
               />
               <Stack.Screen

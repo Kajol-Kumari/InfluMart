@@ -128,7 +128,7 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
     );
     const _data = await response.data;
     if (response.status === 201) {
-      navigation.navigate("UserProfile");
+      navigation.navigate("InfluencerAccountSuccess");
     } else {
       showAlert("Influencer SignUp Error", _data.message);
     }
