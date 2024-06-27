@@ -103,4 +103,23 @@ export const InfluencerConfirmAccountStyles = {
     fontWeight: "700",
     fontSize: FontSize.size_base,
   },
+  termsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: Padding.p_xs,
+    width: "90%",
+    margin: "auto",
+  },
+  termsText: {
+    fontFamily: FontFamily.interRegular,
+    color: Color.colorSteelblue_200,
+    textAlign: "center",
+  },
+  linkText: {
+    fontFamily: FontFamily.interBold,
+    color: Color.colorDodgerblue,
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
 }

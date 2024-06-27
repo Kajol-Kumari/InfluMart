@@ -1,6 +1,13 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Color } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { handleBrandLogin } from "../../controller/loginController";
@@ -130,15 +137,30 @@ const LoginPageBrand = () => {
               </View>
             </View>
           </TouchableOpacity>
-          <View style={styles.loginFrame}>
-            <Text>Create a new Account? </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("BrandRegistrationForm")}
-            >
-              <Text style={styles.loginText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
+          
         </View>
+        <View>
+            <View style={styles.loginFrame}>
+              <Text style={styles.termsText}>
+                By joining, you agree to our{" "}
+              </Text>
+              <TouchableOpacity>
+                <Text style={styles.linkText}>Terms of Use</Text>
+              </TouchableOpacity>
+              <Text style={styles.termsText}> and </Text>
+              <TouchableOpacity>
+                <Text style={styles.linkText}>Privacy Policy</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.loginFrame}>
+              <Text>Create a new Account? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("BrandRegistrationForm")}
+              >
+                <Text style={styles.loginText}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
       </View>
     </ScrollView>
   );
