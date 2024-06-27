@@ -76,19 +76,21 @@ const BrandProfile = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LoginPageBrands")}
-          >
-            <View style={styles.headerContent}>
+
+          <View style={styles.headerContent}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginPageBrands")}
+            >
               <Image
                 style={styles.backArrow}
                 resizeMode="cover"
                 source={require("../assets/depth-4-frame-Backarrow3x.png")}
               />
-              <Text style={styles.headerTitle}>Profile</Text>
-              <view style={styles.backArrow}></view>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>Brand Profile</Text>
+            <View style={styles.backArrow}></View>
+          </View>
+
           <View style={[styles.profileContainer]}>
             <View style={styles.profileImageContainer}>
               <Image
@@ -97,8 +99,8 @@ const BrandProfile = ({ navigation }) => {
                 source={
                   brand?.profileUrl
                     ? {
-                        uri: brand?.profileUrl,
-                      }
+                      uri: brand?.profileUrl,
+                    }
                     : require("../assets/blank-profile.png")
                 }
               />
@@ -106,10 +108,9 @@ const BrandProfile = ({ navigation }) => {
             <View style={styles.profileInfoContainer}>
               <Text style={styles.brandName}>{brand?.name}</Text>
               <Text style={styles.brandDetails}>
-              {brand?.category || "N/A"}
+                {brand?.category || "N/A"}
               </Text>
             </View>
-
             <View style={styles.actionButtons}>
               <TouchableOpacity style={[styles.button, styles.followButton]}>
                 <Text style={styles.followButtonText}>Settings</Text>
@@ -121,109 +122,110 @@ const BrandProfile = ({ navigation }) => {
           </View>
         </View>
 
-        
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Campaign Insights</Text>
-            <View style={styles.insightContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.insightIcon}
-                  resizeMode="cover"
-                  source={require("../assets/growth.png")}
-                />
-              </View>
-              <View style={styles.insightDetails}>
-                <Text style={styles.insightTitle}>Engagement Rate</Text>
-                <Text style={styles.insightText}>Higher than average</Text>
-                <Text style={styles.insightText}>
-                  {analytics?.averageEngagementRate?`${analytics?.averageEngagementRate} %` : "N/A"}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.insightContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.insightIcon}
-                  resizeMode="cover"
-                  source={require("../assets/growth.png")}
-                />
-              </View>
-              <View style={styles.insightDetails}>
-                <Text style={styles.insightTitle}>Post Frequency</Text>
-                <Text style={styles.insightText}>Average</Text>
-                <Text style={styles.insightText}>
-                  {analytics?.averagePostFrequency?`${formatNumber(analytics?.averagePostFrequency)} posts per week`: "N/A"}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.insightContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.insightIcon}
-                  resizeMode="cover"
-                  source={require("../assets/growth.png")}
-                />
-              </View>
-              <View style={styles.insightDetails}>
-                <Text style={styles.insightTitle}>Follower Growth</Text>
-                <Text style={styles.insightText}>Higher than average</Text>
-                <Text style={styles.insightText}>
-                  {analytics?.averageGrowthValue ? `${analytics?.averageGrowthValue} %`: "N/A"}
-                </Text>
-              </View>
-            </View>
-          </View>
 
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Collaboration Requirements</Text>
-            <View style={styles.requirementContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.requirementIcon}
-                  resizeMode="cover"
-                  source={require("../assets/Mini-follower.png")}
-                />
-              </View>
-              <View style={styles.requirementDetails}>
-                <Text style={styles.requirementTitle}>Minimum Followers</Text>
-                <Text style={styles.requirementText}>
-                  {minimumRequirements?.minimumFollowers ? `${formatNumber(minimumRequirements?.minimumFollowers)}`: "N/A"}
-                </Text>
-              </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Campaign Insights</Text>
+          <View style={styles.insightContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.insightIcon}
+                resizeMode="cover"
+                source={require("../assets/growth.png")}
+              />
             </View>
-            <View style={styles.requirementContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.requirementIcon}
-                  resizeMode="cover"
-                  source={require("../assets/likes.png")}
-                />
-              </View>
-              <View style={styles.requirementDetails}>
-                <Text style={styles.requirementTitle}>Average Likes</Text>
-                <Text style={styles.requirementText}>
-                  {minimumRequirements?.minimumLikes ? `${formatNumber(minimumRequirements?.minimumLikes)}`: "N/A"}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.requirementContainer}>
-              <View style={styles.iconBg}>
-                <Image
-                  style={styles.requirementIcon}
-                  resizeMode="cover"
-                  source={require("../assets/post-frequency.png")}
-                />
-              </View>
-              <View style={styles.requirementDetails}>
-                <Text style={styles.requirementTitle}>Post Frequency</Text>
-                <Text style={styles.requirementText}>
-                  
-                  {minimumRequirements?.minimumPostFrequency ? `At least ${formatNumber(minimumRequirements?.minimumPostFrequency)} posts per week`:"N/A"}
-                  
-                </Text>
-              </View>
+            <View style={styles.insightDetails}>
+              <Text style={styles.insightTitle}>Engagement Rate</Text>
+              <Text style={styles.insightText}>Higher than average</Text>
+              <Text style={styles.insightText}>
+                {analytics?.averageEngagementRate ? `${analytics?.averageEngagementRate} %` : "N/A"}
+              </Text>
             </View>
           </View>
+          <View style={styles.insightContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.insightIcon}
+                resizeMode="cover"
+                source={require("../assets/growth.png")}
+              />
+            </View>
+            <View style={styles.insightDetails}>
+              <Text style={styles.insightTitle}>Post Frequency</Text>
+              <Text style={styles.insightText}>Average</Text>
+              <Text style={styles.insightText}>
+                {analytics?.averagePostFrequency ? `${formatNumber(analytics?.averagePostFrequency)} posts per week` : "N/A"}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.insightContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.insightIcon}
+                resizeMode="cover"
+                source={require("../assets/growth.png")}
+              />
+            </View>
+            <View style={styles.insightDetails}>
+              <Text style={styles.insightTitle}>Follower Growth</Text>
+              <Text style={styles.insightText}>Higher than average</Text>
+              <Text style={styles.insightText}>
+                {analytics?.averageGrowthValue ? `${analytics?.averageGrowthValue} %` : "N/A"}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Collaboration Requirements</Text>
+          <View style={styles.requirementContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.requirementIcon}
+                resizeMode="cover"
+                source={require("../assets/Mini-follower.png")}
+              />
+            </View>
+            <View style={styles.requirementDetails}>
+              <Text style={styles.requirementTitle}>Minimum Followers</Text>
+              <Text style={styles.requirementText}>
+                {minimumRequirements?.minimumFollowers ? `${formatNumber(minimumRequirements?.minimumFollowers)}` : "N/A"}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.requirementContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.requirementIcon}
+                resizeMode="cover"
+                source={require("../assets/likes.png")}
+              />
+            </View>
+            <View style={styles.requirementDetails}>
+              <Text style={styles.requirementTitle}>Average Likes</Text>
+              <Text style={styles.requirementText}>
+                {minimumRequirements?.minimumLikes ? `${formatNumber(minimumRequirements?.minimumLikes)}` : "N/A"}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.requirementContainer}>
+            <View style={styles.iconBg}>
+              <Image
+                style={styles.requirementIcon}
+                resizeMode="cover"
+                source={require("../assets/post-frequency.png")}
+              />
+            </View>
+            <View style={styles.requirementDetails}>
+              <Text style={styles.requirementTitle}>Post Frequency</Text>
+              <Text style={styles.requirementText}>
+
+                {minimumRequirements?.minimumPostFrequency ? `At least ${formatNumber(minimumRequirements?.minimumPostFrequency)} posts per week` : "N/A"}
+
+              </Text>
+            </View>
+          </View>
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Collaboration Count</Text>
@@ -236,7 +238,7 @@ const BrandProfile = ({ navigation }) => {
               />
             </View>
             <Text style={styles.collabCount}>
-              {collaborationCount?`${formatNumber(collaborationCount)}`: "N/A"}
+              {collaborationCount ? `${formatNumber(collaborationCount)}` : "N/A"}
             </Text>
           </View>
         </View>

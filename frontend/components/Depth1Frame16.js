@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View, ImageSourcePropType ,TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { FontSize, Color, Border, FontFamily, Padding } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -54,13 +54,13 @@ const Depth1Frame16 = ({
 
   return (
     <View style={styles.depth1Frame3}>
-      <View style={[styles.depth2Frame0, depth2Frame01Style]}>
+      <View style={[styles.depth2Frame0]}>
         <Image
           style={styles.depth3Frame0}
           contentFit="cover"
           source={depth3Frame0}
         />
-        <View style={[styles.depth3Frame2, depth3Frame22Style]}>
+        <View style={[styles.depth3Frame2]}>
           <View style={[styles.depth4Frame0, depth4Frame03Style]}>
             <View style={styles.depth5Frame0}>
               <Text style={styles.productPost}>{productPost}</Text>
@@ -82,7 +82,6 @@ const Depth1Frame16 = ({
           </View>
         </View>
       </View>
-      <View style={[styles.depth2Frame1, styles.frameLayout]}>
       <TouchableOpacity onPress={() => navigation.navigate('FriendRequestPage')}>
 
         <View style={[styles.depth3Frame01, styles.frameBg]}>
@@ -94,9 +93,7 @@ const Depth1Frame16 = ({
             </View>
           </View>
         </View>
-        </TouchableOpacity>
-
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -151,12 +148,9 @@ const styles = StyleSheet.create({
     width: 126,
   },
   depth2Frame0: {
-    left: 16,
-    width: 214,
-    flexDirection: "row",
-    height: 72,
-    top: 12,
-    position: "absolute",
+    width:"auto",
+    display:"flex",
+    flexDirection:"row"
   },
   viewRequest: {
     color: Color.colorWhite,
@@ -175,20 +169,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
     height: 32,
-    width: 126,
+    width: 100,
     justifyContent: "center",
     flexDirection: "row",
   },
   depth2Frame1: {
-    left: 248,
-    top: 12,
-    position: "absolute",
     height: 32,
   },
   depth1Frame3: {
     backgroundColor: Color.colorBlack,
-    width: 390,
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     height: 96,
+    paddingHorizontal:Padding.p_base
   },
 });
 

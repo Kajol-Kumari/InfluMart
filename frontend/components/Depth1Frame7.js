@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
   depth1Frame0: {
     backgroundColor: Color.colorWhitesmoke_100,
     width: "100%",
-    paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_base,
     paddingBottom: Padding.p_5xs,
     height: 'auto',

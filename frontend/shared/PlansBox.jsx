@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: Color.colorGainsboro_200,
     borderWidth: 1,
-    width: 358,
-    height: 178,
+    width: 330,
+    height: "auto",
     padding: Padding.p_5xl,
     borderRadius: Border.br_xs,
     marginVertical: Padding.p_7xs
@@ -63,14 +63,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   planDetailsContainer: {
-    width: 308,
+    width: "100%",
+    display:"flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 16,
   },
   planTextContainer: {
+    width:"100%",
     flexDirection: "row",
+    justifyContent:"space-between",
     alignItems: "center",
   },
   planDuration: {
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontFamily: FontFamily.workSansBold,
     color: Color.colorGray_300,
-    width:"68%"
+    width:"auto"
   },
   suggestedTag: {
     backgroundColor: Color.colorDodgerblue,
@@ -113,9 +116,9 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
     borderStyle: "solid",
     borderColor: Color.colorGainsboro_200,
-    padding: Padding.p_base,
+    paddingVertical: Padding.p_base,
     borderRadius: Border.br_xs,
-    width:"65%"
+    width:"100%"
   },
   buttonIcon: {
     width: 20,

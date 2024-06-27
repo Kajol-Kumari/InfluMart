@@ -14,32 +14,31 @@ const UserProfile = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.userprofile}>
+    <View style={styles.userprofile}>
+      <ScrollView>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
 
-          <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-            <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
+            <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
+              <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
 
-              <View style={[styles.depth3Frame0, styles.frameLayout]}>
+                <View style={[styles.depth3Frame0, styles.frameLayout]}>
 
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-4-frame-018.png")}
-                />
-              </View>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-4-frame-018.png")}
+                  />
+                </View>
 
-              <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-                <View style={[styles.depth4Frame01, styles.frameLayout]}>
-                  <View style={[styles.depth5Frame0, styles.frameLayout]} />
+                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
+                  <View style={[styles.depth4Frame01, styles.frameLayout]}>
+                    <View style={[styles.depth5Frame0, styles.frameLayout]} />
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
           </TouchableOpacity>
-
           <Depth1Frame17 />
           <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>
@@ -69,11 +68,10 @@ const UserProfile = () => {
           />
           <Depth1Frame15 />
           <Depth1Frame14 />
-          <Depth1Frame13 />
-          <View style={[styles.depth1Frame9, styles.frameLayout1]} />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Depth1Frame13 />
+    </View>
   );
 };
 
@@ -82,12 +80,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorBlack,
   },
   depth1FrameSpaceBlock: {
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
   },
   frameFlexBox: {
     justifyContent: "space-between",
@@ -156,13 +154,15 @@ const styles = StyleSheet.create({
     height: 20,
   },
   depth0Frame0: {
-    height: 1158,
+    height: "auto",
     overflow: "hidden",
   },
   userprofile: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorBlack,
     flex: 1,
     width: "100%",
+    height: "auto",
+    paddingBottom:88
   },
 });
 

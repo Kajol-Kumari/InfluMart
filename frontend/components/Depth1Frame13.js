@@ -180,8 +180,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
     flexDirection: "row",
+    justifyContent:"space-evenly",
     height: 72,
   },
   depth1Frame8: {
@@ -189,11 +190,13 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: Color.colorDarkslategray_200,
     borderTopWidth: 1,
-    width: 390,
-    height: 93,
+    width: "100%",
+    height:88,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
+    position:"absolute",
+    bottom:0
   },
 });
 

@@ -1,15 +1,18 @@
+import {Padding} from '../GlobalStyles';
+
 export const BrandProfileStyles = {
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
   header: {
-    padding: 20,
+    paddingTop:40
   },
   headerContent: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal:Padding.p_base
   },
   backArrow: {
     width: 24,
@@ -21,13 +24,15 @@ export const BrandProfileStyles = {
     marginLeft: 10,
   },
   profileContainer: {
+    width:"100%",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
     marginTop: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal:Padding.p_base,
+    boxSizing:"border-box"
   },
   profileImageContainer: {
-    marginRight: 20,
+    width:280,
   },
   profileImage: {
     width: 128,
@@ -35,37 +40,41 @@ export const BrandProfileStyles = {
     borderRadius: 64,
   },
   profileInfoContainer: {
+    width:280,
     flex: 1,
   },
   brandName: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
+    marginTop:20
   },
   brandDetails: {
     color: "#666",
     marginTop: 5,
   },
   actionButtons: {
+    width:"100%",
+    display:"flex",
     flexDirection: "row",
+    justifyContent:"center",
     marginTop: 20,
-    gap: 20,
+    gap: 16,
+    paddingHorizontal:Padding.p_base
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
-    width: 150,
+    width: "50%",
     height: 40,
     borderRadius: 12,
   },
   followButton: {
     backgroundColor: "#f0f0f0",
-    marginRight: 10,
     color: "black",
   },
   messageButton: {
     backgroundColor: "#3498db",
-    marginRight: 10,
   },
   followButtonText: {
     fontWeight: "bold",
@@ -77,7 +86,7 @@ export const BrandProfileStyles = {
   },
   section: {
     padding: 20,
-    marginTop: 20,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 20,

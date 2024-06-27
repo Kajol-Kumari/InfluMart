@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   frameLayout: {
     height: 40,
-    width: 358,
+    width: "100%",
   },
   frameBg: {
     backgroundColor: Color.colorDarkslategray_200,
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   depth5Frame0: {
     borderRadius: Border.br_45xl,
     overflow: "hidden",
-    width: 128,
-    height: 128,
+    width: 120,
+    height: 120,
   },
   depth4Frame0: {
     width: 128,
@@ -110,13 +110,14 @@ const styles = StyleSheet.create({
   depth4Frame1: {
     marginLeft: 16,
     justifyContent: "center",
-    width: 214,
+    width: "auto",
     height: 128,
   },
   depth3Frame0: {
     height: 128,
-    width: 358,
+    width: "100%",
     flexDirection: "row",
+    justifyContent:"center"
   },
   message: {
     fontSize: FontSize.size_sm,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
     height: 40,
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -143,10 +144,12 @@ const styles = StyleSheet.create({
   },
   depth2Frame0: {
     height: 184,
-    width: 358,
+    width: "100%",
+    flexDirection:"column",
+    justifyContent:"center"
   },
   depth1Frame1: {
-    width: 390,
+    width: "100%",
     height: 216,
     padding: Padding.p_base,
     flexDirection: "row",

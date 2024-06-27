@@ -123,14 +123,15 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
+    justifyContent:"space-evenly",
     paddingVertical: 0,
     borderStyle: "solid",
-    width: 'auto',
+    width: '100%',
   },
   depth1Frame5: {
     height: 66,
     paddingBottom: Padding.p_xs,
-    width: 'auto',
+    width: '100%',
   },
 });
 
