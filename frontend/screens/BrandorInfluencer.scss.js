@@ -63,6 +63,7 @@ export const BrandorInfluencerStyles = {
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: Padding.p_xs,
+    flexWrap: "wrap",
   },
   termsText: {
     fontFamily: FontFamily.interRegular,

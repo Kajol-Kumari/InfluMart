@@ -79,6 +79,7 @@ export const signupStyles = {
       width: "100%",
       marginBottom: 14,
       alignItems: "center",
+      flexWrap: "wrap",
     },
     frameBg: {
       backgroundColor: Color.colorDodgerblue,

@@ -34,6 +34,7 @@ export const loginStyle = {
     width: "100%",
     marginBottom: 14,
     alignItems: "center",
+    flexWrap: "wrap",
   },
   loginText: {
     color: Color.colorDodgerblue,

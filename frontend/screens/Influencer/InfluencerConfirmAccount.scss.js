@@ -110,6 +110,7 @@ export const InfluencerConfirmAccountStyles = {
     paddingVertical: Padding.p_xs,
     width: "90%",
     margin: "auto",
+    flexWrap: "wrap",
   },
   termsText: {
     fontFamily: FontFamily.interRegular,

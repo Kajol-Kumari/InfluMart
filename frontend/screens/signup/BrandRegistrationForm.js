@@ -227,11 +227,11 @@ const BrandRegistrationForm = ({ route, navigation }) => {
                 By joining, you agree to our
               </Text>
               <TouchableOpacity>
-                <Text style={styles.linkText}>Terms of Use</Text>
+                <Text style={styles.linkText}>Terms of conditions</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
               <TouchableOpacity>
-                <Text style={styles.linkText}>Privacy Policy</Text>
+                <Text style={styles.linkText}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.loginFrame}>
