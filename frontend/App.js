@@ -39,6 +39,7 @@ import InfluencerDeleteAccountPage from "./screens/Influencer/Settings/Support/I
 import InfluencerContactUs from "./screens/Influencer/Settings/Support/InfluencerContactUs";
 import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/InfluencerHelpCenter";
 import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
+import TosPrivacyPolicyScreen from "./screens/TosPrivacyPolicyScreen";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -119,6 +120,11 @@ const App = () => {
                 name="BrandAccountReviewNotification"
                 component={BrandAccountSignupDataPreview}
                 options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="TosPrivacyPolicy"
+                component={TosPrivacyPolicyScreen}
+                options={{ title: "Terms of Service & Privacy Policy" }}
               />
               <Stack.Screen
                 name="InfluencerConfirmAccount"
