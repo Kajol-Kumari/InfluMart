@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
 
-const Depth1Frame17 = () => {
+const Depth1Frame17 = ({image,username}) => {
   const navigation = useNavigation();
 
   return (
@@ -16,21 +16,21 @@ const Depth1Frame17 = () => {
             <Image
               style={styles.depth5Frame0}
               contentFit="cover"
-              source={require("../assets/depth-5-frame-026.png")}
+              source={image}
             />
           </View>
           <View style={styles.depth4Frame1}>
             <View style={styles.depth5Frame01}>
               <View style={styles.depth6Frame0}>
                 <Text style={[styles.marissa, styles.marissaTypo]}>
-                  Marissa
+                  {username}
                 </Text>
               </View>
             </View>
             <View style={styles.depth5Frame1}>
               <View style={styles.depth6Frame0}>
                 <Text style={styles.influencer150kFollowers}>
-                  Influencer, 150k followers
+                  Influencer
                 </Text>
               </View>
             </View>

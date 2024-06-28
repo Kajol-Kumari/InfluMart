@@ -97,7 +97,7 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
   data.append("price", JSON.stringify(payload.price));
   data.append("firstName", payload.userName);
   data.append("nickName", payload.userName);
-  data.append("instaProfile", payload.social?.insta);
+  data.append("instaProfile", payload?.instaProfile);
   data.append("facebookProfile", payload.social?.fb);
   data.append("linkedInProfile", payload.social?.linkedIn);
   data.append("twitterProfile", payload.social?.tr);

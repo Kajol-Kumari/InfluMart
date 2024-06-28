@@ -25,7 +25,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       price: [payload.price],
       youtubeChannel: payload.social?.yt,
       facebookProfile: payload.social?.fb,
-      instaProfile: payload.social?.insta,
+      instaProfile: payload.social?.ig,
       linkedInProfile: payload.social?.linkedIn,
       twitterProfile: payload.social?.tr,
       nickName: payload.userName,
