@@ -28,10 +28,11 @@ const MultipleSelectList = ({
   notFoundText = "No data found",
   save = "key",
   dropdownShown = false,
+  selectedval = [],
+  setSelectedVal = () => {},
 }) => {
   const [_firstRender, _setFirstRender] = React.useState(true);
   const [dropdown, setDropdown] = React.useState(dropdownShown);
-  const [selectedval, setSelectedVal] = React.useState([]);
   const [height, setHeight] = React.useState(350);
   const animatedvalue = React.useRef(new Animated.Value(0)).current;
   const [filtereddata, setFilteredData] = React.useState(data);

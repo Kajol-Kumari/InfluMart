@@ -12,11 +12,21 @@ import { verifyOTP } from "../controller/signupController";
 import { useAlert } from "../util/AlertContext";
 
 const OtpVerification = ({ route, navigation }) => {
-  const { payload } = route.params;
+  const payload = route.params?.payload;
   const [otp, setOtp] = React.useState(["", "", "", "", "", ""]);
   const inputs = React.useRef([]);
-  const {showAlert} = useAlert();
+  const { showAlert } = useAlert();
   const [error, setError] = React.useState(false);
+
+  // Clear OTP input and state when payload changes (if it becomes null)
+  React.useEffect(() => {
+    if (!payload) {
+      setOtp(["", "", "", "", "", ""]);
+      showAlert("Alert", "Please enter your detail again")
+      navigation.navigate("BrandRegistrationForm");
+    }
+  }, [payload]);
+
   const handleChange = (text, index) => {
     const newOtp = [...otp];
     newOtp[index] = text;
@@ -38,14 +48,15 @@ const OtpVerification = ({ route, navigation }) => {
       return;
     }
     const _otp = otp.join("");
-    await verifyOTP(_otp, payload, navigation,showAlert);
+    await verifyOTP(_otp, payload, navigation, showAlert);
   };
 
   return (
     <View style={styles.otpverification}>
       <View style={styles.depth0Frame0}>
         <View style={{ width: "100%" }}>
-          <TouchableOpacity style={{ width: "100%" }}
+          <TouchableOpacity
+            style={{ width: "100%" }}
             onPress={() => navigation.navigate("BrandRegistrationForm")}
           >
             <View style={[styles.depth1Frame0, styles.depth1FrameBg]}>
@@ -60,6 +71,7 @@ const OtpVerification = ({ route, navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
+
           <View style={styles.depth1Frame1}>
             <View style={styles.depth2Frame01}>
               <Text style={[styles.enterTheCode, styles.nextTypo]}>
@@ -162,7 +174,7 @@ const styles = StyleSheet.create({
   depth3Frame0: {
     alignItems: "center",
     flexDirection: "row",
-    width: "100%"
+    width: "100%",
   },
   depth5Frame0: {
     justifyContent: "flex-end",
@@ -184,13 +196,13 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
     paddingHorizontal: Padding.p_base,
     width: "100%",
-    marginTop: 20
+    marginTop: 20,
   },
   enterTheCode: {
     fontSize: FontSize.size_3xl,
     lineHeight: 28,
     color: Color.colorGray_400,
-    textAlign: "center"
+    textAlign: "center",
   },
   depth2Frame01: {
     alignSelf: "stretch",
@@ -252,13 +264,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingHorizontal: Padding.p_base,
-    bottom:20,
-    right:20
+    bottom: 20,
+    right: 20,
   },
   depth1Frame4: {
     height: 64,
     justifyContent: "flex-end",
-    marginTop:40
+    marginTop: 40,
   },
   depth1Frame5: {
     height: 20,
@@ -269,15 +281,15 @@ const styles = StyleSheet.create({
     overflow: "scroll",
     width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"space-between"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   otpverification: {
     backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
 });
 

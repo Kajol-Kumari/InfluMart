@@ -62,12 +62,24 @@ export const signupStyles = {
       flexDirection: "row",
       width: "100%",
     },
+    termsText: {
+    fontFamily: FontFamily.interRegular,
+    color: Color.colorSteelblue_200,
+    textAlign: "center",
+  },
+  linkText: {
+    fontFamily: FontFamily.interBold,
+    color: Color.colorDodgerblue,
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
     loginFrame: {
-      height: 60,
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
+      marginBottom: 14,
       alignItems: "center",
+      flexWrap: "wrap",
     },
     frameBg: {
       backgroundColor: Color.colorDodgerblue,

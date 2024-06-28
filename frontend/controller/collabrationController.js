@@ -17,10 +17,10 @@ const getBrandCollaborations = async (brandId, showAlert) => {
     if (response.status == 200) {
       return data.collaborations;
     } else {
-      showAlert("Brand Profile Error", data.message);
+      console.log("Brand Profile Error", data.message);
     }
   } catch (error) {
-    showAlert(
+    console.log(
       "Brand Profile Error",
       "Something went wrong. Please try again."
     );
@@ -42,10 +42,10 @@ const getBrandMinimumRequirements = async (brandId, showAlert) => {
     if (response.status == 200) {
       return data;
     } else {
-      showAlert("Brand Profile Error", data.message);
+      console.log("Brand Profile Error", data.message);
     }
   } catch (error) {
-    showAlert(
+    console.log(
       "Brand Profile Error",
       "Something went wrong. Please try again."
     );
@@ -88,11 +88,11 @@ const getBrandCollaborationAnalytics = async (brandId, showAlert) => {
     if (response.status == 200) {
       return data;
     } else {
-      showAlert("Brand Profile Error", data.message);
+      console.log("Brand Profile Error", data.message);
     }
   } catch (error) {
     console.log(error);
-    showAlert("Brand Profile Error", "Something went wrong. Please try again.");
+    console.log("Brand Profile Error", "Something went wrong. Please try again.");
   }
 };
 

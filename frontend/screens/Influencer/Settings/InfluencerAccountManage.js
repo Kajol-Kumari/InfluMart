@@ -8,13 +8,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import InfluPrice from "../signup/components/InfluPrice";
-import HeadingDescToggle from "../signup/components/HeadingDescToggle";
-import { InfluencerVerify } from "../../controller/signupController";
-import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
-import { useAlert } from "../../util/AlertContext";
-import { Color } from "../../GlobalStyles";
+import { useAlert } from "../../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Color, Padding, FontFamily, FontSize, Border } from "../../../GlobalStyles";
 
 const FormField = ({
   label,
@@ -50,13 +46,10 @@ const FormField = ({
   </View>
 );
 
-const InfluencerRegistrationForm = ({ route, navigation }) => {
+const InfluencerManageAccount = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [over18, setOver18] = useState(false);
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [industryAssociation, setIndustryAssociation] = useState(false);
+  const [username, setUsername] = useState("")
   const [location, setLocation] = useState("");
   const social = route.params?.social;
   const follower = route.params?.follower;
@@ -72,8 +65,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       password &&
       username &&
       location &&
-      over18 &&
-      agreedToTerms &&
       social &&
       follower &&
       price
@@ -87,8 +78,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     password,
     username,
     location,
-    over18,
-    agreedToTerms,
     social,
     follower,
     price,
@@ -98,9 +87,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       setEmail('')
       setPassword('')
       setUsername('')
-      setOver18(false)
-      setAgreedToTerms(false)
-      setIndustryAssociation(false)
       setLocation('')
     }
   },[route.params])
@@ -109,9 +95,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       email,
       password,
       userName: username,
-      over18,
-      agreedToTerms,
-      industryAssociation,
       social,
       follower,
       price,
@@ -126,15 +109,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       <ScrollView style={{ backgroundColor: Color.colorWhite }}>
         <View style={styles.influencerRegistrationForm}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("BrandorInfluencer")}
+            onPress={() => navigation.navigate("AdminPanel")}
           >
             <View style={styles.header}>
               <Image
                 style={styles.headerNavigation}
                 resizeMode="cover"
-                source={require("../../assets/depth-4-frame-Backarrow3x.png")}
+                source={require("../../../assets/depth-4-frame-Backarrow3x.png")}
               />
-              <Text style={styles.headerText}>Sign up</Text>
+              <Text style={styles.headerText}>Manage Account</Text>
               <View style={styles.headerNavigation} />
             </View>
           </TouchableOpacity>
@@ -165,7 +148,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -184,7 +167,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -198,36 +181,10 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>
-              Content and age restriction
-            </Text>
-          </View>
-          <HeadingDescToggle
-            heading="I am over 18"
-            desc="You must be at least 18 to use this service."
-            toggleOn={over18}
-            setToggleOn={setOver18}
-          />
-          <HeadingDescToggle
-            heading="I agree to the terms of service"
-            desc="You need to agree to the terms of service."
-            toggleOn={agreedToTerms}
-            setToggleOn={setAgreedToTerms}
-          />
-
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Industry association</Text>
-          </View>
-          <HeadingDescToggle
-            heading="I am a member of an industry association"
-            toggleOn={industryAssociation}
-            setToggleOn={setIndustryAssociation}
-          />
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>Price per post</Text>
             <TouchableOpacity
@@ -238,7 +195,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -247,11 +204,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             value={location}
             setValue={setLocation}
           />
-
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Subscription plans</Text>
-          </View>
-          <InfluPrice />
           <TouchableOpacity
             onPress={handleSelectPlan}
             disabled={!isFormValid}
@@ -267,22 +219,110 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   !isFormValid && styles.selectPlanButtonDisabledText,
                 ]}
               >
-                Select Plan
+                Update Account
               </Text>
             </View>
           </TouchableOpacity>
-          <View style={styles.loginFrame}>
-            <Text>Already have account? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("LoginPage")}>
-              <Text style={styles.loginText}>Login</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create(InfluencerRegistrationFormStyles);
+const styles = StyleSheet.create({
+    influencerRegistrationForm: {
+      backgroundColor: Color.colorWhite,
+      flex: 1,
+      width: "100%",
+      padding: Padding.p_base,
+    },
+    header: {
+      paddingVertical: Padding.p_base,
+      alignItems: "center",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    headerText: {
+      fontSize: FontSize.size_lg,
+      lineHeight: 23,
+      color: Color.colorGray_100,
+      fontFamily: FontFamily.plusJakartaSansBold,
+    },
+    headerNavigation: {
+      height: 24,
+      width: 24,
+    },
+    fieldContainer: {
+      marginVertical: Padding.p_xs,
+    },
+    fieldLabel: {
+      fontFamily: FontFamily.plusJakartaSansMedium,
+      fontWeight: "500",
+      fontSize: FontSize.size_base,
+      color: Color.colorGray_100,
+    },
+    textInput: {
+      borderRadius: Border.br_xs,
+      backgroundColor: Color.colorAliceblue,
+      padding: Padding.p_base,
+      marginTop: Padding.p_5xs,
+      color: "#4F7A94",
+      fontSize: FontSize.size_base,
+      fontFamily: FontFamily.plusJakartaSansRegular,
+    },
+    sectionHeader: {
+      marginVertical: Padding.p_base,
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: Padding.p_xs,
+    },
+    icon: {
+      width: 28,
+      height: 28,
+      marginLeft: 16,
+    },
+    sectionHeaderText: {
+      fontSize: FontSize.size_base,
+      lineHeight: 28,
+      color: Color.colorGray_100,
+      fontFamily: FontFamily.plusJakartaSansBold,
+    },
+    selectPlanButton: {
+      backgroundColor: Color.colorSteelblue_100,
+      borderRadius: Border.br_xs,
+      paddingVertical: Padding.p_base,
+      alignItems: "center",
+      marginVertical: Padding.p_base,
+    },
+    loginFrame: {
+      height: 60,
+      justifyContent: "center",
+      flexDirection: "row",
+      width: "100%",
+      alignItems: "center",
+    },
+    loginText: {
+      color: Color.colorDodgerblue,
+    },
+    selectPlanButtonDisabled: {
+      backgroundColor: "#F0F2F5",
+    },
+    selectPlanButtonDisabledText: {
+      color: "black",
+    },
+    selectPlanButtonText: {
+      color: Color.colorWhitesmoke_200,
+      fontSize: FontSize.size_base,
+      fontFamily: FontFamily.plusJakartaSansBold,
+    },
+    password: {
+      position: "absolute",
+      top: 23,
+      right: 18,
+    },
+  });
 
-export default InfluencerRegistrationForm;
+export default InfluencerManageAccount;
