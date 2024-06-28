@@ -227,4 +227,51 @@ export const AnalyticsStyles = {
     width: "100%",
     backgroundColor: Color.colorWhite,
   },
+  averagePriceSection: {
+    paddingVertical: Padding.p_xs,
+    paddingHorizontal: Padding.p_base,
+    alignSelf: "stretch",
+  },
+  averagePriceHeaderText: {
+    fontSize: 22,
+    lineHeight: 28,
+    fontFamily: FontFamily.plusJakartaSansBold,
+    fontWeight: "700",
+    color: Color.colorGray_200,
+    marginBottom: 16,
+  },
+  averagePriceContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Color.colorWhitesmoke,
+    padding: Padding.p_base,
+    minHeight: 72,
+    marginBottom: 8,
+  },
+  priceContainer: {
+    width: 77,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  priceText: {
+    fontSize: FontSize.size_sm,
+    lineHeight: 21,
+    fontFamily: FontFamily.plusJakartaSansRegular,
+    color: "#4A739C",
+  },
+  platformContainer: {
+    alignSelf: "stretch",
+  },
+  platformText: {
+    fontFamily: FontFamily.plusJakartaSansMedium,
+    fontWeight: "500",
+    fontSize: FontSize.size_base,
+    color: Color.colorGray_200,
+    lineHeight: 24,
+  },
+  insightIcon: {
+    width: 24,
+    height: 24,
+  },
 };

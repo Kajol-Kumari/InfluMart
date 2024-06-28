@@ -138,7 +138,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.confirmButtonContainer}>
-        <TouchableOpacity style={styles.confirmButton}>
+        <TouchableOpacity style={styles.confirmButton} onPress={()=>navigation.navigate("InfluencerRegistrationForm", {social,price,follower,photo,})}>
           <Text style={styles.confirmButtonText}>Confirm</Text>
         </TouchableOpacity>
       </View>
