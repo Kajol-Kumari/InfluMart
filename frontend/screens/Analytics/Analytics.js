@@ -127,10 +127,10 @@ const Analytics = ({ route, navigation }) => {
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.tagContainer}>
-              {socialData?.instaData &&
-                socialData?.instaData[0].tags.map((tag, index) => (
+              {socialData?.instaData !=undefined && socialData?.instaData[0]?.tags !=undefined &&
+                socialData?.instaData[0]?.tags?.map((tag, index) => (
                   <View key={index} style={styles.tagItem}>
-                    <Text style={styles.tagText}>{`#${processTag(tag)}`}</Text>
+                    <Text style={styles.tagText}>{`#${socialData?.instaData[0]?.tags !=undefined && processTag(tag)}`}</Text>
                   </View>
                 ))}
             </View>
