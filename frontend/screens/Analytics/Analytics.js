@@ -245,9 +245,9 @@ const Analytics = ({ route, navigation }) => {
             <Text style={styles.averagePriceHeaderText}>
               Average Price Per Post
             </Text>
-            <AveragePrice platform="Instagram" price="$2,000" />
-            <AveragePrice platform="YouTube" price="$7,500" />
-            <AveragePrice platform="TikTok" price="$5,000" />
+            <AveragePrice platform="Instagram" price={`$ ${influencer?.price && influencer?.price[0]?.ig || "N/A"}`} />
+            <AveragePrice platform="YouTube" price={`$ ${influencer?.price && influencer?.price[0]?.yt || "N/A"}`} />
+            <AveragePrice platform="TikTok" price={`$ ${influencer?.price && influencer?.price[0]?.tt || "N/A"}`} />
           </View>
           <View style={styles.connectContainer}>
             <TouchableOpacity>
