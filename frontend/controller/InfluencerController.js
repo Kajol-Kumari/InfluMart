@@ -17,7 +17,10 @@ const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
     if (response.status === 200) {
       let newData = {...data, profileUrl: data.profileUrl.includes("uploads")
           ? `${API_ENDPOINT}/${data.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
-          : null,category: JSON.parse(data.category).join(", "),}
+          : null, category: data?.category && JSON.parse(data.category).join(", "),
+          price: data?.price && JSON.parse(data.price),
+          }
+      console.log(newData)
       setProfile(newData);
     } else {
       showAlert("Profile Error", response.data.message);
