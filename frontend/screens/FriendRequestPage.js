@@ -7,9 +7,9 @@ import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 
 const FriendRequestPage = () => {
   const navigation = useNavigation();
-
   return (
     <View style={styles.friendrequestpage}>
+      {/* Navigate to Userprofile */}
       <TouchableOpacity style={styles.header} onPress={() => navigation.navigate('UserProfile')}>
 
         <Depth1Frame7
