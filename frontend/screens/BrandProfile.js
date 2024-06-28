@@ -73,6 +73,7 @@ const BrandProfile = ({ navigation }) => {
 
 
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
@@ -103,6 +104,23 @@ const BrandProfile = ({ navigation }) => {
                   : require("../assets/blank-profile.png")
               }
             />
+=======
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginPageBrands")}
+            >
+              <Image
+                style={styles.backArrow}
+                resizeMode="cover"
+                source={require("../assets/depth-4-frame-Backarrow3x.png")}
+              />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>Brand Profile</Text>
+            <View style={styles.backArrow}></View>
+>>>>>>> 027c4f133a418f00cf68c3a90888820eae645250
           </View>
           <View style={styles.profileInfoContainer}>
             <Text style={styles.brandName}>{brand?.name}</Text>

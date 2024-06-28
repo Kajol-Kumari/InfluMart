@@ -39,6 +39,11 @@ import InfluencerDeleteAccountPage from "./screens/Influencer/Settings/Support/I
 import InfluencerContactUs from "./screens/Influencer/Settings/Support/InfluencerContactUs";
 import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/InfluencerHelpCenter";
 import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
+<<<<<<< HEAD
+=======
+import TosScreen from "./screens/TosAndPp/TosScreen";
+import PPScreen from "./screens/TosAndPp/PPScreen";
+>>>>>>> 027c4f133a418f00cf68c3a90888820eae645250
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -118,6 +123,16 @@ const App = () => {
               <Stack.Screen
                 name="BrandAccountReviewNotification"
                 component={BrandAccountSignupDataPreview}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="TosScreen"
+                component={TosScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="PPScreen"
+                component={PPScreen}
                 options={{ headerShown: false }}
               />
               <Stack.Screen

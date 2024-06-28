@@ -123,11 +123,19 @@ const LoginPage = () => {
               <Text style={styles.termsText}>
                 By joining, you agree to our{" "}
               </Text>
+<<<<<<< HEAD
               <TouchableOpacity>
                 <Text style={styles.linkText}>Terms of Service</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
               <TouchableOpacity>
+=======
+              <TouchableOpacity onPress={()=>navigation.navigate("TosScreen",{navigate:"LoginPage"})}>
+                <Text style={styles.linkText}>Terms of Service</Text>
+              </TouchableOpacity>
+              <Text style={styles.termsText}> and </Text>
+              <TouchableOpacity onPress={()=>navigation.navigate("PPScreen",{navigate:"LoginPage"})}>
+>>>>>>> 027c4f133a418f00cf68c3a90888820eae645250
                 <Text style={styles.linkText}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>
