@@ -17,8 +17,19 @@ const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
     if (response.status === 200) {
       let newData = {...data, profileUrl: data.profileUrl.includes("uploads")
           ? `${API_ENDPOINT}/${data.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
-          : null,category: JSON.parse(data.category).join(", "),}
+          : null,category: (() => {
+            try {
+              const categoryArray = JSON.parse(data.category || "[]");
+              return Array.isArray(categoryArray) ? categoryArray.join(", ") : "";
+            } catch (error) {
+              console.error("Failed to parse category JSON:", error.message);
+              return "";
+            }
+          })(),
+        price: data?.price && JSON.parse(data.price),
+        }
       setProfile(newData);
+      console.log(newData);
     } else {
       showAlert("Profile Error", response.data.message);
     }
