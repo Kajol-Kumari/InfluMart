@@ -14,6 +14,8 @@ export const handleInfluencerLogin = async (username,password) => {
           body: JSON.stringify({ username, password })
         });
         const data = await response.json()
+        await AsyncStorage.setItem('token', data?.token);
+        await AsyncStorage.setItem('influencerId', data?.influencer?._id);
         if (response.status == 200){
             return {success:true,message:data.message}
         }

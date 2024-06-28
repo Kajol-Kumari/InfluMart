@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Text } from "react-native";
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
 
-const Depth1Frame9 = () => {
+const Depth1Frame9 = ({image,username,location,category}) => {
   return (
     <View style={styles.depth1Frame1}>
       <View style={styles.depth2Frame0}>
@@ -12,28 +12,28 @@ const Depth1Frame9 = () => {
             <Image
               style={styles.depth5Frame0}
               contentFit="cover"
-              source={require("../assets/depth-5-frame-05.png")}
+              source={image}
             />
           </View>
           <View style={[styles.depth4Frame1, styles.frameFlexBox]}>
             <View style={styles.depth5Frame01}>
               <View style={styles.depth6Frame0}>
                 <Text style={[styles.caroline, styles.followTypo]}>
-                  Caroline 
+                  {username} 
                 </Text>
               </View>
             </View>
             <View style={[styles.depth5Frame1, styles.depth5FrameLayout]}>
               <View style={styles.depth6Frame0}>
                 <Text style={styles.age27Los} numberOfLines={1}>
-                  Age 27, Los Angeles, CA
+                  {location}
                 </Text>
               </View>
             </View>
             <View style={[styles.depth5Frame2, styles.depth5FrameLayout]}>
               <View style={styles.depth6Frame0}>
                 <Text style={styles.age27Los} numberOfLines={1}>
-                  Beauty, Fashion, Travel
+                  {category}
                 </Text>
               </View>
             </View>

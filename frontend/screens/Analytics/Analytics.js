@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import Depth1Frame7 from "../../components/Depth1Frame7";
 import Depth1Frame9 from "../../components/Depth1Frame9";
@@ -15,6 +16,25 @@ import { FBStats, InstaStats, YTStats } from "./components/stats/AllStats";
 import { FBGraph, IgGraph, YTGraph } from "./components/MyGraphs/AllGraphs";
 import { InstaDemo, YTDemo } from "./components/Images/AllImages";
 import { AnalyticsStyles } from "./Analytics.scss";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAlert } from "../../util/AlertContext";
+import { GetInfluencerProfile } from "../../controller/InfluencerController";
+
+const AveragePrice = ({ platform, price }) => (
+  <View style={styles.averagePriceContainer}>
+    <View style={styles.platformContainer}>
+      <Text style={styles.platformText}>{platform}</Text>
+      <Text style={styles.priceText}>{price}</Text>
+    </View>
+    <View style={styles.priceContainer}>
+      <Image
+        style={styles.insightIcon}
+        resizeMode="cover"
+        source={require("../../assets/growth.png")}
+      />
+    </View>
+  </View>
+);
 
 const Analytics = ({ route, navigation }) => {
   const [fbData, setFbData] = React.useState({});
@@ -22,41 +42,53 @@ const Analytics = ({ route, navigation }) => {
   const [ytData, setYtData] = React.useState({});
   const [socialData, setSocialData] = React.useState(false);
   const [tab, setTab] = React.useState("instagram");
+  const { showAlert } = useAlert();
   const [popularPosts, setPopularPosts] = React.useState(null);
-
+  const [influencerId, setInfluencerId] = React.useState("");
+  const [influencer, setInfluencer] = React.useState(null);
   React.useEffect(() => {
-    const userId = "666fecab7b21456e84d3c7e2";
-    getSocialData(userId).then((data) => {
-      const transformedFb = transformFB(data);
-      const transformedYt = transformYT(data);
-      const transformedIg = transformIG(data);
-      setFbData(transformedFb.fbdata);
-      setInstaData(transformedIg.instadata);
-      setYtData(transformedYt.ytdata);
-      setSocialData(data);
-      const sortedPosts = data.instaData[
-        data.instaData.length - 1
-      ].lastPosts.sort((a, b) => b.likes - a.likes);
-      const popularPosts = sortedPosts.slice(0, 2);
-      let popular = popularPosts.map((post) => ({
-        title: post.text,
-        url: post.url,
-        platform: "Instagram",
-      }));
-      const sortedYtPosts = data.ytData[
-        data.ytData.length - 1
-      ].popularVideos.data.sort((a, b) => b.viewCount - a.viewCount);
-      const popularYtPosts = sortedYtPosts.slice(0, 2);
-      popularYtPosts.map((item) => {
-        popular.push({
-          title: item.title,
-          url: `${item.videoId}`,
-          platform: "YouTube",
-        });
-      });
-      setPopularPosts(popular);
-    }
-    ).catch((error) => console.log(error));
+    const getData = async () => {
+      const id = await AsyncStorage.getItem("influencerId");
+      if (!id) {
+        navigation.navigate("Homepage");
+      } else {
+        setInfluencerId(id);
+        GetInfluencerProfile(id, setInfluencer, showAlert);
+        getSocialData(id, showAlert)
+          .then((data) => {
+            const transformedFb = transformFB(data);
+            const transformedYt = transformYT(data);
+            const transformedIg = transformIG(data);
+            setFbData(transformedFb.fbdata);
+            setInstaData(transformedIg.instadata);
+            setYtData(transformedYt.ytdata);
+            setSocialData(data);
+            const sortedPosts = data?.instaData[
+              data?.instaData.length - 1
+            ].lastPosts.sort((a, b) => b.likes - a.likes);
+            const popularPosts = sortedPosts?.slice(0, 2);
+            let popular = popularPosts?.map((post) => ({
+              title: post.text,
+              url: post.url,
+              platform: "Instagram",
+            }));
+            const sortedYtPosts = data?.ytData[
+              data?.ytData.length - 1
+            ].popularVideos.data.sort((a, b) => b.viewCount - a.viewCount);
+            const popularYtPosts = sortedYtPosts?.slice(0, 2);
+            popularYtPosts?.map((item) => {
+              popular.push({
+                title: item.title,
+                url: `${item.videoId}`,
+                platform: "YouTube",
+              });
+            });
+            setPopularPosts(popular);
+          })
+          .catch((error) => console.log(error));
+      }
+    };
+    getData();
   }, []);
 
   const processTag = (tag) => {
@@ -71,21 +103,32 @@ const Analytics = ({ route, navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
             <Depth1Frame7
               depth4Frame0={require("../../assets/depth-4-frame-010.png")}
-              requestDetails="Caroline, Influencer"
+              requestDetails={`Influencer`}
               depth3Frame0BackgroundColor="#fff"
               requestDetailsWidth={173}
               depth4Frame0FontFamily="BeVietnamPro-Bold"
               depth4Frame0Color="#121217"
             />
           </TouchableOpacity>
-          <Depth1Frame9 />
+          <Depth1Frame9
+            image={
+              influencer?.profileUrl
+                ? {
+                    uri: influencer?.profileUrl,
+                  }
+                : require("../../assets/blank-profile.png")
+            }
+            username={influencer?.userName}
+            location={influencer?.location}
+            category={influencer?.category}
+          />
           <View style={styles.recentContainer}>
             <Text style={styles.recentText}>Frequently used hashtags</Text>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.tagContainer}>
-              {socialData &&
-                socialData.instaData[0].tags.map((tag, index) => (
+              {socialData?.instaData &&
+                socialData?.instaData[0].tags.map((tag, index) => (
                   <View key={index} style={styles.tagItem}>
                     <Text style={styles.tagText}>{`#${processTag(tag)}`}</Text>
                   </View>
@@ -164,7 +207,8 @@ const Analytics = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-          {/* Charts */}
+
+          {/* Graphs */}
 
           {socialData &&
             (tab === "instagram" ? (
@@ -197,6 +241,14 @@ const Analytics = ({ route, navigation }) => {
                     )
               )}
           </ScrollView>
+          <View style={styles.averagePriceSection}>
+            <Text style={styles.averagePriceHeaderText}>
+              Average Price Per Post
+            </Text>
+            <AveragePrice platform="Instagram" price="$2,000" />
+            <AveragePrice platform="YouTube" price="$7,500" />
+            <AveragePrice platform="TikTok" price="$5,000" />
+          </View>
           <View style={styles.connectContainer}>
             <TouchableOpacity>
               <View style={styles.connectButton}>
