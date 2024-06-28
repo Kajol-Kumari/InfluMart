@@ -29,7 +29,6 @@ const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
         price: data?.price && JSON.parse(data.price),
         }
       setProfile(newData);
-      console.log(newData);
     } else {
       showAlert("Profile Error", response.data.message);
     }
