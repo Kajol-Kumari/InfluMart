@@ -67,59 +67,57 @@ const BrandProfile = ({ navigation }) => {
         .catch((error) =>
           console.error("Error fetching minimum requirements:", error)
         );
-        getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
+      getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
     }
   }, [brandId, token]);
 
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-
-          <View style={styles.headerContent}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("LoginPageBrands")}
-            >
-              <Image
-                style={styles.backArrow}
-                resizeMode="cover"
-                source={require("../assets/depth-4-frame-Backarrow3x.png")}
-              />
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Brand Profile</Text>
-            <View style={styles.backArrow}></View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerContent}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LoginPageBrands")}
+          >
+            <Image
+              style={styles.backArrow}
+              resizeMode="cover"
+              source={require("../assets/depth-4-frame-Backarrow3x.png")}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Brand Profile</Text>
+          <View style={styles.backArrow}></View>
+        </View>
+      </View>
+      <ScrollView style={styles.container}>
+        <View style={[styles.profileContainer]}>
+          <View style={styles.profileImageContainer}>
+            <Image
+              style={styles.profileImage}
+              resizeMode="cover"
+              source={
+                brand?.profileUrl
+                  ? {
+                    uri: brand?.profileUrl,
+                  }
+                  : require("../assets/blank-profile.png")
+              }
+            />
           </View>
-
-          <View style={[styles.profileContainer]}>
-            <View style={styles.profileImageContainer}>
-              <Image
-                style={styles.profileImage}
-                resizeMode="cover"
-                source={
-                  brand?.profileUrl
-                    ? {
-                      uri: brand?.profileUrl,
-                    }
-                    : require("../assets/blank-profile.png")
-                }
-              />
-            </View>
-            <View style={styles.profileInfoContainer}>
-              <Text style={styles.brandName}>{brand?.name}</Text>
-              <Text style={styles.brandDetails}>
-                {brand?.category || "N/A"}
-              </Text>
-            </View>
-            <View style={styles.actionButtons}>
-              <TouchableOpacity style={[styles.button, styles.followButton]}>
-                <Text style={styles.followButtonText}>Settings</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.messageButton]}>
-                <Text style={styles.buttonText}>inbox</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.profileInfoContainer}>
+            <Text style={styles.brandName}>{brand?.name}</Text>
+            <Text style={styles.brandDetails}>
+              {brand?.category || "N/A"}
+            </Text>
           </View>
+        </View>
+        <View style={styles.actionButtons}>
+          <TouchableOpacity style={[styles.button, styles.followButton]}>
+            <Text style={styles.followButtonText}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.messageButton]}>
+            <Text style={styles.buttonText}>inbox</Text>
+          </TouchableOpacity>
         </View>
 
 
@@ -242,8 +240,8 @@ const BrandProfile = ({ navigation }) => {
             </Text>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

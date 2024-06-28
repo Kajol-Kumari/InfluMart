@@ -1,18 +1,19 @@
-import {Padding} from '../GlobalStyles';
+import {Color, Padding} from '../GlobalStyles';
 
 export const BrandProfileStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Color.colorWhitesmoke_100,
   },
   header: {
-    paddingTop:40
+    paddingTop:24,
+    marginBottom:16
   },
   headerContent: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal:Padding.p_base
+    paddingHorizontal:Padding.p_base,
   },
   backArrow: {
     width: 24,
@@ -32,7 +33,7 @@ export const BrandProfileStyles = {
     boxSizing:"border-box"
   },
   profileImageContainer: {
-    width:280,
+    width:"100%",
   },
   profileImage: {
     width: 128,
@@ -40,7 +41,7 @@ export const BrandProfileStyles = {
     borderRadius: 64,
   },
   profileInfoContainer: {
-    width:280,
+    width:"100%",
     flex: 1,
   },
   brandName: {
@@ -50,7 +51,7 @@ export const BrandProfileStyles = {
     marginTop:20
   },
   brandDetails: {
-    color: "#666",
+    color: "#4A709C",
     marginTop: 5,
   },
   actionButtons: {
@@ -59,7 +60,7 @@ export const BrandProfileStyles = {
     flexDirection: "row",
     justifyContent:"center",
     marginTop: 20,
-    gap: 16,
+    gap: 12,
     paddingHorizontal:Padding.p_base
   },
   button: {
@@ -70,11 +71,11 @@ export const BrandProfileStyles = {
     borderRadius: 12,
   },
   followButton: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#E8EDF5",
     color: "black",
   },
   messageButton: {
-    backgroundColor: "#3498db",
+    backgroundColor: "#0D7DF2",
   },
   followButtonText: {
     fontWeight: "bold",
@@ -85,13 +86,14 @@ export const BrandProfileStyles = {
     color: "#fff",
   },
   section: {
-    padding: 20,
-    marginTop: 16,
+    padding: 16,
+    paddingTop:0,
+    marginTop: 20,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   insightContainer: {
     flexDirection: "row",
@@ -107,7 +109,7 @@ export const BrandProfileStyles = {
   },
   insightTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     marginBottom: 5,
   },
   insightText: {
@@ -135,7 +137,7 @@ export const BrandProfileStyles = {
   },
   requirementTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     marginBottom: 5,
   },
   requirementText: {
@@ -151,7 +153,7 @@ export const BrandProfileStyles = {
   },
   collabCount: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     color: "#333",
   },
 };
