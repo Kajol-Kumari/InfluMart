@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, StyleSheet, View,TouchableOpacity  } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import Depth1Frame7 from "../components/Depth1Frame7";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,60 +7,44 @@ import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 
 const FriendRequestPage = () => {
   const navigation = useNavigation();
-
   return (
     <View style={styles.friendrequestpage}>
-      <View style={styles.depth0Frame0}>
-      <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+      {/* Navigate to Userprofile */}
+      <TouchableOpacity style={styles.header} onPress={() => navigation.navigate('UserProfile')}>
 
         <Depth1Frame7
           depth4Frame0={require("../assets/depth-4-frame-08.png")}
           requestDetails="Request Details"
         />
-        </TouchableOpacity>
-        <View style={styles.depth1Frame1}>
-          <View style={styles.depth2Frame0}>
-            <Text style={[styles.samanthaAdams, styles.samanthaFlexBox]}>
-              Samantha Adams
-            </Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame2}>
-          <View style={styles.depth2Frame0}>
-            <Text style={[styles.samanthaWouldLike, styles.samanthaFlexBox]}>
-              Samantha would like to collaborate with you on a project. Are you
-              interested?
-            </Text>
-          </View>
-        </View>
-        <View style={styles.depth1Frame3}>
-          <View style={styles.depth2Frame02}>
-            <View style={[styles.depth3Frame0, styles.frameFlexBox]}>
-              <View style={[styles.depth4Frame0, styles.depth4FrameSpaceBlock]}>
-                <View style={[styles.depth5Frame0, styles.frameBg1]}>
-                  <View style={styles.depth2Frame0}>
-                    <Text style={[styles.decline, styles.declineTypo]}>
-                      Reject
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View style={[styles.depth3Frame1, styles.frameLayout]}>
-              <View style={[styles.depth4Frame01, styles.frameBg]}>
-                <View style={[styles.depth5Frame01, styles.frameBg]}>
-                  <View style={styles.depth2Frame0}>
-                    <Text style={[styles.collaborate, styles.declineTypo]}>
-                      Accept
-                    </Text>
-                  </View>
-                </View>
-              </View>
+      </TouchableOpacity>
+      <ScrollView style={{width:"100%"}}>
+        <View style={styles.depth0Frame0}>
+          <View style={styles.depth1Frame1}>
+            <View style={styles.depth2Frame0}>
+              <Text style={[styles.samanthaAdams, styles.samanthaFlexBox]}>
+                Samantha Adams
+              </Text>
             </View>
           </View>
+          <View style={styles.depth1Frame2}>
+            <View style={styles.depth2Frame0}>
+              <Text style={[styles.samanthaWouldLike, styles.samanthaFlexBox]}>
+                Samantha would like to collaborate with you on a project. Are you
+                interested?
+              </Text>
+            </View>
+          </View>
+          <View style={styles.depth1Frame3}>
+            <TouchableOpacity style={[styles.button, styles.rejectBtn]}>
+              <Text style={styles.rejectText}>Reject</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.acceptBtn]}>
+              <Text style={styles.acceptText}>Accept</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.depth1Frame4} />
         </View>
-        <View style={styles.depth1Frame4} />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -79,8 +63,7 @@ const styles = StyleSheet.create({
   depth4FrameSpaceBlock: {
     paddingVertical: 0,
     alignItems: "center",
-    borderRadius: Border.br_xs,
-    paddingHorizontal: Padding.p_base,
+    borderRadius: Border.br_xs
   },
   frameBg1: {
     backgroundColor: Color.colorAliceblue,
@@ -95,7 +78,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   frameLayout: {
-    width: 114,
+    width: "50%",
     justifyContent: "center",
     height: 40,
     flexDirection: "row",
@@ -117,9 +100,8 @@ const styles = StyleSheet.create({
   },
   depth1Frame1: {
     height: 'auto',
-    paddingTop: Padding.p_xl,
-    paddingBottom: Padding.p_xs,
     paddingHorizontal: Padding.p_base,
+    paddingVertical: Padding.p_xs,
     width: 'auto',
   },
   samanthaWouldLike: {
@@ -147,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorAliceblue,
     overflow: "hidden",
     justifyContent: "center",
-    width: 85,
+    width: "50%",
     height: 40,
     flexDirection: "row",
   },
@@ -164,30 +146,28 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   depth4Frame01: {
-    width: 'auto',
+    width: '100%',
     justifyContent: "center",
     height: 40,
     flexDirection: "row",
     paddingVertical: 0,
     alignItems: "center",
     borderRadius: Border.br_xs,
-    paddingHorizontal: Padding.p_base,
-  },
-  depth3Frame1: {
-    left: 97,
-    top: 0,
-    position: "absolute",
   },
   depth2Frame02: {
-    width: 211,
+    width: "100%",
     height: 40,
+    display: "flex",
+    flexDirection: "row",
+    gap: 16
   },
   depth1Frame3: {
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
-    height: 64,
+    height: "auto",
     paddingHorizontal: Padding.p_base,
-    width: 390,
+    width: "100%",
+    justifyContent:"space-between"
   },
   depth1Frame4: {
     height: 20,
@@ -195,16 +175,51 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhitesmoke_100,
   },
   depth0Frame0: {
-    height: 844,
+    height: "auto",
     overflow: "hidden",
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhitesmoke_100,
   },
   friendrequestpage: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorWhitesmoke_100,
     flex: 1,
     width: "100%",
+    height: "auto"
   },
+  header: {
+    width: "100%",
+    height: "auto",
+    position: "relative",
+    top: 0,
+    zIndex: 5
+  },
+  button: {
+    width: "49%",
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingVertical: Padding.p_xs,
+    borderRadius: Border.br_base
+  },
+  rejectBtn: {
+    backgroundColor: Color.colorAliceblue,
+  },
+  rejectText: {
+    color: Color.colorGray_400,
+    lineHeight: 21,
+    fontSize: FontSize.size_sm,
+    fontWeight: "700",
+    fontFamily: FontFamily.interBold,
+  },
+  acceptBtn: {
+    backgroundColor: "#1A80E5"
+  },
+  acceptText: {
+    color: Color.colorWhite,
+    lineHeight: 21,
+    fontSize: FontSize.size_sm,
+    fontWeight: "700",
+    fontFamily: FontFamily.interBold,
+  }
 });
 
 export default FriendRequestPage;
