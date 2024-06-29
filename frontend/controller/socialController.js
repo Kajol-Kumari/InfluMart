@@ -5,15 +5,11 @@ const getSocialData = async (userId,showAlert) => {
   try {
     const url = `${API_ENDPOINT}/social/${userId}`
     const response = await axios.get(url);
-    if (response.status == 200) {
-        return response.data;
-    } else {
-      const data = await response.data;
-      showAlert("Error", data.message);
-    }
+    if (response.status == 200) {  
+     return response.data;
+    } 
   } catch (error) {
     console.log("error",error);
-    showAlert("Error", "Something went wrong. Please try again.");
   }
 };
 

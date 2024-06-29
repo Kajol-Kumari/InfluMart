@@ -19,6 +19,7 @@ import { AnalyticsStyles } from "./Analytics.scss";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAlert } from "../../util/AlertContext";
 import { GetInfluencerProfile } from "../../controller/InfluencerController";
+import {sendRequest} from "../../controller/connectionsController"
 
 const AveragePrice = ({ platform, price }) => (
   <View style={styles.averagePriceContainer}>
@@ -46,15 +47,18 @@ const Analytics = ({ route, navigation }) => {
   const [popularPosts, setPopularPosts] = React.useState(null);
   const [influencerId, setInfluencerId] = React.useState("");
   const [influencer, setInfluencer] = React.useState(null);
+  const clickedId = route.params?.influencerId
+
   React.useEffect(() => {
     const getData = async () => {
       const id = await AsyncStorage.getItem("influencerId");
-      if (!id) {
+      if (!id && !clickedId) {
         navigation.navigate("Homepage");
       } else {
         setInfluencerId(id);
-        GetInfluencerProfile(id, setInfluencer, showAlert);
-        getSocialData(id, showAlert)
+        let getId = id || clickedId 
+        GetInfluencerProfile(getId, setInfluencer, showAlert);
+        getSocialData(getId, showAlert)
           .then((data) => {
             const transformedFb = transformFB(data);
             const transformedYt = transformYT(data);
@@ -95,6 +99,13 @@ const Analytics = ({ route, navigation }) => {
     const splitTag = tag.split(/[-\s]/);
     return splitTag.length > 1 ? splitTag[0] : tag;
   };
+
+  const handleConnect = async ()=>{
+    const brandId = await AsyncStorage.getItem("brandId")
+    if(brandId){
+      await sendRequest(brandId,clickedId,showAlert)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -248,7 +259,7 @@ const Analytics = ({ route, navigation }) => {
               <AveragePrice platform="TikTok" price={`$ ${influencer?.price && influencer?.price[0]?.tt || "N/A"}`} />
             </View>
             <View style={styles.connectContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=> handleConnect()}>
                 <View style={styles.connectButton}>
                   <Text style={styles.connectText}>Connect with Caroline</Text>
                 </View>

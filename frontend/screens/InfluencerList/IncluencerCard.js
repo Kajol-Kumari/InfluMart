@@ -1,23 +1,43 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
-import { Border, FontSize, FontFamily, Color, Padding } from "../../GlobalStyles";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  Border,
+  FontSize,
+  FontFamily,
+  Color,
+  Padding,
+} from "../../GlobalStyles";
+import { useNavigation } from "@react-navigation/core";
 
-const InfluencerCard = ({ depth5Frame0, kylieCosmetics, beauty }) => {
+
+const InfluencerCard = ({
+  depth5Frame0,
+  kylieCosmetics,
+  beauty,
+  influencerId,
+}) => {
+  const navigation = useNavigation()
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} contentFit="cover" source={depth5Frame0} />
-        </View>
-        <View style={styles.textContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{kylieCosmetics}</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate("Analytics",{influencerId})}>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              contentFit="cover"
+              source={depth5Frame0}
+            />
           </View>
-          <View style={styles.categoryContainer}>
-            <Text style={styles.category}>{beauty}</Text>
+          <View style={styles.textContainer}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{kylieCosmetics}</Text>
+            </View>
+            <View style={styles.categoryContainer}>
+              <Text style={styles.category}>{beauty}</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

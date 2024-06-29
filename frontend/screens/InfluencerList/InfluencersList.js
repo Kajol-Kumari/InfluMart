@@ -33,7 +33,6 @@ const InfluencersList = () => {
     }
     getBrandId(setInfluencerData,showAlert);
   },[])
-  console.log(brandId);
   React.useEffect(()=>{
     GetAllInfluencerProfile(setInfluencerData)
   },[brandId])
@@ -60,7 +59,7 @@ const InfluencersList = () => {
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item,index)=><InfluencerCard key={index} depth5Frame0={item.profileUrl!=null? item.profileUrl: require("../../assets/blank-profile.png")} kylieCosmetics={item.userName} beauty={item.category} />)}
+            {influencerData && influencerData.map((item,index)=><InfluencerCard key={index} influencerId={item._id}  depth5Frame0={item.profileUrl!=null? item.profileUrl: require("../../assets/blank-profile.png")} kylieCosmetics={item.userName} beauty={item.category} />)}
           </View>
         </ScrollView>
         <View style={[styles.floatButtonContainer, { opacity: showFloatButton ? 1 : 0.4 }]}>
@@ -155,9 +154,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     overflow: "hidden",
     position: "absolute",
-    bottom: 70,
+    bottom: "20%",
     right: 40,
-    zIndex: 2,
+    zIndex: 10,
   },
   floatButton: {
     justifyContent: "flex-end",
@@ -169,8 +168,8 @@ const styles = StyleSheet.create({
   floatButtonContent: {
     shadowColor: "rgba(0, 0, 0, 0.1)",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 103,
+      height: 40,
     },
     shadowRadius: 4,
     elevation: 4,
