@@ -8,7 +8,7 @@ const getSocialData = async (userId,showAlert) => {
     if (response.status == 200) {
         return response.data;
     } else {
-      const data = await response.json();
+      const data = await response.data;
       showAlert("Error", data.message);
     }
   } catch (error) {
