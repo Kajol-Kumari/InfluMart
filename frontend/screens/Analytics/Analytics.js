@@ -97,168 +97,167 @@ const Analytics = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.analytics}>
-        <View style={styles.depth0Frame0}>
-          <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
-            <Depth1Frame7
-              depth4Frame0={require("../../assets/depth-4-frame-010.png")}
-              requestDetails={`Influencer`}
-              depth3Frame0BackgroundColor="#fff"
-              requestDetailsWidth={173}
-              depth4Frame0FontFamily="BeVietnamPro-Bold"
-              depth4Frame0Color="#121217"
-            />
-          </TouchableOpacity>
-          <Depth1Frame9
-            image={
-              influencer?.profileUrl
-                ? {
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.menuBar} onPress={() => navigation.navigate("UserProfile")}>
+        <Depth1Frame7
+          depth4Frame0={require("../../assets/depth-4-frame-010.png")}
+          requestDetails={`Influencer`}
+          depth3Frame0BackgroundColor="#fff"
+          requestDetailsWidth={"auto"}
+          depth4Frame0FontFamily="BeVietnamPro-Bold"
+          depth4Frame0Color="#121217"
+        />
+      </TouchableOpacity>
+      <ScrollView style={styles.scrollViewContent}>
+        <View style={styles.analytics}>
+          <View style={styles.depth0Frame0}>
+            <Depth1Frame9
+              image={
+                influencer?.profileUrl
+                  ? {
                     uri: influencer?.profileUrl,
                   }
-                : require("../../assets/blank-profile.png")
-            }
-            username={influencer?.userName}
-            location={influencer?.location}
-            category={influencer?.category}
-          />
-          <View style={styles.recentContainer}>
-            <Text style={styles.recentText}>Frequently used hashtags</Text>
-          </View>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.tagContainer}>
-              {socialData?.instaData !=undefined && socialData?.instaData[0]?.tags !=undefined &&
-                socialData?.instaData[0]?.tags?.map((tag, index) => (
-                  <View key={index} style={styles.tagItem}>
-                    <Text style={styles.tagText}>{`#${socialData?.instaData[0]?.tags !=undefined && processTag(tag)}`}</Text>
-                  </View>
-                ))}
+                  : require("../../assets/blank-profile.png")
+              }
+              username={influencer?.userName}
+              location={influencer?.location}
+              category={influencer?.category}
+            />
+            <View style={styles.recentContainer}>
+              <Text style={styles.recentText}>Frequently used hashtags</Text>
             </View>
-          </ScrollView>
-          <View style={styles.nav}>
-            <TouchableOpacity onPress={() => setTab("instagram")}>
-              <View style={styles.navItems}>
-                <Text
-                  style={[
-                    styles.navText,
-                    tab == "instagram" && styles.navSelectText,
-                  ]}
-                >
-                  Instagram
-                </Text>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.tagContainer}>
+                {socialData?.instaData != undefined && socialData?.instaData[0]?.tags != undefined &&
+                  socialData?.instaData[0]?.tags?.map((tag, index) => (
+                    <View key={index} style={styles.tagItem}>
+                      <Text style={styles.tagText}>{`#${socialData?.instaData[0]?.tags != undefined && processTag(tag)}`}</Text>
+                    </View>
+                  ))}
               </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setTab("youtube")}>
-              <View style={styles.navItems}>
-                <Text
-                  style={[
-                    styles.navText,
-                    tab == "youtube" && styles.navSelectText,
-                  ]}
-                >
-                  YouTube
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setTab("facebook")}>
-              <View style={styles.navItems}>
-                <Text
-                  style={[
-                    styles.navText,
-                    tab == "facebook" && styles.navSelectText,
-                  ]}
-                >
-                  Facebook
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          {tab === "instagram" ? (
-            <>{instaData && <InstaStats instaData={instaData} />}</>
-          ) : tab === "youtube" ? (
-            <>{ytData && <YTStats ytData={ytData} />}</>
-          ) : tab === "facebook" ? (
-            <>{fbData && <FBStats fbData={fbData} />}</>
-          ) : null}
-          <View style={styles.depth1Frame4}>
-            <View style={styles.depth2Frame02}>
-              <View style={[styles.depth3Frame09, styles.depth3FramePosition]}>
-                <View style={styles.depth4Frame09}>
-                  <View style={styles.depth5Frame0}>
-                    <Text
-                      style={[
-                        styles.pastCollaborations,
-                        styles.contactInfoTypo,
-                      ]}
-                    >
-                      Collaborations
-                    </Text>
-                  </View>
+            </ScrollView>
+            <View style={styles.nav}>
+              <TouchableOpacity onPress={() => setTab("instagram")}>
+                <View style={styles.navItems}>
+                  <Text
+                    style={[
+                      styles.navText,
+                      tab == "instagram" && styles.navSelectText,
+                    ]}
+                  >
+                    Instagram
+                  </Text>
                 </View>
-              </View>
-              <View style={[styles.depth3Frame1, styles.depth3FramePosition]}>
-                <View style={styles.depth4Frame010}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.contactInfo, styles.cartier1Clr]}>
-                      Contact
-                    </Text>
-                  </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setTab("youtube")}>
+                <View style={styles.navItems}>
+                  <Text
+                    style={[
+                      styles.navText,
+                      tab == "youtube" && styles.navSelectText,
+                    ]}
+                  >
+                    YouTube
+                  </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setTab("facebook")}>
+                <View style={styles.navItems}>
+                  <Text
+                    style={[
+                      styles.navText,
+                      tab == "facebook" && styles.navSelectText,
+                    ]}
+                  >
+                    Facebook
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </View>
-
-          {/* Graphs */}
-
-          {socialData &&
-            (tab === "instagram" ? (
-              <>{instaData && <IgGraph instaData={instaData} />}</>
+            {tab === "instagram" ? (
+              <>{instaData && <InstaStats instaData={instaData} />}</>
             ) : tab === "youtube" ? (
-              <>{ytData && <YTGraph ytData={ytData} />}</>
+              <>{ytData && <YTStats ytData={ytData} />}</>
             ) : tab === "facebook" ? (
-              <>{fbData && <FBGraph fbData={fbData} />}</>
-            ) : null)}
-          <View style={styles.recentContainer}>
-            <Text style={styles.recentText}>Recent Highlights</Text>
-          </View>
-          <ScrollView
-            style={styles.ScrollCards}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {popularPosts &&
-              popularPosts.map((item, index) =>
-                item.platform == "Instagram"
-                  ? tab != "youtube" && (
+              <>{fbData && <FBStats fbData={fbData} />}</>
+            ) : null}
+            <View style={styles.depth1Frame4}>
+              <View style={styles.depth2Frame02}>
+                <View style={[styles.depth3Frame09, styles.depth3FramePosition]}>
+                  <View style={styles.depth4Frame09}>
+                    <View style={styles.depth5Frame0}>
+                      <Text
+                        style={[
+                          styles.pastCollaborations,
+                          styles.contactInfoTypo,
+                        ]}
+                      >
+                        Collaborations
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={[styles.depth3Frame1, styles.depth3FramePosition]}>
+                  <View style={styles.depth4Frame010}>
+                    <View style={styles.depth5Frame0}>
+                      <Text style={[styles.contactInfo, styles.cartier1Clr]}>
+                        Contact
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            {socialData &&
+              (tab === "instagram" ? (
+                <>{instaData && <IgGraph instaData={instaData} />}</>
+              ) : tab === "youtube" ? (
+                <>{ytData && <YTGraph ytData={ytData} />}</>
+              ) : tab === "facebook" ? (
+                <>{fbData && <FBGraph fbData={fbData} />}</>
+              ) : null)}
+            <View style={styles.recentContainer}>
+              <Text style={styles.recentText}>Recent Highlights</Text>
+            </View>
+            <ScrollView
+              style={styles.ScrollCards}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            >
+              {popularPosts &&
+                popularPosts.map((item, index) =>
+                  item.platform == "Instagram"
+                    ? tab != "youtube" && (
                       <View key={index} style={styles.frame}>
                         <InstaDemo key={index} url={item.url} />
                       </View>
                     )
-                  : tab == "youtube" && (
+                    : tab == "youtube" && (
                       <View key={index} style={styles.frame}>
                         <YTDemo key={index} videoId={item.url} />
                       </View>
                     )
-              )}
-          </ScrollView>
-          <View style={styles.averagePriceSection}>
-            <Text style={styles.averagePriceHeaderText}>
-              Average Price Per Post
-            </Text>
-            <AveragePrice platform="Instagram" price={`$ ${influencer?.price && influencer?.price[0]?.ig || "N/A"}`} />
-            <AveragePrice platform="YouTube" price={`$ ${influencer?.price && influencer?.price[0]?.yt || "N/A"}`} />
-            <AveragePrice platform="TikTok" price={`$ ${influencer?.price && influencer?.price[0]?.tt || "N/A"}`} />
-          </View>
-          <View style={styles.connectContainer}>
-            <TouchableOpacity>
-              <View style={styles.connectButton}>
-                <Text style={styles.connectText}>Connect with Caroline</Text>
-              </View>
-            </TouchableOpacity>
+                )}
+            </ScrollView>
+            <View style={styles.averagePriceSection}>
+              <Text style={styles.averagePriceHeaderText}>
+                Average Price Per Post
+              </Text>
+              <AveragePrice platform="Instagram" price={`$ ${influencer?.price && influencer?.price[0]?.ig || "N/A"}`} />
+              <AveragePrice platform="YouTube" price={`$ ${influencer?.price && influencer?.price[0]?.yt || "N/A"}`} />
+              <AveragePrice platform="TikTok" price={`$ ${influencer?.price && influencer?.price[0]?.tt || "N/A"}`} />
+            </View>
+            <View style={styles.connectContainer}>
+              <TouchableOpacity>
+                <View style={styles.connectButton}>
+                  <Text style={styles.connectText}>Connect with Caroline</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

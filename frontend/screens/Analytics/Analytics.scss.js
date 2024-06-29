@@ -9,6 +9,8 @@ export const AnalyticsStyles = {
   scrollViewContent: {
     flexGrow: 1,
     paddingBottom: 20,
+    width:"100%",
+    backgroundColor:Color.colorWhite
   },
   ScrollCards: {
     gap: 10,
@@ -20,20 +22,21 @@ export const AnalyticsStyles = {
     justifyContent: "flex-start",
     gap: 10,
     maxHeight: 150, // Set the maximum height for the container
+    paddingHorizontal:Padding.p_base
   },
   frame: {
     width: 350,
-    height: 350,
+    height: 320,
     margin: 10,
   },
   tagItem: {
-    padding: 5,
-    backgroundColor: Color.colorGainsboro_100,
+    padding: 8,
+    backgroundColor: Color.colorWhitesmoke_300,
     borderRadius: 16,
     paddingHorizontal: 16,
     marginVertical: 5,
     overflow: "hidden",
-    height: 40,
+    height: "auto",
   },
 
   recentContainer: {
@@ -54,14 +57,15 @@ export const AnalyticsStyles = {
   connectContainer: {
     margin: 10,
     paddingBottom: 10,
+    paddingHorizontal:Padding.p_base
   },
   connectButton: {
     backgroundColor: "#1A5CE5",
-    height: 48,
-    width: 358,
+    height: "auto",
+    width: "100%",
     margin: "auto",
     borderRadius: 12,
-    paddingTop: 10,
+    paddingVertical: 12,
   },
   connectText: {
     fontFamily: FontFamily.beVietnamProBold,
@@ -219,13 +223,14 @@ export const AnalyticsStyles = {
   },
   depth0Frame0: {
     overflow: "hidden",
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorWhite,
   },
   analytics: {
     flex: 1,
     width: "100%",
     backgroundColor: Color.colorWhite,
+    height:"auto"
   },
   averagePriceSection: {
     paddingVertical: Padding.p_xs,
@@ -274,4 +279,12 @@ export const AnalyticsStyles = {
     width: 24,
     height: 24,
   },
+  menuBar:{
+    position:"relative",
+    top:0
+  },
+  container:{
+    width:'100%',
+    height:"100%"
+  }
 };

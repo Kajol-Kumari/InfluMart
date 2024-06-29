@@ -1,4 +1,12 @@
 const graphStyles = {
+  row:{
+    width:"100%",
+    display:"flex",
+    flexDirection:"row",
+    flexWrap:"wrap",
+    gap:12,
+    justifyContent:"center"
+  },
   chartContainer: {
     marginVertical: 20,
     marginHorizontal: 16,
@@ -12,7 +20,7 @@ const graphStyles = {
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    width: "95%",
+    width: 320,
 
   },
   chartTitle: {
