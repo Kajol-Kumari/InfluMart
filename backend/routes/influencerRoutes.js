@@ -51,6 +51,6 @@ router.put("/profile/:id", influencerAuthenticationMiddleware, updateProfile);
 router.delete("/profile/:id", influencerAuthenticationMiddleware, deleteProfile);
 
 // Route to get all influencers' profiles
-router.get("/profiles", influencerAuthenticationMiddleware, getAllProfiles);
+router.get("/profiles", getAllProfiles);
 
 module.exports = router;

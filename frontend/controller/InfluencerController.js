@@ -38,4 +38,34 @@ const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
   }
 };
 
-export {GetInfluencerProfile}
+const GetAllInfluencerProfile = async (setProfile) => {
+  try {
+    const response = await axios.get(`${API_ENDPOINT}/influencers/profiles`);
+    const data = await response.data?.influencers;
+
+    if (response.status === 200) {
+      const newData = data.map((influencer) => ({
+        ...influencer,
+        profileUrl: influencer.profileUrl && influencer.profileUrl.includes("uploads")
+          ? `${API_ENDPOINT}/${influencer.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
+          : null,
+        category: (() => {
+          try {
+            const categoryArray = JSON.parse(influencer.category || "[]");
+            return Array.isArray(categoryArray) ? categoryArray.join(", ") : "";
+          } catch (error) {
+            console.error("Failed to parse category JSON:", error.message);
+            return "";
+          }
+        })(),
+      }));
+      console.log(newData)
+
+      setProfile(newData);
+    }
+  } catch (error) {
+    console.error("Profile fetching error:", error.message);
+  }
+};
+
+export {GetInfluencerProfile,GetAllInfluencerProfile}

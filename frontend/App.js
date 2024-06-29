@@ -10,7 +10,7 @@ import FriendRequestPage from "./screens/FriendRequestPage";
 import AccountCreatedSuccessfullyNoti from "./screens/AccountCreatedSuccessfullyNoti";
 import FailedPaymentStatus from "./screens/FailedPaymentStatus";
 import Analytics from "./screens/Analytics/Analytics";
-import InfluencersList from "./screens/InfluencersList";
+import InfluencersList from "./screens/InfluencerList/InfluencersList";
 import InboxInterface from "./screens/inbox/InboxInterface";
 import ChatInterface from "./screens/chat/ChatInterface";
 import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrationForm";

@@ -22,6 +22,7 @@ const getBrandProfile = async (brandId, showAlert) => {
           ? `${API_ENDPOINT}/${data.brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,
       };
+      console.log("brand");
       return brand;
     } else {
       showAlert("Brand Profile Error", data.message);
