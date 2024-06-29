@@ -53,12 +53,9 @@ const getAllRequests = async (userId, setRequests, showAlert) => {
             requestId: item?._id,
           }));
       setRequests(formatData);
-    } else {
-      showAlert("Error", response.data.message);
-    }
+    } 
   } catch (error) {
     console.log(error);
-    showAlert("Error", "Something went wrong");
   }
 };
 
