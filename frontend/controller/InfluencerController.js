@@ -59,8 +59,6 @@ const GetAllInfluencerProfile = async (setProfile) => {
           }
         })(),
       }));
-      console.log(newData)
-
       setProfile(newData);
     }
   } catch (error) {

@@ -13,6 +13,7 @@ const {
   verifyUser,
 } = require("../controllers/influencerController");
 const influencerAuthenticationMiddleware = require("../middleware/influencers/influencerAuthenticationMiddleware");
+const brandorInfluencerAuthenticationMiddleware = require("../middleware/brandorInfluencerAuthenticationMiddleware");
 
 const store = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,7 +42,7 @@ router.post("/login", login);
 router.put("/profile", influencerAuthenticationMiddleware, updateProfile);
 
 // Get an influencer's profile by ID
-router.get("/profile/:id", influencerAuthenticationMiddleware, getProfile);
+router.get("/profile/:id", brandorInfluencerAuthenticationMiddleware, getProfile);
 
 
 // Update an influencer's profile by ID
