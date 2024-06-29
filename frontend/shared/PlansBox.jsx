@@ -63,14 +63,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   planDetailsContainer: {
-    width: 308,
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 16,
   },
   planTextContainer: {
+    width:"100%",
     flexDirection: "row",
+    justifyContent:"space-between",
     alignItems: "center",
   },
   planDuration: {

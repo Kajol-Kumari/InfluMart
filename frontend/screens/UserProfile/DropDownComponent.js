@@ -43,14 +43,16 @@ const DropdownComponent = ({ title, content }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 358,
+    width: "100%",
     marginBottom: 10,
     backgroundColor: Color.colorDarkslategray_200,
     borderRadius: Border.br_xs,
     padding: Padding.p_base,
-    margin: "auto"
+    margin: "auto",
+    paddingHorizontal:Padding.p_base,
   },
   header: {
+    width:"100%",
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: 326,
+    width: "100%",
     height: 21,
   },
   title: {

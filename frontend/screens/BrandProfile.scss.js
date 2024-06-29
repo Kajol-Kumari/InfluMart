@@ -1,15 +1,20 @@
+import {Color, Padding} from '../GlobalStyles';
+
 export const BrandProfileStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Color.colorWhitesmoke_100,
+    paddingBottom:40
   },
   header: {
-    padding: 20,
+    paddingTop:24,
+    marginBottom:16
   },
   headerContent: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    paddingHorizontal:Padding.p_base,
   },
   backArrow: {
     width: 24,
@@ -21,13 +26,15 @@ export const BrandProfileStyles = {
     marginLeft: 10,
   },
   profileContainer: {
+    width:"100%",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
     marginTop: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal:Padding.p_base,
+    boxSizing:"border-box"
   },
   profileImageContainer: {
-    marginRight: 20,
+    width:"100%",
   },
   profileImage: {
     width: 128,
@@ -35,37 +42,40 @@ export const BrandProfileStyles = {
     borderRadius: 64,
   },
   profileInfoContainer: {
+    width:"100%",
     flex: 1,
   },
   brandName: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
+    marginTop:20
   },
   brandDetails: {
-    color: "#666",
+    color: "#4A709C",
     marginTop: 5,
   },
   actionButtons: {
+    width:"100%",
+    display:"flex",
     flexDirection: "row",
+    justifyContent:"center",
     marginTop: 20,
-    gap: 20,
+    gap: 12
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
-    width: 150,
+    width: "50%",
     height: 40,
     borderRadius: 12,
   },
   followButton: {
-    backgroundColor: "#f0f0f0",
-    marginRight: 10,
+    backgroundColor: "#E8EDF5",
     color: "black",
   },
   messageButton: {
-    backgroundColor: "#3498db",
-    marginRight: 10,
+    backgroundColor: "#0D7DF2",
   },
   followButtonText: {
     fontWeight: "bold",
@@ -76,13 +86,14 @@ export const BrandProfileStyles = {
     color: "#fff",
   },
   section: {
-    padding: 20,
+    padding: 16,
+    paddingTop:0,
     marginTop: 20,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   insightContainer: {
     flexDirection: "row",
@@ -98,7 +109,7 @@ export const BrandProfileStyles = {
   },
   insightTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     marginBottom: 5,
   },
   insightText: {
@@ -126,7 +137,7 @@ export const BrandProfileStyles = {
   },
   requirementTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     marginBottom: 5,
   },
   requirementText: {
@@ -142,7 +153,11 @@ export const BrandProfileStyles = {
   },
   collabCount: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 600,
     color: "#333",
   },
+  bottomBar: {
+    position: "absolute",
+    bottom: 0
+  }
 };

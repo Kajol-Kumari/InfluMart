@@ -31,14 +31,14 @@ const PlanChooseInterface = ({ route, navigation }) => {
       paymentMode: "",
       transactionDate: _data.transactionDate,
     };
-    await subscribe(subscription, payload, navigation,showAlert);
+    await subscribe(subscription, payload, navigation, showAlert);
   };
   useEffect(() => {
     const getPlans = async () => {
       const data = await getSubscriptionPlans({
         platform: payload.follower.platform,
         followers: payload.follower.value,
-      },showAlert);
+      }, showAlert);
       setPlanData(data);
     };
 
@@ -48,26 +48,26 @@ const PlanChooseInterface = ({ route, navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.innerContainer}>
         <TouchableOpacity
+          style={{ width: "100%" }}
           onPress={() => navigation.navigate("InfluencerRegistrationForm")}
         >
           <Depth1Frame7
             depth4Frame0={require("../../assets/depth-4-frame-019.png")}
             requestDetails="Choose Your Plan"
             depth3Frame0BackgroundColor="#fff"
-            requestDetailsWidth="auto"
+            requestDetailsWidth="100%"
             depth4Frame0FontFamily="WorkSans-Bold"
             depth4Frame0Color="#121417"
           />
         </TouchableOpacity>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>{`Hulu (No Ads)`}</Text>
+          <Text style={styles.headerText}>{`Influmart Subscriptions`}</Text>
         </View>
 
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>
-            Enjoy our entire library, plus exclusive streaming access to the
-            biggest winner movies.
+            Join now to unlock exclusive brand collaborations and elevate your marketing game!
           </Text>
         </View>
 
@@ -85,42 +85,44 @@ const PlanChooseInterface = ({ route, navigation }) => {
             <Text style={[!plans && styles.planText]}>Yearly</Text>
           </TouchableOpacity>
         </View>
-
-        {!plans && planData && (
-          <PlanBox
-            setSelect={setSelectedPlan}
-            select={selectedPlan}
-            plan={"halfYearly"}
-            duration={"6 months"}
-            price={`$ ${planData?.halfYearly}`}
-            suggested={true}
-          />
-        )}
-        {!plans && planData && (
-          <PlanBox
-            setSelect={setSelectedPlan}
-            select={selectedPlan}
-            plan={"quarterly"}
-            duration={"3 months"}
-            price={`$ ${planData?.quarterly}`}
-          />
-        )}
-        {plans && planData && (
-          <PlanBox
-            setSelect={setSelectedPlan}
-            select={selectedPlan}
-            plan={"annually"}
-            duration={"1 year"}
-            price={`$ ${planData?.annually}`}
-          />
-        )}
+        <View style={styles.planContainer}>
+          {!plans && planData && (
+            <PlanBox
+              setSelect={setSelectedPlan}
+              select={selectedPlan}
+              plan={"halfYearly"}
+              duration={"6 months"}
+              price={`$ ${planData?.halfYearly}`}
+              suggested={true}
+            />
+          )}
+          {!plans && planData && (
+            <PlanBox
+              setSelect={setSelectedPlan}
+              select={selectedPlan}
+              plan={"quarterly"}
+              duration={"3 months"}
+              price={`$ ${planData?.quarterly}`}
+            />
+          )}
+          {plans && planData && (
+            <PlanBox
+              setSelect={setSelectedPlan}
+              select={selectedPlan}
+              plan={"annually"}
+              duration={"1 year"}
+              price={`$ ${planData?.annually}`}
+            />
+          )}
+        </View>
         <TouchableOpacity
+          style={{ width: "100%" }}
           onPress={() => {
             handleSelectPlan();
           }}
         >
           <View style={styles.selectPlanButton}>
-            <Text style={styles.selectPlanButtonText}>Select Plan</Text>
+            <Text style={styles.selectPlanButtonText}>Proceed to payment</Text>
           </View>
         </TouchableOpacity>
       </View>

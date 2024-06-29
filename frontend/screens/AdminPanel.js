@@ -62,6 +62,7 @@ const AdminPanel = () => {
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>Account settings</Text>
+          <View style={{width:20,height:20}}></View>
         </View>
         <View style={styles.optionContainer}>
           <Text style={styles.optionLabel}>Logout</Text>
@@ -114,7 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
   },
   header: {
+    width:"100%",
     flexDirection: "row",
+    justifyContent:"space-between",
     alignItems: "center",
     padding: Padding.p_base,
     backgroundColor: Color.colorWhite,

@@ -71,7 +71,7 @@ const ProductCard = ({
         onPress={() => navigation.navigate("FriendRequestPage",{name: postTitle,requestId: id})}
       >
         <View style={styles.button}>
-          <Text style={styles.buttonText}>View</Text>
+          <Text style={styles.buttonText}>View Request</Text>
         </View>
       </TouchableOpacity>
     </View>

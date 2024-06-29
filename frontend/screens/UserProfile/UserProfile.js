@@ -139,11 +139,10 @@ const UserProfile = ({ navigation }) => {
           },
           {
             heading: "Price per Post",
-            content: `$ ${
-              influencer.price[0].ig
-                ? formatNumber(influencer.price[0].ig)
-                : "N/A"
-            }`,
+            content: `$ ${influencer.price[0].ig
+              ? formatNumber(influencer.price[0].ig)
+              : "N/A"
+              }`,
           },
         ];
         setInstaData(_insta);
@@ -176,35 +175,15 @@ const UserProfile = ({ navigation }) => {
     }
   }, [influencer]);
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.userprofile}>
+    <View style={styles.userprofile}>
+      <ScrollView>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <TouchableOpacity>
-            <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-              <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
-                <View style={[styles.depth3Frame0, styles.frameLayout]}>
-                  <Image
-                    style={styles.depth4Frame0}
-                    contentFit="cover"
-                    source={require("../../assets/depth-4-frame-018.png")}
-                  />
-                </View>
-
-                <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
-                  <View style={[styles.depth4Frame01, styles.frameLayout]}>
-                    <View style={[styles.depth5Frame0, styles.frameLayout]} />
-                  </View>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
           <Depth1Frame17
             image={
               influencer?.profileUrl
                 ? {
-                    uri: influencer?.profileUrl,
-                  }
+                  uri: influencer?.profileUrl,
+                }
                 : require("../../assets/blank-profile.png")
             }
             username={influencer?.userName}
@@ -218,37 +197,44 @@ const UserProfile = ({ navigation }) => {
               </View>
             </View>
           </View>
-          <ScrollView style={{flex:1}}>
-            {requests!=null &&
-              requests?.map((item, index) => (
-                <ProductCard
-                  key={index}
-                  imageSource={item.imageSource}
-                  postTitle={item.postTitle}
-                  postDate={item.postDate}
-                  productName={item.productName}
-                  id={item.requestId}
-                  cardWidth="100%"
-                  postTitleWidth="auto"
-                  postDateWidth="auto"
-                  productNameWidth="auto"
-                  buttonWidth="auto"
-                />
-              ))}
-          </ScrollView>
+          {
+            requests && requests.length > 0 ?
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {requests != null &&
+                  requests?.map((item, index) => (
+                    <ProductCard
+                      key={index}
+                      imageSource={item.imageSource}
+                      postTitle={item.postTitle}
+                      postDate={item.postDate}
+                      productName={item.productName}
+                      id={item.requestId}
+                      cardWidth="100%"
+                      postTitleWidth="auto"
+                      postDateWidth="auto"
+                      productNameWidth="auto"
+                      buttonWidth="auto"
+                    />
+                  ))}
+              </ScrollView> :
+              <View style={{width:"100%",padding:Padding.p_base}}>
+                  <Text style={{color:Color.colorAliceblue}}>No request found.</Text>
+              </View>
+          }
+
           <NavTab setTab={setTab} tab={tab} />
-          <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+          <ScrollView style={{ flex: 1, paddingHorizontal: Padding.p_base }} showsVerticalScrollIndicator={false}>
             {tab == "instagram"
               ? instaData &&
-                instaData.map((item, index) => (
-                  <DropdownComponent
-                    title={item.heading}
-                    content={item.content}
-                    key={index}
-                  />
-                ))
+              instaData.map((item, index) => (
+                <DropdownComponent
+                  title={item.heading}
+                  content={item.content}
+                  key={index}
+                />
+              ))
               : tab == "youtube"
-              ? ytData &&
+                ? ytData &&
                 ytData.map((item, index) => (
                   <DropdownComponent
                     title={item.heading}
@@ -256,7 +242,7 @@ const UserProfile = ({ navigation }) => {
                     key={index}
                   />
                 ))
-              : fbData &&
+                : fbData &&
                 fbData.map((item, index) => (
                   <DropdownComponent
                     title={item.heading}
@@ -265,11 +251,11 @@ const UserProfile = ({ navigation }) => {
                   />
                 ))}
           </ScrollView>
-          <Depth1Frame13 />
           <View style={[styles.depth1Frame9, styles.frameLayout1]} />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Depth1Frame13 active={"home"}/>
+    </View>
   );
 };
 
@@ -278,7 +264,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   frameLayout1: {
-    width: 390,
+    width: "100%",
     backgroundColor: Color.colorBlack,
   },
   depth1FrameSpaceBlock: {
@@ -352,13 +338,16 @@ const styles = StyleSheet.create({
     height: 20,
   },
   depth0Frame0: {
-    height: 1158,
+    paddingTop: 40,
+    minHeight: 900,
+    height: "auto",
     overflow: "hidden",
   },
   userprofile: {
     backgroundColor: Color.colorWhite,
     flex: 1,
     width: "100%",
+    height: "auto"
   },
 });
 
