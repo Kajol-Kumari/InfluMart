@@ -35,6 +35,14 @@ const brandSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  resetPasswordToken: {
+    type: String,
+    default: null,
+  },
+  resetPasswordExpires: {
+    type: Date,
+    default: null,
+  },
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

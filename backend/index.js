@@ -28,6 +28,10 @@ const otpRouter = require("./routes/otpRoutes");
 const collaborationRoutes = require('./routes/collaborationRoutes');
 const connectRouter = require('./routes/connectionRoutes');
 const { getSocialData } = require("./controllers/influencerController");
+const passwordRoutes = require('./routes/passwordRoutes');
+
+// Mount the password controller routes
+app.use('/api', passwordRoutes);
 
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
