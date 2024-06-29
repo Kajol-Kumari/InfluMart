@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -21,6 +21,8 @@ import { useAlert } from "../../util/AlertContext";
 import NavTab from "./NavTab";
 import DropdownComponent from "./DropDownComponent";
 import { formatNumber } from "../../helpers/GraphData";
+import { getAllRequests } from "../../controller/connectionsController";
+import ProductCard from "./ProductCard";
 
 const UserProfile = ({ navigation }) => {
   const [influencer, setInfluencer] = React.useState(null);
@@ -30,6 +32,8 @@ const UserProfile = ({ navigation }) => {
   const [fbData, setFbData] = React.useState(null);
   const [instaData, setInstaData] = React.useState(null);
   const [ytData, setYtData] = React.useState(null);
+  const [requests, setRequests] = React.useState([]);
+  const isFocused = useIsFocused();
   React.useEffect(() => {
     const getData = async () => {
       const id = await AsyncStorage.getItem("influencerId");
@@ -38,10 +42,11 @@ const UserProfile = ({ navigation }) => {
       } else {
         setInfluencerId(id);
         GetInfluencerProfile(id, setInfluencer, showAlert);
+        getAllRequests(id, setRequests, showAlert)
       }
     };
     getData();
-  }, []);
+  }, [isFocused]);
   React.useEffect(() => {
     if (influencer) {
       const fb = influencer.fbData;
@@ -213,23 +218,24 @@ const UserProfile = ({ navigation }) => {
               </View>
             </View>
           </View>
-          <Depth1Frame16
-            depth3Frame0={require("../../assets/depth-3-frame-07.png")}
-            productPost="Product Post"
-            dateJun15="Date: Jun 15"
-            productToteBag="Product: Tote Bag"
-          />
-          <Depth1Frame16
-            depth3Frame0={require("../../assets/depth-3-frame-08.png")}
-            productPost="Story Post"
-            dateJun15="Date: Jul 12"
-            productToteBag="Product: Yoga Mat"
-            propWidth={215}
-            propWidth1={127}
-            propWidth2={127}
-            propWidth3={127}
-            propWidth4={127}
-          />
+          <ScrollView style={{flex:1}}>
+            {requests!=null &&
+              requests?.map((item, index) => (
+                <ProductCard
+                  key={index}
+                  imageSource={item.imageSource}
+                  postTitle={item.postTitle}
+                  postDate={item.postDate}
+                  productName={item.productName}
+                  id={item.requestId}
+                  cardWidth="100%"
+                  postTitleWidth="auto"
+                  postDateWidth="auto"
+                  productNameWidth="auto"
+                  buttonWidth="auto"
+                />
+              ))}
+          </ScrollView>
           <NavTab setTab={setTab} tab={tab} />
           <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
             {tab == "instagram"

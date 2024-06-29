@@ -4,9 +4,21 @@ import Depth1Frame7 from "../components/Depth1Frame7";
 import { useNavigation } from "@react-navigation/native";
 
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
+import { useAlert } from "../util/AlertContext";
+import { acceptRequest,rejectRequest } from "../controller/connectionsController";
 
-const FriendRequestPage = () => {
-  const navigation = useNavigation();
+const FriendRequestPage = ({route,navigation}) => {
+  const name = route.params.name
+  const requestId = route.params.requestId
+  const {showAlert} = useAlert()
+  const handleReject = async () => {
+    await rejectRequest(requestId,showAlert)
+    navigation.navigate('UserProfile')
+  }
+  const handleAccept = async () => {
+    await acceptRequest(requestId,showAlert)
+    navigation.navigate('UserProfile')
+  }
   return (
     <View style={styles.friendrequestpage}>
       {/* Navigate to Userprofile */}
@@ -22,23 +34,23 @@ const FriendRequestPage = () => {
           <View style={styles.depth1Frame1}>
             <View style={styles.depth2Frame0}>
               <Text style={[styles.samanthaAdams, styles.samanthaFlexBox]}>
-                Samantha Adams
+                {name}
               </Text>
             </View>
           </View>
           <View style={styles.depth1Frame2}>
             <View style={styles.depth2Frame0}>
               <Text style={[styles.samanthaWouldLike, styles.samanthaFlexBox]}>
-                Samantha would like to collaborate with you on a project. Are you
+                {name} would like to collaborate with you on a project. Are you
                 interested?
               </Text>
             </View>
           </View>
           <View style={styles.depth1Frame3}>
-            <TouchableOpacity style={[styles.button, styles.rejectBtn]}>
+            <TouchableOpacity onPress={()=>handleReject()} style={[styles.button, styles.rejectBtn]}>
               <Text style={styles.rejectText}>Reject</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.acceptBtn]}>
+            <TouchableOpacity onPress={()=>handleAccept()} style={[styles.button, styles.acceptBtn]}>
               <Text style={styles.acceptText}>Accept</Text>
             </TouchableOpacity>
           </View>

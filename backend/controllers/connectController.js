@@ -24,11 +24,10 @@ const allRequests = async (req, res) => {
     populate: {
       path: "sender",
       model: "Brand",
-      options: { select: "name category"}
+      options: { select: "name category profileUrl"}
     },
   });
-  console.log(user)
-  res.status(200).json(user?.notifications);
+  res.status(200).json({user: user?.notifications});
 };
 
 // Accept a connection request
