@@ -6,7 +6,7 @@ import MyLineChart from "../../../../shared/MyLineChart"
 
 const YTGraph = ({ ytData }) => {
   return (
-    <>
+    <View style={styles.row}>
       <View style={styles.chartContainer}>
         <Text style={styles.chartTitle}>Subscribers Over Time</Text>
         <Text style={styles.chartValue}>
@@ -52,12 +52,12 @@ const YTGraph = ({ ytData }) => {
           tracking={ytData?.trackingData}
         />
       </View>
-    </>
+    </View>
   );
 };
 const FBGraph = ({ fbData }) => {
   return (
-    <>
+    <View style={styles.row}>
       <View style={styles.chartContainer}>
         <Text style={styles.chartTitle}>Followers Over Time</Text>
         <Text style={styles.chartValue}>
@@ -87,12 +87,12 @@ const FBGraph = ({ fbData }) => {
           title={"Likes data"}
         />
       </View>
-    </>
+    </View>
   );
 };
 function IgGraph({ instaData }){
   return (
-    <View>
+    <View style={styles.row}>
       <View style={styles.chartContainer}>
         <Text style={styles.chartTitle}>Engagement Rate Over Time</Text>
         <Text style={styles.chartValue}>

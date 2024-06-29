@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text,TouchableOpacity } from "react-native";
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
 
 const Depth1Frame9 = ({image,username,location,category}) => {
@@ -41,13 +41,13 @@ const Depth1Frame9 = ({image,username,location,category}) => {
         </View>
         <View style={[styles.depth3Frame1, styles.frameLayout]}>
           <View style={styles.frameLayout}>
-            <View style={[styles.depth5Frame02, styles.frameBg]}>
+            <TouchableOpacity style={[styles.depth5Frame02, styles.frameBg]}>
               <View style={[styles.depth6Frame03, styles.frameBg]}>
                 <View style={styles.depth7Frame0}>
                   <Text style={[styles.follow, styles.followTypo]}>Follow</Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   frameLayout: {
     height: 40,
-    width: 358,
+    width: "100%",
   },
   frameBg: {
     backgroundColor: Color.colorWhitesmoke_300,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
     height: 40,
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -154,10 +154,10 @@ const styles = StyleSheet.create({
   depth2Frame0: {
     height: 276,
     alignItems: "center",
-    width: 358,
+    width: "100%",
   },
   depth1Frame1: {
-    width: 390,
+    width: "100%",
     height: 308,
     padding: Padding.p_base,
     flexDirection: "row",
