@@ -13,7 +13,6 @@ import Analytics from "./screens/Analytics/Analytics";
 import InfluencersList from "./screens/InfluencersList";
 import InboxInterface from "./screens/inbox/InboxInterface";
 import ChatInterface from "./screens/chat/ChatInterface";
-import UserProfile from "./screens/UserProfile";
 import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrationForm";
 import PlanChooseInterface from "./screens/Influencer/PlanChooseInterface";
 import LoginPageBrand from "./screens/login/LoginPageBrands";
@@ -41,6 +40,7 @@ import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/Influenc
 import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
 import TosScreen from "./screens/TosAndPp/TosScreen";
 import PPScreen from "./screens/TosAndPp/PPScreen";
+import UserProfile from "./screens/UserProfile/UserProfile";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
