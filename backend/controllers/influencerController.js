@@ -238,8 +238,7 @@ exports.getAllProfiles = async (req, res) => {
       {},
       { category: 1, userName: 1, profileUrl: 1, _id: 1 }
     );
-    console.log(influencers);
-    res.status(200).json({ influencers });
+    res.status(200).json({influencers});
   } catch (err) {
     console.error("Error getting all influencer profiles:", err);
     res.status(500).json({ message: "Failed to retrieve profiles" });
