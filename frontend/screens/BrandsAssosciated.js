@@ -28,7 +28,7 @@ const BrandAssosciated = () => {
               <View style={styles.depth3Frame1}>
                 <View style={styles.depth4Frame01}>
                   <View style={styles.depth5Frame0}>
-                    <Text style={styles.allPartners}>Case Studies</Text>
+                    <Text style={styles.allPartners}>Brands</Text>
                   </View>
                 </View>
               </View>
