@@ -29,9 +29,13 @@ const collaborationRoutes = require('./routes/collaborationRoutes');
 const connectRouter = require('./routes/connectionRoutes');
 const { getSocialData } = require("./controllers/influencerController");
 const passwordRoutes = require('./routes/passwordRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+
+// Mount the payment controller routes
+app.use('/api/payment', paymentRoutes);
 
 // Mount the password controller routes
-app.use('/api', passwordRoutes);
+app.use('/api/password', passwordRoutes);
 
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
