@@ -254,7 +254,7 @@ const UserProfile = ({ navigation }) => {
           <View style={[styles.depth1Frame9, styles.frameLayout1]} />
         </View>
       </ScrollView>
-      <Depth1Frame13 active={"home"}/>
+      <Depth1Frame13 active={"list"}/>
     </View>
   );
 };

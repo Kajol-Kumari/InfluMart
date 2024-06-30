@@ -12,12 +12,12 @@ const Depth1Frame13 = ({ active }) => {
 
   function handleClick(tab) {
     setActiveTab(tab)
-    if (tab == "home")
+    if (tab == "list")
       //navigation for home icon
-      navigation.navigate('AdminPanel')
+      navigation.navigate('InfluencersList')
     if (tab == "partnership")
       //navigation for partnership icon
-      navigation.navigate('UserProfile')
+      navigation.navigate('BrandsAssosciated')
     if (tab == "settings")
       navigation.navigate('AdminPanel')
     if (tab == "network")
@@ -30,18 +30,18 @@ const Depth1Frame13 = ({ active }) => {
   return (
     <View style={styles.depth1Frame8}>
       <View style={styles.depth2Frame0}>
-        <TouchableOpacity onPress={()=>{handleClick("home")}}>
+        <TouchableOpacity onPress={()=>{handleClick("list")}}>
           <View style={styles.depth3Frame0}>
             <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
               <Image
                 style={styles.depth5Frame0}
                 contentFit="cover"
-                source={require("../assets/depth-5-frame-027.png")}
+                source={require("../assets/depth-5-frame-02.png")}
               />
             </View>
             <View style={[styles.depth4Frame1, styles.depth4FrameSpaceBlock]}>
               <View style={styles.depth5Frame01}>
-                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "home" ? "#fff" : "#ccc"}` }]}>Home</Text>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "home" ? "#fff" : "#ccc"}` }]}>Influencers</Text>
               </View>
             </View>
           </View>
@@ -58,7 +58,7 @@ const Depth1Frame13 = ({ active }) => {
           <View style={[styles.depth4Frame11, styles.depth4FrameSpaceBlock]}>
             <View style={styles.depth5Frame01}>
               <Text style={[styles.partnerships, styles.homeTypo, { color: `${activeTab == "partnership" ? "#fff" : "#ccc"}` }]}>
-                Partnership
+                Brands
               </Text>
             </View>
           </View>
