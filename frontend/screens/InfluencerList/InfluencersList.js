@@ -25,17 +25,17 @@ const InfluencersList = () => {
   const [scrollOffset, setScrollOffset] = React.useState(0);
   const [brandId, setBrandId] = React.useState("");
   const [influencerData, setInfluencerData] = React.useState(null);
-  const {showAlert} = useAlert()
-  React.useEffect(()=>{
+  const { showAlert } = useAlert()
+  React.useEffect(() => {
     const getBrandId = async () => {
       const brandId = await AsyncStorage.getItem("brandId");
       setBrandId(brandId);
     }
-    getBrandId(setInfluencerData,showAlert);
-  },[])
-  React.useEffect(()=>{
+    getBrandId(setInfluencerData, showAlert);
+  }, [])
+  React.useEffect(() => {
     GetAllInfluencerProfile(setInfluencerData)
-  },[brandId])
+  }, [brandId])
   const FakeData = [
     { key: "one", value: "One" },
     { key: "two", value: "Two" },
@@ -59,37 +59,20 @@ const InfluencersList = () => {
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item,index)=><InfluencerCard key={index} influencerId={item._id}  depth5Frame0={item.profileUrl!=null? item.profileUrl: require("../../assets/blank-profile.png")} kylieCosmetics={item.userName} beauty={item.category} />)}
+            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl != null ? item.profileUrl : require("../../assets/blank-profile.png")} kylieCosmetics={item.userName} beauty={item.category} />)}
           </View>
         </ScrollView>
-        <View style={[styles.floatButtonContainer, { opacity: showFloatButton ? 1 : 0.4 }]}>
-          <Pressable onPress={() => navigation.navigate("FilterUI")} style={styles.floatButton}>
-            <View style={styles.floatButtonContent}>
-              <Image style={styles.floatButtonImage} contentFit="cover" source={require("../../assets/depth-4-frame-015.png")} />
-              <View style={styles.floatButtonTextContainer}>
-                <Text style={styles.floatButtonText}>Filters</Text>
-              </View>
-            </View>
-          </Pressable>
-        </View>
       </View>
-      <Depth1Frame
-        depth5Frame0={require("../../assets/depth-5-frame-01.png")}
-        depth5Frame01={require("../../assets/depth-5-frame-018.png")}
-        search="Campaigns"
-        depth5Frame02={require("../../assets/depth-5-frame-019.png")}
-        myBrands="Messages"
-        depth5Frame03={require("../../assets/depth-5-frame-020.png")}
-        propBorderColor="#f0f2f5"
-        propFontFamily="BeVietnamPro-Medium"
-        propColor="#121217"
-        propFontFamily1="BeVietnamPro-Medium"
-        propColor1="#637087"
-        propFontFamily2="BeVietnamPro-Medium"
-        propColor2="#637087"
-        propFontFamily3="BeVietnamPro-Medium"
-        propColor3="#637087"
-      />
+      <View style={[styles.floatButtonContainer, { opacity: showFloatButton ? 1 : 0.4 }]}>
+        <Pressable onPress={() => navigation.navigate("FilterUI")} style={styles.floatButton}>
+          <View style={styles.floatButtonContent}>
+            <Image style={styles.floatButtonImage} contentFit="cover" source={require("../../assets/depth-4-frame-015.png")} />
+            <View style={styles.floatButtonTextContainer}>
+              <Text style={styles.floatButtonText}>Filters</Text>
+            </View>
+          </View>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -107,8 +90,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     width: "100%",
-    height: "95%",
-    paddingBottom: 80,
+    height: "100%",
   },
   scrollView: {
     width: "100%",
@@ -154,14 +136,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     overflow: "hidden",
     position: "absolute",
-    bottom: "20%",
+    bottom: 50,
     right: 40,
     zIndex: 10,
   },
   floatButton: {
-    justifyContent: "flex-end",
+    justifyContent: "center",
     height: 40,
-    width: 103,
+    width: "auto",
     flexDirection: "row",
     overflow: "hidden",
   },
@@ -175,13 +157,15 @@ const styles = StyleSheet.create({
     elevation: 4,
     shadowOpacity: 1,
     backgroundColor: Color.colorRoyalblue,
-    paddingLeft: Padding.p_5xs,
+    paddingLeft: Padding.p_base,
     paddingRight: Padding.p_base,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: Border.br_xs,
     height: 40,
-    width: 103,
+    width: "auto",
+    display: "flex",
+    flexDirection: "row"
   },
   floatButtonImage: {
     width: 24,
