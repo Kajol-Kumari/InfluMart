@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View, Text, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { FontFamily, FontSize, Border, Color, Padding } from "../GlobalStyles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -118,7 +119,17 @@ const Depth1Frame = ({
       ...getStyleValue("color", propColor3),
     };
   }, [propFontFamily3, propColor3]);
-
+  const handleProfileClick = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('BrandProfile')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }else{
+      navigation.navigate('BrandorInfluencer')
+    }
+  }
   return (
     <View style={[styles.depth1Frame13, depth1Frame13Style,style]}>
       <View style={styles.depth2Frame0}>
@@ -214,7 +225,7 @@ const Depth1Frame = ({
           </View>
         </TouchableOpacity >
 
-        <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
+        <TouchableOpacity onPress={() => handleProfileClick()}>
 
           <View
             style={[
