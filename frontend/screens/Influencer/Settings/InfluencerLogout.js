@@ -11,8 +11,22 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { InfluencerLogoutStyles } from "./InfluencerLogout.scss";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAlert } from "../../../util/AlertContext";
 
 const InfluencerLogOutPage = ({ navigation }) => {
+  const { showAlert } = useAlert();
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("influencerId");
+      showAlert("Logout", "You have been logged out successfully");
+      navigation.navigate("LoginPage");
+    } catch (error) {
+      showAlert("Logout Error", "Something went wrong");
+    }
+  };
   return (
     <ScrollView style={styles.scrollView}>
       <TouchableOpacity onPress={() => navigation.navigate("AdminPanel")}>
@@ -38,12 +52,15 @@ const InfluencerLogOutPage = ({ navigation }) => {
         </Text>
       </View>
       <View style={styles.CancelButtonContainer}>
-        <TouchableOpacity style={styles.CancelButton}>
+        <TouchableOpacity
+          style={styles.CancelButton}
+          onPress={() => navigation.navigate("AdminPanel")}
+        >
           <Text style={styles.CancelButtonText}>Cancel</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.loginButtonContainer}>
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={()=>handleLogout()}>
           <Text style={styles.loginButtonText}>Log Out</Text>
         </TouchableOpacity>
       </View>

@@ -66,4 +66,31 @@ const GetAllInfluencerProfile = async (setProfile) => {
   }
 };
 
-export {GetInfluencerProfile,GetAllInfluencerProfile}
+const DeleteInfluencerProfile = async (influencerId, navigation, showAlert) => {
+  const token = await AsyncStorage.getItem("token");
+  try {
+    const response = await axios.delete(
+      `${API_ENDPOINT}/influencers/profile/${influencerId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      showAlert("Profile Deleted", "Successfully deleted your profile");
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("influencerId");
+      navigation.navigate("LoginPage");
+    }
+  } catch (error) {
+    console.log(error);
+    showAlert("Profile Error", "Something went wrong");
+  }
+};
+
+export {
+  GetInfluencerProfile,
+  GetAllInfluencerProfile,
+  DeleteInfluencerProfile,
+};
