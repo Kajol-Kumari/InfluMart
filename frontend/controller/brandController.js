@@ -33,4 +33,20 @@ const getBrandProfile = async (brandId, showAlert) => {
   }
 };
 
-export { getBrandProfile };
+const getAllBrandProfiles=async(showAlert)=>{
+  const token=await AsyncStorage.getItem("token")
+  try{
+    const response=await axios.get(`${API_ENDPOINT}/brands/getAllBrands`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      },
+    })
+    const data=await response.data;
+    return data
+  }catch(error){
+    console.log(error)
+    showAlert("Brand Profiles Error","Something went wrong")
+  }
+}
+
+export { getBrandProfile,getAllBrandProfiles };

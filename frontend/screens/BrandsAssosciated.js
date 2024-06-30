@@ -3,12 +3,24 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { getAllBrandProfiles } from '../controller/brandController'
+import { useAlert } from '../util/AlertContext'
 
 
 const BrandAssosciated = () => {
   const navigation = useNavigation();
+  const { showAlert } = useAlert()
+  const fakeData = ["Google", "Cisco", "Zoho", "PWC", "Meta", "Swiggy", "LinkedIn", "Zomato"]
 
-  const fakeData = ["Google","Cisco","Zoho","PWC","Meta","Swiggy","LinkedIn","Zomato"]
+  const [brands, setBrands] = React.useState([])
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await getAllBrandProfiles(showAlert)
+      setBrands(res?.brands)
+    }
+    fetchData()
+  }, [])
 
   return (
 
@@ -41,23 +53,31 @@ const BrandAssosciated = () => {
         <ScrollView style={{ width: '100%' }}>
           <View style={styles.depth1Frame1}>
             {
-              fakeData.map((value,index)=> {
-                return (
-                  <View style={styles.depth2FrameLayout} key={index}>
-                    <Image
-                      style={styles.depth4Frame03}
-                      contentFit="cover"
-                      source={require("../assets/depth-4-frame-01.png")}
-                    />
-                    <View style={styles.depth3Frame11}>
-                      <View style={styles.depth4Frame04}>
-                        <Text style={styles.google}>{value}</Text>
+              brands && brands.length > 0 ?
+                brands.map(({ name, profileUrl,_id }, index) => {
+                  return (
+                    <TouchableOpacity onPress={()=>{navigation.navigate("BrandProfile",{clickedId:_id})}}>
+                      <View style={styles.depth2FrameLayout} key={index}>
+                        <Image
+                          style={styles.depth4Frame03}
+                          contentFit="cover"
+                          source={profileUrl ? profileUrl : require("../assets/depth-4-frame-01.png")}
+                        />
+                        <View style={styles.depth3Frame11}>
+                          <View style={styles.depth4Frame04}>
+                            <Text style={styles.google}>{name}</Text>
+                          </View>
+                        </View>
                       </View>
-                    </View>
-                  </View>
-                )
-              })
+                    </TouchableOpacity>
+                  )
+                })
+                :
+                <View>
+                  <Text style={{ color: "#ccc", fontSize: FontSize.size_base }}>No Brands found</Text>
+                </View>
             }
+
           </View>
         </ScrollView>
         <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
@@ -148,9 +168,9 @@ const styles = StyleSheet.create({
   depth2FrameLayout: {
     height: 'auto',
     width: 280,
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center"
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   frameLayout: {
     height: 173,
@@ -308,12 +328,12 @@ const styles = StyleSheet.create({
   depth1Frame1: {
     height: "100%",
     width: "100%",
-    display:"flex",
-    flexDirection:"row",
-    flexWrap:"wrap",
-    gap:20,
-    justifyContent:"center",
-    paddingHorizontal:"2%"
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 20,
+    justifyContent: "center",
+    paddingHorizontal: "2%"
   },
   depth4Frame019: {
     paddingHorizontal: 0,
@@ -359,7 +379,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     width: "100%",
-    gap:40
+    gap: 40
   },
   depth1Frame3: {
     borderStyle: "solid",

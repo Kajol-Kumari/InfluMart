@@ -20,7 +20,8 @@ import { BrandProfileStyles } from "./BrandProfile.scss";
 import { getBrandProfile } from "../controller/brandController";
 import Depth1Frame from "../components/Depth1Frame";
 
-const BrandProfile = ({ navigation }) => {
+const BrandProfile = ({ route, navigation }) => {
+  const clickedId = route?.params?.clickedId
   const { showAlert } = useAlert();
   const [brandId, setBrandId] = useState(null);
   const [token, setToken] = useState(null);
@@ -45,7 +46,6 @@ const BrandProfile = ({ navigation }) => {
         console.error("Error fetching user data from AsyncStorage:", error);
       }
     };
-
     fetchUserData();
   }, []);
 
@@ -68,17 +68,20 @@ const BrandProfile = ({ navigation }) => {
         .catch((error) =>
           console.error("Error fetching minimum requirements:", error)
         );
-      getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
+      if (clickedId)
+        getBrandProfile(clickedId, showAlert).then((data) => setBrand(data));
+      else
+        getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
     }
-  }, [brandId, token]);
+  }, [brandId, token, clickedId]);
 
 
   return (
-    <View style={{ width: "100%",height:"100%" }}>
+    <View style={{ width: "100%", height: "100%" }}>
       <ScrollView style={styles.container}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.navigate("Homepage")}
+            <TouchableOpacity
             >
               <View style={styles.headerContent}>
                 <Text style={styles.headerTitle}>Brand Profile</Text>
