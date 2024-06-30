@@ -136,7 +136,7 @@ const Homepage = ({route,navigation}) => {
         <Depth1Frame
           depth5Frame0={require("../assets/depth-5-frame-01.png")}
           depth5Frame01={require("../assets/depth-5-frame-02.png")}
-          search="Search"
+          search="Influencers"
           depth5Frame02={require("../assets/depth-5-frame-03.png")}
           myBrands="My Brands"
           depth5Frame03={require("../assets/depth-5-frame-04.png")}
