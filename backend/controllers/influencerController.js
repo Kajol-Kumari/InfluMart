@@ -105,7 +105,7 @@ exports.login = async (req, res) => {
     const influencer = await InfluencerSignupRequest.findOne({
       userName: username,
     });
-
+    console.log(influencer);
     // Check if the influencer exists
     if (!influencer) {
       return res.status(401).json({ message: "Authentication failed" });
@@ -215,14 +215,11 @@ exports.deleteProfile = async (req, res) => {
   const influencerId = req.params.id; // Get the influencer's ID from the request parameters
 
   try {
-    const influencer = await InfluencerSignupRequest.findById(influencerId);
+    const influencer = await InfluencerSignupRequest.findByIdAndDelete(influencerId);
 
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
     }
-
-    // Remove the influencer's profile from the database
-    await influencer.remove();
 
     res.status(200).json({ message: "Profile deleted successfully" });
   } catch (err) {
