@@ -33,20 +33,28 @@ const getBrandProfile = async (brandId, showAlert) => {
   }
 };
 
-const getAllBrandProfiles=async(showAlert)=>{
-  const token=await AsyncStorage.getItem("token")
-  try{
-    const response=await axios.get(`${API_ENDPOINT}/brands/getAllBrands`,{
-      headers:{
-        Authorization:`Bearer ${token}`
+const getAllBrandProfiles = async (showAlert) => {
+  const token = await AsyncStorage.getItem("token")
+  try {
+    const response = await axios.get(`${API_ENDPOINT}/brands/getAllBrands`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       },
     })
-    const data=await response.data;
+    let data = await response.data.brands;
+    
+    data = data.map((brand) => {
+      return {
+        ...brand, profileUrl: brand.profileUrl.includes("uploads")
+          ? `${API_ENDPOINT}/${brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
+          : null
+      }
+    })
     return data
-  }catch(error){
+  } catch (error) {
     console.log(error)
-    showAlert("Brand Profiles Error","Something went wrong")
+    showAlert("Brand Profiles Error", "Something went wrong")
   }
 }
 
-export { getBrandProfile,getAllBrandProfiles };
+export { getBrandProfile, getAllBrandProfiles };

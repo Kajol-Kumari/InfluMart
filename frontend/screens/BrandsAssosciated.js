@@ -16,7 +16,8 @@ const BrandAssosciated = ({ active }) => {
   React.useEffect(() => {
     async function fetchData() {
       const res = await getAllBrandProfiles(showAlert)
-      setBrands(res?.brands)
+      setBrands(res)
+      console.log(res)
     }
     fetchData()
   }, [])
