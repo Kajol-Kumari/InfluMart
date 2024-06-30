@@ -38,12 +38,23 @@ const BrandAssosciated = ({active}) => {
       navigation.navigate('brandorInfluencer')
     }
   }
+  const handleBack = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('BrandProfile')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }else{
+      navigation.navigate('Homepage')
+    }
+  }
   return (
 
     <View style={styles.galileoDesign}>
       <View style={[styles.depth0Frame0, styles.frameBg]}>
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-          <TouchableOpacity style={{ width: "100%", height: "auto" }} onPress={() => navigation.navigate('Homepage')}>
+          <TouchableOpacity style={{ width: "100%", height: "auto" }} onPress={() => handleBack()}>
             <View style={styles.depth2Frame0}>
 
               <View style={styles.depth3Frame0}>

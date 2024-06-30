@@ -127,7 +127,7 @@ const Depth1Frame = ({
     } else if (influencer) {
       navigation.navigate('UserProfile')
     }else{
-      navigation.navigate('brandorInfluencer')
+      navigation.navigate('BrandorInfluencer')
     }
   }
   return (

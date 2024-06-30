@@ -4,6 +4,7 @@ import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 
 import { FontSize, FontFamily, Color, Padding, Border } from "../GlobalStyles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Depth1Frame11 = ({ onChange, style }) => {
   const navigation = useNavigation();
@@ -13,11 +14,22 @@ const Depth1Frame11 = ({ onChange, style }) => {
   const handleSearch = () => {
     setIsSearchBarOpen(!isSearchBarOpen);
   };
+  const handleBack = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('BrandProfile')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }else{
+      navigation.navigate('Homepage')
+    }
+  }
 
   return (
     <View style={[styles.depth1Frame0, style]}>
       <View style={styles.depth2Frame0}>
-        <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+        <TouchableOpacity onPress={() => handleBack()}>
           <View style={styles.BackArrow}>
             <Image
               style={styles.depth4Frame0}
