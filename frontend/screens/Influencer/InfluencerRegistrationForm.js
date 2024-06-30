@@ -247,11 +247,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             value={location}
             setValue={setLocation}
           />
-
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Subscription plans</Text>
-          </View>
-          <InfluPrice />
           <TouchableOpacity
             onPress={handleSelectPlan}
             disabled={!isFormValid}

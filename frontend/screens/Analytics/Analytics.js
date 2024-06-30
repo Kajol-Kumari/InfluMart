@@ -48,10 +48,19 @@ const Analytics = ({ route, navigation }) => {
   const [influencerId, setInfluencerId] = React.useState("");
   const [influencer, setInfluencer] = React.useState(null);
   const clickedId = route.params?.influencerId
+  const [idType,setIdType] = React.useState("") 
 
   React.useEffect(() => {
     const getData = async () => {
       const id = await AsyncStorage.getItem("influencerId");
+      const _id = await AsyncStorage.getItem("brandId");
+      if(_id){
+        setIdType("brand")
+      }
+      if(id){
+        setIdType("influencer")
+      }
+
       if (!id && !clickedId) {
         navigation.navigate("Homepage");
       } else {
@@ -106,10 +115,19 @@ const Analytics = ({ route, navigation }) => {
       await sendRequest(brandId,clickedId,showAlert)
     }
   }
+  const handleBack = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('InfluencersList')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.menuBar} onPress={() => navigation.navigate("UserProfile")}>
+      <TouchableOpacity style={styles.menuBar} onPress={() => handleBack()}>
         <Depth1Frame7
           depth4Frame0={require("../../assets/depth-4-frame-010.png")}
           requestDetails={`Influencer`}
@@ -258,13 +276,13 @@ const Analytics = ({ route, navigation }) => {
               <AveragePrice platform="YouTube" price={`$ ${influencer?.price && influencer?.price[0]?.yt || "N/A"}`} />
               <AveragePrice platform="TikTok" price={`$ ${influencer?.price && influencer?.price[0]?.tt || "N/A"}`} />
             </View>
-            <View style={styles.connectContainer}>
+            {idType=="brand"?<View style={styles.connectContainer}>
               <TouchableOpacity onPress={()=> handleConnect()}>
                 <View style={styles.connectButton}>
-                  <Text style={styles.connectText}>Connect with Caroline</Text>
+                  <Text style={styles.connectText}>{`Connect with ${influencer?.userName}`}</Text>
                 </View>
               </TouchableOpacity>
-            </View>
+            </View>:null}
           </View>
         </View>
       </ScrollView>

@@ -5,15 +5,14 @@ import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { getAllBrandProfiles } from '../controller/brandController'
 import { useAlert } from '../util/AlertContext'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const BrandAssosciated = () => {
+const BrandAssosciated = ({active}) => {
   const navigation = useNavigation();
   const { showAlert } = useAlert()
-  const fakeData = ["Google", "Cisco", "Zoho", "PWC", "Meta", "Swiggy", "LinkedIn", "Zomato"]
 
   const [brands, setBrands] = React.useState([])
-
   React.useEffect(() => {
     async function fetchData() {
       const res = await getAllBrandProfiles(showAlert)
@@ -22,12 +21,53 @@ const BrandAssosciated = () => {
     fetchData()
   }, [])
 
+  const [activeTab, setActiveTab] = React.useState(active)
+  function handleClick(tab) {
+    setActiveTab(tab)
+    if (tab == "list")
+      //navigation for home icon
+      navigation.navigate('InfluencersList')
+    if (tab == "partnership")
+      //navigation for partnership icon
+      navigation.navigate('BrandsAssosciated')
+    if (tab == "events")
+      //navigation.navigate('AdminPanel')
+    console.log("eventspage")
+    if (tab == "network")
+      //navigation for partnership icon
+      navigation.navigate('UserProfile')
+    if (tab == "profile")
+      handleProfileClick()
+  }
+  const fakeData = ["Google","Cisco","Zoho","PWC","Meta","Swiggy","LinkedIn","Zomato"]
+  const handleProfileClick = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('BrandProfile')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }else{
+      navigation.navigate('brandorInfluencer')
+    }
+  }
+  const handleBack = async () => {
+    const brand = await AsyncStorage.getItem("brandId")
+    const influencer = await AsyncStorage.getItem("influencerId")
+    if (brand) {
+      navigation.navigate('BrandProfile')
+    } else if (influencer) {
+      navigation.navigate('UserProfile')
+    }else{
+      navigation.navigate('Homepage')
+    }
+  }
   return (
 
     <View style={styles.galileoDesign}>
       <View style={[styles.depth0Frame0, styles.frameBg]}>
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
-          <TouchableOpacity style={{ width: "100%", height: "auto" }} onPress={() => navigation.navigate('Homepage')}>
+          <TouchableOpacity style={{ width: "100%", height: "auto" }} onPress={() => handleBack()}>
             <View style={styles.depth2Frame0}>
 
               <View style={styles.depth3Frame0}>
@@ -83,6 +123,7 @@ const BrandAssosciated = () => {
         <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame02}>
             <View style={styles.depth3FrameLayout}>
+              <TouchableOpacity onPress={() => handleClick("list")}>
               <View style={[styles.depth4Frame019, styles.depth4FrameFlexBox]}>
                 <Image
                   style={styles.depth4Frame0}
@@ -95,8 +136,10 @@ const BrandAssosciated = () => {
                   <Text style={[styles.home, styles.homeTypo]}>Home</Text>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
+            <TouchableOpacity onPress={() => handleClick("partnership")}>
               <View style={[styles.depth4Frame020, styles.depth4FrameFlexBox]}>
                 <Image
                   style={styles.depth4Frame0}
@@ -113,9 +156,11 @@ const BrandAssosciated = () => {
                   </Text>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
-              <View style={[styles.depth4Frame019, styles.depth4FrameFlexBox]}>
+            <TouchableOpacity onPress={() => handleClick("events")}>
+              <View style={[activeTab=="events"?styles.depth4Frame020:styles.depth4Frame019, styles.depth4FrameFlexBox]}>
                 <Image
                   style={styles.depth4Frame0}
                   contentFit="cover"
@@ -123,28 +168,31 @@ const BrandAssosciated = () => {
                 />
               </View>
               <View
-                style={[styles.depth4Frame12, styles.depth4FrameSpaceBlock]}
+                style={[activeTab=="events"?styles.depth4Frame11:styles.depth4Frame12, styles.depth4FrameSpaceBlock]}
               >
                 <View style={styles.depth5Frame02}>
-                  <Text style={[styles.home, styles.homeTypo]}>Events</Text>
+                  <Text style={[activeTab=="events"? styles.partners:styles.home, styles.homeTypo]}>Events</Text>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
-              <View style={[styles.depth4Frame019, styles.depth4FrameFlexBox]}>
+            <TouchableOpacity onPress={() => handleClick("profile")}>
+              <View style={[activeTab=="profile"?styles.depth4Frame020:styles.depth4Frame019, styles.depth4FrameFlexBox]}>
                 <Image
                   style={styles.depth4Frame0}
                   contentFit="cover"
-                  source={require("../assets/depth-5-frame-03.png")}
+                  source={require("../assets/depth-5-frame-031.png")}
                 />
               </View>
               <View
-                style={[styles.depth4Frame13, styles.depth4FrameSpaceBlock]}
+                style={[activeTab=="profile"?styles.depth4Frame11:styles.depth4Frame13, styles.depth4FrameSpaceBlock]}
               >
                 <View style={styles.depth5Frame02}>
-                  <Text style={[styles.home, styles.homeTypo]}>Profile</Text>
+                  <Text style={[activeTab=="profile"? styles.partners:styles.home, styles.homeTypo]}>Profile</Text>
                 </View>
               </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
