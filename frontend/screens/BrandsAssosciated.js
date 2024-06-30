@@ -61,7 +61,7 @@ const BrandAssosciated = () => {
                         <Image
                           style={styles.depth4Frame03}
                           contentFit="cover"
-                          source={profileUrl ? profileUrl : require("../assets/depth-4-frame-01.png")}
+                          source={profileUrl ? {uri:profileUrl} : require("../assets/depth-4-frame-01.png")}
                         />
                         <View style={styles.depth3Frame11}>
                           <View style={styles.depth4Frame04}>
