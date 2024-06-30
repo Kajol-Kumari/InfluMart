@@ -48,7 +48,7 @@ const Depth1Frame11 = ({ onChange, style }) => {
           />
         ) : (
           <>
-            <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
+            <TouchableOpacity>
               <View style={styles.depth3Frame1}>
                 <View style={styles.depth4Frame0}>
                   <View style={styles.depth5Frame0}>

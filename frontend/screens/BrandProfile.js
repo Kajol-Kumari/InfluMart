@@ -18,7 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatNumber } from "../helpers/GraphData";
 import { BrandProfileStyles } from "./BrandProfile.scss";
 import { getBrandProfile } from "../controller/brandController";
-import Depth1Frame from "../components/Depth1Frame";
+import BrandProfileBottomBar from "../components/BrandProfileBottomBar";
 
 const BrandProfile = ({ route, navigation }) => {
   const clickedId = route?.params?.clickedId
@@ -240,12 +240,12 @@ const BrandProfile = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <Depth1Frame
+      <BrandProfileBottomBar
         depth5Frame0={require("../assets/depth-5-frame-01.png")}
         depth5Frame01={require("../assets/depth-5-frame-02.png")}
-        search="Search"
+        search="Influencer"
         depth5Frame02={require("../assets/depth-5-frame-03.png")}
-        myBrands="My Brands"
+        myBrands="Brands"
         depth5Frame03={require("../assets/depth-5-frame-04.png")}
         style={styles.bottomBar}
       />

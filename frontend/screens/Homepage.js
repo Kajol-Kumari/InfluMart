@@ -138,7 +138,7 @@ const Homepage = ({route,navigation}) => {
           depth5Frame01={require("../assets/depth-5-frame-02.png")}
           search="Influencers"
           depth5Frame02={require("../assets/depth-5-frame-03.png")}
-          myBrands="My Brands"
+          myBrands="Brands"
           depth5Frame03={require("../assets/depth-5-frame-04.png")}
           style={styles.bottomBar}
         />

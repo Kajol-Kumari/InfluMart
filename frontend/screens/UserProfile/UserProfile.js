@@ -42,7 +42,7 @@ const UserProfile = ({ navigation }) => {
       } else {
         setInfluencerId(id);
         GetInfluencerProfile(id, setInfluencer, showAlert);
-        getAllRequests(id, setRequests, showAlert)
+        // getAllRequests(id, setRequests, showAlert)
       }
     };
     getData();
@@ -199,7 +199,7 @@ const UserProfile = ({ navigation }) => {
           </View>
           {
             requests && requests.length > 0 ?
-              <ScrollView showsVerticalScrollIndicator={false}>
+              <View showsVerticalScrollIndicator={false}>
                 {requests != null &&
                   requests?.map((item, index) => (
                     <ProductCard
@@ -216,7 +216,7 @@ const UserProfile = ({ navigation }) => {
                       buttonWidth="auto"
                     />
                   ))}
-              </ScrollView> :
+              </View> :
               <View style={{width:"100%",padding:Padding.p_base}}>
                   <Text style={{color:Color.colorAliceblue}}>No request found.</Text>
               </View>
@@ -340,14 +340,14 @@ const styles = StyleSheet.create({
   depth0Frame0: {
     paddingTop: 40,
     minHeight: 900,
-    height: "auto",
+    height: "100%",
     overflow: "hidden",
   },
   userprofile: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorBlack,
     flex: 1,
     width: "100%",
-    height: "auto"
+    height: "100%"
   },
 });
 
