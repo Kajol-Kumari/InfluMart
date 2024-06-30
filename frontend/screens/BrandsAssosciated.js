@@ -3,11 +3,25 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { getAllBrandProfiles } from '../controller/brandController'
+import { useAlert } from '../util/AlertContext'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const BrandAssosciated = ({active}) => {
+const BrandAssosciated = ({ active }) => {
   const navigation = useNavigation();
+  const { showAlert } = useAlert()
+
+  const [brands, setBrands] = React.useState([])
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await getAllBrandProfiles(showAlert)
+      setBrands(res)
+      console.log(res)
+    }
+    fetchData()
+  }, [])
+
   const [activeTab, setActiveTab] = React.useState(active)
   function handleClick(tab) {
     setActiveTab(tab)
@@ -19,14 +33,14 @@ const BrandAssosciated = ({active}) => {
       navigation.navigate('BrandsAssosciated')
     if (tab == "events")
       //navigation.navigate('AdminPanel')
-    console.log("eventspage")
+      console.log("eventspage")
     if (tab == "network")
       //navigation for partnership icon
       navigation.navigate('UserProfile')
     if (tab == "profile")
       handleProfileClick()
   }
-  const fakeData = ["Google","Cisco","Zoho","PWC","Meta","Swiggy","LinkedIn","Zomato"]
+  const fakeData = ["Google", "Cisco", "Zoho", "PWC", "Meta", "Swiggy", "LinkedIn", "Zomato"]
   const handleProfileClick = async () => {
     const brand = await AsyncStorage.getItem("brandId")
     const influencer = await AsyncStorage.getItem("influencerId")
@@ -34,7 +48,7 @@ const BrandAssosciated = ({active}) => {
       navigation.navigate('BrandProfile')
     } else if (influencer) {
       navigation.navigate('UserProfile')
-    }else{
+    } else {
       navigation.navigate('brandorInfluencer')
     }
   }
@@ -45,7 +59,7 @@ const BrandAssosciated = ({active}) => {
       navigation.navigate('BrandProfile')
     } else if (influencer) {
       navigation.navigate('UserProfile')
-    }else{
+    } else {
       navigation.navigate('Homepage')
     }
   }
@@ -80,97 +94,105 @@ const BrandAssosciated = ({active}) => {
         <ScrollView style={{ width: '100%' }}>
           <View style={styles.depth1Frame1}>
             {
-              fakeData.map((value,index)=> {
-                return (
-                  <View style={styles.depth2FrameLayout} key={index}>
-                    <Image
-                      style={styles.depth4Frame03}
-                      contentFit="cover"
-                      source={require("../assets/depth-4-frame-01.png")}
-                    />
-                    <View style={styles.depth3Frame11}>
-                      <View style={styles.depth4Frame04}>
-                        <Text style={styles.google}>{value}</Text>
+              brands && brands.length > 0 ?
+                brands.map(({ name, profileUrl, _id }, index) => {
+                  return (
+                    <TouchableOpacity>
+                      <View style={styles.depth2FrameLayout} key={index}>
+                        <Image
+                          style={styles.depth4Frame03}
+                          contentFit="cover"
+                          source={profileUrl ? {uri:profileUrl} : require("../assets/depth-4-frame-01.png")}
+                        />
+                        <View style={styles.depth3Frame11}>
+                          <View style={styles.depth4Frame04}>
+                            <Text style={styles.google}>{name}</Text>
+                          </View>
+                        </View>
                       </View>
-                    </View>
-                  </View>
-                )
-              })
+                    </TouchableOpacity>
+                  )
+                })
+                :
+                <View>
+                  <Text style={{ color: "#ccc", fontSize: FontSize.size_base }}>No Brands found</Text>
+                </View>
             }
+
           </View>
         </ScrollView>
         <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
           <View style={styles.depth2Frame02}>
             <View style={styles.depth3FrameLayout}>
               <TouchableOpacity onPress={() => handleClick("list")}>
-              <View style={[styles.depth4Frame019, styles.depth4FrameFlexBox]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-5-frame-0.png")}
-                />
-              </View>
-              <View style={[styles.depth4Frame1, styles.depth4FrameSpaceBlock]}>
-                <View style={styles.depth5Frame02}>
-                  <Text style={[styles.home, styles.homeTypo]}>Home</Text>
+                <View style={[styles.depth4Frame019, styles.depth4FrameFlexBox]}>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-5-frame-0.png")}
+                  />
                 </View>
-              </View>
+                <View style={[styles.depth4Frame1, styles.depth4FrameSpaceBlock]}>
+                  <View style={styles.depth5Frame02}>
+                    <Text style={[styles.home, styles.homeTypo]}>Home</Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => handleClick("partnership")}>
-              <View style={[styles.depth4Frame020, styles.depth4FrameFlexBox]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-5-frame-01.png")}
-                />
-              </View>
-              <View
-                style={[styles.depth4Frame11, styles.depth4FrameSpaceBlock]}
-              >
-                <View style={styles.depth5Frame02}>
-                  <Text style={[styles.partners, styles.homeTypo]}>
-                    Partners
-                  </Text>
+              <TouchableOpacity onPress={() => handleClick("partnership")}>
+                <View style={[styles.depth4Frame020, styles.depth4FrameFlexBox]}>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-5-frame-01.png")}
+                  />
                 </View>
-              </View>
+                <View
+                  style={[styles.depth4Frame11, styles.depth4FrameSpaceBlock]}
+                >
+                  <View style={styles.depth5Frame02}>
+                    <Text style={[styles.partners, styles.homeTypo]}>
+                      Partners
+                    </Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => handleClick("events")}>
-              <View style={[activeTab=="events"?styles.depth4Frame020:styles.depth4Frame019, styles.depth4FrameFlexBox]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-5-frame-02.png")}
-                />
-              </View>
-              <View
-                style={[activeTab=="events"?styles.depth4Frame11:styles.depth4Frame12, styles.depth4FrameSpaceBlock]}
-              >
-                <View style={styles.depth5Frame02}>
-                  <Text style={[activeTab=="events"? styles.partners:styles.home, styles.homeTypo]}>Events</Text>
+              <TouchableOpacity onPress={() => handleClick("events")}>
+                <View style={[activeTab == "events" ? styles.depth4Frame020 : styles.depth4Frame019, styles.depth4FrameFlexBox]}>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-5-frame-02.png")}
+                  />
                 </View>
-              </View>
+                <View
+                  style={[activeTab == "events" ? styles.depth4Frame11 : styles.depth4Frame12, styles.depth4FrameSpaceBlock]}
+                >
+                  <View style={styles.depth5Frame02}>
+                    <Text style={[activeTab == "events" ? styles.partners : styles.home, styles.homeTypo]}>Events</Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             </View>
             <View style={[styles.depth3Frame19, styles.depth3FrameLayout]}>
-            <TouchableOpacity onPress={() => handleClick("profile")}>
-              <View style={[activeTab=="profile"?styles.depth4Frame020:styles.depth4Frame019, styles.depth4FrameFlexBox]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-5-frame-031.png")}
-                />
-              </View>
-              <View
-                style={[activeTab=="profile"?styles.depth4Frame11:styles.depth4Frame13, styles.depth4FrameSpaceBlock]}
-              >
-                <View style={styles.depth5Frame02}>
-                  <Text style={[activeTab=="profile"? styles.partners:styles.home, styles.homeTypo]}>Profile</Text>
+              <TouchableOpacity onPress={() => handleClick("profile")}>
+                <View style={[activeTab == "profile" ? styles.depth4Frame020 : styles.depth4Frame019, styles.depth4FrameFlexBox]}>
+                  <Image
+                    style={styles.depth4Frame0}
+                    contentFit="cover"
+                    source={require("../assets/depth-5-frame-031.png")}
+                  />
                 </View>
-              </View>
+                <View
+                  style={[activeTab == "profile" ? styles.depth4Frame11 : styles.depth4Frame13, styles.depth4FrameSpaceBlock]}
+                >
+                  <View style={styles.depth5Frame02}>
+                    <Text style={[activeTab == "profile" ? styles.partners : styles.home, styles.homeTypo]}>Profile</Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             </View>
           </View>
@@ -195,9 +217,9 @@ const styles = StyleSheet.create({
   depth2FrameLayout: {
     height: 'auto',
     width: 280,
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center"
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   frameLayout: {
     height: 173,
@@ -355,12 +377,12 @@ const styles = StyleSheet.create({
   depth1Frame1: {
     height: "100%",
     width: "100%",
-    display:"flex",
-    flexDirection:"row",
-    flexWrap:"wrap",
-    gap:20,
-    justifyContent:"center",
-    paddingHorizontal:"2%"
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 20,
+    justifyContent: "center",
+    paddingHorizontal: "2%"
   },
   depth4Frame019: {
     paddingHorizontal: 0,
@@ -406,7 +428,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     width: "100%",
-    gap:40
+    gap: 40
   },
   depth1Frame3: {
     borderStyle: "solid",
