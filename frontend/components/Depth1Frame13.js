@@ -5,91 +5,115 @@ import { useNavigation } from "@react-navigation/native";
 
 import { FontFamily, FontSize, Padding, Color, Border } from "../GlobalStyles";
 
-const Depth1Frame13 = () => {
+const Depth1Frame13 = ({ active }) => {
   const navigation = useNavigation();
+
+  const [activeTab, setActiveTab] = React.useState(active)
+
+  function handleClick(tab) {
+    setActiveTab(tab)
+    if (tab == "home")
+      //navigation for home icon
+      navigation.navigate('AdminPanel')
+    if (tab == "partnership")
+      //navigation for partnership icon
+      navigation.navigate('UserProfile')
+    if (tab == "settings")
+      navigation.navigate('AdminPanel')
+    if (tab == "network")
+      //navigation for partnership icon
+      navigation.navigate('UserProfile')
+    if (tab == "profile")
+      navigation.navigate('Analytics')
+  }
 
   return (
     <View style={styles.depth1Frame8}>
       <View style={styles.depth2Frame0}>
-        <View style={styles.depth3Frame0}>
-          <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={require("../assets/depth-5-frame-027.png")}
-            />
-          </View>
-          <View style={[styles.depth4Frame1, styles.depth4FrameSpaceBlock]}>
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>Home</Text>
+        <TouchableOpacity onPress={()=>{handleClick("home")}}>
+          <View style={styles.depth3Frame0}>
+            <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={require("../assets/depth-5-frame-027.png")}
+              />
+            </View>
+            <View style={[styles.depth4Frame1, styles.depth4FrameSpaceBlock]}>
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "home" ? "#fff" : "#ccc"}` }]}>Home</Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{handleClick("partnership")}}>
         <View style={[styles.depth3Frame1, styles.depth3FrameSpaceBlock]}>
           <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
             <Image
               style={styles.depth5Frame0}
               contentFit="cover"
-              source={require("../assets/depth-5-frame-028.png")}
+              source={require("../assets/depth-5-frame-0281.png")}
             />
           </View>
           <View style={[styles.depth4Frame11, styles.depth4FrameSpaceBlock]}>
             <View style={styles.depth5Frame01}>
-              <Text style={[styles.partnerships, styles.homeTypo]}>
+              <Text style={[styles.partnerships, styles.homeTypo, { color: `${activeTab == "partnership" ? "#fff" : "#ccc"}` }]}>
                 Partnership
               </Text>
             </View>
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('AdminPanel')}>
-
-        <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
-          <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={require("../assets/depth-5-frame-029.png")}
-            />
-          </View>
-
-          <View style={[styles.depth4Frame12, styles.depth4FrameSpaceBlock]}>
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>Settings</Text>
-            </View>
-          </View>
-        </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => {handleClick("settings")}}>
 
-        <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
-          <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={require("../assets/depth-5-frame-030.png")}
-            />
-          </View>
-          <View style={[styles.depth4Frame13, styles.depth4FrameSpaceBlock]}>
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>Network</Text>
+          <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
+            <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={require("../assets/depth-5-frame-029.png")}
+              />
+            </View>
+
+            <View style={[styles.depth4Frame12, styles.depth4FrameSpaceBlock]}>
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "settings" ? "#fff" : "#ccc"}` }]}>Settings</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Analytics')}>
-
-        <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
-          <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={require("../assets/depth-5-frame-031.png")}
-            />
-          </View>
-          <View style={[styles.depth4Frame14, styles.depth4FrameSpaceBlock]}>
-            <View style={styles.depth5Frame01}>
-              <Text style={[styles.home, styles.homeTypo]}>Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{handleClick("network")}}>
+          <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
+            <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={require("../assets/depth-5-frame-030.png")}
+              />
+            </View>
+            <View style={[styles.depth4Frame13, styles.depth4FrameSpaceBlock]}>
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "network" ? "#fff" : "#ccc"}` }]}>Network</Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {handleClick("profile")}}>
+
+          <View style={[styles.depth3Frame2, styles.depth3FrameSpaceBlock]}>
+            <View style={[styles.depth4Frame0, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={require("../assets/depth-5-frame-031.png")}
+              />
+            </View>
+            <View style={[styles.depth4Frame14, styles.depth4FrameSpaceBlock]}>
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "profile" ? "#fff" : "#ccc"}` }]}>Profile</Text>
+              </View>
+            </View>
+          </View>
         </TouchableOpacity>
 
       </View>
@@ -152,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   partnerships: {
-    color: Color.colorWhite,
+    color: Color.colorLightgray,
   },
   depth4Frame11: {
     width: 77,
@@ -180,8 +204,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   depth2Frame0: {
-    width: 358,
+    width: "100%",
     flexDirection: "row",
+    justifyContent: "space-evenly",
     height: 72,
   },
   depth1Frame8: {
@@ -189,12 +214,15 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: Color.colorDarkslategray_200,
     borderTopWidth: 1,
-    width: 390,
+    width: "100%",
     height: 93,
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
   },
+  activeTab: {
+    colorolor: Color.colorWhite
+  }
 });
 
 export default Depth1Frame13;

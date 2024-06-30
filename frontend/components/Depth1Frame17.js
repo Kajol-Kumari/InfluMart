@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   frameLayout: {
     height: 40,
-    width: 358,
+    width: "100%",
   },
   frameBg: {
     backgroundColor: Color.colorDarkslategray_200,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingVertical: 0,
     height: 40,
-    width: 358,
+    width: "100%",
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -143,10 +143,10 @@ const styles = StyleSheet.create({
   },
   depth2Frame0: {
     height: 184,
-    width: 358,
+    width: "100%",
   },
   depth1Frame1: {
-    width: 390,
+    width: "100%",
     height: 216,
     padding: Padding.p_base,
     flexDirection: "row",

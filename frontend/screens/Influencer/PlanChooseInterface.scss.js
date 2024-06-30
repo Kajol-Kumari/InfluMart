@@ -4,16 +4,16 @@ export const PlanChooseInterfaceStyles = {
   container: {
     flex: 1,
     backgroundColor: Color.colorWhite,
-    width: 390,
+    width: "100%",
   },
   innerContainer: {
-    padding: Padding.p_base,
     alignItems: "center",
     height: "auto",
+    paddingHorizontal:Padding.p_base
   },
   header: {
     marginVertical: Padding.p_xl,
-    width: "90%",
+    width: "100%",
   },
   headerText: {
     fontSize: FontSize.size_3xl,
@@ -24,7 +24,7 @@ export const PlanChooseInterfaceStyles = {
   },
   subHeader: {
     marginBottom: Padding.p_xl,
-    paddingHorizontal: Padding.p_xs,
+    width:"100%"
   },
   subHeaderText: {
     fontSize: FontSize.size_base,
@@ -38,20 +38,29 @@ export const PlanChooseInterfaceStyles = {
     marginBottom: Padding.p_xl,
     justifyContent: "center",
     backgroundColor: "#F0F2F5",
-    width: "99%",
-    paddingVertical: 4,
-    paddingHorizontal: Padding.p_xs,
+    width: "100%",
+    paddingVertical: 8,
+    marginHorizontal: Padding.p_base,
     borderRadius: 12,
+    paddingHorizontal:Padding.p_base
   },
   planButton: {
-    width: 165,
+    width: "50%",
     height: 40,
     backgroundColor: Color.colorWhitesmoke_300,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: Padding.p_5xs,
     borderRadius: Border.br_xs,
     color: "#637587",
+  },
+  planContainer:{
+    width:"100%",
+    height:"auto",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"center",
+    gap:20,
+    flexWrap:"wrap"
   },
   planText: {
     color: "#637587",
@@ -84,7 +93,7 @@ export const PlanChooseInterfaceStyles = {
     paddingVertical: Padding.p_base,
     alignItems: "center",
     marginVertical: Padding.p_base,
-    width: 260,
+    width: "100%",
   },
   selectPlanButtonText: {
     color: "black",

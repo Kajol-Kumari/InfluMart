@@ -18,6 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { formatNumber } from "../helpers/GraphData";
 import { BrandProfileStyles } from "./BrandProfile.scss";
 import { getBrandProfile } from "../controller/brandController";
+import Depth1Frame from "../components/Depth1Frame";
 
 const BrandProfile = ({ navigation }) => {
   const { showAlert } = useAlert();
@@ -26,7 +27,7 @@ const BrandProfile = ({ navigation }) => {
   const [analytics, setAnalytics] = useState(null);
   const [minimumRequirements, setMinimumRequirements] = useState(null);
   const [collaborationCount, setCollaborationCount] = useState(0);
-  const { width } = useWindowDimensions(); 
+  const { width } = useWindowDimensions();
   const [brand, setBrand] = useState(null);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -67,60 +68,55 @@ const BrandProfile = ({ navigation }) => {
         .catch((error) =>
           console.error("Error fetching minimum requirements:", error)
         );
-        getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
+      getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
     }
   }, [brandId, token]);
 
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate("Homepage")}
-          >
-            <View style={styles.headerContent}>
-              <Image
-                style={styles.backArrow}
-                resizeMode="cover"
-                source={require("../assets/depth-4-frame-Backarrow3x.png")}
-              />
-              <Text style={styles.headerTitle}>Profile</Text>
-              <View style={styles.backArrow}></View>
-            </View>
-          </TouchableOpacity>
-          <View style={[styles.profileContainer]}>
-            <View style={styles.profileImageContainer}>
-              <Image
-                style={styles.profileImage}
-                resizeMode="cover"
-                source={
-                  brand?.profileUrl
-                    ? {
+    <View style={{ width: "100%",height:"100%" }}>
+      <ScrollView style={styles.container}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.navigate("Homepage")}
+            >
+              <View style={styles.headerContent}>
+                <Text style={styles.headerTitle}>Brand Profile</Text>
+              </View>
+            </TouchableOpacity>
+            <View style={[styles.profileContainer]}>
+              <View style={styles.profileImageContainer}>
+                <Image
+                  style={styles.profileImage}
+                  resizeMode="cover"
+                  source={
+                    brand?.profileUrl
+                      ? {
                         uri: brand?.profileUrl,
                       }
-                    : require("../assets/blank-profile.png")
-                }
-              />
-            </View>
-            <View style={styles.profileInfoContainer}>
-              <Text style={styles.brandName}>{brand?.name}</Text>
-              <Text style={styles.brandDetails}>
-              {brand?.category || "N/A"}
-              </Text>
-            </View>
+                      : require("../assets/blank-profile.png")
+                  }
+                />
+              </View>
+              <View style={styles.profileInfoContainer}>
+                <Text style={styles.brandName}>{brand?.name}</Text>
+                <Text style={styles.brandDetails}>
+                  {brand?.category || "N/A"}
+                </Text>
+              </View>
 
-            <View style={styles.actionButtons}>
-              <TouchableOpacity style={[styles.button, styles.followButton]}>
-                <Text style={styles.followButtonText}>Settings</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.messageButton]}>
-                <Text style={styles.buttonText}>inbox</Text>
-              </TouchableOpacity>
+              <View style={styles.actionButtons}>
+                <TouchableOpacity style={[styles.button, styles.followButton]}>
+                  <Text style={styles.followButtonText}>Settings</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.messageButton]}>
+                  <Text style={styles.buttonText}>inbox</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
-        
+
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Campaign Insights</Text>
             <View style={styles.insightContainer}>
@@ -135,7 +131,7 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Engagement Rate</Text>
                 <Text style={styles.insightText}>Higher than average</Text>
                 <Text style={styles.insightText}>
-                  {analytics?.averageEngagementRate?`${analytics?.averageEngagementRate} %` : "N/A"}
+                  {analytics?.averageEngagementRate ? `${analytics?.averageEngagementRate} %` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -151,7 +147,7 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Post Frequency</Text>
                 <Text style={styles.insightText}>Average</Text>
                 <Text style={styles.insightText}>
-                  {analytics?.averagePostFrequency?`${formatNumber(analytics?.averagePostFrequency)} posts per week`: "N/A"}
+                  {analytics?.averagePostFrequency ? `${formatNumber(analytics?.averagePostFrequency)} posts per week` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -167,7 +163,7 @@ const BrandProfile = ({ navigation }) => {
                 <Text style={styles.insightTitle}>Follower Growth</Text>
                 <Text style={styles.insightText}>Higher than average</Text>
                 <Text style={styles.insightText}>
-                  {analytics?.averageGrowthValue ? `${analytics?.averageGrowthValue} %`: "N/A"}
+                  {analytics?.averageGrowthValue ? `${analytics?.averageGrowthValue} %` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -186,7 +182,7 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Minimum Followers</Text>
                 <Text style={styles.requirementText}>
-                  {minimumRequirements?.minimumFollowers ? `${formatNumber(minimumRequirements?.minimumFollowers)}`: "N/A"}
+                  {minimumRequirements?.minimumFollowers ? `${formatNumber(minimumRequirements?.minimumFollowers)}` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -201,7 +197,7 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Average Likes</Text>
                 <Text style={styles.requirementText}>
-                  {minimumRequirements?.minimumLikes ? `${formatNumber(minimumRequirements?.minimumLikes)}`: "N/A"}
+                  {minimumRequirements?.minimumLikes ? `${formatNumber(minimumRequirements?.minimumLikes)}` : "N/A"}
                 </Text>
               </View>
             </View>
@@ -216,31 +212,41 @@ const BrandProfile = ({ navigation }) => {
               <View style={styles.requirementDetails}>
                 <Text style={styles.requirementTitle}>Post Frequency</Text>
                 <Text style={styles.requirementText}>
-                  
-                  {minimumRequirements?.minimumPostFrequency ? `At least ${formatNumber(minimumRequirements?.minimumPostFrequency)} posts per week`:"N/A"}
-                  
+
+                  {minimumRequirements?.minimumPostFrequency ? `At least ${formatNumber(minimumRequirements?.minimumPostFrequency)} posts per week` : "N/A"}
+
                 </Text>
               </View>
             </View>
           </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Collaboration Count</Text>
-          <View style={styles.collabCountContainer}>
-            <View style={styles.iconBg}>
-              <Image
-                style={styles.collabIcon}
-                resizeMode="cover"
-                source={require("../assets/collab_count.png")}
-              />
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Collaboration Count</Text>
+            <View style={styles.collabCountContainer}>
+              <View style={styles.iconBg}>
+                <Image
+                  style={styles.collabIcon}
+                  resizeMode="cover"
+                  source={require("../assets/collab_count.png")}
+                />
+              </View>
+              <Text style={styles.collabCount}>
+                {collaborationCount ? `${formatNumber(collaborationCount)}` : "N/A"}
+              </Text>
             </View>
-            <Text style={styles.collabCount}>
-              {collaborationCount?`${formatNumber(collaborationCount)}`: "N/A"}
-            </Text>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Depth1Frame
+        depth5Frame0={require("../assets/depth-5-frame-01.png")}
+        depth5Frame01={require("../assets/depth-5-frame-02.png")}
+        search="Search"
+        depth5Frame02={require("../assets/depth-5-frame-03.png")}
+        myBrands="My Brands"
+        depth5Frame03={require("../assets/depth-5-frame-04.png")}
+        style={styles.bottomBar}
+      />
+    </View>
   );
 };
 

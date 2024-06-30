@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   row: {
+    width:"100%",
     borderColor: Color.colorDarkslategray_100,
     borderBottomWidth: 1,
     height: 56,
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     overflow: "hidden",
     borderStyle: "solid",
+    justifyContent:"space-evenly"
   },
   container: {
     height: 66,
