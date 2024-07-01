@@ -94,4 +94,19 @@ export const InfluencerRegistrationFormStyles = {
     top: 23,
     right: 18,
   },
+  madantoryText:{
+    fontWeight:700,
+    color:"#f00"
+  },
+  labelWrapper:{
+    display:"flex",
+    flexDirection:'row',
+    gap:8
+  },
+  desc: {
+    fontSize: FontSize.size_sm,
+    marginTop: 5,
+    fontFamily: FontFamily.plusJakartaSansRegular,
+    color: Color.colorSlategray_100,
+  },
 };
