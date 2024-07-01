@@ -110,6 +110,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               <View style={styles.frameLayout}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Email</Text>
+                  <Text style={styles.mandatoryText}>*</Text>
                 </View>
                 <View>
                   <View style={[styles.depth5Frame01]}>
@@ -131,6 +132,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               <View style={styles.frameLayout}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Password</Text>
+                  <Text style={styles.mandatoryText}>*</Text>
                 </View>
                 <View
                   style={[
@@ -167,6 +169,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
                   <Text style={[styles.email, styles.emailTypo]}>
                     Brand Type
                   </Text>
+                  <Text style={styles.mandatoryText}>*</Text>
                 </View>
                 <View>
                   <View>
@@ -187,6 +190,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               <View style={styles.frameLayout}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>Username</Text>
+                  <Text style={styles.mandatoryText}>*</Text>
                 </View>
                 <View style={styles.depth4Frame06}>
                   <View style={[styles.depth5Frame01, styles.depth5FrameBg]}>
