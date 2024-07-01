@@ -108,7 +108,7 @@ const App = () => {
         <NavigationContainer>
           {hideSplashScreen ? (
             <Stack.Navigator
-              initialRouteName={"planChooseInterface"}
+              initialRouteName={initialRoute}
               screenOptions={{ headerShown: false }}
             >
               <Stack.Screen
