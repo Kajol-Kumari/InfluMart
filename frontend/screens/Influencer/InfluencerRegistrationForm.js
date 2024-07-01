@@ -15,6 +15,7 @@ import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.sc
 import { useAlert } from "../../util/AlertContext";
 import { Color } from "../../GlobalStyles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import MultipleSelectList from "../../shared/MultiSelect";
 
 const FormField = ({
   label,
@@ -23,8 +24,9 @@ const FormField = ({
   secureTextEntry = false,
   showPassword,
   setShowPassword,
+  style
 }) => (
-  <View style={styles.fieldContainer}>
+  <View style={[styles.fieldContainer, style]}>
     <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
       <Text style={styles.fieldLabel}>{label}</Text>
       <Text style={styles.madantoryText}>*</Text>
@@ -54,9 +56,12 @@ const FormField = ({
 );
 
 const InfluencerRegistrationForm = ({ route, navigation }) => {
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("")
+  const [selected, setSelected] = useState([]);
   const [over18, setOver18] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [industryAssociation, setIndustryAssociation] = useState(false);
@@ -68,9 +73,21 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const photo = route.params?.photo;
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const data = [
+    { key: "grocery", value: "Grocery" },
+    { key: "electronics", value: "Electronics" },
+    { key: "fashion", value: "Fashion" },
+    { key: "toys", value: "Toys" },
+    { key: "beauty", value: "Beauty" },
+    { key: "home-decoration", value: "Home Decoration" },
+    { key: "fitness", value: "Fitness" },
+    { key: "education", value: "Education" },
+    { key: "others", value: "Others" },
+  ];
 
   useEffect(() => {
     if (
+      name &&
       email &&
       password &&
       username &&
@@ -141,7 +158,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <View style={styles.headerNavigation} />
             </View>
           </TouchableOpacity>
-
+          <FormField label="Name" value={name} setValue={setName} />
           <FormField label="Email" value={email} setValue={setEmail} />
           <FormField
             label="Password"
@@ -152,7 +169,44 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             setShowPassword={setShowPassword}
           />
           <FormField label="Username" value={username} setValue={setUsername} />
-
+          <View style={styles.mobileNoWrap}>
+            <FormField label={"Mobile Number"} value={mobileNumber} setValue={setMobileNumber} style={{ width: "85%" }} />
+            <View style={styles.verifyContainer}>
+              <TouchableOpacity
+                style={styles.verifyButton}
+              >
+                <Image
+                  style={styles.verifyIcon}
+                  contentFit="cover"
+                  source={require("../../assets/verify_symbol.png")}
+                />
+                <Text style={styles.verifyText}>Verify</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Influencer Type
+                  </Text>
+                  <Text style={styles.mandatoryText}>*</Text>
+                </View>
+                <View>
+                  <View>
+                    <MultipleSelectList
+                      setSelected={(val) => setSelected(val)}
+                      data={data}
+                      save="value"
+                      selectedval={selected}
+                      setSelectedVal={setSelected}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.sectionHeader}>
             <View>
               <View style={styles.labelWrapper}>
@@ -241,8 +295,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
 
           <View style={styles.sectionHeader}>
             <View style={styles.labelWrapper}>
-            <Text style={styles.sectionHeaderText}>Industry association</Text>
-            <Text style={styles.madantoryText}>*</Text>
+              <Text style={styles.sectionHeaderText}>Industry association</Text>
+              <Text style={styles.madantoryText}>*</Text>
             </View>
           </View>
           <HeadingDescToggle
@@ -252,11 +306,11 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           />
           <View style={styles.sectionHeader}>
             <View>
-            <View style={styles.labelWrapper}>
-              <Text style={styles.sectionHeaderText}>Price per post</Text>
-              <Text style={styles.madantoryText}>*</Text>
-            </View>
-            <Text style={styles.desc}>Atleast one field is mandatory</Text>
+              <View style={styles.labelWrapper}>
+                <Text style={styles.sectionHeaderText}>Price per post</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+              <Text style={styles.desc}>Atleast one field is mandatory</Text>
             </View>
             <TouchableOpacity
               onPress={() =>
