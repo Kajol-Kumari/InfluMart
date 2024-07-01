@@ -109,7 +109,7 @@ const BrandProfile = ({ route, navigation }) => {
               </View>
 
               <View style={styles.actionButtons}>
-                <TouchableOpacity style={[styles.button, styles.followButton]}>
+                <TouchableOpacity style={[styles.button, styles.followButton]} onPress={()=>navigation.navigate("BrandAdminPanel")}>
                   <Text style={styles.followButtonText}>Settings</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.messageButton]}>
