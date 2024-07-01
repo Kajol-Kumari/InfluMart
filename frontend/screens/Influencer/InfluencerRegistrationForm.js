@@ -170,18 +170,31 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           />
           <FormField label="Username" value={username} setValue={setUsername} />
           <View style={styles.mobileNoWrap}>
-            <FormField label={"Mobile Number"} value={mobileNumber} setValue={setMobileNumber} style={{ width: "85%" }} />
-            <View style={styles.verifyContainer}>
-              <TouchableOpacity
-                style={styles.verifyButton}
-              >
-                <Image
-                  style={styles.verifyIcon}
-                  contentFit="cover"
-                  source={require("../../assets/verify_symbol.png")}
+            <View style={[styles.fieldContainer,{width:"100%"}]}>
+              <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+                <Text style={styles.fieldLabel}>Mobile Number</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+              <View style={{width:"100%",display:"flex",flexDirection:"row",justifyContent:"space-between",gap:8}}>
+                <TextInput
+                  style={[styles.textInput,{width:"90%"}]}
+                  value={mobileNumber}
+                  onChangeText={setMobileNumber}
+                  placeholder={"Mobile Number"}
                 />
-                <Text style={styles.verifyText}>Verify</Text>
-              </TouchableOpacity>
+                <View style={styles.verifyContainer}>
+                  <TouchableOpacity
+                    style={styles.verifyButton}
+                  >
+                    <Image
+                      style={styles.verifyIcon}
+                      contentFit="cover"
+                      source={require("../../assets/verify_symbol.png")}
+                    />
+                    <Text style={styles.verifyText}>Verify</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
           <View style={styles.depth1Frame2}>
