@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from '@env';
 import { handlePaymentMobile, handlePaymentWeb } from "../util/paymentFuntions";
 import { Platform } from "react-native";
-import RazorpayCheckout from "expo-razorpay";
+import RazorpayCheckout from "react-native-razorpay";
 
 export const createOrder = async ({ amount, currency, receipt }) => {
   try {

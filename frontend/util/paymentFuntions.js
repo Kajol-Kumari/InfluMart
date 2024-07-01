@@ -1,4 +1,4 @@
-import RazorpayCheckout from "expo-razorpay";
+import RazorpayCheckout from "react-native-razorpay";
 import { RAZORPAY_KEY_ID } from "@env";
 
 const handlePaymentMobile = async (order) => {
