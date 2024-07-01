@@ -11,39 +11,26 @@ import {
   Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
+import { Color, Padding, FontSize, FontFamily, Border } from "../../GlobalStyles";
 
-const AdminPanel = () => {
+const BrandAdminPanel = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [inputValue, setInputValue] = useState("");
-
-  const handleOptionPress = (option) => {
-    setSelectedOption(option);
-    setModalVisible(true);
-  };
-
-  const handleSave = () => {
-    // Handle the save action here (e.g., update state or call an API)
-    setModalVisible(false);
-  };
 
   const menuOptions = [
      {
       label: "Help center",
-      image: require("../assets/depth-3-frame-1.png"),
+      image: require("../../assets/depth-3-frame-1.png"),
       navigate: "InfluencerHelpCenterPage",
     },
     {
       label: "Contact us",
-      image: require("../assets/depth-3-frame-1.png"),
+      image: require("../../assets/depth-3-frame-1.png"),
       navigate: "InfluencerContactUsPage",
     },
     {
       label: "Delete account",
-      image: require("../assets/depth-3-frame-1.png"),
-      navigate: "InfluencerAccountDeletePage",
+      image: require("../../assets/depth-3-frame-1.png"),
+      navigate: "BrandAccountDeletePage",
     },
   ];
 
@@ -52,13 +39,13 @@ const AdminPanel = () => {
       <View style={styles.adminPanel}>
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("UserProfile")}
+            onPress={() => navigation.navigate("BrandProfile")}
             style={styles.iconButton}
           >
             <Image
               style={styles.icon}
               contentFit="cover"
-              source={require("../assets/adminPanelBack.png")}
+              source={require("../../assets/adminPanelBack.png")}
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>Account settings</Text>
@@ -68,18 +55,18 @@ const AdminPanel = () => {
           <Text style={styles.optionLabel}>Logout</Text>
           <TouchableOpacity
             style={styles.logoutButton}
-            onPress={() => navigation.navigate("InfluencerLogoutPage")}
+            onPress={() => navigation.navigate("BrandLogoutPage")}
           >
             <Text style={styles.logoutButtonText}>Logout</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.optionContainer}>
           <Text style={styles.optionLabel}>Manage Profile</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("InfluencerManageAccountPage")}>
+          <TouchableOpacity onPress={() => navigation.navigate("BrandManageAccountPage")}>
             <Image
               style={styles.optionImage}
               contentFit="cover"
-              source={require("../assets/depth-3-frame-1.png")}
+              source={require("../../assets/depth-3-frame-1.png")}
             />
           </TouchableOpacity>
         </View>
@@ -89,7 +76,7 @@ const AdminPanel = () => {
         {menuOptions.map((option, index) => (
           <View key={index} style={styles.optionContainer}>
             <Text style={styles.optionLabel}>{option.label}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate(option.navigate,{navigate:"AdminPanel"})}>
+            <TouchableOpacity onPress={() => navigation.navigate(option.navigate,{navigate:"BrandAdminPanel"})}>
               {option.image && (
                 <Image
                   style={styles.optionImage}
@@ -213,4 +200,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AdminPanel;
+export default BrandAdminPanel;
