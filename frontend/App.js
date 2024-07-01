@@ -41,6 +41,10 @@ import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAcc
 import TosScreen from "./screens/TosAndPp/TosScreen";
 import PPScreen from "./screens/TosAndPp/PPScreen";
 import UserProfile from "./screens/UserProfile/UserProfile";
+import BrandAdminPanel from "./screens/Brand/BrandAdminPanel";
+import BrandLogOutPage from "./screens/Brand/Settings/BrandLogout";
+import BrandDeleteAccountPage from "./screens/Brand/Settings/Support/BrandDeleteAccount";
+import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -219,6 +223,29 @@ const App = () => {
                 options={{ headerShown: false }}
               />
 
+              <Stack.Screen
+                name="BrandAdminPanel"
+                component={BrandAdminPanel}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="BrandLogoutPage"
+                component={BrandLogOutPage}
+                options={{ headerShown: false }}
+              />
+              
+              <Stack.Screen
+                name="BrandAccountDeletePage"
+                component={BrandDeleteAccountPage}
+                options={{ headerShown: false }}
+              />
+              
+              <Stack.Screen
+                name="BrandManageAccountPage"
+                component={BrandManageAccount}
+                options={{ headerShown: false }}
+              />
               <Stack.Screen
                 name="FriendRequestPage"
                 component={FriendRequestPage}
