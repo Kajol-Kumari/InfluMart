@@ -28,11 +28,12 @@ const InfoBlock = ({ title, description, details }) => (
   </View>
 );
 
-const InfluencerContactUs = ({navigation}) => {
+const InfluencerContactUs = ({route,navigation}) => {
+  const navigate = route.params?.navigate
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.contactus}>
-        <TouchableOpacity onPress={() => navigation.navigate("AdminPanel")}>
+        <TouchableOpacity onPress={() => navigation.navigate(navigate)}>
           <View style={styles.headerContainer}>
             <View style={styles.headerContent}>
               <Image

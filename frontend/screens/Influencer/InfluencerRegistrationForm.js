@@ -25,7 +25,10 @@ const FormField = ({
   setShowPassword,
 }) => (
   <View style={styles.fieldContainer}>
-    <Text style={styles.fieldLabel}>{label}</Text>
+    <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+      <Text style={styles.fieldLabel}>{label}</Text>
+      <Text style={styles.madantoryText}>*</Text>
+    </View>
     <View style={secureTextEntry}>
       <TextInput
         style={styles.textInput}
@@ -94,7 +97,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     price,
   ]);
   useEffect(() => {
-    if(!route.params){
+    if (!route.params) {
       setEmail('')
       setPassword('')
       setUsername('')
@@ -103,7 +106,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       setIndustryAssociation(false)
       setLocation('')
     }
-  },[route.params])
+  }, [route.params])
   const handleSelectPlan = async () => {
     const payload = {
       email,
@@ -151,7 +154,13 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           <FormField label="Username" value={username} setValue={setUsername} />
 
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Add social profiles</Text>
+            <View>
+              <View style={styles.labelWrapper}>
+                <Text style={styles.sectionHeaderText}>Add social profiles</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+              <Text style={styles.desc}>Atleast one field is mandatory</Text>
+            </View>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("InfluencerSocialHandles", {
@@ -170,7 +179,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Add Your profiles</Text>
+            <View style={styles.labelWrapper}>
+              <Text style={styles.sectionHeaderText}>Add Your profiles</Text>
+            </View>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("UserProfilePhoto", {
@@ -189,7 +200,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
+            <View>
+              <View style={styles.labelWrapper}>
+                <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+            </View>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("MaxFollowersNo", { price, social, photo, follower })
@@ -203,9 +219,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>
-              Content and age restriction
-            </Text>
+            <View style={styles.labelWrapper}>
+              <Text style={styles.sectionHeaderText}>
+                Content and age restriction
+              </Text>
+              <Text style={styles.madantoryText}>*</Text>
+            </View>
           </View>
           <HeadingDescToggle
             heading="I am over 18"
@@ -221,7 +240,10 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           />
 
           <View style={styles.sectionHeader}>
+            <View style={styles.labelWrapper}>
             <Text style={styles.sectionHeaderText}>Industry association</Text>
+            <Text style={styles.madantoryText}>*</Text>
+            </View>
           </View>
           <HeadingDescToggle
             heading="I am a member of an industry association"
@@ -229,7 +251,13 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             setToggleOn={setIndustryAssociation}
           />
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionHeaderText}>Price per post</Text>
+            <View>
+            <View style={styles.labelWrapper}>
+              <Text style={styles.sectionHeaderText}>Price per post</Text>
+              <Text style={styles.madantoryText}>*</Text>
+            </View>
+            <Text style={styles.desc}>Atleast one field is mandatory</Text>
+            </View>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("PricePerPost", { social, follower, photo, price })

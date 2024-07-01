@@ -131,7 +131,7 @@ export const signupStyles = {
       alignItems: "center",
     },
     email: {
-      width:"100%",
+      width:"auto",
       fontWeight: "500",
       fontFamily: FontFamily.workSansMedium,
       color: Color.colorBlack,
@@ -141,6 +141,9 @@ export const signupStyles = {
       height: 32,
       width: "100%",
       paddingBottom: Padding.p_5xs,
+      display:"flex",
+      flexDirection:"row",
+      gap:8
     },
     email1: {
       fontFamily: FontFamily.workSansRegular,
@@ -276,4 +279,8 @@ export const signupStyles = {
       top:18,
       right:18
     },
+    mandatoryText:{
+      color:"#f00",
+      fontWeight:700
+    }
   }
