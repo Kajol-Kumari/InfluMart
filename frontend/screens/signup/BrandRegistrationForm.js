@@ -17,6 +17,7 @@ import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 
 const BrandRegistrationForm = ({ route, navigation }) => {
+  const[name,setName]=useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -105,6 +106,26 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Name</Text>
+                  <Text style={styles.mandatoryText}>*</Text>
+                </View>
+                <View>
+                  <View style={[styles.depth5Frame01]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={name}
+                      onChangeText={setName}
+                      placeholder="Name"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.depth1Frame2}>
             <View style={[styles.depth2Frame02, styles.frameLayout]}>
               <View style={styles.frameLayout}>
