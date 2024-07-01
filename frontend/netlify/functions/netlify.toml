@@ -1,3 +1,7 @@
 [build]
-  command = "npm install --legacy-peer-deps --no-cache && npm run build"
+  command = "NODE_VERSION=18.17.0 NPM_VERSION=9.6.7 npm install --legacy-peer-deps --no-cache && npm run build"
   publish = "frontend/web-build"
+
+[build.environment]
+  NODE_VERSION = "18.17.0"
+  NPM_VERSION = "9.6.7"
