@@ -24,11 +24,12 @@ const FAQItem = ({ question, answer }) => (
   </View>
 );
 
-const InfluencerHelpCenter = ({navigation}) => {
+const InfluencerHelpCenter = ({route,navigation}) => {
+  const navigate = route.params?.navigate
   return (
     <ScrollView style={styles.helpcenter}>
       <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.navigate("AdminPanel")}>
+      <TouchableOpacity onPress={() => navigation.navigate(navigate)}>
         <View style={styles.headerContent}>
           <Image
             style={styles.headerImage}
