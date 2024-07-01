@@ -12,6 +12,7 @@ import { getSubscriptionPlans, subscribe } from "../../controller/subscriptionCo
 import { generateSubscriptionDates } from "../../util/subscriptionDate";
 import { PlanChooseInterfaceStyles } from "./PlanChooseInterface.scss";
 import { useAlert } from "../../util/AlertContext";
+import { handlePayment, verifyPayment } from "../../controller/paymentController";
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
@@ -19,6 +20,24 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const [planData, setPlanData] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { showAlert } = useAlert();
+  const [orderId, setOrderId] = useState(null);
+
+  const initiatePayment = async () => {
+    console.log('Initiating payment...');
+    try {
+      const paymentData = await handlePayment(showAlert);
+      const verificationResponse = await verifyPayment({ paymentData });
+      if (verificationResponse.message === 'Payment verified successfully') {
+        await handleSelectPlan()
+        showAlert('Payment Success', 'Payment Successfull')
+      }
+    } catch (error) {
+      console.error('Payment failed:', error);
+      showAlert('Payment Failed', 'Payment Failed');
+    }
+  };
+
+
   const handleSelectPlan = async () => {
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
@@ -118,7 +137,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
         <TouchableOpacity
           style={{ width: "100%" }}
           onPress={() => {
-            handleSelectPlan();
+            initiatePayment();
           }}
         >
           <View style={styles.selectPlanButton}>
