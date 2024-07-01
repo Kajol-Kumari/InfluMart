@@ -1,4 +1,4 @@
-import RazorpayCheckout from "react-native-razorpay";
+import RazorpayCheckout from "expo-razorpay";
 import { RAZORPAY_KEY_ID } from "@env";
 
 const handlePaymentMobile = async (order) => {
@@ -40,7 +40,7 @@ const loadRazorpayScript = async () => {
   });
 };
 
-const handlePaymentWeb = async (order) => {
+const handlePaymentWeb = async (order,showAlert) => {
   const options = {
     key: RAZORPAY_KEY_ID,
     amount: "5000", // Amount in paise
@@ -59,7 +59,7 @@ const handlePaymentWeb = async (order) => {
     },
     modal: {
       ondismiss: function () {
-        console.log("Checkout form closed");
+        showAlert("Payment Cancelled","You cancelled to Procced Payment");
       },
     },
   };

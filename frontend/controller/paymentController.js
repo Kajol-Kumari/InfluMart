@@ -1,7 +1,7 @@
-import RazorpayCheckout from "react-native-razorpay";
-import {API_ENDPOINT} from "@env"
+import { API_ENDPOINT } from '@env';
 import { handlePaymentMobile, handlePaymentWeb } from "../util/paymentFuntions";
 import { Platform } from "react-native";
+import RazorpayCheckout from "expo-razorpay";
 
 export const createOrder = async ({ amount, currency, receipt }) => {
   try {
@@ -24,8 +24,7 @@ export const createOrder = async ({ amount, currency, receipt }) => {
   }
 };
 
-export const handlePayment = async () => {
-  console.log(RazorpayCheckout);
+export const handlePayment = async (showAlert) => {
 
   if (Platform.OS !== 'web' && !RazorpayCheckout) {
     console.error("RazorpayCheckout is not initialized");
@@ -40,12 +39,13 @@ export const handlePayment = async () => {
   });
 
   if (!order || !order.id) {
+    showAlert("Error", "Failed to create order")
     console.error("Failed to create order");
     return;
   }
 
   if (Platform.OS === 'web') {
-    await handlePaymentWeb(order);
+    await handlePaymentWeb(order,showAlert);
   } else {
     await handlePaymentMobile(order);
   }

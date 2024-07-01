@@ -38,7 +38,7 @@ Thumbs.db
 # Expo OTA update
 .expo/
 .expo-shared/
-
+android/
 # Turtle
 turtle-build/
   

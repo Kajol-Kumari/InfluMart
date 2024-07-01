@@ -25,16 +25,15 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const initiatePayment = async () => {
     console.log('Initiating payment...');
     try {
-      const paymentData = await handlePayment();
+      const paymentData = await handlePayment(showAlert);
       const verificationResponse = await verifyPayment({ paymentData });
       if (verificationResponse.message === 'Payment verified successfully') {
         await handleSelectPlan()
-        console.log('Payment successful!');
-      } else {
-        console.log('Payment verification failed');
+        showAlert('Payment Success', 'Payment Successfull')
       }
     } catch (error) {
       console.error('Payment failed:', error);
+      showAlert('Payment Failed', 'Payment Failed');
     }
   };
 
