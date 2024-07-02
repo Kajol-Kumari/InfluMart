@@ -10,6 +10,10 @@ const brandSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  brandName: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
