@@ -9,6 +9,9 @@ import {
   Padding,
 } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/core";
+import ImageWithFallback from "../../util/ImageWithFallback";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAlert } from "../../util/AlertContext";
 
 
 const InfluencerCard = ({
@@ -17,17 +20,34 @@ const InfluencerCard = ({
   beauty,
   influencerId,
 }) => {
+  const {showAlert} = useAlert()
   const navigation = useNavigation()
+  const [navigate,setnavigate] = React.useState(false)
+  React.useEffect(()=>{
+    const getData = async ()=>{
+      const brand = await AsyncStorage.getItem("brandId")
+      const influencer = await AsyncStorage.getItem("influencerId")
+      if(!brand && !influencer){
+        setnavigate(false)
+      }else{
+        setnavigate(true)
+      }
+    }
+    getData()
+  })
+  const handleClick = async ()=>{
+    if(navigate){
+      navigation.navigate("Analytics",{influencerId})
+    }else{
+      showAlert("Login Require!", "Please login to see Influencer's Analytics.")
+    }
+  }
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
-        <TouchableOpacity onPress={()=>navigation.navigate("Analytics",{influencerId})}>
+        <TouchableOpacity onPress={()=>handleClick()}>
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              contentFit="cover"
-              source={depth5Frame0}
-            />
+            <ImageWithFallback image={depth5Frame0} imageStyle={styles.image} />
           </View>
           <View style={styles.textContainer}>
             <View style={styles.titleContainer}>

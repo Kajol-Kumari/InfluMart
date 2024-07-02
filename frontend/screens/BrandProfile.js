@@ -19,6 +19,7 @@ import { formatNumber } from "../helpers/GraphData";
 import { BrandProfileStyles } from "./BrandProfile.scss";
 import { getBrandProfile } from "../controller/brandController";
 import BrandProfileBottomBar from "../components/BrandProfileBottomBar";
+import ImageWithFallback from "../util/ImageWithFallback";
 
 const BrandProfile = ({ route, navigation }) => {
   const clickedId = route?.params?.clickedId
@@ -89,17 +90,12 @@ const BrandProfile = ({ route, navigation }) => {
             </TouchableOpacity>
             <View style={[styles.profileContainer]}>
               <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImage}
-                  resizeMode="cover"
+                {brand?.profileUrl && <ImageWithFallback
+                  imageStyle={styles.profileImage}
                   source={
                     brand?.profileUrl
-                      ? {
-                        uri: brand?.profileUrl,
-                      }
-                      : require("../assets/blank-profile.png")
                   }
-                />
+                />}
               </View>
               <View style={styles.profileInfoContainer}>
                 <Text style={styles.brandName}>{brand?.name}</Text>
