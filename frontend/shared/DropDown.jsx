@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native'
 import { Color, Padding, FontSize, FontFamily, Border } from '../GlobalStyles';
 
-function DropDown({ icon, name, items, selectedValue }) {
+function DropDown({ icon, name, items, selectedValue, dropDownItemsStyle, dropDownOptionStyle, titleStyle, dropDownContainerStyle }) {
 
     const [showElements, setShowElement] = useState(false)
     const [currentValue, setCurrentValue] = useState(undefined)
@@ -29,15 +29,19 @@ function DropDown({ icon, name, items, selectedValue }) {
     }
 
     return (
-        <View style={{position:"relative",zIndex:10}}>
-            <View style={styles.dropDownContainer}>
-                <Pressable onPress={handleOpen} style={styles.dropDownSelect}>
-                    <Image source={icon} style={styles.icon} />
-                    <Text style={styles.dropDownTitle}>{name}</Text>
+        <View style={{ position: "relative", zIndex: 10 }}>
+            <View style={[styles.dropDownContainer, dropDownContainerStyle]}>
+                <Pressable onPress={handleOpen} style={[styles.dropDownSelect, dropDownOptionStyle]}>
+                    {
+                        icon == "none" ?
+                            "" :
+                            <Image source={icon} style={styles.icon} />
+                    }
+                    <Text style={[styles.dropDownTitle, titleStyle]}>{name}</Text>
                     <Image style={styles.arrowAndCloseIcon} source={showElements ? require("../assets/multiselect/close.png") : require("../assets/depth-3-frame-2.png")} />
                 </Pressable>
             </View>
-            <View style={[styles.dropDownItemsContainer, { display: `${showElements ? "flex" : "none"}` }]}>
+            <View style={[styles.dropDownItemsContainer, dropDownItemsStyle, { display: `${showElements ? "flex" : "none"}` }]}>
                 {
                     items.length > 0 && items ?
                         <View style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -89,7 +93,6 @@ const styles = StyleSheet.create({
         width: "auto",
         fontSize: FontSize.size_base,
         fontFamily: FontFamily.beVietnamProMedium,
-        paddingBottom: 4,
         height: "auto"
     },
     arrowAndCloseIcon: {
@@ -101,11 +104,11 @@ const styles = StyleSheet.create({
         backgroundColor: Color.colorWhitesmoke_300,
         paddingHorizontal: Padding.p_xs,
         paddingVertical: Padding.p_base,
-        height: 220,
+        height: "auto",
         overflow: "scroll",
         marginTop: 8,
         position: "relative",
-        top:"0%",
+        top: "0%",
         left: 0,
         borderRadius: Border.br_base,
     },

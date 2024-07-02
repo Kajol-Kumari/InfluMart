@@ -17,6 +17,7 @@ import { Color, FontSize } from "../../GlobalStyles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MultipleSelectList from "../../shared/MultiSelect";
 import { CountryPicker } from 'react-native-country-codes-picker'
+import DropDown from "../../shared/DropDown";
 
 const FormField = ({
   label,
@@ -61,6 +62,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const[gender,setGender]=useState("Male")
   const [mobileNumber, setMobileNumber] = useState("")
   const [selected, setSelected] = useState([]);
   const [over18, setOver18] = useState(false);
@@ -88,6 +90,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     { key: "education", value: "Education" },
     { key: "others", value: "Others" },
   ];
+
+  const genderData = [
+    {
+      key: "male", value: "Male",
+    },
+    {
+      key: "female", value: "Female"
+    }
+  ]
 
   useEffect(() => {
     if (
@@ -173,6 +184,23 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             setShowPassword={setShowPassword}
           />
           <FormField label="Username" value={username} setValue={setUsername} />
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Gender
+                  </Text>
+                  <Text style={styles.madantoryText}>*</Text>
+                </View>
+                <View>
+                  <View>
+                    <DropDown name={gender} items={genderData} icon={"none"} dropDownOptionStyle={{width:"100%",paddingVertical:16}} dropDownContainerStyle={{width:"100%"}} dropDownItemsStyle={{width:"100%"}} titleStyle={{paddingStart:12,color:"#4F7A94"}} selectedValue={(setGender)}/>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.mobileNoWrap}>
             <View style={[styles.fieldContainer, { width: "100%" }]}>
               <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
@@ -180,12 +208,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                 <Text style={styles.madantoryText}>*</Text>
               </View>
               <View style={[styles.textInput, styles.mobileNoWrap]}>
-                <View style={{width:"85%",display:"flex",flexDirection:"row",alignItems:"center"}}>
+                <View style={{ width: "85%", display: "flex", flexDirection: "row", alignItems: "center" }}>
                   <TouchableOpacity onPress={() => { setOpenCountryCode(true) }}>
-                    <Text style={{ color: "#4F7A94", fontSize: FontSize.size_base,paddingEnd:12,borderRightWidth:2,borderRightColor:"#ccc" }}>{countryCode}</Text>
+                    <Text style={{ color: "#4F7A94", fontSize: FontSize.size_base, paddingEnd: 12, borderRightWidth: 2, borderRightColor: "#ccc" }}>{countryCode}</Text>
                   </TouchableOpacity>
                   <TextInput
-                    style={{ color: "#4F7A94", fontSize: FontSize.size_base, outlineStyle: "none",width:"90%",height:"100%",paddingStart:8 }}
+                    style={{ color: "#4F7A94", fontSize: FontSize.size_base, outlineStyle: "none", width: "90%", height: "100%", paddingStart: 8 }}
                     value={mobileNumber}
                     onChangeText={setMobileNumber}
                     placeholder={"Mobile Number"}
@@ -196,7 +224,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   mobileNoVerified ?
                     <Image style={{ width: 28, height: 28 }} source={require("../../assets/verified_icon.png")} />
                     :
-                    <TouchableOpacity onPress={()=>{setMobileNoVerified(true)}}>
+                    <TouchableOpacity onPress={() => { setMobileNoVerified(true) }}>
                       <Image style={{ width: 28, height: 28 }} source={require("../../assets/unverified_icon.png")} />
                     </TouchableOpacity>
                 }
