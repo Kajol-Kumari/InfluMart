@@ -18,17 +18,17 @@ const getSubscriptionPlans = async (payload,showAlert) => {
   }
 };
 
-const subscribe = async (subscribeData,payload, navigation,showAlert) => {
+const subscribe = async (subscribeData,payload,navigation) => {
   try {
     const response = await axios.post(`${API_ENDPOINT}/subscriptions/subscription`, subscribeData);
     if (response.status === 201) {
       navigation.navigate("InfluencerConfirmAccount", { payload });
     } else {
       const data = await response.data;
-      showAlert("Influencer SignUp Error", data.message);
+      throw new Error(data.message);
     }
   } catch (error) {
-    showAlert("Influencer SignUp Error", "Something went wrong. Please try again.");
+    throw error;
   }
 };
 
