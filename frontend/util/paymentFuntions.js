@@ -6,7 +6,7 @@ import { subscribe } from "../controller/subscriptionController";
 const handlePaymentMobile = async (order, payload, subscription, navigation, showAlert) => {
   const options = {
     description: "Connects influencer with brands",
-    image: "https://i.imgur.com/3g7nmJC.png",
+    image: "https://imgur.com/g63XWcL.jpg", // App logo
     currency: "INR",
     key: RAZORPAY_KEY_ID,
     amount: order.amount, // Amount in paise
@@ -77,7 +77,7 @@ const handlePaymentWeb = async (
     currency: "INR",
     name: "Influmart",
     description: "Connects influencer with brands",
-    image: "https://i.imgur.com/3g7nmJC.png",
+    image: "https://imgur.com/g63XWcL.jpg",  // App logo
     order_id: order.id,
     prefill: {
       email: payload.email,
