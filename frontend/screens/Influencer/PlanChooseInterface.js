@@ -8,11 +8,17 @@ import {
 } from "react-native";
 import Depth1Frame7 from "../../components/Depth1Frame7";
 import PlanBox from "../../shared/PlansBox";
-import { getSubscriptionPlans, subscribe } from "../../controller/subscriptionController";
+import {
+  getSubscriptionPlans,
+  subscribe,
+} from "../../controller/subscriptionController";
 import { generateSubscriptionDates } from "../../util/subscriptionDate";
 import { PlanChooseInterfaceStyles } from "./PlanChooseInterface.scss";
 import { useAlert } from "../../util/AlertContext";
-import { handlePayment, verifyPayment } from "../../controller/paymentController";
+import {
+  handlePayment,
+  verifyPayment,
+} from "../../controller/paymentController";
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
@@ -23,22 +29,6 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const [orderId, setOrderId] = useState(null);
 
   const initiatePayment = async () => {
-    console.log('Initiating payment...');
-    try {
-      const paymentData = await handlePayment(showAlert);
-      const verificationResponse = await verifyPayment({ paymentData });
-      if (verificationResponse.message === 'Payment verified successfully') {
-        await handleSelectPlan()
-        showAlert('Payment Success', 'Payment Successfull')
-      }
-    } catch (error) {
-      console.error('Payment failed:', error);
-      showAlert('Payment Failed', 'Payment Failed');
-    }
-  };
-
-
-  const handleSelectPlan = async () => {
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
       userName: payload.userName,
@@ -50,14 +40,21 @@ const PlanChooseInterface = ({ route, navigation }) => {
       paymentMode: "",
       transactionDate: _data.transactionDate,
     };
-    await subscribe(subscription, payload, navigation, showAlert);
+    try {
+      await handlePayment(subscription, payload,navigation, showAlert);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     const getPlans = async () => {
-      const data = await getSubscriptionPlans({
-        platform: payload.follower.platform,
-        followers: payload.follower.value,
-      }, showAlert);
+      const data = await getSubscriptionPlans(
+        {
+          platform: payload.follower.platform,
+          followers: payload.follower.value,
+        },
+        showAlert
+      );
       setPlanData(data);
     };
 
@@ -86,7 +83,8 @@ const PlanChooseInterface = ({ route, navigation }) => {
 
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>
-            Join now to unlock exclusive brand collaborations and elevate your marketing game!
+            Join now to unlock exclusive brand collaborations and elevate your
+            marketing game!
           </Text>
         </View>
 
@@ -111,7 +109,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"halfYearly"}
               duration={"6 months"}
-              price={`$ ${planData?.halfYearly}`}
+              price={`${planData?.halfYearly}`}
               suggested={true}
             />
           )}

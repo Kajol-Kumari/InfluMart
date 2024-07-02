@@ -1,32 +1,56 @@
 import RazorpayCheckout from "react-native-razorpay";
 import { RAZORPAY_KEY_ID } from "@env";
+import { verifyPayment } from "../controller/paymentController";
+import { subscribe } from "../controller/subscriptionController";
 
-const handlePaymentMobile = async (order) => {
+const handlePaymentMobile = async (order, payload, subscription, navigation, showAlert) => {
   const options = {
     description: "Connects influencer with brands",
-    image: "https://i.imgur.com/3g7nmJC.png",
+    image: "https://imgur.com/g63XWcL.jpg", // App logo
     currency: "INR",
     key: RAZORPAY_KEY_ID,
-    amount: "5000", // Amount in paise
+    amount: order.amount, // Amount in paise
     name: "Influmart",
     order_id: order.id,
     prefill: {
-      email: "void@razorpay.com",
-      contact: "9191919191",
-      name: "Razorpay Software",
+      email: payload.email,
+      name: order.receipt,
     },
     theme: { color: "#1A80E5" },
   };
 
   RazorpayCheckout.open(options)
-    .then((data) => {
+    .then(async (data) => {
       // handle success
-      console.log(`Success: ${data.razorpay_payment_id}`);
+      const paymentData = {
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature,
+      };
+
+      try {
+        await verifyPayment(paymentData);
+        const _subs = {
+          ...subscription,
+          paymentMode: JSON.stringify({
+            razorpay_order_id: data.razorpay_order_id,
+            razorpay_payment_id: data.razorpay_payment_id,
+          }),
+        };
+        await subscribe(_subs, payload, navigation);
+        showAlert(
+          "Payment Successful",
+          "Your payment has been processed successfully."
+        );
+      } catch (error) {
+        showAlert("Payment Failed", "Your payment could not be verified.");
+        console.error(error);
+      }
     })
     .catch((error) => {
       // handle failure
       console.log(`Error: ${error.code} | ${error.description}`);
-      console.error(error);
+      showAlert("Payment Failed", error.description);
     });
 };
 
@@ -40,37 +64,67 @@ const loadRazorpayScript = async () => {
   });
 };
 
-const handlePaymentWeb = async (order,showAlert) => {
+const handlePaymentWeb = async (
+  order,
+  payload,
+  subscription,
+  navigation,
+  showAlert
+) => {
   const options = {
     key: RAZORPAY_KEY_ID,
-    amount: "5000", // Amount in paise
+    amount: order.amount, // Amount in paise
     currency: "INR",
     name: "Influmart",
     description: "Connects influencer with brands",
-    image: "https://i.imgur.com/3g7nmJC.png",
+    image: "https://imgur.com/g63XWcL.jpg",  // App logo
     order_id: order.id,
     prefill: {
-      email: "void@razorpay.com",
-      name: "Razorpay Software",
+      email: payload.email,
+      name: order.receipt,
     },
     theme: { color: "#1A80E5" },
-    handler: function (response) {
-      console.log(`Success: ${response.razorpay_payment_id}`);
-    },
-    modal: {
-      ondismiss: function () {
-        showAlert("Payment Cancelled","You cancelled to Procced Payment");
-      },
+    handler: async function (response) {
+      const paymentData = {
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+      };
+      try {
+        await verifyPayment(paymentData);
+        const _subs = {
+          ...subscription,
+          paymentMode: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+          }),
+        };
+        await subscribe(_subs, payload, navigation);
+        showAlert(
+          "Payment Successful",
+          "Your payment has been processed successfully."
+        );
+      } catch (error) {
+        showAlert("Payment Failed", "Your payment could not be verified.");
+        throw error;
+      }
     },
   };
 
   const success = await loadRazorpayScript();
   if (!success) {
-    console.error("Razorpay SDK failed to load");
+    showAlert(
+      "Payment Failed",
+      "Failed to load payment gateway. Please try again."
+    );
     return;
   }
 
   const rzp = new window.Razorpay(options);
+  rzp.on("payment.failed", function (response) {
+    console.log("Payment failed", response);
+    showAlert("Payment Failed", response.error.description);
+  });
   rzp.open();
 };
 

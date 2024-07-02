@@ -39,7 +39,7 @@ const PlanBox = ({duration,select,plan,suggested=false,setSelect,price}) => {
   };
   return (
     <View style={[styles.container, select?.duration==duration && styles.activeContainer ]}>
-      <PlanDetails duration={duration} price={price} suggested={suggested} />
+      <PlanDetails duration={duration} price={`$ ${price}`} suggested={suggested} />
       <CheckoutButton onPress={handleCheckout} />
     </View>
   );
