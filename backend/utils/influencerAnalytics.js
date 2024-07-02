@@ -1,5 +1,5 @@
 const axios = require("axios");
-const config = require("../config/dbConfig");
+const config = require("../config/configs");
 
 const trackingData = () => {
   const now = new Date();

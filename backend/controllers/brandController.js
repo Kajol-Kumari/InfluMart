@@ -1,4 +1,4 @@
-const { JWT_SECRET_KEY, JWT_EXPIRES_IN } = require("../config/dbConfig");
+const { JWT_SECRET_KEY, JWT_EXPIRES_IN } = require("../config/configs");
 const { DOESNT_EXIST } = require("../constant/constants");
 const Brand = require("../model/brandDbRequestModel");
 const bcrypt = require("bcrypt"); // For password hashing

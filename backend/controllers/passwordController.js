@@ -1,4 +1,4 @@
-const { JWT_SECRET_KEY, JWT_EXPIRES_IN, RESET_PASSWORD_TOKEN_SECRET, RESET_PASSWORD_TOKEN_EXPIRATION } = require("../config/dbConfig");
+const { JWT_SECRET_KEY, JWT_EXPIRES_IN, RESET_PASSWORD_TOKEN_SECRET, RESET_PASSWORD_TOKEN_EXPIRATION } = require("../config/configs");
 const Brand = require("../model/brandDbRequestModel");
 const Influencer = require("../model/brandDbRequestModel");
 const crypto = require('crypto');

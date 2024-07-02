@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const dbConfig = {
+const configs = {
   MONGO_DB_URL: process.env.MONGO_DB_URL,
   DB_NAME: process.env.DB_NAME,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
@@ -21,4 +21,4 @@ const dbConfig = {
   SMTP_HOST: process.env.SMTP_HOST,
 };
 
-module.exports = dbConfig;
+module.exports = configs;

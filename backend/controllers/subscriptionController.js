@@ -1,4 +1,4 @@
-const { UPI_URL } = require("../config/dbConfig");
+const { UPI_URL } = require("../config/configs");
 const Subscription = require("../model/Subscription");
 
 
