@@ -95,7 +95,7 @@ export const InfluencerRegistrationFormStyles = {
     right: 18,
   },
   madantoryText:{
-    fontWeight:700,
+    fontWeight:"700",
     color:"#f00"
   },
   labelWrapper:{

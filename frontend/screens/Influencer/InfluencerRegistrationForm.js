@@ -13,9 +13,10 @@ import HeadingDescToggle from "../signup/components/HeadingDescToggle";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
 import { useAlert } from "../../util/AlertContext";
-import { Color } from "../../GlobalStyles";
+import { Color, FontSize } from "../../GlobalStyles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MultipleSelectList from "../../shared/MultiSelect";
+import { CountryPicker } from 'react-native-country-codes-picker'
 
 const FormField = ({
   label,
@@ -73,6 +74,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const photo = route.params?.photo;
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [openCountryCode, setOpenCountryCode] = useState(false)
+  const [countryCode, setCountryCode] = useState("+91")
+  const [mobileNoVerified, setMobileNoVerified] = useState(false)
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -170,30 +174,32 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           />
           <FormField label="Username" value={username} setValue={setUsername} />
           <View style={styles.mobileNoWrap}>
-            <View style={[styles.fieldContainer,{width:"100%"}]}>
+            <View style={[styles.fieldContainer, { width: "100%" }]}>
               <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
                 <Text style={styles.fieldLabel}>Mobile Number</Text>
                 <Text style={styles.madantoryText}>*</Text>
               </View>
-              <View style={{width:"100%",display:"flex",flexDirection:"row",justifyContent:"space-between",gap:8}}>
-                <TextInput
-                  style={[styles.textInput,{width:"90%"}]}
-                  value={mobileNumber}
-                  onChangeText={setMobileNumber}
-                  placeholder={"Mobile Number"}
-                />
-                <View style={styles.verifyContainer}>
-                  <TouchableOpacity
-                    style={styles.verifyButton}
-                  >
-                    <Image
-                      style={styles.verifyIcon}
-                      contentFit="cover"
-                      source={require("../../assets/verify_symbol.png")}
-                    />
-                    <Text style={styles.verifyText}>Verify</Text>
+              <View style={[styles.textInput, styles.mobileNoWrap]}>
+                <View style={{width:"85%",display:"flex",flexDirection:"row",alignItems:"center"}}>
+                  <TouchableOpacity onPress={() => { setOpenCountryCode(true) }}>
+                    <Text style={{ color: "#4F7A94", fontSize: FontSize.size_base,paddingEnd:12,borderRightWidth:2,borderRightColor:"#ccc" }}>{countryCode}</Text>
                   </TouchableOpacity>
+                  <TextInput
+                    style={{ color: "#4F7A94", fontSize: FontSize.size_base, outlineStyle: "none",width:"90%",height:"100%",paddingStart:8 }}
+                    value={mobileNumber}
+                    onChangeText={setMobileNumber}
+                    placeholder={"Mobile Number"}
+                    keyboardType="phone-pad"
+                  />
                 </View>
+                {
+                  mobileNoVerified ?
+                    <Image style={{ width: 28, height: 28 }} source={require("../../assets/verified_icon.png")} />
+                    :
+                    <TouchableOpacity onPress={()=>{setMobileNoVerified(true)}}>
+                      <Image style={{ width: 28, height: 28 }} source={require("../../assets/unverified_icon.png")} />
+                    </TouchableOpacity>
+                }
               </View>
             </View>
           </View>
@@ -204,7 +210,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   <Text style={[styles.email, styles.emailTypo]}>
                     Influencer Type
                   </Text>
-                  <Text style={styles.mandatoryText}>*</Text>
+                  <Text style={styles.madantoryText}>*</Text>
                 </View>
                 <View>
                   <View>
@@ -369,6 +375,21 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
+      <CountryPicker
+        show={openCountryCode}
+        // when picker button press you will get the country object with dial code
+        pickerButtonOnPress={(item) => {
+          setCountryCode(item.dial_code)
+          setOpenCountryCode(false);
+        }}
+        style={{
+          modal: {
+            height: 300,
+            width: "100%",
+            maxWidth: "100%"
+          }
+        }}
+      />
     </View>
   );
 };
