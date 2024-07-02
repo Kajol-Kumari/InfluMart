@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const Brand = require("../model/brandDbRequestModel");
 const OTP = require("../model/otp");
-const dbConfig = require("../config/dbConfig");
+const configs = require("../config/configs");
 const {
   ERR_SAVE_DATA,
   SUBJECT,
@@ -17,12 +17,12 @@ const {
 } = require("../constant/constants");
 
 const transporter = nodemailer.createTransport({
-  host: dbConfig.SMTP_HOST,
+  host: configs.SMTP_HOST,
   port: 465,
   secure: true,
   auth: {
-    user: dbConfig.OTP_MAIL,
-    pass: dbConfig.PASSWORD,
+    user: configs.OTP_MAIL,
+    pass: configs.PASSWORD,
   },
 });
 function generateOTP() {
@@ -72,7 +72,7 @@ const sendOTP = async (req, res) => {
     }
   }
   const mailOptions = {
-    from: dbConfig.OTP_MAIL,
+    from: configs.OTP_MAIL,
     to: email,
     subject: SUBJECT,
     text: `Your OTP code is ${otp}. It will expire in 1 hour.`,

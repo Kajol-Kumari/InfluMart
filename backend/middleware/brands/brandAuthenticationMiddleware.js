@@ -1,7 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const { JWT_SECRET_KEY } = require("../../config/dbConfig");
+const { JWT_SECRET_KEY } = require("../../config/configs");
 const Brand = require("../../model/brandDbRequestModel");
 
 const brandAuthenticationMiddleware = async (req, res, next) => {
