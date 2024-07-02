@@ -4,6 +4,7 @@ import { StyleSheet, View, Text , TouchableOpacity} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
+import ImageWithFallback from "../util/ImageWithFallback";
 
 const Depth1Frame17 = ({image,username}) => {
   const navigation = useNavigation();
@@ -13,12 +14,9 @@ const Depth1Frame17 = ({image,username}) => {
       <View style={styles.depth2Frame0}>
         <View style={styles.depth3Frame0}>
           <View style={styles.depth4Frame0}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={image}
-            />
+            <ImageWithFallback imageStyle={styles.depth5Frame0} image={image} />
           </View>
+          
           <View style={styles.depth4Frame1}>
             <View style={styles.depth5Frame01}>
               <View style={styles.depth6Frame0}>

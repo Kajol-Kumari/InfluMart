@@ -2,6 +2,7 @@ import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, Text,TouchableOpacity } from "react-native";
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
+import ImageWithFallback from "../util/ImageWithFallback";
 
 const Depth1Frame9 = ({image,username,location,category}) => {
   return (
@@ -9,11 +10,7 @@ const Depth1Frame9 = ({image,username,location,category}) => {
       <View style={styles.depth2Frame0}>
         <View style={styles.depth3Frame0}>
           <View style={styles.depth4Frame0}>
-            <Image
-              style={styles.depth5Frame0}
-              contentFit="cover"
-              source={image}
-            />
+            <ImageWithFallback image={image} imageStyle={styles.depth5Frame0} />
           </View>
           <View style={[styles.depth4Frame1, styles.frameFlexBox]}>
             <View style={styles.depth5Frame01}>

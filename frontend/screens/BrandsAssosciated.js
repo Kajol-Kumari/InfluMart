@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getAllBrandProfiles } from '../controller/brandController'
 import { useAlert } from '../util/AlertContext'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ImageWithFallback from "../util/ImageWithFallback";
 
 
 const BrandAssosciated = ({ active }) => {
@@ -84,13 +85,9 @@ const BrandAssosciated = ({ active }) => {
               brands && brands.length > 0 ?
                 brands.map(({ name, profileUrl, _id }, index) => {
                   return (
-                    <TouchableOpacity>
-                      <View style={styles.depth2FrameLayout} key={index}>
-                        <Image
-                          style={styles.depth4Frame03}
-                          contentFit="cover"
-                          source={profileUrl ? { uri: profileUrl } : require("../assets/depth-4-frame-01.png")}
-                        />
+                    <TouchableOpacity key={index} onPress={()=>{console.log(profileUrl)}}>
+                      <View style={styles.depth2FrameLayout} >
+                        <ImageWithFallback imageStyle={styles.depth4Frame03} image={profileUrl} />
                         <View style={styles.depth3Frame11}>
                           <View style={styles.depth4Frame04}>
                             <Text style={styles.google}>{name}</Text>

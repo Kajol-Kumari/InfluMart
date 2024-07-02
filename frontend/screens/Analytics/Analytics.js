@@ -64,8 +64,8 @@ const Analytics = ({ route, navigation }) => {
       if (!id && !clickedId) {
         navigation.navigate("Homepage");
       } else {
-        setInfluencerId(id);
-        let getId = id || clickedId 
+        let getId = clickedId || id
+        setInfluencerId(getId); 
         GetInfluencerProfile(getId, setInfluencer, showAlert);
         getSocialData(getId, showAlert)
           .then((data) => {
@@ -87,7 +87,7 @@ const Analytics = ({ route, navigation }) => {
             }));
             const sortedYtPosts = data?.ytData[
               data?.ytData.length - 1
-            ].popularVideos.data.sort((a, b) => b.viewCount - a.viewCount);
+            ].popularVideos?.data?.sort((a, b) => b.viewCount - a.viewCount);
             const popularYtPosts = sortedYtPosts?.slice(0, 2);
             popularYtPosts?.map((item) => {
               popular.push({
@@ -102,7 +102,7 @@ const Analytics = ({ route, navigation }) => {
       }
     };
     getData();
-  }, []);
+  }, [influencerId, clickedId]);
 
   const processTag = (tag) => {
     const splitTag = tag.split(/[-\s]/);
@@ -140,18 +140,12 @@ const Analytics = ({ route, navigation }) => {
       <ScrollView style={styles.scrollViewContent}>
         <View style={styles.analytics}>
           <View style={styles.depth0Frame0}>
-            <Depth1Frame9
-              image={
-                influencer?.profileUrl
-                  ? {
-                    uri: influencer?.profileUrl,
-                  }
-                  : require("../../assets/blank-profile.png")
-              }
+            {influencer?.profileUrl && <Depth1Frame9
+              image={influencer?.profileUrl}
               username={influencer?.userName}
               location={influencer?.location}
               category={influencer?.category}
-            />
+            />}
             <View style={styles.recentContainer}>
               <Text style={styles.recentText}>Frequently used hashtags</Text>
             </View>
