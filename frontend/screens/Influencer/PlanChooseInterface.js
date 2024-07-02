@@ -8,10 +8,17 @@ import {
 } from "react-native";
 import Depth1Frame7 from "../../components/Depth1Frame7";
 import PlanBox from "../../shared/PlansBox";
-import { getSubscriptionPlans, subscribe } from "../../controller/subscriptionController";
+import {
+  getSubscriptionPlans,
+  subscribe,
+} from "../../controller/subscriptionController";
 import { generateSubscriptionDates } from "../../util/subscriptionDate";
 import { PlanChooseInterfaceStyles } from "./PlanChooseInterface.scss";
 import { useAlert } from "../../util/AlertContext";
+import {
+  handlePayment,
+  verifyPayment,
+} from "../../controller/paymentController";
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
@@ -19,7 +26,9 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const [planData, setPlanData] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { showAlert } = useAlert();
-  const handleSelectPlan = async () => {
+  const [orderId, setOrderId] = useState(null);
+
+  const initiatePayment = async () => {
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
       userName: payload.userName,
@@ -31,14 +40,21 @@ const PlanChooseInterface = ({ route, navigation }) => {
       paymentMode: "",
       transactionDate: _data.transactionDate,
     };
-    await subscribe(subscription, payload, navigation, showAlert);
+    try {
+      await handlePayment(subscription, payload,navigation, showAlert);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     const getPlans = async () => {
-      const data = await getSubscriptionPlans({
-        platform: payload.follower.platform,
-        followers: payload.follower.value,
-      }, showAlert);
+      const data = await getSubscriptionPlans(
+        {
+          platform: payload.follower.platform,
+          followers: payload.follower.value,
+        },
+        showAlert
+      );
       setPlanData(data);
     };
 
@@ -67,7 +83,8 @@ const PlanChooseInterface = ({ route, navigation }) => {
 
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>
-            Join now to unlock exclusive brand collaborations and elevate your marketing game!
+            Join now to unlock exclusive brand collaborations and elevate your
+            marketing game!
           </Text>
         </View>
 
@@ -92,7 +109,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"halfYearly"}
               duration={"6 months"}
-              price={`$ ${planData?.halfYearly}`}
+              price={`${planData?.halfYearly}`}
               suggested={true}
             />
           )}
@@ -118,7 +135,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
         <TouchableOpacity
           style={{ width: "100%" }}
           onPress={() => {
-            handleSelectPlan();
+            initiatePayment();
           }}
         >
           <View style={styles.selectPlanButton}>

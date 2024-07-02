@@ -57,9 +57,9 @@ const InfluencersList = () => {
     <View style={styles.container}>
       <Depth1Frame11 style={styles.menuBar} onChange={setSearchValue} />
       <View style={styles.scrollContainer}>
-        <ScrollView onScroll={handleScroll} style={styles.scrollView}>
+        <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl != null ? item.profileUrl : require("../../assets/blank-profile.png")} kylieCosmetics={item.userName} beauty={item.category} />)}
+            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl} kylieCosmetics={item.userName} beauty={item.category} />)}
           </View>
         </ScrollView>
       </View>
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   scrollView: {
     width: "100%",
     height: "100%",
+    flex:1,
   },
   horizontalScroll: {
     height: "auto",
