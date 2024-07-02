@@ -178,16 +178,10 @@ const UserProfile = ({ navigation }) => {
     <View style={styles.userprofile}>
       <ScrollView>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-          <Depth1Frame17
-            image={
-              influencer?.profileUrl
-                ? {
-                  uri: influencer?.profileUrl,
-                }
-                : require("../../assets/blank-profile.png")
-            }
+          {influencer?.profileUrl &&<Depth1Frame17
+            image={influencer?.profileUrl}
             username={influencer?.userName}
-          />
+          />}
           <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>
               <View style={styles.depth3Frame01}>

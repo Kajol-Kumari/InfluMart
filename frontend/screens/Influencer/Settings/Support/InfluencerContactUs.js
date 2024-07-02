@@ -98,6 +98,10 @@ const InfluencerContactUs = ({route,navigation}) => {
             description="Follow us"
             details="@influmart"
           />
+          <InfoBlock
+            title="Images Credit"
+            description="All profile images are Designed by freepik"
+          />
           <View style={styles.footerSpacing} />
         </View>
       </View>
