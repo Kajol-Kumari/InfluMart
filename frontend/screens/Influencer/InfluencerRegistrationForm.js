@@ -268,7 +268,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                 {mobileNoVerified ? (
                   <Image
                     style={{ width: 28, height: 28 }}
-                    source={{uri:""}}
+                    source={{ uri: "" }}
                   />
                 ) : (
                   <TouchableOpacity
@@ -278,7 +278,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   >
                     <Image
                       style={{ width: 28, height: 28 }}
-                      source={{uri:""}}
+                      source={{ uri: "" }}
                     />
                   </TouchableOpacity>
                 )}
@@ -475,15 +475,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
         show={openCountryCode}
         // when picker button press you will get the country object with dial code
         pickerButtonOnPress={(item) => {
-          setCountryCode(item.dial_code)
+          setCountryCode(item.dial_code);
           setOpenCountryCode(false);
         }}
         style={{
           modal: {
             height: 300,
             width: "100%",
-            maxWidth: "100%"
-          }
+            maxWidth: "100%",
+          },
         }}
       />
     </View>

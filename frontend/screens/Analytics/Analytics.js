@@ -142,7 +142,7 @@ const Analytics = ({ route, navigation }) => {
           <View style={styles.depth0Frame0}>
             {influencer?.profileUrl && <Depth1Frame9
               image={influencer?.profileUrl}
-              username={influencer?.userName}
+              username={influencer?.influencerName}
               location={influencer?.location}
               category={influencer?.category}
             />}

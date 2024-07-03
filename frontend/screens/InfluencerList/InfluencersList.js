@@ -59,7 +59,7 @@ const InfluencersList = () => {
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl} kylieCosmetics={item.userName} beauty={item.category} />)}
+            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl} kylieCosmetics={item.influencerName} beauty={item.category} />)}
           </View>
         </ScrollView>
       </View>

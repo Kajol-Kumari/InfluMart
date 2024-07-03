@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Color } from "../../GlobalStyles";
 import MultipleSelectList from "../../shared/MultiSelect";
-import { BrandSignUp, SendOtp } from "../../controller/signupController";
+import { SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
@@ -73,7 +73,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
       );
       return;
     }
-    await BrandSignUp(payload, navigation, showAlert);
+    await SendOtp(payload, navigation, showAlert);
   };
 
   return (
