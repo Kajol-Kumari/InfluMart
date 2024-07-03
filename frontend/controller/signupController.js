@@ -45,6 +45,7 @@ const BrandSignUp = async (payload, navigation, showAlert) => {
   data.append("name", payload.name);
   data.append("email", payload.email);
   data.append("password", payload.password);
+  data.append("brandName", payload.brandName);
   data.append("category", JSON.stringify(payload.category));
   data.append("location", payload.location || "");
   data.append("website", payload.website || "");
@@ -102,6 +103,11 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
   data.append("linkedInProfile", payload.social?.linkedIn);
   data.append("twitterProfile", payload.social?.tr);
   data.append("youtubeChannel", payload.social?.yt);
+  data.append("influencerName", payload.name);
+  data.append("category",JSON.stringify(payload.selected));
+  data.append("phoneNo[country]",payload.country);
+  data.append("phoneNo[number]",payload.number);
+  data.append("gender",payload.gender)
   if (payload.profileUrl && payload.profileUrl.uri) {
     // For web, handle base64 string as a Blob
     if (Platform.OS === "web") {

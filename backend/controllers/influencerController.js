@@ -149,7 +149,7 @@ exports.getProfile = async (req, res) => {
     // const influencerObjectId = new mongoose.Types.ObjectId(influencerId);
     const influencer = await InfluencerSignupRequest.findById(
       influencerId
-    ).select("-password");
+    ).select("-password -phoneNo");
 
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });

@@ -13,8 +13,11 @@ import HeadingDescToggle from "../signup/components/HeadingDescToggle";
 import { InfluencerVerify } from "../../controller/signupController";
 import { InfluencerRegistrationFormStyles } from "./InfluencerRegstrationForm.scss";
 import { useAlert } from "../../util/AlertContext";
-import { Color } from "../../GlobalStyles";
+import { Color, FontSize } from "../../GlobalStyles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import MultipleSelectList from "../../shared/MultiSelect";
+import { CountryPicker } from "react-native-country-codes-picker";
+import DropDown from "../../shared/DropDown";
 
 const FormField = ({
   label,
@@ -23,8 +26,9 @@ const FormField = ({
   secureTextEntry = false,
   showPassword,
   setShowPassword,
+  style,
 }) => (
-  <View style={styles.fieldContainer}>
+  <View style={[styles.fieldContainer, style]}>
     <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
       <Text style={styles.fieldLabel}>{label}</Text>
       <Text style={styles.madantoryText}>*</Text>
@@ -54,9 +58,13 @@ const FormField = ({
 );
 
 const InfluencerRegistrationForm = ({ route, navigation }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [gender, setGender] = useState("Male");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [selected, setSelected] = useState([]);
   const [over18, setOver18] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [industryAssociation, setIndustryAssociation] = useState(false);
@@ -68,9 +76,35 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const photo = route.params?.photo;
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [openCountryCode, setOpenCountryCode] = useState(false);
+  const [countryCode, setCountryCode] = useState("+91");
+  const [mobileNoVerified, setMobileNoVerified] = useState(false);
+  const data = [
+    { key: "grocery", value: "Grocery" },
+    { key: "electronics", value: "Electronics" },
+    { key: "fashion", value: "Fashion" },
+    { key: "toys", value: "Toys" },
+    { key: "beauty", value: "Beauty" },
+    { key: "home-decoration", value: "Home Decoration" },
+    { key: "fitness", value: "Fitness" },
+    { key: "education", value: "Education" },
+    { key: "others", value: "Others" },
+  ];
 
+  const genderData = [
+    {
+      key: "male",
+      value: "Male",
+    },
+    {
+      key: "female",
+      value: "Female",
+    },
+  ];
   useEffect(() => {
     if (
+      name &&
+      mobileNumber &&
       email &&
       password &&
       username &&
@@ -98,15 +132,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   ]);
   useEffect(() => {
     if (!route.params) {
-      setEmail('')
-      setPassword('')
-      setUsername('')
-      setOver18(false)
-      setAgreedToTerms(false)
-      setIndustryAssociation(false)
-      setLocation('')
+      setEmail("");
+      setPassword("");
+      setUsername("");
+      setOver18(false);
+      setAgreedToTerms(false);
+      setIndustryAssociation(false);
+      setLocation("");
     }
-  }, [route.params])
+  }, [route.params]);
   const handleSelectPlan = async () => {
     const payload = {
       email,
@@ -120,6 +154,11 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       price,
       location,
       profileUrl: photo,
+      name,
+      country: countryCode,
+      number: mobileNumber,
+      selected,
+      gender,
     };
     await InfluencerVerify(payload, navigation, showAlert);
   };
@@ -141,7 +180,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <View style={styles.headerNavigation} />
             </View>
           </TouchableOpacity>
-
+          <FormField label="Name" value={name} setValue={setName} />
           <FormField label="Email" value={email} setValue={setEmail} />
           <FormField
             label="Password"
@@ -152,11 +191,129 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             setShowPassword={setShowPassword}
           />
           <FormField label="Username" value={username} setValue={setUsername} />
-
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Gender</Text>
+                  <Text style={styles.madantoryText}>*</Text>
+                </View>
+                <View>
+                  <View>
+                    <DropDown
+                      name={gender}
+                      items={genderData}
+                      icon={"none"}
+                      dropDownOptionStyle={{
+                        width: "100%",
+                        paddingVertical: 16,
+                      }}
+                      dropDownContainerStyle={{ width: "100%" }}
+                      dropDownItemsStyle={{ width: "100%" }}
+                      titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+                      selectedValue={setGender}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.mobileNoWrap}>
+            <View style={[styles.fieldContainer, { width: "100%" }]}>
+              <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+                <Text style={styles.fieldLabel}>Mobile Number</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+              <View style={[styles.textInput, styles.mobileNoWrap]}>
+                <View
+                  style={{
+                    width: "85%",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpenCountryCode(true);
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#4F7A94",
+                        fontSize: FontSize.size_base,
+                        paddingEnd: 12,
+                        borderRightWidth: 2,
+                        borderRightColor: "#ccc",
+                      }}
+                    >
+                      {countryCode}
+                    </Text>
+                  </TouchableOpacity>
+                  <TextInput
+                    style={{
+                      color: "#4F7A94",
+                      fontSize: FontSize.size_base,
+                      outlineStyle: "none",
+                      width: "90%",
+                      height: "100%",
+                      paddingStart: 8,
+                    }}
+                    value={mobileNumber}
+                    onChangeText={setMobileNumber}
+                    placeholder={"Mobile Number"}
+                    keyboardType="phone-pad"
+                  />
+                </View>
+                {mobileNoVerified ? (
+                  <Image
+                    style={{ width: 28, height: 28 }}
+                    source={{uri:""}}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setMobileNoVerified(true);
+                    }}
+                  >
+                    <Image
+                      style={{ width: 28, height: 28 }}
+                      source={{uri:""}}
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Influencer Type
+                  </Text>
+                  <Text style={styles.madantoryText}>*</Text>
+                </View>
+                <View>
+                  <View>
+                    <MultipleSelectList
+                      setSelected={(val) => setSelected(val)}
+                      data={data}
+                      save="value"
+                      selectedval={selected}
+                      setSelectedVal={setSelected}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.sectionHeader}>
             <View>
               <View style={styles.labelWrapper}>
-                <Text style={styles.sectionHeaderText}>Add social profiles</Text>
+                <Text style={styles.sectionHeaderText}>
+                  Add social profiles
+                </Text>
                 <Text style={styles.madantoryText}>*</Text>
               </View>
               <Text style={styles.desc}>Atleast one field is mandatory</Text>
@@ -188,7 +345,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   price,
                   follower,
                   social,
-                  photo
+                  photo,
                 })
               }
             >
@@ -202,13 +359,20 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           <View style={styles.sectionHeader}>
             <View>
               <View style={styles.labelWrapper}>
-                <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
+                <Text style={styles.sectionHeaderText}>
+                  Add Social Followers
+                </Text>
                 <Text style={styles.madantoryText}>*</Text>
               </View>
             </View>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("MaxFollowersNo", { price, social, photo, follower })
+                navigation.navigate("MaxFollowersNo", {
+                  price,
+                  social,
+                  photo,
+                  follower,
+                })
               }
             >
               <Image
@@ -241,8 +405,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
 
           <View style={styles.sectionHeader}>
             <View style={styles.labelWrapper}>
-            <Text style={styles.sectionHeaderText}>Industry association</Text>
-            <Text style={styles.madantoryText}>*</Text>
+              <Text style={styles.sectionHeaderText}>Industry association</Text>
+              <Text style={styles.madantoryText}>*</Text>
             </View>
           </View>
           <HeadingDescToggle
@@ -252,15 +416,20 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           />
           <View style={styles.sectionHeader}>
             <View>
-            <View style={styles.labelWrapper}>
-              <Text style={styles.sectionHeaderText}>Price per post</Text>
-              <Text style={styles.madantoryText}>*</Text>
-            </View>
-            <Text style={styles.desc}>Atleast one field is mandatory</Text>
+              <View style={styles.labelWrapper}>
+                <Text style={styles.sectionHeaderText}>Price per post</Text>
+                <Text style={styles.madantoryText}>*</Text>
+              </View>
+              <Text style={styles.desc}>Atleast one field is mandatory</Text>
             </View>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("PricePerPost", { social, follower, photo, price })
+                navigation.navigate("PricePerPost", {
+                  social,
+                  follower,
+                  photo,
+                  price,
+                })
               }
             >
               <Image
@@ -302,6 +471,21 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
+      <CountryPicker
+        show={openCountryCode}
+        // when picker button press you will get the country object with dial code
+        pickerButtonOnPress={(item) => {
+          setCountryCode(item.dial_code)
+          setOpenCountryCode(false);
+        }}
+        style={{
+          modal: {
+            height: 300,
+            width: "100%",
+            maxWidth: "100%"
+          }
+        }}
+      />
     </View>
   );
 };
