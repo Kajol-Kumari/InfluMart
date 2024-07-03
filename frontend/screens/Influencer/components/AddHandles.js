@@ -36,7 +36,7 @@ const FormField = ({ label, placeholder, value, setValue, account, handleVerify,
           <Image
             style={styles.verifyIcon}
             contentFit="cover"
-            source={isVerified ? require("../../../assets/verified_symbol.png") : require("../../../assets/verify_symbol.png")}
+            source={isVerified ? require("../../../assets/verify_symbol.png") : require("../../../assets/verify_symbol.png")}
           />
           <Text style={styles.verifyText}>{isVerified ? "Verified" : "Verify"}</Text>
         </TouchableOpacity>
