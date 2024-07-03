@@ -242,3 +242,91 @@ exports.getAllProfiles = async (req, res) => {
   }
 };
 
+
+exports.filterInfluencers = async (req, res) => {
+  try {
+    const {
+      location,
+      category,
+      price,
+      platform,
+      followers,
+      likes,
+      engagementRate,
+      audienceAge,
+      gender,
+      reachability,
+      avgComments,
+      viewCount,
+      cities
+    } = req.body;
+
+    // Build the filter query
+    let query = {};
+
+    if (location) {
+      query.location = location;
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
+    if (price && platform) {
+      query[`price.${platform}`] = { $lte: price };
+    }
+
+    if (followers && platform) {
+      query[`instaData.followers`] = { $gte: followers };
+    }
+
+    if (likes && platform) {
+      query[`instaData.avgLikes`] = { $gte: likes };
+    }
+
+    if (engagementRate) {
+      query['instaData.avgER'] = { $gte: engagementRate };
+    }
+
+    if (audienceAge) {
+      query['instaData.ages.name'] = audienceAge;
+    }
+
+    if (gender) {
+      query.gender = gender;
+    }
+
+    if (reachability) {
+      query['instaData.membersReachability.name'] = reachability;
+    }
+
+    if (avgComments) {
+      query['instaData.avgComments'] = { $gte: avgComments };
+    }
+
+    if (viewCount && platform) {
+      query[`ytData.popularVideo.viewCount`] = { $gte: viewCount };
+    }
+
+    if (cities) {
+      query['instaData.memberCities.name'] = { $in: cities };
+    }
+
+    // Fetch influencers based on the query
+    const influencers = await InfluencerSignupRequest.find(query).lean();
+
+    // Sort influencers based on the percentage of the audience belonging to a specific age
+    if (audienceAge) {
+      influencers.sort((a, b) => {
+        const aAgeData = a.instaData.ages.find(age => age.name === audienceAge);
+        const bAgeData = b.instaData.ages.find(age => age.name === audienceAge);
+        return (bAgeData?.percent || 0) - (aAgeData?.percent || 0);
+      });
+    }
+
+    res.status(200).json(influencers);
+  } catch (error) {
+    console.error('Error filtering influencers:', error);
+    res.status(500).json({ message: 'Internal Server Error', error });
+  }
+};
