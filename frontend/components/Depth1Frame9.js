@@ -115,12 +115,13 @@ const styles = StyleSheet.create({
   depth4Frame1: {
     height: 76,
     marginTop: 16,
-    width: 189,
+    width: "auto",
   },
   depth3Frame0: {
-    height: 220,
-    width: 189,
+    height: "auto",
+    width: "80%",
     alignItems: "center",
+    paddingBottom: 16,
   },
   follow: {
     fontSize: FontSize.size_sm,

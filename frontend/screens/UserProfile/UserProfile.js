@@ -40,9 +40,13 @@ const UserProfile = ({ navigation }) => {
       if (!id) {
         navigation.navigate("Homepage");
       } else {
+        if(id == "undefined"){
+          navigation.navigate("BrandorInfluencer");
+          return;
+        }
         setInfluencerId(id);
         GetInfluencerProfile(id, setInfluencer, showAlert);
-        // getAllRequests(id, setRequests, showAlert)
+        await getAllRequests(id, setRequests, showAlert)
       }
     };
     getData();
@@ -180,7 +184,8 @@ const UserProfile = ({ navigation }) => {
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
           {influencer?.profileUrl &&<Depth1Frame17
             image={influencer?.profileUrl}
-            username={influencer?.userName}
+            username={influencer?.influencerName}
+            category={influencer?.category}
           />}
           <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>

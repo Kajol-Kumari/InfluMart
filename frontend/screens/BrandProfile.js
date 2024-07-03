@@ -90,15 +90,13 @@ const BrandProfile = ({ route, navigation }) => {
             </TouchableOpacity>
             <View style={[styles.profileContainer]}>
               <View style={styles.profileImageContainer}>
-                {brand?.profileUrl || <ImageWithFallback
+                {brand?.profileUrl && <ImageWithFallback
                   imageStyle={styles.profileImage}
-                  source={
-                    brand?.profileUrl
-                  }
+                  image={brand?.profileUrl}
                 />}
               </View>
               <View style={styles.profileInfoContainer}>
-                <Text style={styles.brandName}>{brand?.name}</Text>
+                <Text style={styles.brandName}>{brand?.brandName}</Text>
                 <Text style={styles.brandDetails}>
                   {brand?.category || "N/A"}
                 </Text>

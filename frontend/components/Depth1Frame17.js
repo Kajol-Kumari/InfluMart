@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, Border, FontSize, Padding } from "../GlobalStyles";
 import ImageWithFallback from "../util/ImageWithFallback";
 
-const Depth1Frame17 = ({image,username}) => {
+const Depth1Frame17 = ({image,username,category}) => {
   const navigation = useNavigation();
 
   return (
@@ -28,7 +28,8 @@ const Depth1Frame17 = ({image,username}) => {
             <View style={styles.depth5Frame1}>
               <View style={styles.depth6Frame0}>
                 <Text style={styles.influencer150kFollowers}>
-                  Influencer
+                  Influencer{"\n"}
+                  {category}
                 </Text>
               </View>
             </View>

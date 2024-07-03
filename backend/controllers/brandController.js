@@ -71,7 +71,7 @@ exports.getProfile = async (req, res) => {
     res.status(200).json({
       message: 'Brand profile fetched successfully',
       brand: {
-        name: brand.name,
+        brandName: brand.brandName,
         email: brand.email,
         category: brand.category,
         profileUrl: brand.profileUrl,
@@ -174,6 +174,7 @@ exports.getAllBrands = async (req, res) => {
         website: brand.website,
         description: brand.description,
         profileUrl: brand.profileUrl,
+        brandName: brand.brandName,
       })),
     });
   } catch (error) {

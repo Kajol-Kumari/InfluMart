@@ -233,7 +233,7 @@ exports.getAllProfiles = async (req, res) => {
   try {
     const influencers = await InfluencerSignupRequest.find(
       {},
-      { category: 1, userName: 1, profileUrl: 1, _id: 1 }
+      { category: 1, influencerName: 1, profileUrl: 1, _id: 1 }
     );
     res.status(200).json({influencers});
   } catch (err) {
