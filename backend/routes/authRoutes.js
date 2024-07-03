@@ -8,6 +8,18 @@ const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 const session = require('express-session');
 const router = express.Router();
 
+// Session configuration
+router.use(session({
+  secret: config.JWT_SECRET_KEY, // Change to a secure, random secret for production
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: process.env.NODE_ENV === 'production' }
+}));
+
+// Initialize Passport and restore authentication state, if any, from the session
+router.use(passport.initialize());
+router.use(passport.session());
+
 // Instagram Strategy
 passport.use(new InstagramStrategy({
   clientID: config.INSTAGRAM_CLIENT_ID,
@@ -23,6 +35,9 @@ passport.use(new TwitterStrategy({
   consumerSecret: config.TWITTER_CONSUMER_SECRET,
   callbackURL: config.BASE_URL + '/auth/twitter/callback'
 }, (token, tokenSecret, profile, done) => {
+  console.log("Token:", token);
+  console.log("Token Secret:", tokenSecret);
+  console.log("Profile:", profile);
   done(null, profile);
 }));
 
@@ -47,10 +62,6 @@ passport.use(new GoogleStrategy({
 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
-
-router.use(session({ secret: 'secret', resave: false, saveUninitialized: false }));
-router.use(passport.initialize());
-router.use(passport.session());
 
 // Instagram routes
 router.get('/auth/instagram', passport.authenticate('instagram'));

@@ -6,6 +6,7 @@ const configs = {
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
   BASE_URL: process.env.BASE_URL,
+  CLIENT_URL: process.env.CLIENT_URL,
   X_RAPIDAPI_KEY: process.env.X_RAPIDAPI_KEY,
   X_RAPIDAPI_HOST_INSTA: process.env.X_RAPIDAPI_HOST_INSTA,
   X_RAPIDAPI_HOST_YT: process.env.X_RAPIDAPI_HOST_YT,
