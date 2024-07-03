@@ -48,7 +48,7 @@ const InstagramData = async (instagramId) => {
       avgInteractions: data?.avgInteractions,
       avgLikes: data?.avgLikes,
       avgComments: data?.avgComments,
-      memberCities:data?.membersCities?.slice(0, 5),
+      memberCities:data?.membersCities,
       ages: data?.ages,
       genders: data?.genders,
       lastPosts: data?.lastPosts,

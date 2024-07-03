@@ -11,6 +11,7 @@ const {
   deleteProfile,
   getAllProfiles,
   verifyUser,
+  filterInfluencers,
 } = require("../controllers/influencerController");
 const influencerAuthenticationMiddleware = require("../middleware/influencers/influencerAuthenticationMiddleware");
 const brandorInfluencerAuthenticationMiddleware = require("../middleware/brandorInfluencerAuthenticationMiddleware");
@@ -53,5 +54,9 @@ router.delete("/profile/:id", influencerAuthenticationMiddleware, deleteProfile)
 
 // Route to get all influencers' profiles
 router.get("/profiles", getAllProfiles);
+
+// Route to get filtered influencers
+router.post("/search-influencers", filterInfluencers);
+
 
 module.exports = router;
