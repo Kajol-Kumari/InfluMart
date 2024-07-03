@@ -11,12 +11,13 @@ import {
 } from "react-native";
 import { Color } from "../../GlobalStyles";
 import MultipleSelectList from "../../shared/MultiSelect";
-import { SendOtp } from "../../controller/signupController";
+import { BrandSignUp, SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 
 const BrandRegistrationForm = ({ route, navigation }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -54,13 +55,14 @@ const BrandRegistrationForm = ({ route, navigation }) => {
       password,
       category: selected,
       name: username,
+      brandName: name,
     };
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
       showAlert("Brand SignUp Error", "Please enter a valid email address");
       return;
     }
-    if (!email || !password || !selected.length || !username) {
+    if (!email || !password || !selected.length || !username || !name) {
       showAlert("Brand SignUp Error", "Please fill all the fields");
       return;
     }
@@ -71,7 +73,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
       );
       return;
     }
-    await SendOtp(payload, navigation, showAlert);
+    await BrandSignUp(payload, navigation, showAlert);
   };
 
   return (
@@ -105,6 +107,26 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
+          <View style={styles.depth1Frame2}>
+            <View style={[styles.depth2Frame02, styles.frameLayout]}>
+              <View style={styles.frameLayout}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>Name</Text>
+                  <Text style={styles.mandatoryText}>*</Text>
+                </View>
+                <View>
+                  <View style={[styles.depth5Frame01]}>
+                    <TextInput
+                      style={styles.textInput}
+                      value={name}
+                      onChangeText={setName}
+                      placeholder="Brand Name"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
           <View style={styles.depth1Frame2}>
             <View style={[styles.depth2Frame02, styles.frameLayout]}>
               <View style={styles.frameLayout}>
@@ -227,14 +249,24 @@ const BrandRegistrationForm = ({ route, navigation }) => {
           </View>
           <View>
             <View style={styles.loginFrame}>
-              <Text style={styles.termsText}>
-                By joining, you agree to our
-              </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("TosScreen",{navigate:"BrandRegistrationForm"})}>
+              <Text style={styles.termsText}>By joining, you agree to our</Text>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("TosScreen", {
+                    navigate: "BrandRegistrationForm",
+                  })
+                }
+              >
                 <Text style={styles.linkText}>Terms of Service</Text>
               </TouchableOpacity>
               <Text style={styles.termsText}> and </Text>
-              <TouchableOpacity onPress={()=>navigation.navigate("PPScreen",{navigate:"BrandRegistrationForm"})}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("PPScreen", {
+                    navigate: "BrandRegistrationForm",
+                  })
+                }
+              >
                 <Text style={styles.linkText}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>

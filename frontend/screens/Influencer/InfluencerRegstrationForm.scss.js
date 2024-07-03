@@ -33,6 +33,69 @@ export const InfluencerRegistrationFormStyles = {
     fontSize: FontSize.size_base,
     color: Color.colorGray_100,
   },
+  verifyContainer: {
+    paddingHorizontal:0
+  },
+  verifyButton: {
+    flexDirection: "column"
+  },
+  verifyIcon: {
+    width: 40,
+    height: 40,
+  },
+  verifyText: {
+    fontSize: FontSize.size_sm,
+    lineHeight: 21,
+    fontFamily: FontFamily.plusJakartaSansMedium,
+    fontWeight: "500",
+    color: Color.colorGray,
+  },
+  mobileNoWrap:{
+    width:"100%",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    gap:4
+  },
+  depth1Frame2: {
+    height: 112,
+    paddingVertical: Padding.p_xs,
+    alignItems: "center",
+    flexDirection: "row",
+    width: "100%",
+    zIndex: 1,
+  },
+  depth2Frame02: {
+    width:"100%",
+    alignItems: "flex-end",
+    flexDirection: "row",
+    zIndex: 1,
+  },
+  frameLayout: {
+    height: 88,
+    width: "100%",
+  },
+  depth4Frame02: {
+    height: 32,
+    width: "100%",
+    paddingBottom: Padding.p_5xs,
+    display:"flex",
+    flexDirection:"row",
+    gap:8
+  },
+  email: {
+    width:"auto",
+    fontWeight: "500",
+    fontFamily: FontFamily.workSansMedium,
+    color: Color.colorBlack,
+    alignSelf: "stretch",
+  },
+  emailTypo: {
+    textAlign: "left",
+    lineHeight: 24,
+    fontSize: FontSize.size_base,
+  },
   textInput: {
     borderRadius: Border.br_xs,
     backgroundColor: Color.colorAliceblue,

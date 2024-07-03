@@ -8,7 +8,7 @@ const OTP = require("../model/otp");
 
 // Signup a brand
 exports.signup = async (req, res) => {
-  const { name, email, password, category } = req.body;
+  const { name, email, password, category, brandName } = req.body;
   
   const hashedPassword = await bcrypt.hash(password, 10);
   const brand = new Brand({
@@ -17,6 +17,7 @@ exports.signup = async (req, res) => {
     password: hashedPassword,
     category,
     profileUrl: req.file?.path,
+    brandName
   });
   brand
     .save()

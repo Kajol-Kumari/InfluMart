@@ -28,8 +28,6 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       instaProfile: payload.social?.ig,
       linkedInProfile: payload.social?.linkedIn,
       twitterProfile: payload.social?.tr,
-      nickName: payload.userName,
-      firstName: payload.userName,
     };
     await InfluencerSignUp(userData, navigation, showAlert);
   };
