@@ -6,14 +6,15 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Linking
+  Linking,
+  Alert
 } from "react-native";
 import * as WebBrowser from 'expo-web-browser';
 import { Image } from "expo-image";
 import { AddHandlesStyles } from "./AddHandle.scss";
 import { API_ENDPOINT } from "@env";
 
-const FormField = ({ label, placeholder, value, setValue, account, handleVerify }) => {
+const FormField = ({ label, placeholder, value, setValue, account, handleVerify, isVerified }) => {
   return (
     <View style={styles.formField}>
       <View style={styles.fieldContainer}>
@@ -23,19 +24,21 @@ const FormField = ({ label, placeholder, value, setValue, account, handleVerify 
           value={value}
           onChangeText={(value) => setValue(value)}
           placeholder={placeholder}
+          editable={!isVerified}
         />
       </View>
       <View style={styles.verifyContainer}>
         <TouchableOpacity
-          style={styles.verifyButton}
+          style={[styles.verifyButton, isVerified && styles.verifiedButton]}
           onPress={() => handleVerify(account)}
+          disabled={isVerified}
         >
           <Image
             style={styles.verifyIcon}
             contentFit="cover"
-            source={require("../../../assets/verify_symbol.png")}
+            source={isVerified ? require("../../../assets/verified_symbol.png") : require("../../../assets/verify_symbol.png")}
           />
-          <Text style={styles.verifyText}>Verify</Text>
+          <Text style={styles.verifyText}>{isVerified ? "Verified" : "Verify"}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -83,36 +86,42 @@ const AddHandles = ({ route, navigation }) => {
         return;
     }
 
-    const result = await WebBrowser.openAuthSessionAsync(authUrl);
-
-    if (result.type === 'success') {
-      setVerifiedAccounts((prev) => [...prev, platform]);
+    try {
+      const result = await WebBrowser.openAuthSessionAsync(authUrl);
+      if (result.type === 'success') {
+        const { path, queryParams } = Linking.parse(result.url);
+        if (path.includes('success')) {
+          const user = JSON.parse(decodeURIComponent(queryParams.user));
+          handleAuthSuccess(platform, user);
+        } else if (path.includes('failure')) {
+          Alert.alert('Authentication Failed', 'Unable to verify your account. Please try again.');
+        }
+      }
+    } catch (error) {
+      console.error('Error during authentication:', error);
+      Alert.alert('Error', 'An error occurred during authentication. Please try again.');
     }
   };
 
-  const handleDeepLink = (url) => {
-    const { path, queryParams } = Linking.parse(url);
-    if (
-      path === 'auth/instagram/success' || 
-      path === 'auth/twitter/success' || 
-      path === 'auth/facebook/success' || 
-      path === 'auth/youtube/success'
-    ) {
-      const user = JSON.parse(queryParams.user);
-      // Handle the authenticated user info here, e.g., mark the account as verified
-      console.log("Authenticated user:", user);
+  const handleAuthSuccess = (platform, user) => {
+    setVerifiedAccounts((prev) => [...prev, platform]);
+    // Update the corresponding state based on the platform
+    switch(platform) {
+      case 'instagram':
+        setInstagram(user.username);
+        break;
+      case 'twitter':
+        setTwitter(user.username);
+        break;
+      case 'facebook':
+        setFacebook(user.name);
+        break;
+      case 'youtube':
+        setYoutube(user.displayName);
+        break;
     }
+    Alert.alert('Success', `Your ${platform} account has been verified!`);
   };
-
-  useEffect(() => {
-    Linking.addEventListener('url', (event) => {
-      handleDeepLink(event.url);
-    });
-
-    return () => {
-      Linking.removeEventListener('url');
-    };
-  }, []);
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -134,44 +143,49 @@ const AddHandles = ({ route, navigation }) => {
         </View>
 
         <FormField
-          label={"Instagram"}
-          placeholder={"username"}
+          label="Instagram"
+          placeholder="username"
           value={instagram}
           setValue={setInstagram}
-          account={"instagram"}
+          account="instagram"
           handleVerify={handleVerify}
+          isVerified={verifiedAccounts.includes('instagram')}
         />
         <FormField
-          label={"Twitter"}
-          placeholder={"@username"}
+          label="Twitter"
+          placeholder="@username"
           value={twitter}
           setValue={setTwitter}
-          account={"twitter"}
+          account="twitter"
           handleVerify={handleVerify}
+          isVerified={verifiedAccounts.includes('twitter')}
         />
         <FormField
-          label={"Facebook"}
-          placeholder={"username"}
+          label="Facebook"
+          placeholder="username"
           value={facebook}
           setValue={setFacebook}
-          account={"facebook"}
+          account="facebook"
           handleVerify={handleVerify}
+          isVerified={verifiedAccounts.includes('facebook')}
         />
         <FormField
-          label={"YouTube"}
-          placeholder={"@channelName"}
+          label="YouTube"
+          placeholder="@channelName"
           value={youtube}
           setValue={setYoutube}
-          account={"youtube"}
+          account="youtube"
           handleVerify={handleVerify}
+          isVerified={verifiedAccounts.includes('youtube')}
         />
         <FormField
-          label={"TikTok"}
-          placeholder={"@username"}
+          label="TikTok"
+          placeholder="@username"
           value={tiktok}
           setValue={setTiktok}
-          account={"tiktok"}
+          account="tiktok"
           handleVerify={handleVerify}
+          isVerified={verifiedAccounts.includes('tiktok')}
         />
         <TouchableOpacity
           style={styles.confirmButton}

@@ -33,7 +33,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 // Verification routes
-app.use(authRoutes);
+app.use('/', authRoutes);
 
 // Mount the payment controller routes
 app.use('/api/payment', paymentRoutes);

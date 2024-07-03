@@ -1,90 +1,149 @@
-const express = require('express');
-const passport = require('passport');
+const express = require("express");
+const passport = require("passport");
 const config = require("../config/configs");
-const { Strategy: InstagramStrategy } = require('passport-instagram');
-const { Strategy: TwitterStrategy } = require('passport-twitter');
-const { Strategy: FacebookStrategy } = require('passport-facebook');
-const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
-const session = require('express-session');
+const { Strategy: InstagramStrategy } = require("passport-instagram");
+const { Strategy: TwitterStrategy } = require("passport-twitter");
+const { Strategy: FacebookStrategy } = require("passport-facebook");
+const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
+const session = require("express-session");
 const router = express.Router();
 
-// Session configuration
-router.use(session({
-  secret: config.JWT_SECRET_KEY, // Change to a secure, random secret for production
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: process.env.NODE_ENV === 'production' }
-}));
+router.use(
+  session({
+    secret: config.JWT_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: process.env.NODE_ENV === "production" },
+  })
+);
 
-// Initialize Passport and restore authentication state, if any, from the session
 router.use(passport.initialize());
 router.use(passport.session());
 
-// Instagram Strategy
-passport.use(new InstagramStrategy({
-  clientID: config.INSTAGRAM_CLIENT_ID,
-  clientSecret: config.INSTAGRAM_CLIENT_SECRET,
-  callbackURL: config.BASE_URL + '/auth/instagram/callback'
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
-
-// Twitter Strategy
-passport.use(new TwitterStrategy({
-  consumerKey: config.TWITTER_CONSUMER_KEY,
-  consumerSecret: config.TWITTER_CONSUMER_SECRET,
-  callbackURL: config.BASE_URL + '/auth/twitter/callback'
-}, (token, tokenSecret, profile, done) => {
-  console.log("Token:", token);
-  console.log("Token Secret:", tokenSecret);
+const handleAuth = (accessToken, refreshToken, profile, done) => {
+  // Here you should find or create a user in your database
+  // For now, we'll just pass the profile
   console.log("Profile:", profile);
   done(null, profile);
-}));
+};
 
-// Facebook Strategy
-passport.use(new FacebookStrategy({
-  clientID: config.FACEBOOK_APP_ID,
-  clientSecret: config.FACEBOOK_APP_SECRET,
-  callbackURL: config.BASE_URL + '/auth/facebook/callback'
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
+passport.use(
+  new InstagramStrategy(
+    {
+      clientID: config.INSTAGRAM_CLIENT_ID,
+      clientSecret: config.INSTAGRAM_CLIENT_SECRET,
+      callbackURL: config.BASE_URL + "/auth/instagram/callback",
+    },
+    handleAuth
+  )
+);
 
-// YouTube (Google) Strategy
-passport.use(new GoogleStrategy({
-  clientID: config.GOOGLE_CLIENT_ID,
-  clientSecret: config.GOOGLE_CLIENT_SECRET,
-  callbackURL: config.BASE_URL + '/auth/youtube/callback',
-  scope: ['profile', 'email', 'https://www.googleapis.com/auth/youtube.readonly']
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: config.TWITTER_CONSUMER_KEY,
+      consumerSecret: config.TWITTER_CONSUMER_SECRET,
+      callbackURL: config.BASE_URL + "/auth/twitter/callback",
+    },
+    handleAuth
+  )
+);
 
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: config.FACEBOOK_APP_ID,
+      clientSecret: config.FACEBOOK_APP_SECRET,
+      callbackURL: config.BASE_URL + "/auth/facebook/callback",
+    },
+    handleAuth
+  )
+);
 
-// Instagram routes
-router.get('/auth/instagram', passport.authenticate('instagram'));
-router.get('/auth/instagram/callback', passport.authenticate('instagram', { failureRedirect: '/' }), (req, res) => {
-  res.redirect(`influmart://auth/instagram/success?user=${JSON.stringify(req.user)}`);
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: config.GOOGLE_CLIENT_ID,
+      clientSecret: config.GOOGLE_CLIENT_SECRET,
+      callbackURL: config.BASE_URL + "/auth/youtube/callback",
+      scope: [
+        "profile",
+        "email",
+        "https://www.googleapis.com/auth/youtube.readonly",
+      ],
+    },
+    handleAuth
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-// Twitter routes
-router.get('/auth/twitter', passport.authenticate('twitter'));
-router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), (req, res) => {
-  res.redirect(`influmart://auth/twitter/success?user=${JSON.stringify(req.user)}`);
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
 });
 
-// Facebook routes
-router.get('/auth/facebook', passport.authenticate('facebook'));
-router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), (req, res) => {
-  res.redirect(`influmart://auth/facebook/success?user=${JSON.stringify(req.user)}`);
-});
+const handleAuthCallback = (platform) => (req, res) => {
+  const userData = JSON.stringify(req.user);
+  res.redirect(
+    `influmart://auth/${platform}/success?user=${encodeURIComponent(userData)}`
+  );
+};
+
+router.get("/auth/instagram", passport.authenticate("instagram"));
+router.get(
+  "/auth/instagram/callback",
+  passport.authenticate("instagram", { failureRedirect: "/auth/failure" }),
+  handleAuthCallback("instagram")
+);
+
+router.get("/auth/twitter", passport.authenticate("twitter"));
+router.get(
+  "/auth/twitter/callback",
+  passport.authenticate("twitter", { failureRedirect: "/auth/failure" }),
+  handleAuthCallback("twitter")
+);
+
+router.get("/auth/facebook", passport.authenticate("facebook"));
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", { failureRedirect: "/auth/failure" }),
+  handleAuthCallback("facebook")
+);
 
 // YouTube routes
-router.get('/auth/youtube', passport.authenticate('google', { scope: ['profile', 'email', 'https://www.googleapis.com/auth/youtube.readonly'] }));
-router.get('/auth/youtube/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
-  res.redirect(`influmart://auth/youtube/success?user=${JSON.stringify(req.user)}`);
+router.get("/auth/youtube", (req, res, next) => {
+  console.log("Hitting /auth/youtube route");
+  passport.authenticate("google", {
+    scope: [
+      "profile",
+      "email",
+      "https://www.googleapis.com/auth/youtube.readonly",
+    ],
+  })(req, res, next);
+});
+
+router.get(
+  "/auth/youtube/callback",
+  (req, res, next) => {
+    console.log("Hitting /auth/youtube/callback route");
+    passport.authenticate("google", { failureRedirect: "/auth/failure" })(
+      req,
+      res,
+      next
+    );
+  },
+  (req, res) => {
+    res.redirect(
+      `influmart://auth/youtube/success?user=${JSON.stringify(req.user)}`
+    );
+  }
+);
+
+router.get("/auth/failure", (req, res) => {
+  console.log("Authentication failed");
+  res.redirect("influmart://auth/failure");
 });
 
 module.exports = router;
