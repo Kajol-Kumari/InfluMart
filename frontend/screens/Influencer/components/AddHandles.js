@@ -97,6 +97,17 @@ const AddHandles = ({ route, navigation }) => {
       if (tt) setTiktok(tt);
     }
 
+    // Handle initial params if coming from a deep link
+    if (platform && user) {
+      try {
+        const userData = typeof user === 'string' ? JSON.parse(decodeURIComponent(user)) : user;
+        handleAuthSuccess(platform, userData);
+      } catch (error) {
+        console.error("Error parsing initial user data:", error);
+        Alert.alert("Error", "Failed to process initial authentication data.");
+      }
+    }
+
     const handleDeepLink = (event) => {
       let data = Linking.parse(event.url);
       console.log("Received deep link:", data);
