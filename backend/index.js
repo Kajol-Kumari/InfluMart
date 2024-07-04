@@ -6,6 +6,7 @@ var cookies = require("cookie-parser");
 
 const app = express();
 const server = http.Server(app);
+const io = require('socket.io')(server); //socket.io instance
 
 // Making uploads folder public
 app.use(express.static('uploads'));
@@ -31,7 +32,12 @@ const { getSocialData } = require("./controllers/influencerController");
 const passwordRoutes = require('./routes/passwordRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const authRoutes = require('./routes/authRoutes');
+const Message = require("./model/Message");
 
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 // Verification routes
 app.use('/', authRoutes);
 
@@ -64,6 +70,27 @@ app.get("/", (_req, res) => {
   res
     .status(200)
     .json({ message: "Hello There!! You are at the backend server!" });
+});
+
+// Socket.io connection
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  
+  // Listen for new messages
+  socket.on('sendMessage', async ({ senderId, receiverId, content }) => {
+    const message = new Message({
+      sender: senderId,
+      receiver: receiverId,
+      content: content,
+    });
+    await message.save();
+    
+    io.to(receiverId).emit('receiveMessage', message);
+  });
 });
 
 // Start the server
