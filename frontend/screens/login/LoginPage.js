@@ -7,6 +7,7 @@ import { loginStyle } from './LoginStyle';
 import { Color } from "../../GlobalStyles";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
+import { forgotPasswordControl } from "../../controller/PasswordController";
 
 const LoginPage = () => {
   const navigation = useNavigation();
@@ -87,11 +88,13 @@ const LoginPage = () => {
         </View>
       </View>
       <View style={[styles.depth1Frame5, styles.depth1FrameSpaceBlock]}>
+      <TouchableOpacity onPress={() => navigation.navigate("ForgotPasswordPage",{type:"influencer"})}>
         <View style={styles.depth2Frame01}>
           <Text style={[styles.forgotYourPassword, styles.logInTypo]}>
             Forgot your password?
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
       <View style={{ margin: 15 }}>
         <View style={styles.depth2Frame06}>

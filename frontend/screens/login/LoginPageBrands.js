@@ -107,11 +107,13 @@ const LoginPageBrand = () => {
         </View>
       </View>
       <View style={[styles.depth1Frame5, styles.depth1FrameSpaceBlock]}>
+      <TouchableOpacity onPress={() => navigation.navigate("ForgotPasswordPage",{type:"brand"})}>
         <View style={styles.depth2Frame01}>
           <Text style={[styles.forgotYourPassword, styles.logInTypo]}>
             Forgot your password?
           </Text>
         </View>
+        </TouchableOpacity>
       </View>
       <View style={{ margin: 15 }}>
         <View style={styles.depth2Frame06}>

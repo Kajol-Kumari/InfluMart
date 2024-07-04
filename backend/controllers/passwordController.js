@@ -1,17 +1,17 @@
-const { JWT_SECRET_KEY, JWT_EXPIRES_IN, RESET_PASSWORD_TOKEN_SECRET, RESET_PASSWORD_TOKEN_EXPIRATION } = require("../config/configs");
-const Brand = require("../model/brandDbRequestModel");
-const Influencer = require("../model/brandDbRequestModel");
+const { JWT_SECRET_KEY, JWT_EXPIRES_IN, RESET_PASSWORD_TOKEN_SECRET, RESET_PASSWORD_TOKEN_EXPIRATION, PASSWORD, OTP_MAIL } = require("../config/configs");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const Brand = require("../model/brandDbRequestModel");
+const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 
 // Use the existing SMTP configuration
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.OTP_MAIL,
-    pass: process.env.OTP_MAIL_PASSWORD,
+    user: OTP_MAIL,
+    pass: PASSWORD,
   },
 });
 
@@ -35,25 +35,23 @@ const sendResetEmail = (email, token) => {
 
 // Generate a reset token
 const generateResetToken = (userId) => {
-  const resetToken = jwt.sign({ userId }, RESET_PASSWORD_TOKEN_SECRET, { expiresIn: RESET_PASSWORD_TOKEN_EXPIRATION });
+  const resetToken = jwt.sign({ userId }, RESET_PASSWORD_TOKEN_SECRET, { expiresIn: parseInt(RESET_PASSWORD_TOKEN_EXPIRATION, 10) });
   return resetToken;
 };
 
 // Forgot Password (Request Reset)
 exports.forgotPassword = async (req, res) => {
   const { email, type } = req.body; // type can be 'brand' or 'influencer'
-
   try {
-    const Model = type === 'brand' ? Brand : Influencer;
+    const Model = type == 'brand' ? Brand : InfluencerSignupRequest;
     const user = await Model.findOne({ email });
-
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const resetToken = generateResetToken(user._id);
     user.resetPasswordToken = resetToken;
-    user.resetPasswordExpires = Date.now() + RESET_PASSWORD_TOKEN_EXPIRATION;
+    user.resetPasswordExpires = new Date(Date.now() + parseInt(RESET_PASSWORD_TOKEN_EXPIRATION) * 1000);
     await user.save();
 
     sendResetEmail(email, resetToken);
@@ -72,10 +70,8 @@ exports.resetPassword = async (req, res) => {
   try {
     const decoded = jwt.verify(token, RESET_PASSWORD_TOKEN_SECRET);
     const { userId } = decoded;
-
-    const user = await Brand.findById(userId) || await Influencer.findById(userId);
-
-    if (!user || user.resetPasswordToken !== token || user.resetPasswordExpires < Date.now()) {
+    const user = await Brand.findById(userId) || await InfluencerSignupRequest.findById(userId);
+    if (!user || user.resetPasswordToken !== token || Date.parse(user.resetPasswordExpires) < Date.now()) {
       return res.status(400).json({ message: 'Invalid or expired token' });
     }
 
@@ -84,7 +80,6 @@ exports.resetPassword = async (req, res) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     await user.save();
-
     res.status(200).json({ message: 'Password reset successfully' });
   } catch (error) {
     console.error('Error during password reset:', error);

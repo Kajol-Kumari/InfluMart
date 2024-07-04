@@ -46,6 +46,14 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     brand: { type: mongoose.Schema.Types.ObjectId, ref: "Brand" },
     notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Request" }],
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      default: null,
+    },
   },
   {
     toJSON: { getters: true },
