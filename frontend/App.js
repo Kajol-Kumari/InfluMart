@@ -135,6 +135,7 @@ const App = () => {
   }
 
   return (
+    <>
     <AlertProvider>
       <NavigationContainer linking={linking}>
         {hideSplashScreen ? (
@@ -180,7 +181,6 @@ const App = () => {
             <Stack.Screen
               name="ResetPassword"
               component={ResetPasswordPage}
-              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="InfluencerSocialHandles"
@@ -257,26 +257,31 @@ const App = () => {
               component={BrandProfile}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="LoginPageBrands"
               component={LoginPageBrand}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="BrandAdminPanel"
               component={BrandAdminPanel}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="BrandLogoutPage"
               component={BrandLogOutPage}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="BrandAccountDeletePage"
               component={BrandDeleteAccountPage}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen
               name="BrandManageAccountPage"
               component={BrandManageAccount}
@@ -346,6 +351,7 @@ const App = () => {
         ) : null}
       </NavigationContainer>
     </AlertProvider>
+  </>
   );
 };
 export default App;
