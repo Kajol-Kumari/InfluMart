@@ -45,6 +45,18 @@ import BrandAdminPanel from "./screens/Brand/BrandAdminPanel";
 import BrandLogOutPage from "./screens/Brand/Settings/BrandLogout";
 import BrandDeleteAccountPage from "./screens/Brand/Settings/Support/BrandDeleteAccount";
 import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
+import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
+import ResetPasswordPage from "./screens/login/ResetPasswordPage";
+
+
+const linking = {
+  prefixes: ['http://192.168.106.76:8081', 'myapp://'],
+  config: {
+    screens: {
+      ResetPassword: 'reset-password/:token',
+    },
+  },
+};
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -105,7 +117,7 @@ const App = () => {
   return (
     <>
       <AlertProvider>
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
           {hideSplashScreen ? (
             <Stack.Navigator
               initialRouteName={initialRoute}
@@ -147,6 +159,10 @@ const App = () => {
                 options={{ headerShown: false }}
               />
               <Stack.Screen
+                name="ResetPassword"
+                component={ResetPasswordPage}
+              />
+              <Stack.Screen
                 name="InfluencerSocialHandles"
                 component={AddHandles}
                 options={{ headerShown: false }}
@@ -169,6 +185,11 @@ const App = () => {
               <Stack.Screen
                 name="OtpVerification"
                 component={OtpVerification}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="ForgotPasswordPage"
+                component={ForgotPasswordPage}
                 options={{ headerShown: false }}
               />
               <Stack.Screen
@@ -234,13 +255,13 @@ const App = () => {
                 component={BrandLogOutPage}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
                 name="BrandAccountDeletePage"
                 component={BrandDeleteAccountPage}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
                 name="BrandManageAccountPage"
                 component={BrandManageAccount}
