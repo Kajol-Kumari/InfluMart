@@ -209,7 +209,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                         paddingVertical: 16,
                       }}
                       dropDownContainerStyle={{ width: "100%" }}
-                      dropDownItemsStyle={{ width: "100%" }}
+                      dropDownItemsStyle={{ width: "100%"}}
                       titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                       selectedValue={setGender}
                     />

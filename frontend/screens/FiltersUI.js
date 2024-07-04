@@ -1,13 +1,35 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Pressable,ScrollView } from "react-native";
+import { Text, StyleSheet, View, Pressable, ScrollView ,TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
 import { Padding, Color, Border, FontSize, FontFamily } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/core";
+import CustomSlider from "../shared/CustomSlider";
+import DropDown from "../shared/DropDown";
 
 const FiltersUI = () => {
-  const navigation=useNavigation()
+  const navigation = useNavigation()
+  const [selectedAges, setSelectedAges] = React.useState({})
+  const [selectedFollowersCount, setSelectedFollowersCount] = React.useState({})
+  const [selectedPostCount, setSelectedPostCount] = React.useState({})
+  const [selectedLocation, setSelectedLocation] = React.useState("India")
+
+  const locationData = [
+    {
+      key: "india",
+      value: "India"
+    },
+    {
+      key: "pakistan",
+      value: "Pakistan"
+    },
+    {
+      key: "srilanka",
+      value: "Srilanka"
+    }
+  ]
+
   return (
-    <ScrollView style={{backgroundColor:Color.colorWhite}}>
+    <ScrollView style={{ backgroundColor: Color.colorWhite }}>
       <View style={[styles.filtersui, styles.filtersuiLayout]}>
         <View style={styles.depth0Frame0}>
           <View style={styles.depth1Frame0}>
@@ -15,7 +37,7 @@ const FiltersUI = () => {
               <View style={styles.depth3Frame0}>
                 <Text style={[styles.filter, styles.ageFlexBox]}>Filter</Text>
               </View>
-              <Pressable onPress={()=>{navigation.navigate("InfluencersList")}} style={{ width: "auto", height: 24 }}>
+              <Pressable onPress={() => { navigation.navigate("InfluencersList") }} style={{ width: "auto", height: 24 }}>
                 <Image
                   style={styles.depth5Frame0}
                   contentFit="cover"
@@ -33,7 +55,7 @@ const FiltersUI = () => {
                 </View>
                 <View style={styles.depth4Frame1}>
                   <View style={[styles.depth5Frame01, styles.frameLayout]}>
-                    <View style={[styles.depth6Frame1, styles.frameLayout]} />
+                    <CustomSlider minValue={20} maxValue={35} selectedValues={setSelectedAges} />
                   </View>
                 </View>
               </View>
@@ -47,7 +69,7 @@ const FiltersUI = () => {
                 </View>
                 <View style={styles.depth4Frame1}>
                   <View style={[styles.depth5Frame01, styles.frameLayout]}>
-                    <View style={[styles.depth6Frame1, styles.frameLayout]} />
+                    <CustomSlider minValue={1000} maxValue={50000} selectedValues={setSelectedFollowersCount} />
                   </View>
                 </View>
               </View>
@@ -62,7 +84,7 @@ const FiltersUI = () => {
                 </View>
                 <View style={styles.depth4Frame1}>
                   <View style={[styles.depth5Frame01, styles.frameLayout]}>
-                    <View style={[styles.depth6Frame1, styles.frameLayout]} />
+                    <CustomSlider minValue={100} maxValue={2000} selectedValues={setSelectedPostCount} />
                   </View>
                 </View>
               </View>
@@ -70,22 +92,29 @@ const FiltersUI = () => {
             <View style={styles.depth2FrameSpaceBlock1}>
               <Text style={[styles.filter, styles.ageFlexBox]}>Location</Text>
             </View>
-            <View style={[styles.depth2Frame7, styles.depth2FrameSpaceBlock]}>
-              <View style={styles.depth4Frame04}>
-                <Text style={[styles.selectA]}>
-                  Select a country
-                </Text>
-                <Image
-                  style={[styles.vector0]}
-                  contentFit="cover"
-                  source={require("../assets/depth-3-frame-21.png")}
+            <View style={{paddingHorizontal:Padding.p_base,paddingVertical:8}}>
+              <View>
+                <DropDown
+                  name={selectedLocation}
+                  items={locationData}
+                  dropDownOptionStyle={{
+                    width: "100%",
+                    paddingVertical: 16,
+                    backgroundColor:"#fff",
+                    borderWidth:2,
+                    borderColor:"#DBE0E5"
+                  }}
+                  dropDownContainerStyle={{ width: "100%" }}
+                  dropDownItemsStyle={{ width: "100%",position:"absolute",top:-120,zIndex:1000,height:160,overflow:"scroll"}}
+                  titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+                  selectedValue={setSelectedLocation}
                 />
               </View>
             </View>
           </View>
           <View style={styles.depth1Frame0}>
             <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock]}>
-              <View style={[styles.depth3Frame05, styles.frameFlexBox]}>
+              <TouchableOpacity onPress={()=>{navigation.navigate("InfluencersList")}} style={[styles.depth3Frame05, styles.frameFlexBox]}>
                 <View style={styles.depth4Frame05}>
                   <Text
                     style={[styles.applyFilters, styles.ageLayout]}
@@ -94,7 +123,7 @@ const FiltersUI = () => {
                     Apply Filters
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.depth2Frame11} />
           </View>
@@ -136,7 +165,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
   },
   frameLayout: {
-    height: 4,
+    height: "auto",
     borderRadius: Border.br_11xs,
     flex: 1,
   },
@@ -181,6 +210,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: Padding.p_base,
     paddingVertical: 40,
+    paddingBottom: 20,
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -195,7 +225,7 @@ const styles = StyleSheet.create({
   },
   depth1Frame0: {
     width: "100%",
-    alignSelf: "stretch",
+    alignSelf: "stretch"
   },
   depth6Frame1: {
     backgroundColor: Color.colorGray,
@@ -218,6 +248,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "stretch",
     flex: 1,
+    marginBottom: Padding.p_xs
   },
   vector0: {
     width: 24,
@@ -275,6 +306,8 @@ const styles = StyleSheet.create({
     minWidth: 84,
     maxWidth: 480,
     flex: 1,
+    zIndex:6,
+    marginTop:32
   },
   depth2Frame01: {
     alignSelf: "stretch",
