@@ -110,6 +110,8 @@ const AddHandles = ({ route, navigation }) => {
           console.error("Error parsing user data:", error);
           Alert.alert("Error", "Failed to process authentication data.");
         }
+      } else if (data.path && data.path.includes("failure")) {
+        Alert.alert("Authentication Failed", "Unable to verify your account. Please try again.");
       }
     };
 
@@ -136,19 +138,24 @@ const AddHandles = ({ route, navigation }) => {
 
     console.log(`Initiating ${platform} authentication`);
     try {
-      const result = await WebBrowser.openAuthSessionAsync(authUrl);
+      const result = await WebBrowser.openAuthSessionAsync(authUrl, 'influmart://');
       console.log("WebBrowser result:", result);
       if (result.type === "cancel") {
         console.log("Authentication canceled by user");
       } else if (result.type === "success") {
-        console.log("Authentication successful, waiting for deep link");
+        if (result.url.includes('error=access_denied')) {
+          console.log("Authentication failed: Access denied");
+          Alert.alert(
+            "Authentication Failed",
+            "You may need to be added as a test user for this app. Please contact the app developer."
+          );
+        } else {
+          console.log("Authentication successful, waiting for deep link");
+        }
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      Alert.alert(
-        "Error",
-        "An error occurred during authentication. Please try again."
-      );
+      Alert.alert("Error", "An error occurred during authentication. Please try again.");
     }
   };
 
