@@ -88,6 +88,8 @@ const AddHandles = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
+    console.log("AddHandles mounted. Route params:", route.params);
+
     if (route.params?.social) {
       const { ig, tw, fb, yt, tt } = route.params.social;
       if (ig) setInstagram(ig);
@@ -98,13 +100,31 @@ const AddHandles = ({ route, navigation }) => {
     }
 
     // Handle initial params if coming from a deep link
+    const { platform, user } = route.params || {};
     if (platform && user) {
+      console.log(
+        "Received initial auth data. Platform:",
+        platform,
+        "User:",
+        user
+      );
       try {
-        const userData = typeof user === 'string' ? JSON.parse(decodeURIComponent(user)) : user;
+        let userData;
+        if (typeof user === "string") {
+          userData = JSON.parse(decodeURIComponent(user));
+        } else if (typeof user === "object") {
+          userData = user;
+        } else {
+          throw new Error("Invalid user data format");
+        }
+        console.log("Parsed user data:", userData);
         handleAuthSuccess(platform, userData);
       } catch (error) {
-        console.error("Error parsing initial user data:", error);
-        Alert.alert("Error", "Failed to process initial authentication data.");
+        console.error("Error processing initial auth data:", error);
+        Alert.alert(
+          "Error",
+          "Failed to process initial authentication data. Please try verifying again."
+        );
       }
     }
 
@@ -122,7 +142,10 @@ const AddHandles = ({ route, navigation }) => {
           Alert.alert("Error", "Failed to process authentication data.");
         }
       } else if (data.path && data.path.includes("failure")) {
-        Alert.alert("Authentication Failed", "Unable to verify your account. Please try again.");
+        Alert.alert(
+          "Authentication Failed",
+          "Unable to verify your account. Please try again."
+        );
       }
     };
 
@@ -149,12 +172,15 @@ const AddHandles = ({ route, navigation }) => {
 
     console.log(`Initiating ${platform} authentication`);
     try {
-      const result = await WebBrowser.openAuthSessionAsync(authUrl, 'influmart://');
+      const result = await WebBrowser.openAuthSessionAsync(
+        authUrl,
+        "influmart://"
+      );
       console.log("WebBrowser result:", result);
       if (result.type === "cancel") {
         console.log("Authentication canceled by user");
       } else if (result.type === "success") {
-        if (result.url.includes('error=access_denied')) {
+        if (result.url.includes("error=access_denied")) {
           console.log("Authentication failed: Access denied");
           Alert.alert(
             "Authentication Failed",
@@ -166,7 +192,10 @@ const AddHandles = ({ route, navigation }) => {
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      Alert.alert("Error", "An error occurred during authentication. Please try again.");
+      Alert.alert(
+        "Error",
+        "An error occurred during authentication. Please try again."
+      );
     }
   };
 

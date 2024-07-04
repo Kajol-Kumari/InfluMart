@@ -56,7 +56,13 @@ const linking = {
   config: {
     screens: {
       ResetPassword: "reset-password/:token",
-      InfluencerSocialHandles: "auth/:platform/success",
+      InfluencerSocialHandles: {
+        path: "auth/:platform/success",
+        parse: {
+          platform: (platform) => platform,
+          user: (user) => decodeURIComponent(user)
+        },
+      },
       Homepage: "*",
     },
   },
