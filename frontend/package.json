@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/core": "^6.2.1",
@@ -40,6 +41,7 @@
     "react-native-country-codes-picker": "^2.3.5",
     "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "^2.16.1",
+    "react-native-range-slider": "^0.1.2",
     "react-native-razorpay": "^2.3.0",
     "react-native-reanimated": "3.10.1",
     "react-native-responsive-dimensions": "^3.1.1",

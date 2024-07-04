@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
-import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
+import { View, Text, Pressable, StyleSheet, FlatList, ScrollView } from "react-native";
 import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 
 function DropDown({
@@ -54,7 +54,7 @@ function DropDown({
           />
         </Pressable>
       </View>
-      <View style={[styles.dropDownItemsContainer, dropDownItemsStyle, { display: `${showElements ? "flex" : "none"}` }]}>
+      <ScrollView style={[styles.dropDownItemsContainer, dropDownItemsStyle, { display: `${showElements ? "flex" : "none"}` }]}>
         {items.length > 0 && items ? (
           <View style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {items.map(({ key, value }) => {
@@ -62,6 +62,7 @@ function DropDown({
                 <Pressable
                   onPress={() => {
                     handleSelect(key, value);
+                    setShowElement(false)
                   }}
                   style={[
                     styles.dropDownItem,
@@ -83,7 +84,7 @@ function DropDown({
         ) : (
           <Text style={styles.dropDownItemText}>No Data</Text>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
