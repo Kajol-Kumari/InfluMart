@@ -47,6 +47,9 @@ const accept = async (req, res) => {
     $push: { messages: helloMessage._id },
   });
   await Request.findByIdAndDelete(requestId);
+  // Emit hello message to both users
+  req.io.to(request.sender._id.toString()).emit('receiveMessage', helloMessage);
+  req.io.to(request.receiver._id.toString()).emit('receiveMessage', helloMessage);
   res.status(200).json({ message: "Request accepted and hello message sent" });
 };
 
@@ -58,4 +61,14 @@ const reject = async (req, res) => {
   res.status(200).json({ message: "Request rejected" });
 };
 
-module.exports = { sendRequest, allRequests, accept, reject };
+const closeChat = async (req, res) => {
+  const { userId, chatUserId } = req.body;
+  
+  // Remove all messages between these users
+  await Message.deleteMany({ sender: userId, receiver: chatUserId });
+  await Message.deleteMany({ sender: chatUserId, receiver: userId });
+  
+  res.status(200).json({ message: "Chat closed" });
+};
+
+module.exports = { sendRequest, allRequests, accept, reject, closeChat };

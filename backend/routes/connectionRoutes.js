@@ -4,6 +4,7 @@ const {
   allRequests,
   accept,
   reject,
+  closeChat,
 } = require("../controllers/connectController");
 const brandAuthenticationMiddleware = require("../middleware/brands/brandAuthenticationMiddleware");
 const influencerAuthenticationMiddleware = require("../middleware/influencers/influencerAuthenticationMiddleware");
@@ -20,5 +21,7 @@ router.post("/accept-request", influencerAuthenticationMiddleware ,accept);
 
 // Reject a connection request endpoint
 router.post("/reject-request", influencerAuthenticationMiddleware ,reject);
+
+router.post('/closeChat', closeChat);
 
 module.exports = router;
