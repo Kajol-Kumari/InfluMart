@@ -134,11 +134,7 @@ router.get(
       next
     );
   },
-  (req, res) => {
-    res.redirect(
-      `influmart://auth/youtube/success?user=${JSON.stringify(req.user)}`
-    );
-  }
+  handleAuthCallback("youtube")
 );
 
 router.get("/auth/failure", (req, res) => {

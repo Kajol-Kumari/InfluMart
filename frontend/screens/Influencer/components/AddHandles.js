@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Text,
   StyleSheet,
@@ -7,14 +7,22 @@ import {
   TextInput,
   ScrollView,
   Linking,
-  Alert
+  Alert,
 } from "react-native";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 import { Image } from "expo-image";
 import { AddHandlesStyles } from "./AddHandle.scss";
 import { API_ENDPOINT } from "@env";
 
-const FormField = ({ label, placeholder, value, setValue, account, handleVerify, isVerified }) => {
+const FormField = ({
+  label,
+  placeholder,
+  value,
+  setValue,
+  account,
+  handleVerify,
+  isVerified,
+}) => {
   return (
     <View style={styles.formField}>
       <View style={styles.fieldContainer}>
@@ -36,9 +44,15 @@ const FormField = ({ label, placeholder, value, setValue, account, handleVerify,
           <Image
             style={styles.verifyIcon}
             contentFit="cover"
-            source={isVerified ? require("../../../assets/verify_symbol.png") : require("../../../assets/verify_symbol.png")}
+            source={
+              isVerified
+                ? require("../../../assets/verified_symbol.png")
+                : require("../../../assets/verify_symbol.png")
+            }
           />
-          <Text style={styles.verifyText}>{isVerified ? "Verified" : "Verify"}</Text>
+          <Text style={styles.verifyText}>
+            {isVerified ? "Verified" : "Verify"}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -52,9 +66,26 @@ const AddHandles = ({ route, navigation }) => {
   const [facebook, setFacebook] = useState("");
   const [youtube, setYoutube] = useState("");
   const [tiktok, setTiktok] = useState("");
-  const price = route.params?.price;
-  const follower = route.params?.follower;
-  const photo = route.params?.photo;
+  const { price, follower, photo } = route.params || {};
+
+  const handleAuthSuccess = useCallback((platform, user) => {
+    setVerifiedAccounts((prev) => [...prev, platform]);
+    switch (platform) {
+      case "instagram":
+        setInstagram(user.username);
+        break;
+      case "twitter":
+        setTwitter(user.username);
+        break;
+      case "facebook":
+        setFacebook(user.name);
+        break;
+      case "youtube":
+        setYoutube(user.displayName);
+        break;
+    }
+    Alert.alert("Success", `Your ${platform} account has been verified!`);
+  }, []);
 
   useEffect(() => {
     if (route.params?.social) {
@@ -65,73 +96,77 @@ const AddHandles = ({ route, navigation }) => {
       if (yt) setYoutube(yt);
       if (tt) setTiktok(tt);
     }
-  }, [route.params]);
 
-  const handleVerify = async (platform) => {
-    let authUrl;
-    switch(platform) {
-      case 'instagram':
-        authUrl = `${API_ENDPOINT}/auth/instagram`;
-        break;
-      case 'twitter':
-        authUrl = `${API_ENDPOINT}/auth/twitter`;
-        break;
-      case 'facebook':
-        authUrl = `${API_ENDPOINT}/auth/facebook`;
-        break;
-      case 'youtube':
-        authUrl = `${API_ENDPOINT}/auth/youtube`;
-        break;
-      default:
-        return;
-    }
-
-    try {
-      const result = await WebBrowser.openAuthSessionAsync(authUrl);
-      if (result.type === 'success') {
-        const { path, queryParams } = Linking.parse(result.url);
-        if (path.includes('success')) {
-          const user = JSON.parse(decodeURIComponent(queryParams.user));
+    const handleDeepLink = (event) => {
+      let data = Linking.parse(event.url);
+      console.log("Received deep link:", data);
+      if (data.path && data.path.includes("success")) {
+        const platform = data.path.split("/")[2];
+        try {
+          const user = JSON.parse(decodeURIComponent(data.queryParams.user));
+          console.log("Parsed user data:", user);
           handleAuthSuccess(platform, user);
-        } else if (path.includes('failure')) {
-          Alert.alert('Authentication Failed', 'Unable to verify your account. Please try again.');
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+          Alert.alert("Error", "Failed to process authentication data.");
         }
       }
-    } catch (error) {
-      console.error('Error during authentication:', error);
-      Alert.alert('Error', 'An error occurred during authentication. Please try again.');
-    }
-  };
+    };
 
-  const handleAuthSuccess = (platform, user) => {
-    setVerifiedAccounts((prev) => [...prev, platform]);
-    // Update the corresponding state based on the platform
-    switch(platform) {
-      case 'instagram':
-        setInstagram(user.username);
-        break;
-      case 'twitter':
-        setTwitter(user.username);
-        break;
-      case 'facebook':
-        setFacebook(user.name);
-        break;
-      case 'youtube':
-        setYoutube(user.displayName);
-        break;
+    Linking.addEventListener("url", handleDeepLink);
+
+    return () => {
+      Linking.removeAllListeners("url");
+    };
+  }, [route.params, handleAuthSuccess]);
+
+  const handleVerify = async (platform) => {
+    const authUrls = {
+      instagram: `${API_ENDPOINT}/auth/instagram`,
+      twitter: `${API_ENDPOINT}/auth/twitter`,
+      facebook: `${API_ENDPOINT}/auth/facebook`,
+      youtube: `${API_ENDPOINT}/auth/youtube`,
+    };
+
+    const authUrl = authUrls[platform];
+    if (!authUrl) {
+      console.error("Invalid platform:", platform);
+      return;
     }
-    Alert.alert('Success', `Your ${platform} account has been verified!`);
+
+    console.log(`Initiating ${platform} authentication`);
+    try {
+      const result = await WebBrowser.openAuthSessionAsync(authUrl);
+      console.log("WebBrowser result:", result);
+      if (result.type === "cancel") {
+        console.log("Authentication canceled by user");
+      } else if (result.type === "success") {
+        console.log("Authentication successful, waiting for deep link");
+      }
+    } catch (error) {
+      console.error("Error during authentication:", error);
+      Alert.alert(
+        "Error",
+        "An error occurred during authentication. Please try again."
+      );
+    }
   };
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={{width:24,height:24}}></View>
+          <View style={{ width: 24, height: 24 }}></View>
           <Text style={styles.headerText}>Add Accounts</Text>
           <View style={styles.headerIcon}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("InfluencerRegistrationForm", { price, follower, photo })}
+              onPress={() =>
+                navigation.navigate("InfluencerRegistrationForm", {
+                  price,
+                  follower,
+                  photo,
+                })
+              }
             >
               <Image
                 style={styles.headerImage}
@@ -149,7 +184,7 @@ const AddHandles = ({ route, navigation }) => {
           setValue={setInstagram}
           account="instagram"
           handleVerify={handleVerify}
-          isVerified={verifiedAccounts.includes('instagram')}
+          isVerified={verifiedAccounts.includes("instagram")}
         />
         <FormField
           label="Twitter"
@@ -158,7 +193,7 @@ const AddHandles = ({ route, navigation }) => {
           setValue={setTwitter}
           account="twitter"
           handleVerify={handleVerify}
-          isVerified={verifiedAccounts.includes('twitter')}
+          isVerified={verifiedAccounts.includes("twitter")}
         />
         <FormField
           label="Facebook"
@@ -167,7 +202,7 @@ const AddHandles = ({ route, navigation }) => {
           setValue={setFacebook}
           account="facebook"
           handleVerify={handleVerify}
-          isVerified={verifiedAccounts.includes('facebook')}
+          isVerified={verifiedAccounts.includes("facebook")}
         />
         <FormField
           label="YouTube"
@@ -176,7 +211,7 @@ const AddHandles = ({ route, navigation }) => {
           setValue={setYoutube}
           account="youtube"
           handleVerify={handleVerify}
-          isVerified={verifiedAccounts.includes('youtube')}
+          isVerified={verifiedAccounts.includes("youtube")}
         />
         <FormField
           label="TikTok"
@@ -185,7 +220,7 @@ const AddHandles = ({ route, navigation }) => {
           setValue={setTiktok}
           account="tiktok"
           handleVerify={handleVerify}
-          isVerified={verifiedAccounts.includes('tiktok')}
+          isVerified={verifiedAccounts.includes("tiktok")}
         />
         <TouchableOpacity
           style={styles.confirmButton}
@@ -200,7 +235,7 @@ const AddHandles = ({ route, navigation }) => {
               },
               price,
               follower,
-              photo
+              photo,
             })
           }
         >
