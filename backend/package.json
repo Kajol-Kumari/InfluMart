@@ -33,6 +33,7 @@
     "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
     "razorpay": "^2.9.4",
+    "socket.io": "^4.7.5",
     "uuid": "^9.0.1"
   }
 }
