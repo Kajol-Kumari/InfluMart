@@ -23,11 +23,11 @@ export default function CustomSlider({minValue,maxValue,selectedValues}) {
                 containerStyle={styles.containerStyle}
                 onValuesChange={multiSliderValuesChange}
                 unselectedStyle={{ backgroundColor: "#DBE0E5" }}
-                markerStyle={{ backgroundColor: "", shadowOpacity: 0, borderWidth: 0 }}
+                markerStyle={{ backgroundColor: "#000",height:10,width:10,position:"absolute",top:-2,left:-1, shadowOpacity: 0, borderWidth: 0 }}
                 min={minValue}
                 max={maxValue}
                 step={1}
-                trackStyle={{ height: 5, borderRadius: 50 }}
+                trackStyle={{ height: 4, borderRadius: 50 }}
             />
             <View style={styles.valuesContainer}>
                 <Text style={styles.valueText}>{value.values[0]}</Text>

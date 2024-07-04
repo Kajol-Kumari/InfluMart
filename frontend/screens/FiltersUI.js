@@ -1,18 +1,27 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Pressable, ScrollView ,TouchableOpacity} from "react-native";
+import { Text, StyleSheet, View, Pressable, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { Image } from "expo-image";
 import { Padding, Color, Border, FontSize, FontFamily } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/core";
 import CustomSlider from "../shared/CustomSlider";
 import DropDown from "../shared/DropDown";
+import MultipleSelectList from "../shared/MultiSelect";
 
 const FiltersUI = () => {
   const navigation = useNavigation()
+  const [platform, setPlatform] = React.useState("")
   const [selectedAges, setSelectedAges] = React.useState({})
   const [selectedFollowersCount, setSelectedFollowersCount] = React.useState({})
   const [selectedPostCount, setSelectedPostCount] = React.useState({})
+  const [selectedViewsCount, setSelectedViewsCount] = React.useState({})
   const [selectedLocation, setSelectedLocation] = React.useState("India")
-
+  const [gender, setGender] = React.useState("Male")
+  const [engagementRate, setEngagementRate] = React.useState({})
+  const [price, setPrice] = React.useState({})
+  const [reachability, setReachability] = React.useState({})
+  const [categories, setCategories] = React.useState([])
+  const [cities, setCities] = React.useState([])
+  const [tags, setTags] = React.useState("")
   const locationData = [
     {
       key: "india",
@@ -27,6 +36,28 @@ const FiltersUI = () => {
       value: "Srilanka"
     }
   ]
+
+  const genderData = [
+    {
+      key: "male",
+      value: "Male"
+    }, {
+      key: "female",
+      value: "Female"
+    }
+  ]
+
+  const categoriedData = [
+    { key: "grocery", value: "Grocery" },
+    { key: "electronics", value: "Electronics" },
+    { key: "fashion", value: "Fashion" },
+    { key: "toys", value: "Toys" },
+    { key: "beauty", value: "Beauty" },
+    { key: "home-decoration", value: "Home Decoration" },
+    { key: "fitness", value: "Fitness" },
+    { key: "education", value: "Education" },
+    { key: "others", value: "Others" },
+  ];
 
   return (
     <ScrollView style={{ backgroundColor: Color.colorWhite }}>
@@ -45,6 +76,52 @@ const FiltersUI = () => {
                 />
               </Pressable>
             </View>
+            <Text style={[styles.filter, styles.ageFlexBox, { paddingHorizontal: Padding.p_base }]}>Platform</Text>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal style={{ paddingHorizontal: Padding.p_base, width: "100%", paddingVertical: 16 }}>
+              <Pressable onPress={() => { setPlatform("instagram") }} style={[styles.platformContainer, { backgroundColor: platform == "instagram" ? Color.colorWhitesmoke_400 : Color.colorWhitesmoke_300 }]}>
+                <Text style={styles.platformText}>Instagram</Text>
+              </Pressable>
+              <Pressable onPress={() => { setPlatform("facebook") }} style={[styles.platformContainer, { backgroundColor: platform == "facebook" ? Color.colorWhitesmoke_400 : Color.colorWhitesmoke_300 }]}>
+                <Text style={styles.platformText}>Facebook</Text>
+              </Pressable>
+              <Pressable onPress={() => { setPlatform("twitter") }} style={[styles.platformContainer, { backgroundColor: platform == "twitter" ? Color.colorWhitesmoke_400 : Color.colorWhitesmoke_300 }]}>
+                <Text style={styles.platformText}>Twitter</Text>
+              </Pressable>
+              <Pressable onPress={() => { setPlatform("youtube") }} style={[styles.platformContainer, { backgroundColor: platform == "youtube" ? Color.colorWhitesmoke_400 : Color.colorWhitesmoke_300 }]}>
+                <Text style={styles.platformText}>YouTube</Text>
+              </Pressable>
+              <Pressable onPress={() => { setPlatform("tiktok") }} style={[styles.platformContainer, { backgroundColor: platform == "tiktok" ? Color.colorWhitesmoke_400 : Color.colorWhitesmoke_300 }]}>
+                <Text style={styles.platformText}>TikTok</Text>
+              </Pressable>
+            </ScrollView>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth1Frame0}>
+                  <Text style={[styles.age, styles.ageLayout]}>
+                    Price
+                  </Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={1000} maxValue={50000} selectedValues={setPrice} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth1Frame0}>
+                  <Text style={[styles.age, styles.ageLayout]}>
+                    Engagement Rate
+                  </Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={0} maxValue={100} selectedValues={setEngagementRate} />
+                  </View>
+                </View>
+              </View>
+            </View>
             <View style={styles.depth2FrameSpaceBlock1}>
               <Text style={[styles.filter, styles.ageFlexBox]}>Followers</Text>
             </View>
@@ -55,7 +132,7 @@ const FiltersUI = () => {
                 </View>
                 <View style={styles.depth4Frame1}>
                   <View style={[styles.depth5Frame01, styles.frameLayout]}>
-                    <CustomSlider minValue={20} maxValue={35} selectedValues={setSelectedAges} />
+                    <CustomSlider minValue={0} maxValue={100} selectedValues={setSelectedAges} />
                   </View>
                 </View>
               </View>
@@ -90,9 +167,73 @@ const FiltersUI = () => {
               </View>
             </View>
             <View style={styles.depth2FrameSpaceBlock1}>
+              <Text style={[styles.filter, styles.ageFlexBox]}>Views</Text>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth1Frame0}>
+                  <Text style={[styles.age, styles.ageLayout]}>Views Count</Text>
+                </View>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={100} maxValue={2000} selectedValues={setSelectedViewsCount} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth2FrameSpaceBlock1}>
+              <Text style={[styles.filter, styles.ageFlexBox]}>Reachability</Text>
+              <Text style={[styles.age, styles.ageLayout, { marginTop: 12 }]}>Followers</Text>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={0} maxValue={100} selectedValues={setReachability} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={101} maxValue={500} selectedValues={setReachability} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={501} maxValue={1000} selectedValues={setReachability} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={1001} maxValue={5000} selectedValues={setReachability} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth1Frame0}>
+              <View style={styles.depth3Frame01}>
+                <View style={styles.depth4Frame1}>
+                  <View style={[styles.depth5Frame01, styles.frameLayout]}>
+                    <CustomSlider minValue={5001} maxValue={10000} selectedValues={setReachability} />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.depth2FrameSpaceBlock1}>
               <Text style={[styles.filter, styles.ageFlexBox]}>Location</Text>
             </View>
-            <View style={{paddingHorizontal:Padding.p_base,paddingVertical:8}}>
+            <View style={{ paddingHorizontal: Padding.p_base, paddingVertical: 8 }}>
               <View>
                 <DropDown
                   name={selectedLocation}
@@ -100,21 +241,84 @@ const FiltersUI = () => {
                   dropDownOptionStyle={{
                     width: "100%",
                     paddingVertical: 16,
-                    backgroundColor:"#fff",
-                    borderWidth:2,
-                    borderColor:"#DBE0E5"
+                    backgroundColor: "#fff",
+                    borderWidth: 2,
+                    borderColor: "#DBE0E5"
                   }}
                   dropDownContainerStyle={{ width: "100%" }}
-                  dropDownItemsStyle={{ width: "100%",position:"absolute",top:-120,zIndex:1000,height:160,overflow:"scroll"}}
+                  dropDownItemsStyle={{ width: "100%", position: "absolute", top: -120, zIndex: 1000, height: 160, overflow: "scroll" }}
                   titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                   selectedValue={setSelectedLocation}
                 />
               </View>
             </View>
+            <View style={styles.depth2FrameSpaceBlock1}>
+              <Text style={[styles.filter, styles.ageFlexBox]}>Gender</Text>
+            </View>
+            <View style={{ paddingHorizontal: Padding.p_base, paddingVertical: 8 }}>
+              <View>
+                <DropDown
+                  name={gender}
+                  items={genderData}
+                  dropDownOptionStyle={{
+                    width: "100%",
+                    paddingVertical: 16,
+                    backgroundColor: "#fff",
+                    borderWidth: 2,
+                    borderColor: "#DBE0E5"
+                  }}
+                  dropDownContainerStyle={{ width: "100%" }}
+                  dropDownItemsStyle={{ width: "100%", position: "absolute", top: -120, zIndex: 1000, height: 120, overflow: "scroll" }}
+                  titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+                  selectedValue={setGender}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.depth2FrameSpaceBlock1}>
+            <Text style={[styles.filter, styles.ageFlexBox, { marginVertical: 8 }]}>Tags</Text>
+          </View>
+          <View style={{ width: "100%", paddingHorizontal: Padding.p_base }}>
+            <View style={[styles.textBoxContainer]}>
+              <TextInput
+                style={styles.textInput}
+                value={tags}
+                onChangeText={setTags}
+                placeholder="Search tags"
+              />
+            </View>
+          </View>
+          <View style={styles.depth2FrameSpaceBlock1}>
+            <Text style={[styles.filter, styles.ageFlexBox, { marginVertical: 8 }]}>Category</Text>
+          </View>
+          <View style={{ paddingHorizontal: Padding.p_base }}>
+            <View>
+              <MultipleSelectList
+                setSelected={(val) => setCategories(val)}
+                data={categoriedData}
+                save="value"
+                selectedval={categories}
+                setSelectedVal={setCategories}
+              />
+            </View>
+          </View>
+          <View style={styles.depth2FrameSpaceBlock1}>
+            <Text style={[styles.filter, styles.ageFlexBox, { marginVertical: 8 }]}>Cities</Text>
+          </View>
+          <View style={{ paddingHorizontal: Padding.p_base }}>
+            <View>
+              <MultipleSelectList
+                setSelected={(val) => setCities(val)}
+                data={locationData}
+                save="value"
+                selectedval={cities}
+                setSelectedVal={setCities}
+              />
+            </View>
           </View>
           <View style={styles.depth1Frame0}>
             <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock]}>
-              <TouchableOpacity onPress={()=>{navigation.navigate("InfluencersList")}} style={[styles.depth3Frame05, styles.frameFlexBox]}>
+              <TouchableOpacity onPress={() => { navigation.navigate("InfluencersList") }} style={[styles.depth3Frame05, styles.frameFlexBox]}>
                 <View style={styles.depth4Frame05}>
                   <Text
                     style={[styles.applyFilters, styles.ageLayout]}
@@ -306,8 +510,8 @@ const styles = StyleSheet.create({
     minWidth: 84,
     maxWidth: 480,
     flex: 1,
-    zIndex:6,
-    marginTop:32
+    zIndex: 6,
+    marginTop: 32
   },
   depth2Frame01: {
     alignSelf: "stretch",
@@ -327,6 +531,36 @@ const styles = StyleSheet.create({
   },
   filtersui: {
     backgroundColor: Color.colorWhite,
+  },
+  platformContainer: {
+    paddingHorizontal: 32,
+    paddingVertical: 8,
+    borderRadius: Border.br_base,
+    backgroundColor: Color.colorWhitesmoke_300,
+    marginHorizontal: Padding.p_xs
+  },
+  platformText: {
+    fontSize: FontSize.size_base,
+    fontWeight: "500"
+  },
+  textBoxContainer: {
+    borderRadius: Border.br_xs,
+    backgroundColor: Color.colorAliceblue,
+    height: 56,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    width: "100%",
+    zIndex: 1,
+  },
+  textInput: {
+    width: "100%",
+    borderColor: Color.colorGray_400,
+    borderWidth: 0,
+    borderRadius: Border.br_xs,
+    paddingHorizontal: Padding.p_base,
+    fontSize: FontSize.size_base,
+    flex: 1,
+    color: Color.colorSteelblue_200,
   },
 });
 
