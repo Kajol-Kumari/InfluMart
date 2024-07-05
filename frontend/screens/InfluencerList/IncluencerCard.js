@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 316,
     width: 360,
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorBlack,
     padding: Padding.p_base,
     borderRadius: Border.br_xs,
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     fontWeight: "700",
     fontFamily: FontFamily.beVietnamProBold,
-    color: Color.colorGray_500,
+    color: Color.colorWhite,
     textAlign: "left",
   },
   categoryContainer: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_base,
     lineHeight: 24,
     fontFamily: FontFamily.beVietnamProRegular,
-    color: Color.colorSlategray_200,
+    color: "#ccc",
     textAlign: "left",
   },
 });
