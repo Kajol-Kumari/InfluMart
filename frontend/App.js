@@ -140,7 +140,7 @@ const App = () => {
       <NavigationContainer linking={linking}>
         {hideSplashScreen ? (
           <Stack.Navigator
-            initialRouteName={"InboxInterface"}
+            initialRouteName={initialRoute}
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen
