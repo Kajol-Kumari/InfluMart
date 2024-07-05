@@ -106,7 +106,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <TouchableOpacity style={[styles.button, styles.followButton]} onPress={()=>navigation.navigate("BrandAdminPanel")}>
                   <Text style={styles.followButtonText}>Settings</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.messageButton]}>
+                <TouchableOpacity style={[styles.button, styles.messageButton]} onPress={()=>navigation.navigate("InboxInterface")}>
                   <Text style={styles.buttonText}>inbox</Text>
                 </TouchableOpacity>
               </View>
