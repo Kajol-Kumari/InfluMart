@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 // Verification routes
-app.use('/', authRoutes);
+app.use('/api', authRoutes);
 
 // Mount the payment controller routes
 app.use('/api/payment', paymentRoutes);
