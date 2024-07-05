@@ -48,26 +48,20 @@ import BrandDeleteAccountPage from "./screens/Brand/Settings/Support/BrandDelete
 import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
+import { CLIENT_URL } from "@env";
+
 
 const Stack = createNativeStackNavigator();
 
 const linking = {
-  prefixes: ["influmart://", "http://192.168.106.76:8081", "myapp://"],
+  prefixes: [CLIENT_URL , "influmart://"],
   config: {
     screens: {
-      ResetPassword: "reset-password/:token",
-      InfluencerSocialHandles: {
-        path: "auth/:platform/success",
-        parse: {
-          platform: (platform) => platform,
-          user: (user) => decodeURIComponent(user)
-        },
-      },
-      Homepage: "*",
+      ResetPassword: 'reset-password/:token',
+      InfluencerSocialHandles: 'api/auth/:platform/success'
     },
   },
 };
-
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
   const [initialRoute, setInitialRoute] = React.useState("Login");

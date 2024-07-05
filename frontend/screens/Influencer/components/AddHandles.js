@@ -13,6 +13,7 @@ import * as WebBrowser from "expo-web-browser";
 import { Image } from "expo-image";
 import { AddHandlesStyles } from "./AddHandle.scss";
 import { API_ENDPOINT } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FormField = ({
   label,
@@ -67,7 +68,16 @@ const AddHandles = ({ route, navigation }) => {
   const [youtube, setYoutube] = useState("");
   const [tiktok, setTiktok] = useState("");
   const { price, follower, photo } = route.params || {};
+  const user = route.params?.user;
 
+  useEffect(() => {
+    // Handle user data as needed (e.g., store in context, navigate to home, etc.)
+    const getData = async () => {
+    await AsyncStorage.setItem('userytdata', JSON.stringify(user));
+    user && handleAuthSuccess('youtube', user);
+    };
+    getData()
+  }, []);
   const handleAuthSuccess = useCallback((platform, user) => {
     setVerifiedAccounts((prev) => [...prev, platform]);
     switch (platform) {
@@ -81,87 +91,44 @@ const AddHandles = ({ route, navigation }) => {
         setFacebook(user.name);
         break;
       case "youtube":
-        setYoutube(user.displayName);
+        setYoutube(JSON.parse(user)?.displayName);
         break;
     }
     Alert.alert("Success", `Your ${platform} account has been verified!`);
   }, []);
 
   useEffect(() => {
-    console.log("AddHandles mounted. Route params:", route.params);
-
-    if (route.params?.social) {
-      const { ig, tw, fb, yt, tt } = route.params.social;
-      if (ig) setInstagram(ig);
-      if (tw) setTwitter(tw);
-      if (fb) setFacebook(fb);
-      if (yt) setYoutube(yt);
-      if (tt) setTiktok(tt);
-    }
-
-    // Handle initial params if coming from a deep link
-    const { platform, user } = route.params || {};
-    if (platform && user) {
-      console.log(
-        "Received initial auth data. Platform:",
-        platform,
-        "User:",
-        user
-      );
-      try {
-        let userData;
-        if (typeof user === "string") {
-          userData = JSON.parse(decodeURIComponent(user));
-        } else if (typeof user === "object") {
-          userData = user;
-        } else {
-          throw new Error("Invalid user data format");
-        }
-        console.log("Parsed user data:", userData);
-        handleAuthSuccess(platform, userData);
-      } catch (error) {
-        console.error("Error processing initial auth data:", error);
-        Alert.alert(
-          "Error",
-          "Failed to process initial authentication data. Please try verifying again."
-        );
-      }
-    }
-
     const handleDeepLink = (event) => {
       let data = Linking.parse(event.url);
-      console.log("Received deep link:", data);
-      if (data.path && data.path.includes("success")) {
-        const platform = data.path.split("/")[2];
-        try {
-          const user = JSON.parse(decodeURIComponent(data.queryParams.user));
-          console.log("Parsed user data:", user);
-          handleAuthSuccess(platform, user);
-        } catch (error) {
-          console.error("Error parsing user data:", error);
-          Alert.alert("Error", "Failed to process authentication data.");
+      if (data.path && data.path.includes('auth')) {
+        const platform = data.path.split('/')[1];
+        if (data.path.includes('success')) {
+          try {
+            const user = JSON.parse(decodeURIComponent(data.queryParams.user));
+            handleAuthSuccess(platform, user);
+          } catch (error) {
+            Alert.alert("Error", "Failed to process authentication data.");
+          }
+        } else if (data.path.includes('failure')) {
+          Alert.alert("Authentication Failed", "Unable to verify your account. Please try again.");
         }
-      } else if (data.path && data.path.includes("failure")) {
-        Alert.alert(
-          "Authentication Failed",
-          "Unable to verify your account. Please try again."
-        );
       }
     };
-
-    Linking.addEventListener("url", handleDeepLink);
-
+  
+    Linking.addEventListener('url', handleDeepLink);
+  
     return () => {
-      Linking.removeAllListeners("url");
+      Linking.removeEventListener('url', handleDeepLink);
     };
-  }, [route.params, handleAuthSuccess]);
+  }, []);
+  
 
   const handleVerify = async (platform) => {
     const authUrls = {
-      instagram: `${API_ENDPOINT}/auth/instagram`,
-      twitter: `${API_ENDPOINT}/auth/twitter`,
-      facebook: `${API_ENDPOINT}/auth/facebook`,
-      youtube: `${API_ENDPOINT}/auth/youtube`,
+      instagram: `${API_ENDPOINT}/api/auth/instagram`,
+      twitter: `${API_ENDPOINT}/api/auth/twitter`,
+      facebook: `${API_ENDPOINT}/api/auth/facebook`,
+      youtube: `${API_ENDPOINT}/api/auth/youtube`,
     };
 
     const authUrl = authUrls[platform];
@@ -172,15 +139,12 @@ const AddHandles = ({ route, navigation }) => {
 
     console.log(`Initiating ${platform} authentication`);
     try {
-      const result = await WebBrowser.openAuthSessionAsync(
-        authUrl,
-        "influmart://"
-      );
+      const result = await WebBrowser.openAuthSessionAsync(authUrl, `influmart://api/auth/${platform}/callback`);
       console.log("WebBrowser result:", result);
       if (result.type === "cancel") {
         console.log("Authentication canceled by user");
       } else if (result.type === "success") {
-        if (result.url.includes("error=access_denied")) {
+        if (result.url.includes('error=access_denied')) {
           console.log("Authentication failed: Access denied");
           Alert.alert(
             "Authentication Failed",
@@ -192,10 +156,7 @@ const AddHandles = ({ route, navigation }) => {
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      Alert.alert(
-        "Error",
-        "An error occurred during authentication. Please try again."
-      );
+      Alert.alert("Error", "An error occurred during authentication. Please try again.");
     }
   };
 
