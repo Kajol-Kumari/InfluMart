@@ -64,7 +64,7 @@ passport.use(
     {
       clientID: config.GOOGLE_CLIENT_ID,
       clientSecret: config.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://influmart.loca.lt/api/auth/youtube/callback",
+      callbackURL: `${config.BASE_URL}/api/auth/youtube/callback`,
       scope: [
         "profile",
         "email",
