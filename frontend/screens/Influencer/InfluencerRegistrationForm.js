@@ -337,7 +337,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           </View>
           <View style={styles.sectionHeader}>
             <View style={styles.labelWrapper}>
-              <Text style={styles.sectionHeaderText}>Add Your profiles</Text>
+              <Text style={styles.sectionHeaderText}>Add Profile Photo</Text>
             </View>
             <TouchableOpacity
               onPress={() =>

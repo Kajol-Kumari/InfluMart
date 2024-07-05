@@ -50,7 +50,7 @@ const BrandAssosciated = ({ active }) => {
                 <Image
                   style={styles.depth4Frame0}
                   contentFit="cover"
-                  source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
+                  source={require("../assets/back_arrow_light.png")}
                 />
               </TouchableOpacity>
               {
@@ -73,7 +73,7 @@ const BrandAssosciated = ({ active }) => {
               }
               <View style={styles.depth3Frame2}>
                 <TouchableOpacity onPress={handleSearch}>
-                  <Image style={{ width: 24, height: 24 }} source={require('../assets/depth-5-frame-0.png')} />
+                  <Image style={{ width: 24, height: 24 }} source={require('../assets/search_light.png')} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -112,14 +112,14 @@ const BrandAssosciated = ({ active }) => {
 
 const styles = StyleSheet.create({
   frameBg: {
-    backgroundColor: Color.colorWhitesmoke_100,
+    backgroundColor: Color.colorBlack,
     width: "100%",
     height: "100%"
   },
   depth1FrameSpaceBlock: {
     paddingHorizontal: Padding.p_base,
     width: "100%",
-    backgroundColor: Color.colorWhitesmoke_100,
+    backgroundColor: Color.colorBlack,
     height: "auto"
   },
   depth2FrameLayout: {
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interBold,
     textAlign: "left",
     letterSpacing: 0,
-    color: Color.colorGray,
+    color: Color.colorWhite,
   },
   depth5Frame0: {
     alignSelf: "stretch",
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interMedium,
     fontWeight: "500",
     textAlign: "left",
-    color: Color.colorGray,
+    color: Color.colorWhite,
     alignSelf: "stretch",
   },
   depth4Frame04: {
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   galileoDesign: {
-    backgroundColor: "#fff",
+    backgroundColor: Color.colorBlack,
     flex: 1,
     width: "100%",
     height: "100%"
@@ -375,8 +375,8 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_smi,
     paddingHorizontal: Padding.p_base,
     fontSize: FontSize.size_base,
-    color: Color.colorSteelblue_200,
-    backgroundColor: Color.colorAliceblue,
+    color: "#ccc",
+    backgroundColor: "#333333",
     outlineStyle: "none",
     borderRadius: Border.br_xs,
   },

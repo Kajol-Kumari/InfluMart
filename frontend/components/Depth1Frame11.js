@@ -34,7 +34,7 @@ const Depth1Frame11 = ({ onChange, style }) => {
             <Image
               style={styles.depth4Frame0}
               contentFit="cover"
-              source={require("../assets/depth-4-frame-Backarrow3x 2.png")}
+              source={require("../assets/back_arrow_light.png")}
             />
           </View>
         </TouchableOpacity>
@@ -64,7 +64,7 @@ const Depth1Frame11 = ({ onChange, style }) => {
             <Image
               style={styles.depth5Frame01}
               contentFit="cover"
-              source={require("../assets/depth-5-frame-0.png")}
+              source={require("../assets/search_light.png")}
             />
           </View>
         </TouchableOpacity>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     fontWeight: "700",
     fontFamily: FontFamily.beVietnamProBold,
-    color: Color.colorGray_500,
+    color: Color.colorWhite,
     textAlign: "left",
   },
   depth5Frame0: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
   },
   depth1Frame0: {
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorBlack,
     width: "100%",
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_base,
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_smi,
     paddingHorizontal: Padding.p_base,
     fontSize: FontSize.size_base,
-    color: Color.colorSteelblue_200,
-    backgroundColor: Color.colorAliceblue,
+    color: "#ccc",
+    backgroundColor: "#333333",
     outlineStyle: "none",
     borderRadius: Border.br_xs,
   },
