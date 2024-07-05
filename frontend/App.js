@@ -48,6 +48,7 @@ import BrandDeleteAccountPage from "./screens/Brand/Settings/Support/BrandDelete
 import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
+import CollabPost from "./components/CollabPost";
 
 const Stack = createNativeStackNavigator();
 
@@ -151,7 +152,7 @@ const App = () => {
           >
             <Stack.Screen
               name="Homepage"
-              component={Homepage}
+              component={CollabPost}
               options={{ headerShown: false }}
             />
             <Stack.Screen
