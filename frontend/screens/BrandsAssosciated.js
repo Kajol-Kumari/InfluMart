@@ -1,19 +1,20 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity,TextInput } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { Color, Padding, FontSize, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { getAllBrandProfiles } from '../controller/brandController'
 import { useAlert } from '../util/AlertContext'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ImageWithFallback from "../util/ImageWithFallback";
+import { LinearGradient } from 'expo-linear-gradient'
 
 
 const BrandAssosciated = ({ active }) => {
   const navigation = useNavigation();
   const { showAlert } = useAlert()
   const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false)
-  const [searchValue,setSearchValue]=React.useState("")
+  const [searchValue, setSearchValue] = React.useState("")
   const [brands, setBrands] = React.useState([])
   React.useEffect(() => {
     async function fetchData() {
@@ -35,7 +36,7 @@ const BrandAssosciated = ({ active }) => {
       navigation.navigate('Homepage')
     }
   }
-  const handleSearch=()=>{
+  const handleSearch = () => {
     setIsSearchBarOpen(!isSearchBarOpen)
   }
   return (
@@ -85,13 +86,15 @@ const BrandAssosciated = ({ active }) => {
               brands && brands.length > 0 ?
                 brands.map(({ brandName, profileUrl, _id }, index) => {
                   return (
-                    <TouchableOpacity key={index} onPress={()=>{console.log(profileUrl)}}>
+                    <TouchableOpacity key={index} onPress={() => { console.log(profileUrl) }}>
                       <View style={styles.depth2FrameLayout} >
                         <ImageWithFallback imageStyle={styles.depth4Frame03} image={profileUrl} />
-                        <View style={styles.depth3Frame11}>
-                          <View style={styles.depth4Frame04}>
+                        <View style={styles.overlayContainer}>
+                          <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
+                            <Text style={styles.insightText}>INSIGHT</Text>
                             <Text style={styles.google}>{brandName}</Text>
-                          </View>
+                            <Text style={styles.insightText}>Random Text</Text>
+                          </LinearGradient>
                         </View>
                       </View>
                     </TouchableOpacity>
@@ -123,11 +126,13 @@ const styles = StyleSheet.create({
     height: "auto"
   },
   depth2FrameLayout: {
-    height: 'auto',
+    height: 420,
     width: 280,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    borderRadius: Border.br_base,
+    backgroundColor: "#0C0B0B"
   },
   frameLayout: {
     height: 173,
@@ -238,7 +243,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xs,
     overflow: "hidden",
     width: 280,
-    height: 280
+    height: 350
   },
   google: {
     fontSize: FontSize.size_base,
@@ -379,6 +384,27 @@ const styles = StyleSheet.create({
     backgroundColor: "#333333",
     outlineStyle: "none",
     borderRadius: Border.br_xs,
+  },
+  overlayContainer: {
+    width: 280,
+    height: 350,
+    position: "absolute",
+    top: 0,
+    overflow:"hidden"
+  },
+  overlay: {
+    height: "100%",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"flex-end",
+    padding:Padding.p_base,
+    gap:3
+  },
+  insightText: {
+    width:"100%",
+    fontSize: FontSize.size_xs,
+    fontFamily: FontFamily.plusJakartaSansBold,
+    color: Color.colorSlategray_100,
   },
 });
 
