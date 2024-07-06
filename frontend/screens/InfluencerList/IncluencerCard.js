@@ -8,6 +8,7 @@ import {
   Color,
   Padding,
 } from "../../GlobalStyles";
+import {formatNumber} from '../../helpers/GraphData';
 import { useNavigation } from "@react-navigation/core";
 import ImageWithFallback from "../../util/ImageWithFallback";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -20,6 +21,8 @@ const InfluencerCard = ({
   kylieCosmetics,
   beauty,
   influencerId,
+  userName,
+  statistics
 }) => {
   const { showAlert } = useAlert()
   const navigation = useNavigation()
@@ -36,6 +39,9 @@ const InfluencerCard = ({
     }
     getData()
   })
+  React.useEffect(() => {
+    console.log(statistics)
+  }, [])
   const handleClick = async () => {
     if (navigate) {
       navigation.navigate("Analytics", { influencerId })
@@ -53,10 +59,23 @@ const InfluencerCard = ({
               <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
                 <Text style={styles.insightText}>INSIGHT</Text>
                 <Text style={styles.google}>{kylieCosmetics}</Text>
-                <Text style={styles.insightText}>Random Text</Text>
+                <Text style={styles.insightText}>{beauty}</Text>
               </LinearGradient>
             </View>
-            <Text style={styles.categoryText}>{beauty}</Text>
+            <View style={styles.statisticsContainer}>
+              <View style={styles.statistics}>
+                <Image style={{ width: 24, height: 24 }} source={require('../../assets/instagram_symbol.png')} />
+                <Text style={styles.categoryText}>{formatNumber(statistics.instaData)}</Text>
+              </View>
+              <View style={styles.statistics}>
+                <Image style={{ width: 24, height: 24 }} source={require('../../assets/tt_symbol.png')} />
+                <Text style={styles.categoryText}>{formatNumber(statistics.fbData)}</Text>
+              </View>
+              <View style={styles.statistics}>
+                <Image style={{ width: 24, height: 24 }} source={require('../../assets/yt_symbol.png')} />
+                <Text style={styles.categoryText}>{formatNumber(statistics.ytData)}</Text>
+              </View>
+            </View>
           </View>
         </TouchableOpacity>
       </View>
@@ -82,7 +101,7 @@ const styles = StyleSheet.create({
     width: 280,
     borderRadius: Border.br_xs,
     overflow: "hidden",
-    backgroundColor:"#0C0B0B"
+    backgroundColor: "#0C0B0B"
   },
   image: {
     height: 350,
@@ -127,24 +146,24 @@ const styles = StyleSheet.create({
     height: 350,
     position: "absolute",
     top: 0,
-    overflow:"hidden"
+    overflow: "hidden"
   },
   overlay: {
     height: "100%",
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"flex-end",
-    padding:Padding.p_base,
-    gap:3
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: Padding.p_base,
+    gap: 3
   },
   insightText: {
-    width:"100%",
+    width: "100%",
     fontSize: FontSize.size_xs,
     fontFamily: FontFamily.plusJakartaSansBold,
     color: Color.colorSlategray_100,
   },
   google: {
-    fontSize: FontSize.size_base,
+    fontSize: FontSize.size_lg,
     lineHeight: 24,
     fontFamily: FontFamily.interMedium,
     fontWeight: "500",
@@ -152,18 +171,28 @@ const styles = StyleSheet.create({
     color: Color.colorWhite,
     alignSelf: "stretch",
   },
-  categoryText:{
-    width:"100%",
-    position:"absolute",
-    top:360,
-    fontSize: FontSize.size_base,
+  categoryText: {
+    fontSize: FontSize.size_smi,
     lineHeight: 24,
     fontFamily: FontFamily.interMedium,
     fontWeight: "500",
-    textAlign: "left",
-    color: "#ccc",
-    alignSelf: "stretch",
-    paddingHorizontal:Padding.p_base
+    color: Color.colorSlategray_100,
+  },
+  statisticsContainer:{
+    width:"100%",
+    height:"auto",
+    paddingHorizontal:Padding.p_base,
+    paddingVertical:Padding.p_xs,
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-evenly"
+  },
+  statistics:{
+    width:80,
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+    gap:4
   }
 });
 
