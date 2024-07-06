@@ -1,96 +1,62 @@
-import * as React from "react";
+import React from "react";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
+import { chatStyles } from './ChatStyles.scss';
 import Depth1Frame7 from "../../components/Depth1Frame7";
-import Depth1Frame12 from "../../components/Depth1Frame12";
 import Depth1Frame from "../../components/Depth1Frame";
-import { chatStyle } from './ChatStyles.scss';
+import MessageInput from "./components/MessageInput";
 
-const ChatInterface = () => {
-  const navigation = useNavigation();
+const ChatInterface = ({route, navigation}) => {
+  const name= route.params?.name
+  const messages = [
+    { text: "Liliam joined the chat", time: "2d ago" },
+    { text: "You sent a message", time: "1d ago" },
+    { text: "You sent a message", time: "1d ago" },
+  ];
 
   return (
-    <View style={styles.chatinterface}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
-        <View style={styles.depth0Frame0}>
-          <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
+        <View style={styles.chatContent}>
+        <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
             <Depth1Frame7
               depth4Frame0={require("../../assets/depth-4-frame-017.png")}
-              requestDetails="Chat with Liliam"
+              requestDetails={`Chat ${name}`}
               depth3Frame0BackgroundColor="#fff"
               requestDetailsWidth={'auto'}
               depth4Frame0FontFamily="BeVietnamPro-Bold"
               depth4Frame0Color="#000"
             />
           </TouchableOpacity>
-          <View style={styles.depth1Frame1}>
-            <View style={styles.depth2Frame0}>
-              <View style={styles.depth3Frame0}>
-                <View style={[styles.depth4Frame0, styles.depth4FrameLayout]} />
-                <View style={styles.depth4Frame1} />
-                <View style={[styles.depth4Frame2, styles.depth4FrameLayout]} />
-              </View>
-              <View style={styles.depth3Frame1}>
-                <View style={styles.depth4Frame01}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.liliamJoinedThe, styles.dAgoTypo]}>
-                      Liliam joined the chat
-                    </Text>
-                  </View>
+          <View style={styles.messagesContainer}>
+            {messages.map((message, index) => (
+              <View key={index} style={styles.messageRow}>
+                <View style={styles.messageLine}>
+                  <View style={[styles.messageDot, styles.lineHeight]} />
+                  <View style={styles.messageSmallDot} />
+                  <View style={[styles.messageDot, styles.lineHeight]} />
                 </View>
-                <View style={styles.depth4Frame11}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.dAgo, styles.dAgoTypo]}>2d ago</Text>
+                <View style={styles.messageContent}>
+                  <View style={styles.messageTextContainer}>
+                    <View style={styles.messageTextWrapper}>
+                      <Text style={[styles.messageText, styles.timeText]}>
+                        {message.text}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </View>
-            </View>
-            <View style={styles.depth2Frame0}>
-              <View style={styles.depth3Frame0}>
-                <View style={[styles.depth4Frame0, styles.depth4FrameLayout]} />
-                <View style={styles.depth4Frame1} />
-                <View style={[styles.depth4Frame2, styles.depth4FrameLayout]} />
-              </View>
-              <View style={styles.depth3Frame1}>
-                <View style={styles.depth4Frame03}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.liliamJoinedThe, styles.dAgoTypo]}>
-                      You sent a message
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.depth4Frame13}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.dAgo, styles.dAgoTypo]}>1d ago</Text>
+                  <View style={styles.messageTimeContainer}>
+                    <View style={styles.messageTimeWrapper}>
+                      <Text style={[styles.timeAgo, styles.timeText]}>
+                        {message.time}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.depth2Frame0}>
-              <View style={styles.depth3Frame0}>
-                <View style={[styles.depth4Frame0, styles.depth4FrameLayout]} />
-                <View style={styles.depth4Frame1} />
-                <View style={[styles.depth4Frame2, styles.depth4FrameLayout]} />
-              </View>
-              <View style={styles.depth3Frame1}>
-                <View style={styles.depth4Frame03}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.liliamJoinedThe, styles.dAgoTypo]}>
-                      You sent a message
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.depth4Frame13}>
-                  <View style={styles.depth5Frame0}>
-                    <Text style={[styles.dAgo, styles.dAgoTypo]}>1d ago</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+            ))}
           </View>
-          <Depth1Frame12 />
-          <View style={styles.depth1Frame3} />
+          <MessageInput />
+          <View style={styles.spacer} />
           <Depth1Frame
             depth5Frame0={require("../../assets/depth-5-frame-022.png")}
             depth5Frame01={require("../../assets/depth-5-frame-023.png")}
@@ -116,13 +82,13 @@ const ChatInterface = () => {
             propFontFamily3="BeVietnamPro-Medium"
             propColor3="#6b6b6b"
           />
-          <View style={styles.depth1Frame5} />
+          <View style={styles.footerSpacer} />
         </View>
       </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create(chatStyle);
+const styles = StyleSheet.create(chatStyles);
 
 export default ChatInterface;

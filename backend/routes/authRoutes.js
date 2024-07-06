@@ -23,7 +23,6 @@ router.use(passport.session());
 const handleAuth = (accessToken, refreshToken, profile, done) => {
   // Here you should find or create a user in your database
   // For now, we'll just pass the profile
-  console.log("Profile:", profile);
   done(null, profile);
 };
 
@@ -65,7 +64,7 @@ passport.use(
     {
       clientID: config.GOOGLE_CLIENT_ID,
       clientSecret: config.GOOGLE_CLIENT_SECRET,
-      callbackURL: config.BASE_URL + "/auth/youtube/callback",
+      callbackURL: `${config.BASE_URL}/api/auth/youtube/callback`,
       scope: [
         "profile",
         "email",
@@ -87,7 +86,7 @@ passport.deserializeUser((obj, done) => {
 const handleAuthCallback = (platform) => (req, res) => {
   const userData = JSON.stringify(req.user);
   res.redirect(
-    `influmart://auth/${platform}/success?user=${encodeURIComponent(userData)}`
+    `${config.CLIENT_URL}/api/auth/${platform}/success?user=${encodeURIComponent(userData)}`
   );
 };
 
