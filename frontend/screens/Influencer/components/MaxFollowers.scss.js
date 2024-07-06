@@ -93,4 +93,10 @@ export const MaxFollowersNoStyles = {
     fontFamily: FontFamily.beVietnamProBold,
     color: Color.colorWhite,
   },
+  desc: {
+    fontSize: FontSize.size_sm,
+    marginTop: 5,
+    fontFamily: FontFamily.plusJakartaSansRegular,
+    color: Color.colorSlategray_100,
+  },
 };

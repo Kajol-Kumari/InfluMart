@@ -250,7 +250,7 @@ const Depth1Frame = ({
             >
               <View style={styles.depth5Frame01}>
                 <Text style={[styles.search, styles.homeTypo, profileStyle]}>
-                  Profile
+                  Login
                 </Text>
               </View>
             </View>
