@@ -13,8 +13,10 @@ const CollabPost = () => {
       </View>
       
       <View style={styles.searchContainer}>
-        <Icon name="search" size={20} color="#888" style={styles.searchIcon} />
-        <TextInput style={styles.searchInput} placeholder="Find" />
+        <View style={styles.searchInputContainer}>
+          <Icon name="search" size={20} color="#888" style={styles.searchIcon} />
+          <TextInput style={styles.searchInput} placeholder="Find" />
+        </View>
       </View>
       
       <View style={styles.categories}>
@@ -41,7 +43,7 @@ const CollabPost = () => {
               <Text style={styles.postName}>{post.name}</Text>
               <Text style={styles.postDegree}>{post.degree}</Text>
             </View>
-            <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/100' }} />
+            <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
           </View>
         ))}
       </ScrollView>
@@ -85,23 +87,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     padding: 16,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    backgroundColor: '#fff',
+  searchInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E8EDF2',
     padding: 8,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#ddd',
+    
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,    
   },
   categories: {
     padding: 16,
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   categoryTag: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#E8EDF2',
     padding: 8,
     borderRadius: 8,
     marginRight: 8,
@@ -122,6 +127,7 @@ const styles = StyleSheet.create({
   },
   postCard: {
     flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 16,
     backgroundColor: '#fff',
     borderRadius: 8,
@@ -130,6 +136,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 2,
+    height: 97,
   },
   postContent: {
     flex: 1,
@@ -142,11 +149,11 @@ const styles = StyleSheet.create({
   },
   postName: {
     fontSize: 14,
-    color: '#555',
+    color: '#4F7396',
   },
   postDegree: {
     fontSize: 12,
-    color: '#999',
+    color: '#4F7396',
   },
   postImage: {
     width: 130,
