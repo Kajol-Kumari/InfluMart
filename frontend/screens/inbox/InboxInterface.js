@@ -1,46 +1,46 @@
-import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-  Dimensions,
-} from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
 import { Color } from "../../GlobalStyles";
 import { inboxStyles } from './InboxInterface.scss';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAllConversations } from "../../controller/connectionsController";
+import { useAlert } from "../../util/AlertContext";
+import ImageWithFallback from "../../util/ImageWithFallback";
 
 const InboxInterface = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      title: "Project with Anna",
-      status: "In progress",
-      preview: "Hi Anna, here are the assets and schedule for our collaboration.",
-      image: require("../../assets/depth-3-frame-05.png")
-    },
-    {
-      id: 2,
-      title: "Project with Will",
-      status: "Not started",
-      preview: "Hi Will, how was your experience using the product?",
-      image: require("../../assets/depth-3-frame-06.png")
-    },
-  ]);
+  const [conversations, setConversations] = useState([]);
+  const [userId,setUserId] = useState(null)
+  const [userType,setUserType] = useState(null)
+  const {showAlert} = useAlert()
+  useEffect(() => {
+    const getData = async () => {
+      let id;
+      let data;
+      const _influencer = await AsyncStorage.getItem('influencerId')
+      const _brand = await AsyncStorage.getItem('brandId')
+      console.log(_influencer, _brand)
+      if (_influencer) {
+        id = _influencer;
+        data = await getAllConversations(id, 'influencer',setConversations,showAlert)
+        setUserId(id)
+        setUserType('influencer')
+      } else if (_brand) {
+        id = _brand;
+        data = await getAllConversations(id, 'brand',setConversations,showAlert)
+        setUserId(id)
+        setUserType('brand')
+      }
+    }
+    getData(); 
+  }, []);
 
   const handleSearchChange = (text) => {
     setSearchQuery(text);
   };
-
-  const filteredMessages = messages.filter(message =>
-    message.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={[styles.inboxContainer, { height: Dimensions.get("window").height }]}>
@@ -78,23 +78,19 @@ const InboxInterface = () => {
             />
           </View>
         </View>
-        {filteredMessages.map(message => (
-          <React.Fragment key={message.id}>
-            <TouchableOpacity onPress={() => navigation.navigate("ChatInterface",{name:message.title, image: message.image})}>
+        {conversations?.map((message,index) => (
+          <React.Fragment key={index}>
+            <TouchableOpacity onPress={() => navigation.navigate("ChatInterface", { name: message?.name, image: message?.profileUrl, conversationId:message?.conversationId,userId:userId,userType:userType,receiverId: message?.receiverId })}>
               <View style={styles.messageContainer}>
-                <Image
-                  style={styles.messageImage}
-                  contentFit="cover"
-                  source={message.image}
-                />
+                <ImageWithFallback image={message?.profileUrl} imageStyle={styles.messageImage} key={index} />
                 <View style={styles.messageContent}>
-                  <Text style={styles.messageTitle}>{message.title}</Text>
-                  <Text style={styles.messageStatus}>{message.status}</Text>
+                  <Text style={styles.messageTitle}>{message?.name}</Text>
+                  <Text style={styles.messageStatus}>{message?.lastUpdate}</Text>
                 </View>
               </View>
             </TouchableOpacity>
             <View style={styles.messagePreviewContainer}>
-              <Text style={styles.messagePreview}>{message.preview}</Text>
+              <Text style={styles.messagePreview}>{message?.lastMessage}</Text>
             </View>
           </React.Fragment>
         ))}

@@ -7,18 +7,18 @@ const InfluencerSignupRequest = require("../model/influencerSignupRequestModel")
 
 const brandorInfluencerAuthenticationMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  
+  console.log(authHeader)
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
   // Extract token from header
   const token = authHeader.split(' ')[1];
-
+  console.log(token)
   try {
     // Verify token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY);
-
+    console.log(decoded)
     // Check if brand exists
     const brand = await Brand.findById(decoded.brandId);
 

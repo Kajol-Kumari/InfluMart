@@ -99,7 +99,7 @@ exports.signup = async (req, res) => {
 // Login as an influencer
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-
+  console.log(username,password)
   try {
     // Find the influencer by their username
     const influencer = await InfluencerSignupRequest.findOne({
