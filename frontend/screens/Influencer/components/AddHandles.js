@@ -72,12 +72,21 @@ const AddHandles = ({ route, navigation }) => {
 
   useEffect(() => {
     // Handle user data as needed (e.g., store in context, navigate to home, etc.)
+    if (route.params?.social) {
+      const { ig, tw, fb, yt, tt } = route.params.social;
+      if (ig) setInstagram(ig);
+      if (tw) setTwitter(tw);
+      if (fb) setFacebook(fb);
+      if (yt) setYoutube(yt);
+      if (tt) setTiktok(tt);
+    }
     const getData = async () => {
     await AsyncStorage.setItem('userytdata', JSON.stringify(user));
     user && handleAuthSuccess('youtube', user);
     };
     getData()
   }, []);
+
   const handleAuthSuccess = useCallback((platform, user) => {
     setVerifiedAccounts((prev) => [...prev, platform]);
     switch (platform) {
