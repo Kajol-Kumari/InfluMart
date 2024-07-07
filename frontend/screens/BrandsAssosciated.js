@@ -8,6 +8,7 @@ import { useAlert } from '../util/AlertContext'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ImageWithFallback from "../util/ImageWithFallback";
 import { LinearGradient } from 'expo-linear-gradient'
+import { formatNumber } from "../helpers/GraphData";
 
 
 const BrandAssosciated = ({ active }) => {
@@ -84,17 +85,21 @@ const BrandAssosciated = ({ active }) => {
           <View style={styles.depth1Frame1}>
             {
               brands && brands.length > 0 ?
-                brands.map(({ brandName, profileUrl, _id }, index) => {
+                brands.map(( brand, index) => {
                   return (
-                    <TouchableOpacity key={index} onPress={() => { console.log(profileUrl) }}>
+                    <TouchableOpacity key={index} onPress={() => { console.log(brand?.profileUrl) }}>
                       <View style={styles.depth2FrameLayout} >
-                        <ImageWithFallback imageStyle={styles.depth4Frame03} image={profileUrl} />
+                        <ImageWithFallback imageStyle={styles.depth4Frame03} image={brand?.profileUrl} />
                         <View style={styles.overlayContainer}>
                           <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
                             <Text style={styles.insightText}>INSIGHT</Text>
-                            <Text style={styles.google}>{brandName}</Text>
-                            <Text style={styles.insightText}>Random Text</Text>
+                            <Text style={styles.google}>{brand?.brandName}</Text>
+                            <Text style={styles.insightText}>category: {brand?.category}</Text>
                           </LinearGradient>
+                        </View>
+                        <View style={styles.userNameText}>
+                          <Text style={styles.userNameText}>{`@${brand?.name}`}</Text>
+                          <Text style={styles.userNameText}>Collaborations: {brand?.collaborationCount?formatNumber(brand?.collaborationCount):"N/A"}</Text> 
                         </View>
                       </View>
                     </TouchableOpacity>
@@ -126,7 +131,7 @@ const styles = StyleSheet.create({
     height: "auto"
   },
   depth2FrameLayout: {
-    height: 420,
+    height: 450,
     width: 280,
     display: "flex",
     flexDirection: "column",
@@ -405,6 +410,14 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_xs,
     fontFamily: FontFamily.plusJakartaSansBold,
     color: Color.colorSlategray_100,
+  },
+  userNameText: {
+    width:"100%",
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.plusJakartaSansBold,
+    color: Color.colorSlategray_100,
+    marginTop: 15,
+    marginLeft: 10
   },
 });
 

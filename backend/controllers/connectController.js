@@ -13,8 +13,7 @@ const sendRequest = async (req, res) => {
   await request.save();
   await InfluencerSignupRequest.findByIdAndUpdate(receiverId, {
     $push: { notifications: request._id },
-  });
-  console.log(request)
+  })
   res.status(200).json({ message: "Request sent" });
 };
 
@@ -150,7 +149,6 @@ const getMessages = async (req, res) => {
     if (!conversation) {
       return res.status(404).json({ message: 'Conversation not found' });
     }
-    console.log(conversation.messages)
     res.status(200).json({ messages: conversation.messages });
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch messages' });

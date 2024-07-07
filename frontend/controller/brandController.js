@@ -22,7 +22,6 @@ const getBrandProfile = async (brandId, showAlert) => {
           ? `${API_ENDPOINT}/${data.brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,
       };
-      console.log("brand");
       return brand;
     } else {
       showAlert("Brand Profile Error", data.message);
@@ -47,7 +46,15 @@ const getAllBrandProfiles = async (showAlert) => {
       return {
         ...brand, profileUrl: brand.profileUrl.includes("uploads")
           ? `${API_ENDPOINT}/${brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
-          : null
+          : null,category: (() => {
+            try {
+              const categoryArray = JSON.parse(brand.category || "[]");
+              return Array.isArray(categoryArray) ? categoryArray.join(", ") : "";
+            } catch (error) {
+              console.error("Failed to parse category JSON:", error.message);
+              return "";
+            }
+          })(),
       }
     })
     return data
