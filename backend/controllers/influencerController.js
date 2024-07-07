@@ -84,10 +84,8 @@ exports.signup = async (req, res) => {
 
     // Save the influencer data to the database
     await influencer.save();
-    console.log(influencer)
     res.status(201).json({ message: "Influencer signed up successfully" });
   } catch (err) {
-    console.log(err)
     if (err.name === "MongoError" && err.code === 11000) {
       // Handle the unique constraint violation error
       res.status(400).json({ message: "Username already exists" });
@@ -101,13 +99,11 @@ exports.signup = async (req, res) => {
 // Login as an influencer
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username,password)
   try {
     // Find the influencer by their username
     const influencer = await InfluencerSignupRequest.findOne({
       userName: username,
     });
-    console.log(influencer);
     // Check if the influencer exists
     if (!influencer) {
       return res.status(401).json({ message: "Authentication failed" });
