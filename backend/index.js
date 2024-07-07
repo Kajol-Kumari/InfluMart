@@ -1,15 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const http = require("http");
 require("dotenv").config();
 var cookies = require("cookie-parser");
-
-const app = express();
-const server = http.Server(app);
-const io = require('socket.io')(server); //socket.io instance
+const { app, io, server } = require("./socket/socket");
 
 // Making uploads folder public
-app.use(express.static('uploads'));
+app.use(express.static("uploads"));
 
 // CORS
 app.use(cors());
@@ -26,12 +22,12 @@ const influencerRoutes = require("./routes/influencerRoutes");
 const brandRoutes = require("./routes/brandRoutes");
 const subscriptionRouter = require("./routes/subscriptionRouter");
 const otpRouter = require("./routes/otpRoutes");
-const collaborationRoutes = require('./routes/collaborationRoutes');
-const connectRouter = require('./routes/connectionRoutes');
+const collaborationRoutes = require("./routes/collaborationRoutes");
+const connectRouter = require("./routes/connectionRoutes");
 const { getSocialData } = require("./controllers/influencerController");
-const passwordRoutes = require('./routes/passwordRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
-const authRoutes = require('./routes/authRoutes');
+const passwordRoutes = require("./routes/passwordRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+const authRoutes = require("./routes/authRoutes");
 const Message = require("./model/Message");
 
 app.use((req, res, next) => {
@@ -39,13 +35,13 @@ app.use((req, res, next) => {
   next();
 });
 // Verification routes
-app.use('/api', authRoutes);
+app.use("/api", authRoutes);
 
 // Mount the payment controller routes
-app.use('/api/payment', paymentRoutes);
+app.use("/api/payment", paymentRoutes);
 
 // Mount the password controller routes
-app.use('/api/password', passwordRoutes);
+app.use("/api/password", passwordRoutes);
 
 // Mount the influencer routes on a specific path
 app.use("/influencers", influencerRoutes);
@@ -55,42 +51,21 @@ app.use("/social/:id", getSocialData);
 
 app.use("/subscriptions", subscriptionRouter);
 
-app.use("/otp",otpRouter);
+app.use("/otp", otpRouter);
 
 // Mount the brand routes on a specific path
 app.use("/brands", brandRoutes);
 
-app.use('/api', collaborationRoutes);
+app.use("/api", collaborationRoutes);
 
 // Mount the connect routes on a specific path
-app.use("/connection", connectRouter)
+app.use("/connection", connectRouter);
 
 // Home route
 app.get("/", (_req, res) => {
   res
     .status(200)
     .json({ message: "Hello There!! You are at the backend server!" });
-});
-
-// Socket.io connection
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-  
-  // Listen for new messages
-  socket.on('sendMessage', async ({ senderId, receiverId, content }) => {
-    const message = new Message({
-      sender: senderId,
-      receiver: receiverId,
-      content: content,
-    });
-    await message.save();
-    
-    io.to(receiverId).emit('receiveMessage', message);
-  });
 });
 
 // Start the server

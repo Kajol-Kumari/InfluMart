@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../../../GlobalStyles";
 
-const MessageInput = ({ onSend }) => {
+const MessageInput = ({setNewMessage}) => {
   const [message, setMessage] = useState("");
-
   const handleSend = () => {
-    if (message.trim()) {
-      onSend(message);
-      setMessage("");
-    }
+    setNewMessage(message);
+    setMessage("");
   };
 
   return (

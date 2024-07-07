@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt"); // For password hashing
 const jwt = require('jsonwebtoken');
 const cron = require('node-cron');
 const OTP = require("../model/otp");
+const Collaboration = require("../model/collaboration");
 
 // Signup a brand
 exports.signup = async (req, res) => {
@@ -161,21 +162,37 @@ exports.deleteProfile = async (req, res) => {
 // Fetch list of all brands (excluding passwords)
 exports.getAllBrands = async (req, res) => {
   try {
-    const brands = await Brand.find({}, '-password'); // Exclude password field
+    // Fetch all brands excluding the password field
+    const brands = await Brand.find({}, '-password');
 
+    // Get collaboration counts for each brand
+    const collaborationCounts = await Collaboration.aggregate([
+      {
+        $group: {
+          _id: "$brandId",
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    // Create a map for easier lookup
+    const collaborationCountMap = {};
+    collaborationCounts.forEach(item => {
+      collaborationCountMap[item._id.toString()] = item.count;
+    });
+
+    // Map over brands to include the collaboration count
+    const brandsWithCollaborationCount = brands.map(brand => ({
+      _id: brand._id,
+      name: brand.name,
+      category: brand.category,
+      profileUrl: brand.profileUrl,
+      brandName: brand.brandName,
+      collaborationCount: collaborationCountMap[brand._id.toString()] || 0
+    }));
     res.status(200).json({
       message: 'List of all brands fetched successfully',
-      brands: brands.map(brand => ({
-        _id: brand._id,
-        name: brand.name,
-        email: brand.email,
-        category: brand.category,
-        location: brand.location,
-        website: brand.website,
-        description: brand.description,
-        profileUrl: brand.profileUrl,
-        brandName: brand.brandName,
-      })),
+      brands: brandsWithCollaborationCount,
     });
   } catch (error) {
     console.error('Error fetching brands:', error);

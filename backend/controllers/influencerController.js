@@ -99,13 +99,11 @@ exports.signup = async (req, res) => {
 // Login as an influencer
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-
   try {
     // Find the influencer by their username
     const influencer = await InfluencerSignupRequest.findOne({
       userName: username,
     });
-    console.log(influencer);
     // Check if the influencer exists
     if (!influencer) {
       return res.status(401).json({ message: "Authentication failed" });
@@ -233,7 +231,7 @@ exports.getAllProfiles = async (req, res) => {
   try {
     const influencers = await InfluencerSignupRequest.find(
       {},
-      { category: 1, influencerName: 1, profileUrl: 1, _id: 1 }
+      { category: 1, influencerName: 1, profileUrl: 1, _id: 1,userName:1,ytData:1,instaData:1,fbData:1 }
     );
     res.status(200).json({influencers});
   } catch (err) {

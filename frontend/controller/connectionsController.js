@@ -73,6 +73,7 @@ const acceptRequest = async (requestId, showAlert) => {
     );
     if (response.status === 200) {
       showAlert("Success", "Request accepted and hello message sent");
+      return response.data;
     } else {
       showAlert("Error", response.data.message);
     }
@@ -105,4 +106,129 @@ const rejectRequest = async (requestId, showAlert) => {
   }
 };
 
-export { sendRequest, getAllRequests, acceptRequest, rejectRequest };
+const closeChat = async (userId, chatUserId, showAlert) => {
+  const token = await AsyncStorage.getItem('token');
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/connection/closeChat`,
+      { userId, chatUserId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      showAlert("Success", "Chat closed");
+    } else {
+      showAlert("Error", response.data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    showAlert("Error", "Something went wrong");
+  }
+};
+
+const sendMessage = async (senderId, receiverId, content, showAlert) => {
+  const token = await AsyncStorage.getItem('token');
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/connection/send-message`,
+      { senderId, receiverId, content },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      console.log("res", response.data)
+      return response.data;
+      //showAlert("Success", "Message sent");
+    } else {
+      //showAlert("Error", response.data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    //showAlert("Error", "Something went wrong");
+  }
+};
+
+const getMessages = async (conversationId,userId,userType, setMessages, showAlert) => {
+  const token = await AsyncStorage.getItem('token');
+
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/connection/messages/${conversationId}`,
+      {userId, userType},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      
+    );
+    console.log("res", response);
+    if (response.status === 200) {
+      const formattedMessages = response.data.messages.map(message => ({
+        _id: message._id,
+        content: message.content,
+        createdAt: message.createdAt,
+        sender:{
+          name: message.receiver?._id === userId ? 'You' : message.receiver?.brandName || message.receiver?.influencerName,
+        },
+        timeAgo: `${Math.floor((new Date() - new Date(message.createdAt)) / (1000 * 60))} minutes ago`
+      }));
+      console.log("messages", formattedMessages)
+      setMessages(formattedMessages);
+    } else {
+      //showAlert("Error", response.data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    //showAlert("Error", "Something went wrong");
+  }
+};
+
+const getAllConversations = async (userId, userType, setConversations, showAlert) => {
+  const token = await AsyncStorage.getItem('token');
+  console.log("token", token, userId, userType);
+  try {
+    const response = await axios.post(
+      `${API_ENDPOINT}/connection/get-conversation`,
+      { userId, userType },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("con", response);
+    if (response.status === 200) {
+      const conversations = response.data.conversations.map(conversation => {
+        // Find the participant that is not the current user
+        const participant = conversation.participants.find(p => p._id !== userId);
+        const lastMessage = conversation.messages.length > 0 ? conversation.messages[conversation.messages.length - 1] : null;
+        return {
+          name: userType === 'influencer' ? participant.brandName : participant.influencerName,
+          profileUrl: participant.profileUrl ? `${API_ENDPOINT}/${participant.profileUrl.replace(/\\/g, "/").replace("uploads/", "")}` : require("../assets/blank-profile.png"),
+          lastMessage: lastMessage ? lastMessage.content : '',
+          lastUpdate: lastMessage ? new Date(lastMessage.createdAt).toLocaleString() : new Date(conversation.updatedAt).toLocaleString(),
+          conversationId: conversation._id,
+          receiverId: participant._id
+        };
+      });
+      console.log("conversations", conversations);
+      setConversations(conversations);
+    } else {
+      showAlert("Error", response.data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    showAlert("Error", "Something went wrong");
+  }
+};
+
+
+
+export { sendRequest, getAllRequests, acceptRequest, rejectRequest, closeChat, sendMessage, getAllConversations, getMessages};

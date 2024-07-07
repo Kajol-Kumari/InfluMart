@@ -36,6 +36,9 @@ const InfluencersList = () => {
   React.useEffect(() => {
     GetAllInfluencerProfile(setInfluencerData)
   }, [brandId])
+  // React.useEffect(()=>{
+  //   console.log(influencerData)
+  // },[influencerData])
   const FakeData = [
     { key: "one", value: "One" },
     { key: "two", value: "Two" },
@@ -59,7 +62,7 @@ const InfluencersList = () => {
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl} kylieCosmetics={item.influencerName} beauty={item.category} />)}
+            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} userName={item?.userName} influencerId={item?._id} depth5Frame0={item?.profileUrl} kylieCosmetics={item?.influencerName} beauty={item?.category} statistics={{ytData:item?.ytData[0]?.subscriberCount||"N/A",instaData:item?.instaData[0]?.followers||"N/A",fbData:item?.fbData[0]?.followers||"N/A"}}/>)}
           </View>
         </ScrollView>
       </View>
