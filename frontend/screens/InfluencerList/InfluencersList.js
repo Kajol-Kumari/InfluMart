@@ -17,9 +17,8 @@ const BrandIcon = require("../../assets/depth-3-frame-01.png");
 const BothIcon = require("../../assets/depth-3-frame-02.png");
 const AllIcon = require("../../assets/depth-3-frame-03.png");
 
-const InfluencersList = () => {
-  const navigation = useNavigation();
-
+const InfluencersList = ({route,navigation}) => {
+  const newData = route.params?.newData
   const [searchValue, setSearchValue] = React.useState("");
   const [showFloatButton, setShowFloatButton] = React.useState(true);
   const [scrollOffset, setScrollOffset] = React.useState(0);
@@ -34,8 +33,12 @@ const InfluencersList = () => {
     getBrandId(setInfluencerData, showAlert);
   }, [])
   React.useEffect(() => {
+    if(!newData){
     GetAllInfluencerProfile(setInfluencerData)
-  }, [brandId])
+    }else{
+      setInfluencerData(newData)
+    }
+  }, [brandId,route.params])
   // React.useEffect(()=>{
   //   console.log(influencerData)
   // },[influencerData])
