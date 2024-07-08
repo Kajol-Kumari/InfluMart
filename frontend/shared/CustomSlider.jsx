@@ -10,7 +10,7 @@ export default function CustomSlider({minValue,maxValue,selectedValues}) {
         setValue({
             values,
         });
-        selectedValues({selectedMinValue:value.values[0],selectedMaxValue:value.values[1]})
+        selectedValues({min:value.values[0],max:value.values[1]})
     }
     return (
         <View style={styles.sliderContainer} onLayout={(evt) => {
