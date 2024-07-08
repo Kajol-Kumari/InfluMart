@@ -1,8 +1,7 @@
 import axios from "axios";
-//import { API_ENDPOINT } from "@env";
+import { API_ENDPOINT } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_ENDPOINT = "http://localhost:3000";
 const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
   const token = await AsyncStorage.getItem('token');
   try {
