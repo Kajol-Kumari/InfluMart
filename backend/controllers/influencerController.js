@@ -99,13 +99,11 @@ exports.signup = async (req, res) => {
 // Login as an influencer
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-
   try {
     // Find the influencer by their username
     const influencer = await InfluencerSignupRequest.findOne({
       userName: username,
     });
-    console.log(influencer);
     // Check if the influencer exists
     if (!influencer) {
       return res.status(401).json({ message: "Authentication failed" });
@@ -233,7 +231,7 @@ exports.getAllProfiles = async (req, res) => {
   try {
     const influencers = await InfluencerSignupRequest.find(
       {},
-      { category: 1, influencerName: 1, profileUrl: 1, _id: 1 }
+      { category: 1, influencerName: 1, profileUrl: 1, _id: 1,userName:1,ytData:1,instaData:1,fbData:1 }
     );
     res.status(200).json({influencers});
   } catch (err) {
@@ -245,88 +243,75 @@ exports.getAllProfiles = async (req, res) => {
 
 exports.filterInfluencers = async (req, res) => {
   try {
-    const {
-      location,
-      category,
-      price,
-      platform,
-      followers,
-      likes,
-      engagementRate,
-      audienceAge,
-      gender,
-      reachability,
-      avgComments,
-      viewCount,
-      cities
-    } = req.body;
+    const filters = req.body;
+    const query = {};
+    console.log("Filters: ", filters); // Log the filters
+    if (filters.location && filters.location.trim() !== '') query.location = filters.location;
 
-    // Build the filter query
-    let query = {};
+    if (filters.category && filters.category.length > 0) query.category = { $in: JSON.stringify(filters.category) };
 
-    if (location) {
-      query.location = location;
+    if (filters.price && filters.price.min != null && filters.price.max != null) {
+      query.price = {
+        $elemMatch: {
+          $or: [
+            { 'price.ig': { $gte: filters.price.min, $lte: filters.price.max } },
+            { 'price.yt': { $gte: filters.price.min, $lte: filters.price.max } },
+            { 'price.tr': { $gte: filters.price.min, $lte: filters.price.max } },
+            { 'price.tt': { $gte: filters.price.min, $lte: filters.price.max } }
+          ]
+        }
+      };
     }
 
-    if (category) {
-      query.category = category;
+    if (filters.followers && filters.followers.min != null && filters.followers.max != null) {
+      query['instaData.followers'] = { $gte: filters.followers.min };
     }
 
-    if (price && platform) {
-      query[`price.${platform}`] = { $lte: price };
+    if (filters.likes && filters.likes.min != null && filters.likes.max != null) {
+      query['instaData.avgLikes'] = { $gte: filters.likes.min };
     }
 
-    if (followers && platform) {
-      query[`instaData.followers`] = { $gte: followers };
+    if (filters.engagementRate && filters.engagementRate.min != null && filters.engagementRate.max != null) {
+      query['instaData.avgER'] = { $gte: filters.engagementRate.min*0.001, $lte: filters.engagementRate.max*0.001 };
     }
 
-    if (likes && platform) {
-      query[`instaData.avgLikes`] = { $gte: likes };
+    if (filters.audienceAge && filters.audienceAge.min != null && filters.audienceAge.max != null) {
+      query['instaData.ages'] = {
+        $elemMatch: {
+          percent: { $gte: filters.audienceAge.min }
+        }
+      };
     }
 
-    if (engagementRate) {
-      query['instaData.avgER'] = { $gte: engagementRate };
+    if (filters.gender && filters.gender.trim() !== '') query.gender = filters.gender;
+
+    if (filters.tags && filters.tags.trim() !== '') query.tags = { $in: [filters.tags] };
+
+    if (filters.reachability && filters.reachability.min != null && filters.reachability.max != null) {
+      query['instaData.membersReachability'] = {
+        $elemMatch: {
+          percent: { $gte: filters.reachability.min*0.001 }
+        }
+      };
     }
 
-    if (audienceAge) {
-      query['instaData.ages.name'] = audienceAge;
+    if (filters.avgComments && filters.avgComments.min != null && filters.avgComments.max != null) {
+      query['instaData.avgComments'] = { $gte: filters.avgComments.min };
     }
 
-    if (gender) {
-      query.gender = gender;
+    if (filters.viewCount && filters.viewCount.min != null && filters.viewCount.max != null) {
+      query['ytData.viewCount'] = { $gte: filters.viewCount.min };
     }
 
-    if (reachability) {
-      query['instaData.membersReachability.name'] = reachability;
+    if (filters.cities && filters.cities.length > 0) {
+      query['instaData.memberCities'] = {
+        $elemMatch: { name: { $in: filters.cities } }
+      };
     }
 
-    if (avgComments) {
-      query['instaData.avgComments'] = { $gte: avgComments };
-    }
-
-    if (viewCount && platform) {
-      query[`ytData.popularVideo.viewCount`] = { $gte: viewCount };
-    }
-
-    if (cities) {
-      query['instaData.memberCities.name'] = { $in: cities };
-    }
-
-    // Fetch influencers based on the query
-    const influencers = await InfluencerSignupRequest.find(query).lean();
-
-    // Sort influencers based on the percentage of the audience belonging to a specific age
-    if (audienceAge) {
-      influencers.sort((a, b) => {
-        const aAgeData = a.instaData.ages.find(age => age.name === audienceAge);
-        const bAgeData = b.instaData.ages.find(age => age.name === audienceAge);
-        return (bAgeData?.percent || 0) - (aAgeData?.percent || 0);
-      });
-    }
-
-    res.status(200).json(influencers);
+    const influencers = await InfluencerSignupRequest.find(query);
+    res.json(influencers);
   } catch (error) {
-    console.error('Error filtering influencers:', error);
-    res.status(500).json({ message: 'Internal Server Error', error });
+    res.status(500).json({ error: error.message });
   }
 };

@@ -40,6 +40,7 @@ const InstagramData = async (instagramId) => {
   
   try {
     const response = await axios.request(options);
+    if(response.status !== 200) return {}
     const data = response.data?.data
     const track = trackingData();
     const store = {
@@ -59,6 +60,7 @@ const InstagramData = async (instagramId) => {
     return store
   } catch (error) {
     console.log(error);
+    return {}
   }
 };
 
@@ -80,6 +82,7 @@ const YoutubeData = async (youtubeId) => {
 
   try {
     const response = await axios.request(option);
+    if(response.status !== 200) return {}
     const _data = response.data?.meta;
     const track = trackingData()
     const store = {
@@ -127,7 +130,7 @@ const YoutubeData = async (youtubeId) => {
     return final
   } catch (error) {
     console.log(error);
-    return {error: `Something wrong${error}`}
+    return {}
   }
 };
 
@@ -178,6 +181,7 @@ const facebookData = async (facebookUrl) => {
 
   try {
     const response = await axios.request(options1);
+    if(response.status !== 200) return {}
     const _data = response.data[0];
     const track = trackingData()
     const store = {
@@ -188,7 +192,7 @@ const facebookData = async (facebookUrl) => {
     return store
   } catch (error) {
     console.log(error);
-    return {error:"something wrong"}
+    return {}
   }
 };
 

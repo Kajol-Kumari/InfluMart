@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 import { useAlert } from "../util/AlertContext";
-import { acceptRequest,rejectRequest } from "../controller/connectionsController";
+import { acceptRequest,rejectRequest, sendMessage } from "../controller/connectionsController";
 
 const FriendRequestPage = ({route,navigation}) => {
   const name = route.params.name
@@ -16,7 +16,7 @@ const FriendRequestPage = ({route,navigation}) => {
     navigation.navigate('UserProfile')
   }
   const handleAccept = async () => {
-    await acceptRequest(requestId,showAlert)
+    const _data = await acceptRequest(requestId,showAlert)
     navigation.navigate('UserProfile')
   }
   return (

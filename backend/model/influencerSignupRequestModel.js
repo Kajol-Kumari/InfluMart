@@ -54,6 +54,10 @@ const influencerSignupRequestSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    conversations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Conversation"
+  }],
   },
   {
     toJSON: { getters: true },

@@ -1,29 +1,46 @@
-import React from "react";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
-
-import { chatStyles } from './ChatStyles.scss';
+import React, { useContext, useEffect, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Depth1Frame7 from "../../components/Depth1Frame7";
 import Depth1Frame from "../../components/Depth1Frame";
 import MessageInput from "./components/MessageInput";
+import { getMessages,sendMessage } from "../../controller/connectionsController";
+import { chatStyles } from "./ChatStyles.scss";
+import { useSocketContext } from "../../util/SocketContext";
 
-const ChatInterface = ({route, navigation}) => {
-  const name= route.params?.name
-  const messages = [
-    { text: "Liliam joined the chat", time: "2d ago" },
-    { text: "You sent a message", time: "1d ago" },
-    { text: "You sent a message", time: "1d ago" },
-  ];
+const ChatInterface = ({ route, navigation }) => {
+  const { name, image, conversationId,userId,userType,receiverId } = route.params;
+  const [messages, setMessages] = useState([]);
+  const { socket } = useSocketContext();
 
+  useEffect(() => {
+    const getdata = async () => {
+      await getMessages(conversationId,userId,userType,setMessages);
+    };
+    getdata();
+  }, [conversationId]);
+
+  const handleSend = async (message) => {
+    await sendMessage(userId,receiverId,message)
+    await getMessages(conversationId,userId,userType,setMessages);
+  }
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <View style={styles.chatContent}>
-        <TouchableOpacity onPress={() => navigation.navigate('InboxInterface')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("InboxInterface")}
+          >
             <Depth1Frame7
               depth4Frame0={require("../../assets/depth-4-frame-017.png")}
-              requestDetails={`Chat ${name}`}
+              requestDetails={`Chat with ${name}`}
               depth3Frame0BackgroundColor="#fff"
-              requestDetailsWidth={'auto'}
+              requestDetailsWidth={"auto"}
               depth4Frame0FontFamily="BeVietnamPro-Bold"
               depth4Frame0Color="#000"
             />
@@ -38,16 +55,17 @@ const ChatInterface = ({route, navigation}) => {
                 </View>
                 <View style={styles.messageContent}>
                   <View style={styles.messageTextContainer}>
+                  {message.sender.name}
                     <View style={styles.messageTextWrapper}>
                       <Text style={[styles.messageText, styles.timeText]}>
-                        {message.text}
+                        {message.content}
                       </Text>
                     </View>
                   </View>
                   <View style={styles.messageTimeContainer}>
-                    <View style={styles.messageTimeWrapper}>
+                    <View style={styles.messageTextContainer}>
                       <Text style={[styles.timeAgo, styles.timeText]}>
-                        {message.time}
+                        {message.timeAgo}
                       </Text>
                     </View>
                   </View>
@@ -55,36 +73,13 @@ const ChatInterface = ({route, navigation}) => {
               </View>
             ))}
           </View>
-          <MessageInput />
-          <View style={styles.spacer} />
-          <Depth1Frame
-            depth5Frame0={require("../../assets/depth-5-frame-022.png")}
-            depth5Frame01={require("../../assets/depth-5-frame-023.png")}
-            search="Collaborations"
-            depth5Frame02={require("../../assets/depth-5-frame-024.png")}
-            myBrands="Inbox"
-            depth5Frame03={require("../../assets/depth-5-frame-025.png")}
-            propBorderColor="#ededed"
-            propWidth={81}
-            propWidth1={35}
-            propFontFamily="BeVietnamPro-Medium"
-            propColor="#000"
-            propWidth2={91}
-            propWidth3={91}
-            propFontFamily1="BeVietnamPro-Medium"
-            propColor1="#6b6b6b"
-            propWidth4={81}
-            propWidth5={33}
-            propFontFamily2="BeVietnamPro-Medium"
-            propColor2="#6b6b6b"
-            propWidth6={81}
-            propWidth7={40}
-            propFontFamily3="BeVietnamPro-Medium"
-            propColor3="#6b6b6b"
+          <MessageInput
+            setNewMessage={handleSend}
           />
-          <View style={styles.footerSpacer} />
+          <View style={styles.spacer} />
         </View>
       </ScrollView>
+      <Depth1Frame />
     </View>
   );
 };
