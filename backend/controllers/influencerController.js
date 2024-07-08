@@ -264,11 +264,11 @@ exports.filterInfluencers = async (req, res) => {
     }
 
     if (filters.followers && filters.followers.min != null && filters.followers.max != null) {
-      query['instaData.followers'] = { $gte: filters.followers.min, $lte: filters.followers.max };
+      query['instaData.followers'] = { $gte: filters.followers.min };
     }
 
     if (filters.likes && filters.likes.min != null && filters.likes.max != null) {
-      query['instaData.avgLikes'] = { $gte: filters.likes.min, $lte: filters.likes.max };
+      query['instaData.avgLikes'] = { $gte: filters.likes.min };
     }
 
     if (filters.engagementRate && filters.engagementRate.min != null && filters.engagementRate.max != null) {
@@ -278,7 +278,7 @@ exports.filterInfluencers = async (req, res) => {
     if (filters.audienceAge && filters.audienceAge.min != null && filters.audienceAge.max != null) {
       query['instaData.ages'] = {
         $elemMatch: {
-          percent: { $gte: filters.audienceAge.min, $lte: filters.audienceAge.max }
+          percent: { $gte: filters.audienceAge.min }
         }
       };
     }
@@ -290,17 +290,17 @@ exports.filterInfluencers = async (req, res) => {
     if (filters.reachability && filters.reachability.min != null && filters.reachability.max != null) {
       query['instaData.membersReachability'] = {
         $elemMatch: {
-          percent: { $gte: filters.reachability.min*0.001, $lte: filters.reachability.max*0.001 }
+          percent: { $gte: filters.reachability.min*0.001 }
         }
       };
     }
 
     if (filters.avgComments && filters.avgComments.min != null && filters.avgComments.max != null) {
-      query['instaData.avgComments'] = { $gte: filters.avgComments.min, $lte: filters.avgComments.max };
+      query['instaData.avgComments'] = { $gte: filters.avgComments.min };
     }
 
     if (filters.viewCount && filters.viewCount.min != null && filters.viewCount.max != null) {
-      query['ytData.viewCount'] = { $gte: filters.viewCount.min, $lte: filters.viewCount.max };
+      query['ytData.viewCount'] = { $gte: filters.viewCount.min };
     }
 
     if (filters.cities && filters.cities.length > 0) {
