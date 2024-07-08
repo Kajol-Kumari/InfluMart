@@ -49,6 +49,9 @@ import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import CollabPost from "./screens/CollabPost";
+import { CLIENT_URL } from "@env";
+import CampaignDetail from "./screens/CampaignDetail";
+import CollabForm from "./screens/CollabForm";
 
 const Stack = createNativeStackNavigator();
 
