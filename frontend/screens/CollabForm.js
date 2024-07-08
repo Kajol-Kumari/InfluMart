@@ -1,10 +1,26 @@
 import * as React from "react";
-import { ScrollView, View, Text, TextInput, StyleSheet, Image } from "react-native";
+import { ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const CollabForm = () => {
+  const handleBackPress = () => {
+    // Add functionality to handle back button press
+    console.log("Back button pressed");
+  };
+
+  const handleNextPress = () => {
+    // Add functionality to handle next button press
+    console.log("Next button pressed");
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity onPress={handleBackPress}>
+          <Image
+            style={styles.backButton}
+            source={require("../assets/depth-4-frame-14.png")}
+          />
+        </TouchableOpacity>
         <Text style={styles.headerText}>Create a Campaign</Text>
       </View>
       <View style={styles.inputGroup}>
@@ -76,7 +92,7 @@ const CollabForm = () => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.brandImage}
-          source={require("../assets/depth-4-frame-01.png")}
+          source={require("../assets/depth-4-frame-15.png")}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -97,7 +113,9 @@ const CollabForm = () => {
         />
       </View>
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Next: Review & Publish</Text>
+        <TouchableOpacity onPress={handleNextPress}>
+          <Text style={styles.footerText}>Next: Review & Publish</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -109,7 +127,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 20,
+  },
+  backButton: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
   },
   headerText: {
     fontSize: 22,
@@ -123,7 +148,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#4F7096',
+    color: '0D141C',
     marginBottom: 5,
   },
   input: {

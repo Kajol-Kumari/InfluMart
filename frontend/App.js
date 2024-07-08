@@ -49,9 +49,9 @@ import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import CollabPost from "./screens/CollabPost";
-import { CLIENT_URL } from "@env";
 import CampaignDetail from "./screens/CampaignDetail";
 import CollabForm from "./screens/CollabForm";
+import { CLIENT_URL } from "@env";
 
 const Stack = createNativeStackNavigator();
 
@@ -352,6 +352,16 @@ const App = () => {
             <Stack.Screen
             name="CollabPost"
             component={CollabPost}
+            options={{ headerShown: false }}
+            />
+            <Stack.Screen
+            name="CampaignDetail"
+            component={CampaignDetail}
+            options={{ headerShown: false }}
+            />
+            <Stack.Screen
+            name="CollabForm"
+            component={CollabForm}
             options={{ headerShown: false }}
             />
              
