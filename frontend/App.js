@@ -6,6 +6,10 @@ import { Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import { AlertProvider } from "./util/AlertContext";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Chat from './src/components/Chat';
+
 
 // Import all your screens here
 import Homepage from "./screens/Homepage";
@@ -49,6 +53,8 @@ import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import { CLIENT_URL } from "@env";
+import Chat from './src/components/Chat';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -342,6 +348,12 @@ const App = () => {
               component={PlanChooseInterface}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Chat"
+              component={Chat}
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="FilterUI"
               component={FilterUI}
