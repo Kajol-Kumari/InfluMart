@@ -109,7 +109,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       password &&
       username &&
       location &&
-      over18 &&
       agreedToTerms &&
       social &&
       follower &&
