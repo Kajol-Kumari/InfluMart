@@ -18,6 +18,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MultipleSelectList from "../../shared/MultiSelect";
 import { CountryPicker } from "react-native-country-codes-picker";
 import DropDown from "../../shared/DropDown";
+import Loader from '../../shared/Loader'
 
 const FormField = ({
   label,
@@ -79,6 +80,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const [openCountryCode, setOpenCountryCode] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
   const [mobileNoVerified, setMobileNoVerified] = useState(false);
+  const[loading,setLoading]=useState(false)
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -141,6 +143,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     }
   }, [route.params]);
   const handleSelectPlan = async () => {
+    setLoading(true)
     const payload = {
       email,
       password,
@@ -160,10 +163,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       gender,
     };
     await InfluencerVerify(payload, navigation, showAlert);
+    setLoading(false)
   };
 
   return (
     <View style={{ width: "100%", height: "100%" }}>
+      {loading&&<Loader loading={loading}/>}
       <ScrollView style={{ backgroundColor: Color.colorWhite }}>
         <View style={styles.influencerRegistrationForm}>
           <TouchableOpacity

@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAllConversations } from "../../controller/connectionsController";
 import { useAlert } from "../../util/AlertContext";
 import ImageWithFallback from "../../util/ImageWithFallback";
+import Loader from '../../shared/Loader'
 
 const InboxInterface = () => {
   const navigation = useNavigation();
@@ -16,6 +17,7 @@ const InboxInterface = () => {
   const [userId, setUserId] = useState(null)
   const [userType, setUserType] = useState(null)
   const { showAlert } = useAlert()
+  const[loading,setLoading]=useState(false)
 
   const [showFloatButton, setShowFloatButton] = React.useState(true);
   const [scrollOffset, setScrollOffset] = React.useState(0);
@@ -48,7 +50,9 @@ const InboxInterface = () => {
         setUserId(id)
         setUserType('brand')
       }
+      setLoading(false)
     }
+    setLoading(true)
     getData();
   }, []);
 
@@ -57,6 +61,7 @@ const InboxInterface = () => {
   };
   return (
     <View style={{ width: "100%", height: "100%" }}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.headerContainer}>
         <View style={styles.headerContent}>
           <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>

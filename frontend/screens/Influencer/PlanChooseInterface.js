@@ -19,6 +19,7 @@ import {
   handlePayment,
   verifyPayment,
 } from "../../controller/paymentController";
+import Loader from '../../shared/Loader';
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
@@ -27,8 +28,10 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { showAlert } = useAlert();
   const [orderId, setOrderId] = useState(null);
+  const[loading,setLoading]=useState(false)
 
   const initiatePayment = async () => {
+    setLoading(true)
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
       userName: payload?.userName,
@@ -45,6 +48,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false)
   };
   useEffect(() => {
     const getPlans = async () => {
@@ -67,6 +71,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
   }, []);
   return (
     <ScrollView style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.innerContainer}>
         <TouchableOpacity
           style={{ width: "100%" }}

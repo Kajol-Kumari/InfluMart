@@ -6,6 +6,7 @@ import { loginStyle } from "./LoginStyle";
 import { Image } from "expo-image";
 import { Color } from "../../GlobalStyles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Loader from '../../shared/Loader'
 
 const ResetPasswordPage = () => {
   const navigation = useNavigation();
@@ -15,6 +16,7 @@ const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPasswordC, setShowPasswordC] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+  const[loading,setLoading]=useState(false)
 
   const showAlert = (title, message) => {
     Alert.alert(title, message);
@@ -25,7 +27,9 @@ const ResetPasswordPage = () => {
       showAlert("Error", "Passwords do not match");
       return;
     }
+    setLoading(true)
     resetPasswordControl(token, newPassword, showAlert, navigation);
+    setLoading(false)
   };
 
   return (
@@ -36,6 +40,7 @@ const ResetPasswordPage = () => {
         backgroundColor: Color.colorWhitesmoke_100,
       }}
     >
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity
         onPress={() => navigation.navigate("BrandorInfluencer")}
       >

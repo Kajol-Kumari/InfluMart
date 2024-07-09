@@ -20,6 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAlert } from "../../util/AlertContext";
 import { GetInfluencerProfile } from "../../controller/InfluencerController";
 import {sendRequest} from "../../controller/connectionsController"
+import Loader from '../../shared/Loader';
 
 const AveragePrice = ({ platform, price }) => (
   <View style={styles.averagePriceContainer}>
@@ -50,6 +51,8 @@ const Analytics = ({ route, navigation }) => {
   const clickedId = route.params?.influencerId
   const [idType,setIdType] = React.useState("") 
 
+  const [loading,setLoading]=React.useState(false)
+
   React.useEffect(() => {
     const getData = async () => {
       const id = await AsyncStorage.getItem("influencerId");
@@ -64,6 +67,7 @@ const Analytics = ({ route, navigation }) => {
       if (!id && !clickedId) {
         navigation.navigate("Homepage");
       } else {
+        setLoading(true)
         let getId = clickedId || id
         setInfluencerId(getId); 
         GetInfluencerProfile(getId, setInfluencer, showAlert);
@@ -99,6 +103,7 @@ const Analytics = ({ route, navigation }) => {
             setPopularPosts(popular);
           })
           .catch((error) => console.log(error));
+          setLoading(false)
       }
     };
     getData();
@@ -112,7 +117,9 @@ const Analytics = ({ route, navigation }) => {
   const handleConnect = async ()=>{
     const brandId = await AsyncStorage.getItem("brandId")
     if(brandId){
+      setLoading(true)
       await sendRequest(brandId,clickedId,showAlert)
+      setLoading(false)
     }
   }
   const handleBack = async () => {
@@ -127,6 +134,7 @@ const Analytics = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity style={styles.menuBar} onPress={() => handleBack()}>
         <Depth1Frame7
           depth4Frame0={require("../../assets/depth-4-frame-010.png")}
