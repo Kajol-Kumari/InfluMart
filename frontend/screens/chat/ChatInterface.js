@@ -13,6 +13,7 @@ import { chatStyles } from "./ChatStyles.scss";
 import { useSocketContext } from "../../util/SocketContext";
 import { Image } from "expo-image";
 import {useAlert} from '../../util/AlertContext'
+import Loader from '../../shared/Loader'
 
 const SenderMessage=({name,profileUrl,content,timeAgo})=>{
   return(
@@ -46,24 +47,29 @@ const ChatInterface = ({ route, navigation }) => {
   const { socket } = useSocketContext();
   const scrollView=useRef()
   const{showAlert}=useAlert()
-
+  const[loading,setLoading]=useState(false)
   useEffect(() => {
     const getdata = async () => {
       await getMessages(conversationId, userId, userType, setMessages);
+      setLoading(false)
     };
+    setLoading(true)
     getdata();
   }, [conversationId]);
 
   const handleSend = async (message) => {
     if(message.trim()!=""){
+    setLoading(true)
     await sendMessage(userId, receiverId, message)
     await getMessages(conversationId, userId, userType, setMessages);
+    setLoading(false)
     }
     else
       showAlert("Error","Please provide proper message")
   }
   return (
     <View style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity
         style={styles.topbar}
         onPress={() => navigation.navigate("InboxInterface")}

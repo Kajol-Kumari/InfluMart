@@ -8,6 +8,7 @@ import { Color } from "../../GlobalStyles";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 import { forgotPasswordControl } from "../../controller/PasswordController";
+import Loader from '../../shared/Loader'
 
 const LoginPage = () => {
   const navigation = useNavigation();
@@ -15,9 +16,11 @@ const LoginPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false); // State to manage password visibility
+  const[loading,setLoading]=React.useState(false)
 
   return (
     <ScrollView style={{ width: '100%', height: "100%", backgroundColor: Color.colorWhitesmoke_100 }}>
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity onPress={() => navigation.navigate('BrandorInfluencer')}>
         <View style={styles.depth1Frame0}>
           <View style={[styles.depth2Frame0, styles.frameFlexBox]}>
@@ -101,6 +104,7 @@ const LoginPage = () => {
           <TouchableOpacity
             style={{ width: "100%" }}
             onPress={async () => {
+              setLoading(true)
               let result = await handleInfluencerLogin(username, password);
               if (result.success) {
                 showAlert("Success", result.message);
@@ -110,6 +114,7 @@ const LoginPage = () => {
               } else {
                 showAlert("Error", result.message);
               }
+              setLoading(false)
             }}
           >
             <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>
