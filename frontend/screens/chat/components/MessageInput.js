@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../../../GlobalStyles";
+import ImageWithFallback from "../../../util/ImageWithFallback";
 
 const MessageInput = ({setNewMessage,profileUrl}) => {
   const [message, setMessage] = useState("");
@@ -12,10 +13,10 @@ const MessageInput = ({setNewMessage,profileUrl}) => {
 
   return (
     <View style={[styles.messageInputContainer, styles.flexRow]}>
-      <Image
-        style={styles.profileImage}
+      <ImageWithFallback
+        imageStyle={styles.profileImage}
         contentFit="cover"
-        source={require("../../../assets/depth-2-frame-0.png")}
+        image={profileUrl||require("../../../assets/depth-2-frame-0.png")}
       />
       <View style={[styles.inputWrapper, styles.flexRow]}>
         <View style={styles.inputContainer}>

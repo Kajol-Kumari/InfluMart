@@ -69,7 +69,7 @@ const InboxInterface = () => {
               <Image
                 style={styles.newMessageIcon}
                 contentFit="cover"
-                source={require("../../assets/depth-5-frame-021.png")}
+                source={require("../../assets/plus_icon.png")}
               />
             </View>
           </TouchableOpacity>
@@ -82,7 +82,7 @@ const InboxInterface = () => {
               <Image
                 style={styles.searchIcon}
                 contentFit="cover"
-                source={require("../../assets/depth-3-frame-04.png")}
+                source={require("../../assets/search_icon.png")}
               />
               <TextInput
                 style={styles.searchInput}

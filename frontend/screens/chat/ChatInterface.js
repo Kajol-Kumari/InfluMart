@@ -82,8 +82,8 @@ const ChatInterface = ({ route, navigation }) => {
           <View style={styles.messagesContainer}>
             {messages.map((message, index) => (
               message.sender.name=="You"?
-              <SenderMessage key={index} name={message.sender.name} content={message.content} timeAgo={message.timeAgo}/>:
-              <ReceiverMessage key={index} name={message.sender.name} content={message.content} timeAgo={message.timeAgo}/>
+              <SenderMessage key={index} name={message?.sender?.name} content={message?.content} timeAgo={message?.timeAgo}/>:
+              <ReceiverMessage key={index} name={message?.sender?.name} content={message?.content} timeAgo={message?.timeAgo}/>
             ))}
           </View>
         </View>
