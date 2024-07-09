@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_ENDPOINT } from '@env';
+import {timeStampFormatter} from '../helpers/GraphData'
 
 const sendRequest = async (senderId, receiverId, showAlert) => {
   const token = await AsyncStorage.getItem('token');
@@ -177,7 +178,7 @@ const getMessages = async (conversationId,userId,userType, setMessages, showAler
         sender:{
           name: message.receiver?._id === userId ? 'You' : message.receiver?.brandName || message.receiver?.influencerName,
         },
-        timeAgo: `${Math.floor((new Date() - new Date(message.createdAt)) / (1000 * 60))} minutes ago`
+        timeAgo: timeStampFormatter(message.createdAt)
       }));
       console.log("messages", formattedMessages)
       setMessages(formattedMessages);
