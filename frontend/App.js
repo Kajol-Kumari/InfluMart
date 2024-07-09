@@ -4,12 +4,9 @@ import { useFonts } from "expo-font";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { AlertProvider } from "./util/AlertContext";
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import Chat from './src/components/Chat';
-
 
 // Import all your screens here
 import Homepage from "./screens/Homepage";
@@ -53,12 +50,7 @@ import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import { CLIENT_URL } from "@env";
-import Chat from './src/components/Chat';
-
-
-
 import { SocketContextProvider } from "./util/SocketContext";
-
 
 const Stack = createNativeStackNavigator();
 
@@ -71,6 +63,7 @@ const linking = {
     },
   },
 };
+
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
   const [initialRoute, setInitialRoute] = React.useState("Login");
@@ -144,304 +137,65 @@ const App = () => {
   }
 
   return (
-    <>
-      <AlertProvider>
-        <SocketContextProvider>
-          <NavigationContainer linking={linking}>
-            {hideSplashScreen ? (
-              <Stack.Navigator
-                initialRouteName={initialRoute}
-                screenOptions={{ headerShown: false }}
-              >
-                <Stack.Screen
-                  name="Homepage"
-                  component={Homepage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="BrandorInfluencer"
-                  component={BrandorInfluencer}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="BrandAccountReviewNotification"
-                  component={BrandAccountSignupDataPreview}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="TosScreen"
-                  component={TosScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="PPScreen"
-                  component={PPScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerConfirmAccount"
-                  component={InfluencerConfirmAccount}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="BrandRegistrationForm"
-                  component={BrandRegistrationForm}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="ResetPassword"
-                  component={ResetPasswordPage}
-                />
-                <Stack.Screen
-                  name="InfluencerSocialHandles"
-                  component={AddHandles}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="UserProfilePhoto"
-                  component={UserProfilePhoto}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="MaxFollowersNo"
-                  component={MaxFollowersNo}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="PricePerPost"
-                  component={PricePerPost}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="OtpVerification"
-                  component={OtpVerification}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="ForgotPasswordPage"
-                  component={ForgotPasswordPage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="AdminPanel"
-                  component={AdminPanel}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerLogoutPage"
-                  component={InfluencerLogOutPage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerAccountDeletePage"
-                  component={InfluencerDeleteAccountPage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerContactUsPage"
-                  component={InfluencerContactUs}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerHelpCenterPage"
-                  component={InfluencerHelpCenter}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerManageAccountPage"
-                  component={InfluencerManageAccount}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerAccountSuccess"
-                  component={InfluencerAccountSuccess}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="LoginPage"
-                  component={LoginPage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="BrandProfile"
-                  component={BrandProfile}
-                  options={{ headerShown: false }}
-                />
-
-                <Stack.Screen
-                  name="LoginPageBrands"
-                  component={LoginPageBrand}
-                  options={{ headerShown: false }}
-                />
-
-                <Stack.Screen
-                  name="BrandAdminPanel"
-                  component={BrandAdminPanel}
-                  options={{ headerShown: false }}
-                />
-
-                <Stack.Screen
-                  name="BrandLogoutPage"
-                  component={BrandLogOutPage}
-                  options={{ headerShown: false }}
-                />
-
-                <Stack.Screen
-                  name="BrandAccountDeletePage"
-                  component={BrandDeleteAccountPage}
-                  options={{ headerShown: false }}
-                />
-
-
-            <Stack.Screen
-              name="BrandManageAccountPage"
-              component={BrandManageAccount}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="FriendRequestPage"
-              component={FriendRequestPage}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="BrandsAssosciated"
-              component={BrandAssosciated}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="AccountCreatedSuccessfullyNoti"
-              component={AccountCreatedSuccessfullyNoti}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="FailedPaymentStatus"
-              component={FailedPaymentStatus}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Analytics"
-              component={Analytics}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InfluencersList"
-              component={InfluencersList}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InboxInterface"
-              component={InboxInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ChatInterface"
-              component={ChatInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="UserProfile"
-              component={UserProfile}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="InfluencerRegistrationForm"
-              component={InfluencerRegistrationForm}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="PlanChooseInterface"
-              component={PlanChooseInterface}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Chat"
-              component={Chat}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="FilterUI"
-              component={FilterUI}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        ) : null}
-      </NavigationContainer>
+    <AlertProvider>
+      <SocketContextProvider>
+        <NavigationContainer linking={linking}>
+          {hideSplashScreen ? (
+            <Stack.Navigator
+              initialRouteName={initialRoute}
+              screenOptions={{ headerShown: false }}
+            >
+              <Stack.Screen name="Homepage" component={Homepage} />
+              <Stack.Screen name="BrandorInfluencer" component={BrandorInfluencer} />
+              <Stack.Screen name="BrandAccountReviewNotification" component={BrandAccountSignupDataPreview} />
+              <Stack.Screen name="TosScreen" component={TosScreen} />
+              <Stack.Screen name="PPScreen" component={PPScreen} />
+              <Stack.Screen name="InfluencerConfirmAccount" component={InfluencerConfirmAccount} />
+              <Stack.Screen name="BrandRegistrationForm" component={BrandRegistrationForm} />
+              <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
+              <Stack.Screen name="InfluencerSocialHandles" component={AddHandles} />
+              <Stack.Screen name="UserProfilePhoto" component={UserProfilePhoto} />
+              <Stack.Screen name="MaxFollowersNo" component={MaxFollowersNo} />
+              <Stack.Screen name="PricePerPost" component={PricePerPost} />
+              <Stack.Screen name="OtpVerification" component={OtpVerification} />
+              <Stack.Screen name="ForgotPasswordPage" component={ForgotPasswordPage} />
+              <Stack.Screen name="AdminPanel" component={AdminPanel} />
+              <Stack.Screen name="InfluencerLogoutPage" component={InfluencerLogOutPage} />
+              <Stack.Screen name="InfluencerAccountDeletePage" component={InfluencerDeleteAccountPage} />
+              <Stack.Screen name="InfluencerContactUsPage" component={InfluencerContactUs} />
+              <Stack.Screen name="InfluencerHelpCenterPage" component={InfluencerHelpCenter} />
+              <Stack.Screen name="InfluencerManageAccountPage" component={InfluencerManageAccount} />
+              <Stack.Screen name="InfluencerAccountSuccess" component={InfluencerAccountSuccess} />
+              <Stack.Screen name="LoginPage" component={LoginPage} />
+              <Stack.Screen name="BrandProfile" component={BrandProfile} />
+              <Stack.Screen name="LoginPageBrands" component={LoginPageBrand} />
+              <Stack.Screen name="BrandAdminPanel" component={BrandAdminPanel} />
+              <Stack.Screen name="BrandLogoutPage" component={BrandLogOutPage} />
+              <Stack.Screen name="BrandAccountDeletePage" component={BrandDeleteAccountPage} />
+              <Stack.Screen name="BrandManageAccountPage" component={BrandManageAccount} />
+              <Stack.Screen name="FriendRequestPage" component={FriendRequestPage} />
+              <Stack.Screen name="BrandsAssosciated" component={BrandAssosciated} />
+              <Stack.Screen name="AccountCreatedSuccessfullyNoti" component={AccountCreatedSuccessfullyNoti} />
+              <Stack.Screen name="InfluencerRegistrationForm" component={InfluencerRegistrationForm} />
+              <Stack.Screen name="PlanChooseInterface" component={PlanChooseInterface} />
+              <Stack.Screen name="InfluencerLogOutPage" component={InfluencerLogOutPage} />
+              <Stack.Screen name="FilterUI" component={FilterUI} />
+              <Stack.Screen name="Analytics" component={Analytics} />
+              <Stack.Screen name="InfluencersList" component={InfluencersList} />
+              <Stack.Screen name="FailedPaymentStatus" component={FailedPaymentStatus} />
+              <Stack.Screen name="InboxInterface" component={InboxInterface} />
+              <Stack.Screen name="ChatInterface" component={ChatInterface} />
+              <Stack.Screen name="UserProfile" component={UserProfile} />
+              <Stack.Screen name="Chat" component={Chat} />
+            </Stack.Navigator>
+          ) : (
+            // Add your SplashScreen component here if you have one
+            <SplashScreen />
+          )}
+        </NavigationContainer>
+      </SocketContextProvider>
     </AlertProvider>
-  </>
-
-                <Stack.Screen
-                  name="BrandManageAccountPage"
-                  component={BrandManageAccount}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="FriendRequestPage"
-                  component={FriendRequestPage}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="BrandsAssosciated"
-                  component={BrandAssosciated}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="AccountCreatedSuccessfullyNoti"
-                  component={AccountCreatedSuccessfullyNoti}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="FailedPaymentStatus"
-                  component={FailedPaymentStatus}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Analytics"
-                  component={Analytics}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencersList"
-                  component={InfluencersList}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InboxInterface"
-                  component={InboxInterface}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="ChatInterface"
-                  component={ChatInterface}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="UserProfile"
-                  component={UserProfile}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="InfluencerRegistrationForm"
-                  component={InfluencerRegistrationForm}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="PlanChooseInterface"
-                  component={PlanChooseInterface}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="FilterUI"
-                  component={FilterUI}
-                  options={{ headerShown: false }}
-                />
-              </Stack.Navigator>
-            ) : null}
-          </NavigationContainer>
-        </SocketContextProvider>
-      </AlertProvider>
-    </>
-
   );
 };
+
 export default App;
