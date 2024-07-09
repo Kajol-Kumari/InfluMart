@@ -38,4 +38,20 @@ const postCollabOpen = async (req, res) => {
     }
   }
 
-module.exports = { postCollabOpen };
+const getAllCollabOpen =  async (req, res) => {
+    try {
+      // Fetch all collaboration openings and populate brandName and category fields
+      const collabOpenings = await CollabOpening.find({})
+        .populate({
+          path: 'brand',
+          model: 'Brand',
+          select: 'brandName category'
+        });
+  
+      res.status(200).json({ collabOpenings });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch collaboration openings', error });
+    }
+  }
+
+module.exports = { postCollabOpen, getAllCollabOpen };
