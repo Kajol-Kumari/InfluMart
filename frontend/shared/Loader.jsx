@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: Color.colorWhitesmoke_100,
-        position: "relative",
+        position: "absolute",
         top: 0,
         zIndex: 1000
     },
