@@ -40,6 +40,16 @@ const BrandAssosciated = ({ active }) => {
   const handleSearch = () => {
     setIsSearchBarOpen(!isSearchBarOpen)
   }
+
+  const filteredBrands = brands.filter((brand) => {
+    const searchTerm = searchValue.toLowerCase();
+    return (
+      brand.brandName.toLowerCase().includes(searchTerm) ||
+      brand.name.toLowerCase().includes(searchTerm) ||
+      brand.category.toLowerCase().includes(searchTerm)
+    );
+  });
+
   return (
 
     <View style={styles.galileoDesign}>
@@ -83,9 +93,8 @@ const BrandAssosciated = ({ active }) => {
         </View>
         <ScrollView style={{ width: '100%' }}>
           <View style={styles.depth1Frame1}>
-            {
-              brands && brands.length > 0 ?
-                brands.map(( brand, index) => {
+            {filteredBrands.length > 0 ? 
+              filteredBrands.map((brand, index) => {
                   return (
                     <TouchableOpacity key={index} onPress={() => { console.log(brand?.profileUrl) }}>
                       <View style={styles.depth2FrameLayout} >

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_ENDPOINT } from '@env';
+import {timeStampFormatter} from '../helpers/GraphData'
 
 const sendRequest = async (senderId, receiverId, showAlert) => {
   const token = await AsyncStorage.getItem('token');
@@ -142,7 +143,6 @@ const sendMessage = async (senderId, receiverId, content, showAlert) => {
       }
     );
     if (response.status === 200) {
-      console.log("res", response.data)
       return response.data;
       //showAlert("Success", "Message sent");
     } else {
@@ -168,18 +168,16 @@ const getMessages = async (conversationId,userId,userType, setMessages, showAler
       },
       
     );
-    console.log("res", response);
     if (response.status === 200) {
       const formattedMessages = response.data.messages.map(message => ({
         _id: message._id,
         content: message.content,
         createdAt: message.createdAt,
         sender:{
-          name: message.receiver?._id === userId ? 'You' : message.receiver?.brandName || message.receiver?.influencerName,
+          name: userId===message.sender._id? "You": message.sender?.brandName || message.sender?.influencerName,
         },
-        timeAgo: `${Math.floor((new Date() - new Date(message.createdAt)) / (1000 * 60))} minutes ago`
+        timeAgo: timeStampFormatter(message.createdAt)
       }));
-      console.log("messages", formattedMessages)
       setMessages(formattedMessages);
     } else {
       //showAlert("Error", response.data.message);
@@ -192,7 +190,6 @@ const getMessages = async (conversationId,userId,userType, setMessages, showAler
 
 const getAllConversations = async (userId, userType, setConversations, showAlert) => {
   const token = await AsyncStorage.getItem('token');
-  console.log("token", token, userId, userType);
   try {
     const response = await axios.post(
       `${API_ENDPOINT}/connection/get-conversation`,
@@ -203,23 +200,21 @@ const getAllConversations = async (userId, userType, setConversations, showAlert
         },
       }
     );
-    console.log("con", response);
     if (response.status === 200) {
       const conversations = response.data.conversations.map(conversation => {
         // Find the participant that is not the current user
         const participant = conversation.participants.find(p => p._id !== userId);
-        const lastMessage = conversation.messages.length > 0 ? conversation.messages[conversation.messages.length - 1] : null;
+        const lastMessage = conversation.messages.length > 0 ? conversation.messages[0] : null;
         return {
-          name: userType === 'influencer' ? participant.brandName : participant.influencerName,
-          profileUrl: participant.profileUrl ? `${API_ENDPOINT}/${participant.profileUrl.replace(/\\/g, "/").replace("uploads/", "")}` : require("../assets/blank-profile.png"),
+          name: userType === 'influencer' ? participant?.brandName : participant?.influencerName,
+          profileUrl: participant?.profileUrl ? `${API_ENDPOINT}/${participant?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : require("../assets/blank-profile.png"),
           lastMessage: lastMessage ? lastMessage.content : '',
-          lastUpdate: lastMessage ? new Date(lastMessage.createdAt).toLocaleString() : new Date(conversation.updatedAt).toLocaleString(),
-          conversationId: conversation._id,
-          receiverId: participant._id
+          lastUpdate: lastMessage ? new Date(lastMessage?.createdAt).toLocaleString() : new Date(conversation?.updatedAt).toLocaleString(),
+          conversationId: conversation?._id,
+          receiverId: participant?._id
         };
       });
-      console.log("conversations", conversations);
-      setConversations(conversations);
+      setConversations(conversations||[]);
     } else {
       showAlert("Error", response.data.message);
     }

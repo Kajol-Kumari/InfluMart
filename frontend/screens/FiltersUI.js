@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/core";
 import CustomSlider from "../shared/CustomSlider";
 import DropDown from "../shared/DropDown";
 import MultipleSelectList from "../shared/MultiSelect";
+import { FilterInfluencerProfile } from "../controller/InfluencerController";
 
 const FiltersUI = () => {
   const navigation = useNavigation()
@@ -25,7 +26,7 @@ const FiltersUI = () => {
   const locationData = [
     {
       key: "india",
-      value: "India"
+      value: "india"
     },
     {
       key: "pakistan",
@@ -59,6 +60,24 @@ const FiltersUI = () => {
     { key: "others", value: "Others" },
   ];
 
+  const handleApplyFilters = async () => {
+    const filters = {
+      location: selectedLocation,
+      category: categories,
+      price: price,
+      platform,
+      followers: selectedFollowersCount, 
+      likes: selectedPostCount, 
+      engagementRate: engagementRate, 
+      audienceAge: selectedAges, 
+      gender,
+      tags, 
+      reachability: reachability, 
+      viewCount: selectedViewsCount, 
+      cities
+    };
+    await FilterInfluencerProfile(filters,navigation);
+  }
   return (
     <ScrollView style={{ backgroundColor: Color.colorWhite }}>
       <View style={[styles.filtersui, styles.filtersuiLayout]}>
@@ -318,7 +337,7 @@ const FiltersUI = () => {
           </View>
           <View style={styles.depth1Frame0}>
             <View style={[styles.depth2Frame01, styles.depth2FrameSpaceBlock]}>
-              <TouchableOpacity onPress={() => { navigation.navigate("InfluencersList") }} style={[styles.depth3Frame05, styles.frameFlexBox]}>
+              <TouchableOpacity onPress={() => handleApplyFilters()} style={[styles.depth3Frame05, styles.frameFlexBox]}>
                 <View style={styles.depth4Frame05}>
                   <Text
                     style={[styles.applyFilters, styles.ageLayout]}
