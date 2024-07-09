@@ -114,5 +114,15 @@ function formatNumber(num) {
   return res;
 }
 
+function timeStampFormatter(timestamp){
+  var milliSeconds=(new Date() - new Date(timestamp))
+  if(milliSeconds>=86400000)
+      return `${Math.floor(milliSeconds/(24*60*60*1000))} days ago`
+  else if(milliSeconds>=3600000)
+      return `${Math.floor(milliSeconds/(60*60*1000))} hour ago`
+  else
+      return `${Math.floor(milliSeconds/(60*1000))} mins ago`
+}
 
-export { transformFB, transformIG, transformYT,formatNumber };
+
+export { transformFB, transformIG, transformYT,formatNumber,timeStampFormatter };
