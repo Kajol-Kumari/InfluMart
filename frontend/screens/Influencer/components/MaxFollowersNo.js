@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { MaxFollowersNoStyles } from "./MaxFollowers.scss";
+import { Padding } from "../../../GlobalStyles";
 
 const socialAccounts = [
   {
@@ -63,6 +64,11 @@ const MaxFollowersNo = ({ route, navigation }) => {
           <Text style={styles.addAccountText}>Add a social account</Text>
           <View style={{width:20,height:20}}></View>
         </View>
+      </View>
+      <View style={{width:"100%",padding:Padding.p_base}}>
+        <Text style={styles.desc}>
+            Choose atleast one platform
+        </Text>
       </View>
       {socialAccounts.map((account, index) => (
         <View key={index} style={[styles.accountContainer, platform==account.name && styles.activeAccount]}>

@@ -47,6 +47,10 @@ const brandSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  conversations: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Conversation"
+  }],
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

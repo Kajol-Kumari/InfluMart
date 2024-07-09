@@ -17,9 +17,8 @@ const BrandIcon = require("../../assets/depth-3-frame-01.png");
 const BothIcon = require("../../assets/depth-3-frame-02.png");
 const AllIcon = require("../../assets/depth-3-frame-03.png");
 
-const InfluencersList = () => {
-  const navigation = useNavigation();
-
+const InfluencersList = ({route,navigation}) => {
+  const newData = route.params?.newData
   const [searchValue, setSearchValue] = React.useState("");
   const [showFloatButton, setShowFloatButton] = React.useState(true);
   const [scrollOffset, setScrollOffset] = React.useState(0);
@@ -34,8 +33,15 @@ const InfluencersList = () => {
     getBrandId(setInfluencerData, showAlert);
   }, [])
   React.useEffect(() => {
+    if(!newData){
     GetAllInfluencerProfile(setInfluencerData)
-  }, [brandId])
+    }else{
+      setInfluencerData(newData)
+    }
+  }, [brandId,route.params])
+  // React.useEffect(()=>{
+  //   console.log(influencerData)
+  // },[influencerData])
   const FakeData = [
     { key: "one", value: "One" },
     { key: "two", value: "Two" },
@@ -52,14 +58,20 @@ const InfluencersList = () => {
     }
     setScrollOffset(currentOffset);
   }
-
+  const filteredData = influencerData
+    ? influencerData.filter((item) =>
+        item.influencerName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.userName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : [];
   return (
     <View style={styles.container}>
       <Depth1Frame11 style={styles.menuBar} onChange={setSearchValue} />
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {influencerData && influencerData.map((item, index) => <InfluencerCard key={index} influencerId={item._id} depth5Frame0={item.profileUrl} kylieCosmetics={item.influencerName} beauty={item.category} />)}
+          {filteredData && filteredData.map((item, index) => <InfluencerCard key={index} userName={item?.userName} influencerId={item?._id} depth5Frame0={item?.profileUrl} kylieCosmetics={item?.influencerName} beauty={item?.category} statistics={{ytData:item?.ytData[0]?.subscriberCount||"N/A",instaData:item?.instaData[0]?.followers||"N/A",fbData:item?.fbData[0]?.followers||"N/A"}}/>)}
           </View>
         </ScrollView>
       </View>
@@ -81,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: Color.colorWhite,
+    backgroundColor: Color.colorBlack,
   },
   menuBar: {
     position: "static",

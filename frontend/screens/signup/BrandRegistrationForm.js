@@ -249,7 +249,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
           </View>
           <View>
             <View style={styles.loginFrame}>
-              <Text style={styles.termsText}>By joining, you agree to our</Text>
+              <Text style={styles.termsText}>By joining, you agree to our </Text>
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("TosScreen", {
