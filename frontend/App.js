@@ -6,7 +6,7 @@ import { Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwtDecode from "jwt-decode";
 import { AlertProvider } from "./util/AlertContext";
-import Chat from './src/components/Chat';
+import Chat from './frontend/components/Chat';
 
 // Import all your screens here
 import Homepage from "./screens/Homepage";
