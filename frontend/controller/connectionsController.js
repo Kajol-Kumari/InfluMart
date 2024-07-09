@@ -208,7 +208,7 @@ const getAllConversations = async (userId, userType, setConversations, showAlert
       const conversations = response.data.conversations.map(conversation => {
         // Find the participant that is not the current user
         const participant = conversation.participants.find(p => p._id !== userId);
-        const lastMessage = conversation.messages.length > 0 ? conversation.messages[conversation.messages.length - 1] : null;
+        const lastMessage = conversation.messages.length > 0 ? conversation.messages[0] : null;
         return {
           name: userType === 'influencer' ? participant.brandName : participant.influencerName,
           profileUrl: participant.profileUrl ? `${API_ENDPOINT}/${participant.profileUrl.replace(/\\/g, "/").replace("uploads/", "")}` : require("../assets/blank-profile.png"),

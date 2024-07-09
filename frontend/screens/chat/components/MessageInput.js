@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../../../GlobalStyles";
 
-const MessageInput = ({setNewMessage}) => {
+const MessageInput = ({setNewMessage,profileUrl}) => {
   const [message, setMessage] = useState("");
   const handleSend = () => {
     setNewMessage(message);
@@ -31,7 +31,7 @@ const MessageInput = ({setNewMessage}) => {
             <Image
               style={styles.sendIcon}
               contentFit="cover"
-              source={require("../../../assets/depth-6-frame-0.png")}
+              source={require("../../../assets/send_icon.png")}
             />
           </TouchableOpacity>
         </View>
@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     color: Color.colorDimgray,
     textAlign: "left",
     flex: 1,
+    outlineStyle:"none",
+    border:"none"
   },
   inputContainer: {
     flex: 1,
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   messageInputContainer: {
-    width: 390,
+    width: "100%",
     height: 72,
     paddingHorizontal: Padding.p_base,
     paddingVertical: Padding.p_xs,

@@ -13,6 +13,10 @@ export const inboxStyles = {
   headerContainer: {
     paddingHorizontal: Padding.p_base,
     backgroundColor: Color.colorWhite,
+    position:"relative",
+    top:0,
+    width:"100%",
+    height:72
   },
   headerContent: {
     flexDirection: "row",
@@ -91,15 +95,19 @@ export const inboxStyles = {
     fontFamily: FontFamily.beVietnamProRegular,
   },
   messagePreviewContainer: {
-    paddingHorizontal: Padding.p_base,
+    marginHorizontal: Padding.p_base,
     paddingTop: Padding.p_9xs,
-    paddingBottom: Padding.p_xs,
+    paddingBottom: Padding.p_base,
     backgroundColor: Color.colorWhite,
+    borderBottomWidth:1,
+    borderColor:"#ccc",
   },
   messagePreview: {
     fontFamily: FontFamily.beVietnamProRegular,
     fontSize: FontSize.size_base,
     color: Color.colorGray_500,
+    marginLeft:56,
+    paddingLeft:Padding.p_base
   },
   spacer: {
     height: 20,
@@ -109,10 +117,13 @@ export const inboxStyles = {
   footer: {
     height: 76,
     paddingHorizontal: Padding.p_xl,
-    paddingBottom: Padding.p_xl,
     justifyContent: "flex-end",
     flexDirection: "row",
-    backgroundColor: Color.colorWhite,
+    backgroundColor: "transparent",
+    width:"auto",
+    position:"absolute",
+    bottom:30,
+    right:30
   },
   newMessageFooterButton: {
     width: 56,
