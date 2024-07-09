@@ -31,7 +31,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const initiatePayment = async () => {
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
-      userName: payload.userName,
+      userName: payload?.userName,
       plan: selectedPlan?.plan || "free",
       startDate: _data.startDate,
       endDate: _data.endDate,
@@ -48,13 +48,18 @@ const PlanChooseInterface = ({ route, navigation }) => {
   };
   useEffect(() => {
     const getPlans = async () => {
-      const data = await getSubscriptionPlans(
-        {
-          platform: payload.follower.platform,
-          followers: payload.follower.value,
-        },
-        showAlert
-      );
+      // const data = await getSubscriptionPlans(
+      //   {
+      //     platform: payload.follower.platform,
+      //     followers: payload.follower.value,
+      //   },
+      //   showAlert
+      // );
+      let data = {
+        halfYearly: 499,
+        quarterly: 299,
+        annually: 899,
+      };
       setPlanData(data);
     };
 
@@ -119,7 +124,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"quarterly"}
               duration={"3 months"}
-              price={`$ ${planData?.quarterly}`}
+              price={`${planData?.quarterly}`}
             />
           )}
           {plans && planData && (
@@ -128,7 +133,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"annually"}
               duration={"1 year"}
-              price={`$ ${planData?.annually}`}
+              price={`${planData?.annually}`}
             />
           )}
         </View>
