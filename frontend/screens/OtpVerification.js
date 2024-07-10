@@ -10,6 +10,7 @@ import {
 import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
 import { verifyOTP } from "../controller/signupController";
 import { useAlert } from "../util/AlertContext";
+import Loader from '../shared/Loader'
 
 const OtpVerification = ({ route, navigation }) => {
   const payload = route.params?.payload;
@@ -17,6 +18,7 @@ const OtpVerification = ({ route, navigation }) => {
   const inputs = React.useRef([]);
   const { showAlert } = useAlert();
   const [error, setError] = React.useState(false);
+  const[loading,setLoading]=React.useState(false)
 
   // Clear OTP input and state when payload changes (if it becomes null)
   React.useEffect(() => {
@@ -48,11 +50,14 @@ const OtpVerification = ({ route, navigation }) => {
       return;
     }
     const _otp = otp.join("");
+    setLoading(true)
     await verifyOTP(_otp, payload, navigation, showAlert);
+    setLoading(false)
   };
 
   return (
     <View style={styles.otpverification}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.depth0Frame0}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity

@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ImageWithFallback from "../util/ImageWithFallback";
 import { LinearGradient } from 'expo-linear-gradient'
 import { formatNumber } from "../helpers/GraphData";
+import Loader from '../shared/Loader'
 
 
 const BrandAssosciated = ({ active }) => {
@@ -17,12 +18,14 @@ const BrandAssosciated = ({ active }) => {
   const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false)
   const [searchValue, setSearchValue] = React.useState("")
   const [brands, setBrands] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
   React.useEffect(() => {
     async function fetchData() {
       const res = await getAllBrandProfiles(showAlert)
       setBrands(res)
-      console.log(res)
+      setLoading(false)
     }
+    setLoading(true)
     fetchData()
   }, [])
 
@@ -44,15 +47,15 @@ const BrandAssosciated = ({ active }) => {
   const filteredBrands = brands.filter((brand) => {
     const searchTerm = searchValue.toLowerCase();
     return (
-      brand.brandName.toLowerCase().includes(searchTerm) ||
+      brand?.brandName?.toLowerCase().includes(searchTerm) ||
       brand.name.toLowerCase().includes(searchTerm) ||
       brand.category.toLowerCase().includes(searchTerm)
     );
   });
 
   return (
-
     <View style={styles.galileoDesign}>
+      {loading && <Loader loading={loading} />}
       <View style={[styles.depth0Frame0, styles.frameBg]}>
         <View style={[styles.depth1Frame0, styles.depth1FrameSpaceBlock]}>
           <View style={{ width: "100%", height: "auto" }}>
@@ -93,31 +96,31 @@ const BrandAssosciated = ({ active }) => {
         </View>
         <ScrollView style={{ width: '100%' }}>
           <View style={styles.depth1Frame1}>
-            {filteredBrands.length > 0 ? 
+            {filteredBrands.length > 0 ?
               filteredBrands.map((brand, index) => {
-                  return (
-                    <TouchableOpacity key={index} onPress={() => { console.log(brand?.profileUrl) }}>
-                      <View style={styles.depth2FrameLayout} >
-                        <ImageWithFallback imageStyle={styles.depth4Frame03} image={brand?.profileUrl} />
-                        <View style={styles.overlayContainer}>
-                          <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
-                            <Text style={styles.insightText}>INSIGHT</Text>
-                            <Text style={styles.google}>{brand?.brandName}</Text>
-                            <Text style={styles.insightText}>category: {brand?.category}</Text>
-                          </LinearGradient>
-                        </View>
-                        <View style={styles.userNameText}>
-                          <Text style={styles.userNameText}>{`@${brand?.name}`}</Text>
-                          <Text style={styles.userNameText}>Collaborations: {brand?.collaborationCount?formatNumber(brand?.collaborationCount):"N/A"}</Text> 
-                        </View>
+                return (
+                  <TouchableOpacity key={index} onPress={() => { console.log(brand?.profileUrl) }}>
+                    <View style={styles.depth2FrameLayout} >
+                      <ImageWithFallback imageStyle={styles.depth4Frame03} image={brand?.profileUrl} />
+                      <View style={styles.overlayContainer}>
+                        <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
+                          <Text style={styles.insightText}>INSIGHT</Text>
+                          <Text style={styles.google}>{brand?.brandName}</Text>
+                          <Text style={styles.insightText}>category: {brand?.category}</Text>
+                        </LinearGradient>
                       </View>
-                    </TouchableOpacity>
-                  )
-                })
-                :
-                <View>
-                  <Text style={{ color: "#ccc", fontSize: FontSize.size_base }}>No Brands found</Text>
-                </View>
+                      <View style={styles.userNameText}>
+                        <Text style={styles.userNameText}>{`@${brand?.name}`}</Text>
+                        <Text style={styles.userNameText}>Collaborations: {brand?.collaborationCount ? formatNumber(brand?.collaborationCount) : "N/A"}</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )
+              })
+              :
+              <View>
+                <Text style={{ color: "#ccc", fontSize: FontSize.size_base }}>No Brands found</Text>
+              </View>
             }
 
           </View>
@@ -404,24 +407,24 @@ const styles = StyleSheet.create({
     height: 350,
     position: "absolute",
     top: 0,
-    overflow:"hidden"
+    overflow: "hidden"
   },
   overlay: {
     height: "100%",
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"flex-end",
-    padding:Padding.p_base,
-    gap:3
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: Padding.p_base,
+    gap: 3
   },
   insightText: {
-    width:"100%",
+    width: "100%",
     fontSize: FontSize.size_xs,
     fontFamily: FontFamily.plusJakartaSansBold,
     color: Color.colorSlategray_100,
   },
   userNameText: {
-    width:"100%",
+    width: "100%",
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.plusJakartaSansBold,
     color: Color.colorSlategray_100,

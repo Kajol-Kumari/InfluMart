@@ -14,6 +14,7 @@ import { handleBrandLogin } from "../../controller/loginController";
 import { loginStyle } from "./LoginStyle";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Loader from '../../shared/Loader'
 
 const LoginPageBrand = () => {
   const navigation = useNavigation();
@@ -21,6 +22,7 @@ const LoginPageBrand = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
+  const[loading,setLoading]=React.useState(false)
 
   return (
     <ScrollView
@@ -30,6 +32,7 @@ const LoginPageBrand = () => {
         backgroundColor: Color.colorWhitesmoke_100,
       }}
     >
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity
         onPress={() => navigation.navigate("BrandorInfluencer")}
       >
@@ -120,6 +123,7 @@ const LoginPageBrand = () => {
           <TouchableOpacity
             style={{ width: "100%" }}
             onPress={async () => {
+              setLoading(true)
               let result = await handleBrandLogin(email, password);
               if (result.success) {
                 showAlert("Success", result.message);
@@ -129,6 +133,7 @@ const LoginPageBrand = () => {
               } else {
                 showAlert("Error", result.message);
               }
+              setLoading(false)
             }}
           >
             <View style={[styles.depth4Frame04, styles.depth4FrameLayout]}>

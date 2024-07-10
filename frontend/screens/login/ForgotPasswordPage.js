@@ -12,14 +12,18 @@ import { loginStyle } from "./LoginStyle";
 import { Color } from "../../GlobalStyles";
 import { useAlert } from "../../util/AlertContext";
 import { forgotPasswordControl } from "../../controller/PasswordController";
+import Loader from '../../shared/Loader'
 
 const ForgotPasswordPage = ({route, navigation}) => {
   const { showAlert } = useAlert();
   const type = route.params?.type;
   console.log(route.params)
   const [username, setUsername] = React.useState("");
+  const[loading,setLoading]=React.useState(false)
   const handleForgotPassword = async () => {
+    setLoading(true)
     await forgotPasswordControl(username, type, showAlert);
+    setLoading(false)
   };
 
   return (
@@ -30,6 +34,7 @@ const ForgotPasswordPage = ({route, navigation}) => {
         backgroundColor: Color.colorWhitesmoke_100,
       }}
     >
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity
         onPress={() => navigation.navigate("BrandorInfluencer")}
       >

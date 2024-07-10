@@ -11,15 +11,20 @@ import { InfluencerDeleteAccountStyles } from "./InfluencerDeleteAccount.scss";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DeleteInfluencerProfile } from "../../../../controller/InfluencerController";
 import { useAlert } from "../../../../util/AlertContext";
+import Loader from '../../../../shared/Loader'
 
 const InfluencerDeleteAccountPage = ({ navigation }) => {
   const {showAlert} = useAlert()
+  const[loading,setLoading]=useState(false)
   const handleDeleteAccount = async () => {
     const influencerId = await AsyncStorage.getItem("influencerId")
+    setLoading(true)
     await DeleteInfluencerProfile(influencerId,navigation,showAlert)
+    setLoading(false)
   }
   return (
     <ScrollView style={styles.scrollView}>
+      {loading&&<Loader loading={loading}/>}
       <TouchableOpacity onPress={() => navigation.navigate("AdminPanel")}>
         <View style={styles.headerContainer}>
           <View style={styles.headerContent}>
