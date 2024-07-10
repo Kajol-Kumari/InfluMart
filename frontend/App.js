@@ -351,6 +351,21 @@ const App = () => {
                   component={FilterUI}
                   options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                  name="CollabPost"
+                  component={CollabPost}
+                  options={{ headerShown: false }}
+                />
+                 <Stack.Screen
+                  name="CampaignDetail"
+                  component={CampaignDetail}
+                  options={{ headerShown: false }}
+                />
+                 <Stack.Screen
+                  name="CollabForm"
+                  component={CollabForm}
+                  options={{ headerShown: false }}
+                />                
               </Stack.Navigator>
             ) : null}
           </NavigationContainer>
