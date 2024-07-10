@@ -48,6 +48,9 @@ import BrandDeleteAccountPage from "./screens/Brand/Settings/Support/BrandDelete
 import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
+import AboutUs from "./screens/AboutUs";
+import BrandService from './screens/BrandService'
+import InfluencerService from './screens/InfluencerService'
 import { CLIENT_URL } from "@env";
 import { SocketContextProvider } from "./util/SocketContext";
 
@@ -346,6 +349,21 @@ const App = () => {
                 <Stack.Screen
                   name="FilterUI"
                   component={FilterUI}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="AboutUs"
+                  component={AboutUs}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="BrandService"
+                  component={BrandService}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="InfluencerService"
+                  component={InfluencerService}
                   options={{ headerShown: false }}
                 />
               </Stack.Navigator>
