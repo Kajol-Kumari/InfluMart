@@ -26,7 +26,7 @@ const Homepage = ({route,navigation}) => {
                 <Image
                   style={[styles.depth4Frame0,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]}
                   contentFit="cover"
-                  source={require("../assets/Influmart.png")}
+                  source={require("../assets/home-page-cover.png")}
                 />
               </View>
             </View>
