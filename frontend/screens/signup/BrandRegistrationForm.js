@@ -15,6 +15,7 @@ import { SendOtp } from "../../controller/signupController";
 import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
+import Loader from '../../shared/Loader'
 
 const BrandRegistrationForm = ({ route, navigation }) => {
   const [name, setName] = useState("");
@@ -22,6 +23,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
+  const[loading,setLoading]=useState(false)
   const { showAlert } = useAlert();
   const payload = route.params?.payload;
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
@@ -73,11 +75,14 @@ const BrandRegistrationForm = ({ route, navigation }) => {
       );
       return;
     }
+    setLoading(true)
     await SendOtp(payload, navigation, showAlert);
+    setLoading(false)
   };
 
   return (
     <ScrollView style={styles.scrollView}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.brandregistrationform}>
         <View style={[styles.depth0Frame0, styles.frameLayout2]}>
           <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>

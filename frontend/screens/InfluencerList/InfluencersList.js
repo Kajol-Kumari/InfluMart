@@ -11,6 +11,7 @@ import InfluencerCard from "./IncluencerCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GetAllInfluencerProfile } from "../../controller/InfluencerController";
 import { useAlert } from "../../util/AlertContext";
+import Loader from '../../shared/Loader'
 
 const InfluencerIcon = require("../../assets/depth-3-frame-0.png");
 const BrandIcon = require("../../assets/depth-3-frame-01.png");
@@ -25,6 +26,7 @@ const InfluencersList = ({route,navigation}) => {
   const [brandId, setBrandId] = React.useState("");
   const [influencerData, setInfluencerData] = React.useState(null);
   const { showAlert } = useAlert()
+  const[loading,setLoading]=React.useState(false)
   React.useEffect(() => {
     const getBrandId = async () => {
       const brandId = await AsyncStorage.getItem("brandId");
@@ -34,14 +36,13 @@ const InfluencersList = ({route,navigation}) => {
   }, [])
   React.useEffect(() => {
     if(!newData){
+    setLoading(true)
     GetAllInfluencerProfile(setInfluencerData)
+    setLoading(false)
     }else{
       setInfluencerData(newData)
     }
   }, [brandId,route.params])
-  // React.useEffect(()=>{
-  //   console.log(influencerData)
-  // },[influencerData])
   const FakeData = [
     { key: "one", value: "One" },
     { key: "two", value: "Two" },
@@ -67,6 +68,7 @@ const InfluencersList = ({route,navigation}) => {
     : [];
   return (
     <View style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <Depth1Frame11 style={styles.menuBar} onChange={setSearchValue} />
       <View style={styles.scrollContainer}>
         <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.scrollView}>

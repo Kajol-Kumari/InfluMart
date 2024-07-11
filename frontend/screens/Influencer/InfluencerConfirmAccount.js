@@ -13,13 +13,16 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useAlert } from "../../util/AlertContext";
 import { InfluencerSignUp } from "../../controller/signupController";
 import { InfluencerConfirmAccountStyles } from "./InfluencerConfirmAccount.scss";
+import Loader from '../../shared/Loader'
 const InfluencerConfirmAccount = ({ route, navigation }) => {
   const payload = route.params?.payload;
   const { showAlert } = useAlert();
   const [showPassword, setShowPassword] = useState(false);
   const [image, setImage] = useState(payload?.profileUrl?.uri);
+  const[loading,setLoading]=useState(false)
 
   const registerInfluencer = async () => {
+    setLoading(true)
     const userData = {
       ...payload,
       price: [payload.price],
@@ -30,6 +33,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
       twitterProfile: payload.social?.tr,
     };
     await InfluencerSignUp(userData, navigation, showAlert);
+    setLoading(false)
   };
 
   const pickImage = async () => {
@@ -46,6 +50,7 @@ const InfluencerConfirmAccount = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.innerContainer}>
         <TouchableOpacity
           style={styles.fullWidth}

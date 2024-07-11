@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-
+import Loader from '../../shared/Loader'
 import {
   StyleSheet,
   View,
@@ -34,6 +34,7 @@ const UserProfile = ({ navigation }) => {
   const [ytData, setYtData] = React.useState(null);
   const [requests, setRequests] = React.useState([]);
   const isFocused = useIsFocused();
+  const[loading,setLoading]=React.useState(false)
   React.useEffect(() => {
     const getData = async () => {
       const id = await AsyncStorage.getItem("influencerId");
@@ -44,9 +45,11 @@ const UserProfile = ({ navigation }) => {
           navigation.navigate("BrandorInfluencer");
           return;
         }
+        setLoading(true)
         setInfluencerId(id);
         GetInfluencerProfile(id, setInfluencer, showAlert);
         await getAllRequests(id, setRequests, showAlert)
+        setLoading(false)
       }
     };
     getData();
@@ -180,6 +183,7 @@ const UserProfile = ({ navigation }) => {
   }, [influencer]);
   return (
     <View style={styles.userprofile}>
+      {loading&&<Loader loading={loading}/>}
       <ScrollView>
         <View style={[styles.depth0Frame0, styles.frameLayout1]}>
           {influencer?.profileUrl &&<Depth1Frame17

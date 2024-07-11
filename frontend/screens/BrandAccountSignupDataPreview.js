@@ -13,6 +13,7 @@ import { useAlert } from "../util/AlertContext";
 import { BrandSignUp } from "../controller/signupController";
 import { BrandAccountSignupDataPreviewStyles } from "./BrandAccountSignupDataPreview.scss";
 import { handleImageSelection } from "../util/imagePickerUtil";
+import Loader from '../shared/Loader'
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const payload = route.params?.payload;
@@ -20,9 +21,12 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const [photo, setPhoto] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const { showAlert } = useAlert();
+  const[loading,setLoading]=React.useState(false)
 
   const registerBrand = async () => {
+    setLoading(true)
     await BrandSignUp({ ...payload, image: photo }, navigation, showAlert);
+    setLoading(false)
   };
 
   const handleUploadPhoto = async () => {
@@ -71,6 +75,7 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.mainView}>
         <TouchableOpacity style={styles.fullWidth} onPress={() => navigation.navigate("OtpVerification")}>
           <View style={styles.header}>

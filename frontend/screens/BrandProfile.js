@@ -20,6 +20,7 @@ import { BrandProfileStyles } from "./BrandProfile.scss";
 import { getBrandProfile } from "../controller/brandController";
 import BrandProfileBottomBar from "../components/BrandProfileBottomBar";
 import ImageWithFallback from "../util/ImageWithFallback";
+import Loader from '../shared/Loader'
 
 const BrandProfile = ({ route, navigation }) => {
   const clickedId = route?.params?.clickedId
@@ -31,6 +32,7 @@ const BrandProfile = ({ route, navigation }) => {
   const [collaborationCount, setCollaborationCount] = useState(0);
   const { width } = useWindowDimensions();
   const [brand, setBrand] = useState(null);
+  const[loading,setLoading]=useState(false)
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -52,6 +54,7 @@ const BrandProfile = ({ route, navigation }) => {
 
   useEffect(() => {
     if (brandId && token) {
+      setLoading(true)
       getBrandCollaborationAnalytics(brandId, showAlert)
         .then((data) => setAnalytics(data))
         .catch((error) =>
@@ -73,12 +76,14 @@ const BrandProfile = ({ route, navigation }) => {
         getBrandProfile(clickedId, showAlert).then((data) => setBrand(data));
       else
         getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
+      setLoading(false)
     }
   }, [brandId, token, clickedId]);
 
 
   return (
     <View style={{ width: "100%", height: "100%" }}>
+      {loading&&<Loader loading={loading}/>}
       <ScrollView style={styles.container}>
         <View style={styles.container}>
           <View style={styles.header}>

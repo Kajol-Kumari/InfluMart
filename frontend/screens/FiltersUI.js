@@ -7,6 +7,7 @@ import CustomSlider from "../shared/CustomSlider";
 import DropDown from "../shared/DropDown";
 import MultipleSelectList from "../shared/MultiSelect";
 import { FilterInfluencerProfile } from "../controller/InfluencerController";
+import Loader from '../shared/Loader'
 
 const FiltersUI = () => {
   const navigation = useNavigation()
@@ -23,6 +24,7 @@ const FiltersUI = () => {
   const [categories, setCategories] = React.useState([])
   const [cities, setCities] = React.useState([])
   const [tags, setTags] = React.useState("")
+  const[loading,setLoading]=React.useState(false)
   const locationData = [
     {
       key: "india",
@@ -61,6 +63,7 @@ const FiltersUI = () => {
   ];
 
   const handleApplyFilters = async () => {
+    setLoading(true)
     const filters = {
       location: selectedLocation,
       category: categories,
@@ -77,9 +80,11 @@ const FiltersUI = () => {
       cities
     };
     await FilterInfluencerProfile(filters,navigation);
+    setLoading(false)
   }
   return (
     <ScrollView style={{ backgroundColor: Color.colorWhite }}>
+      {loading&&<Loader loading={loading}/>}
       <View style={[styles.filtersui, styles.filtersuiLayout]}>
         <View style={styles.depth0Frame0}>
           <View style={styles.depth1Frame0}>

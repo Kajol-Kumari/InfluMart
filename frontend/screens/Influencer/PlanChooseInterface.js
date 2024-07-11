@@ -19,6 +19,7 @@ import {
   handlePayment,
   verifyPayment,
 } from "../../controller/paymentController";
+import Loader from '../../shared/Loader';
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
@@ -27,11 +28,13 @@ const PlanChooseInterface = ({ route, navigation }) => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { showAlert } = useAlert();
   const [orderId, setOrderId] = useState(null);
+  const[loading,setLoading]=useState(false)
 
   const initiatePayment = async () => {
+    setLoading(true)
     const _data = generateSubscriptionDates(selectedPlan?.duration);
     let subscription = {
-      userName: payload.userName,
+      userName: payload?.userName,
       plan: selectedPlan?.plan || "free",
       startDate: _data.startDate,
       endDate: _data.endDate,
@@ -45,16 +48,22 @@ const PlanChooseInterface = ({ route, navigation }) => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false)
   };
   useEffect(() => {
     const getPlans = async () => {
-      const data = await getSubscriptionPlans(
-        {
-          platform: payload.follower.platform,
-          followers: payload.follower.value,
-        },
-        showAlert
-      );
+      // const data = await getSubscriptionPlans(
+      //   {
+      //     platform: payload.follower.platform,
+      //     followers: payload.follower.value,
+      //   },
+      //   showAlert
+      // );
+      let data = {
+        halfYearly: 499,
+        quarterly: 299,
+        annually: 899,
+      };
       setPlanData(data);
     };
 
@@ -62,6 +71,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
   }, []);
   return (
     <ScrollView style={styles.container}>
+      {loading&&<Loader loading={loading}/>}
       <View style={styles.innerContainer}>
         <TouchableOpacity
           style={{ width: "100%" }}
@@ -119,7 +129,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"quarterly"}
               duration={"3 months"}
-              price={`$ ${planData?.quarterly}`}
+              price={`${planData?.quarterly}`}
             />
           )}
           {plans && planData && (
@@ -128,7 +138,7 @@ const PlanChooseInterface = ({ route, navigation }) => {
               select={selectedPlan}
               plan={"annually"}
               duration={"1 year"}
-              price={`$ ${planData?.annually}`}
+              price={`${planData?.annually}`}
             />
           )}
         </View>

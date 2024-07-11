@@ -6,21 +6,27 @@ import { useNavigation } from "@react-navigation/native";
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 import { useAlert } from "../util/AlertContext";
 import { acceptRequest,rejectRequest, sendMessage } from "../controller/connectionsController";
-
+import Loader from '../shared/Loader'
 const FriendRequestPage = ({route,navigation}) => {
   const name = route.params.name
   const requestId = route.params.requestId
   const {showAlert} = useAlert()
+  const[loading,setLoading]=React.useState(false)
   const handleReject = async () => {
+    setLoading(true)
     await rejectRequest(requestId,showAlert)
+    setLoading(false)
     navigation.navigate('UserProfile')
   }
   const handleAccept = async () => {
+    setLoading(true)
     const _data = await acceptRequest(requestId,showAlert)
+    setLoading(false)
     navigation.navigate('UserProfile')
   }
   return (
     <View style={styles.friendrequestpage}>
+      {loading&&<Loader loading={loading}/>}
       {/* Navigate to Userprofile */}
       <TouchableOpacity style={styles.header} onPress={() => navigation.navigate('UserProfile')}>
 

@@ -120,35 +120,51 @@ const sendMessage = async (req, res) => {
 
 const getMessages = async (req, res) => {
   const { conversationId } = req.params;
-  const { userId, userType } = req.body;
-
   try {
     let conversation;
-    if (userType === 'influencer') {
+    let conversation1;
       conversation = await Conversation.findById(conversationId).populate({
         path: 'messages',
         options: { sort: { createdAt: 1 } }, // Sort messages by creation date
-        populate: {
-          path: 'receiver',
-          model: 'Brand',
-          select: 'brandName',
-        }
+        populate: [
+          {
+            path: 'receiver',
+            model: 'influencer',
+            select: 'influencerName',
+          },
+          {
+            path: 'sender',
+            model: 'Brand',
+            select: 'brandName',
+          },
+        ],
       });
-    } else if (userType === 'brand') {
-      conversation = await Conversation.findById(conversationId).populate({
+      conversation1 = await Conversation.findById(conversationId).populate({
         path: 'messages',
         options: { sort: { createdAt: 1 } }, // Sort messages by creation date
-        populate: {
-          path: 'receiver',
-          model: 'influencer',
-          select: 'influencerName',
-        }
+        populate: [
+          {
+            path: 'sender',
+            model: 'influencer',
+            select: 'influencerName',
+          },
+          {
+            path: 'receiver',
+            model: 'Brand',
+            select: 'brandName',
+          },
+        ],
       });
-    }
-
+    conversation.messages.map((message,index) => {
+      if(message.sender==null){
+        conversation.messages[index].sender=conversation1.messages[index].sender
+        conversation.messages[index].receiver=conversation1.messages[index].receiver
+      }}
+    );
     if (!conversation) {
       return res.status(404).json({ message: 'Conversation not found' });
     }
+
     res.status(200).json({ messages: conversation.messages });
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch messages' });
