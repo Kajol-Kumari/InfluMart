@@ -1,8 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
-//import { API_ENDPOINT } from "@env";
-const API_ENDPOINT = "http://localhost:3000";
+import { API_ENDPOINT } from "@env";
 const SocketContext = createContext();
 
 export const useSocketContext = () => {
