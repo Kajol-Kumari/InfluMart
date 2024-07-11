@@ -16,7 +16,7 @@ const CollabForm = () => {
         <TouchableOpacity onPress={handleBackPress}>
           <Image
             style={styles.backButton}
-            source={""}
+            source={require("../../assets/depth-4-frame-07.png")}
           />
         </TouchableOpacity>
         <Text style={styles.headerText}>Create a Campaign</Text>
@@ -90,7 +90,7 @@ const CollabForm = () => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.brandImage}
-          source={""}
+          source={"../../assets/depth-4-frame-15.png"}
         />
       </View>
       <View style={styles.inputGroup}>

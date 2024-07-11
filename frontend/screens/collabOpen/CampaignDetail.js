@@ -8,10 +8,10 @@ const CampaignDetail = () => {
       <View style={styles.header}>
         <Text style={styles.campaignDetails}>Campaign Details</Text>
         <TouchableOpacity style={styles.shareIcon}>
-          <Image style={styles.icon} source={""} />
+          <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-0.png")} />
         </TouchableOpacity>
       </View>
-      <Image style={styles.mainImage} source={""} />
+      <Image style={styles.mainImage} source={"../../assets/collab/depth-4-frame-0.png"} />
       <Text style={styles.title}>Sneaker Brand X - Campaign 2023</Text>
       <Text style={styles.description}>
         We're looking for influencers to promote our new line of sneakers. The campaign is open to all genders and ages.
@@ -19,7 +19,7 @@ const CampaignDetail = () => {
       <Text style={styles.sectionHeader}>Requirements</Text>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Content</Text>
           <Text style={styles.requirementDetail}>Post on Instagram</Text>
@@ -29,7 +29,7 @@ const CampaignDetail = () => {
       </View>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Disclosure</Text>
           <Text style={styles.requirementDetail}>Sponsored</Text>
@@ -39,7 +39,7 @@ const CampaignDetail = () => {
       </View>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Branding</Text>
           <Text style={styles.requirementDetail}>Mention</Text>
@@ -49,7 +49,7 @@ const CampaignDetail = () => {
       </View>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>CTA</Text>
           <Text style={styles.requirementDetail}>Link in Bio</Text>
@@ -61,7 +61,7 @@ const CampaignDetail = () => {
       <Text style={styles.sectionHeader}>Compensation</Text>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-4-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Base Fee</Text>
           <Text style={styles.requirementDetail}>$500</Text>
@@ -69,7 +69,7 @@ const CampaignDetail = () => {
       </View>
 
       <View style={styles.requirement}>
-        <Image style={styles.icon} source={""} />
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Bonus</Text>
           <Text style={styles.requirementDetail}>Free products</Text>
