@@ -281,6 +281,6 @@ export const signupStyles = {
     },
     mandatoryText:{
       color:"#f00",
-      fontWeight:700
+      fontWeight: "700"
     }
   }

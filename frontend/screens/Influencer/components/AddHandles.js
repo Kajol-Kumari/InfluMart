@@ -105,31 +105,6 @@ const AddHandles = ({ route, navigation }) => {
     }
     Alert.alert("Success", `Your ${platform} account has been verified!`);
   }, []);
-
-  useEffect(() => {
-    const handleDeepLink = (event) => {
-      let data = Linking.parse(event.url);
-      if (data.path && data.path.includes('auth')) {
-        const platform = data.path.split('/')[1];
-        if (data.path.includes('success')) {
-          try {
-            const user = JSON.parse(decodeURIComponent(data.queryParams.user));
-            handleAuthSuccess(platform, user);
-          } catch (error) {
-            Alert.alert("Error", "Failed to process authentication data.");
-          }
-        } else if (data.path.includes('failure')) {
-          Alert.alert("Authentication Failed", "Unable to verify your account. Please try again.");
-        }
-      }
-    };
-  
-    Linking.addEventListener('url', handleDeepLink);
-  
-    return () => {
-      Linking.removeEventListener('url', handleDeepLink);
-    };
-  }, []);
   
 
   const handleVerify = async (platform) => {
