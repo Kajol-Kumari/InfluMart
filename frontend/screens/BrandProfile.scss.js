@@ -109,7 +109,7 @@ export const BrandProfileStyles = {
   },
   insightTitle: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: "600",
     marginBottom: 5,
   },
   insightText: {
@@ -137,7 +137,7 @@ export const BrandProfileStyles = {
   },
   requirementTitle: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: "600",
     marginBottom: 5,
   },
   requirementText: {
@@ -153,7 +153,7 @@ export const BrandProfileStyles = {
   },
   collabCount: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: "600",
     color: "#333",
   },
   bottomBar: {

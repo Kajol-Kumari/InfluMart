@@ -162,6 +162,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       selected,
       gender,
     };
+    console.log("payload", payload);
     await InfluencerVerify(payload, navigation, showAlert);
     setLoading(false)
   };
@@ -272,17 +273,15 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                 {mobileNoVerified ? (
                   <Image
                     style={{ width: 28, height: 28 }}
-                    source={{ uri: "" }}
+                    source={require("../../assets/verified_symbol.png")}
                   />
                 ) : (
                   <TouchableOpacity
-                    onPress={() => {
-                      setMobileNoVerified(true);
-                    }}
+                    onPress={() => setMobileNoVerified(true)}
                   >
                     <Image
                       style={{ width: 28, height: 28 }}
-                      source={{ uri: "" }}
+                      source={require("../../assets/verify_symbol.png")}
                     />
                   </TouchableOpacity>
                 )}
