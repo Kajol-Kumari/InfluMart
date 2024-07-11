@@ -10,8 +10,11 @@ import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 
 const Homepage = ({route,navigation}) => {
   const [searchValue, setSearchValue] = React.useState("")
+  const[viewWidth,setViewWidth]=React.useState(0)
   return (
-    <View style={styles.homepage}>
+    <View style={styles.homepage} onLayout={(evt)=>{
+      setViewWidth(evt.nativeEvent.layout.width)
+    }}>
       <View style={[styles.depth0Frame0, styles.frameLayout1]}>
         <Depth1Frame4 onChange={(value) => {
           setSearchValue(value)
@@ -21,9 +24,9 @@ const Homepage = ({route,navigation}) => {
             <View style={styles.frameLayout}>
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
                 <Image
-                  style={[styles.depth4Frame0]}
+                  style={[styles.depth4Frame0,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]}
                   contentFit="cover"
-                  source={require("../assets/contact_background.png")}
+                  source={require("../assets/Influmart.png")}
                 />
               </View>
             </View>
@@ -205,8 +208,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth4Frame0: {
-    width: 320,
-    height: 410
+    width: "100%"
   },
   depth3Frame0: {
     overflow: "hidden",

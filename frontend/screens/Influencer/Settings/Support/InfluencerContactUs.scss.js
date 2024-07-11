@@ -38,9 +38,8 @@ export const InfluencerContactUsStyles = {
     borderWidth: 2,
   },
   contactBackground: {
-    width: 320,
-    height: 410,
-    flex: 1,
+    width: "100%",
+    height: 380
   },
   contactContent: {
     position: "absolute",

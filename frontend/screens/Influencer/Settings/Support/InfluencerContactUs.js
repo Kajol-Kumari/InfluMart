@@ -28,10 +28,13 @@ const InfoBlock = ({ title, description, details }) => (
   </View>
 );
 
-const InfluencerContactUs = ({route,navigation}) => {
+const InfluencerContactUs = ({ route, navigation }) => {
   const navigate = route.params?.navigate
+  const [viewWidth, setViewWidth] = React.useState(0)
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView contentContainerStyle={styles.scrollContainer} onLayout={(evt) => {
+      setViewWidth(evt.nativeEvent.layout.width)
+    }}>
       <View style={styles.contactus}>
         <TouchableOpacity onPress={() => navigation.navigate(navigate)}>
           <View style={styles.headerContainer}>
@@ -45,28 +48,7 @@ const InfluencerContactUs = ({route,navigation}) => {
             </View>
           </View>
         </TouchableOpacity>
-        <View style={styles.contactBlock}>
-          <LinearGradient
-            locations={[0, 1]}
-            colors={["rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.4)"]}
-          >
-            <ImageBackground
-              style={styles.contactBackground}
-              resizeMode="cover"
-              source={require("../../../../assets/contact_background.png")}
-            >
-              <View style={styles.contactContent}>
-                <Text style={[styles.contactUs, styles.emailFlexBox]}>
-                  Contact Us
-                </Text>
-                <Text style={[styles.weAreHere, styles.sendUsAnTypo]}>
-                  We are here to help. Visit our FAQ page for answers to common
-                  questions or reach out to us directly.
-                </Text>
-              </View>
-            </ImageBackground>
-          </LinearGradient>
-        </View>
+        <Image style={[styles.contactBackground, { height: viewWidth <= 375 ? 150 : viewWidth <= 550 ? 180 : viewWidth <= 768 ? 250 : 380 }]} source={require('../../../../assets/contact us.png')} />
         <View>
           <InfoBlock
             title="Email"

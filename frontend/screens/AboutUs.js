@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Image } from 'expo-image'
 import { Padding, Color, FontFamily, FontSize } from '../GlobalStyles'
 import { useNavigation } from '@react-navigation/core'
 
 export default function AboutUs() {
+    const[viewWidth,setViewWidth]=useState(0)
     const navigation=useNavigation()
     return (
-        <View style={styles.aboutUsContainer}>
+        <View style={styles.aboutUsContainer} onLayout={(evt)=>{
+            setViewWidth(evt.nativeEvent.layout.width)
+          }}>
             <View style={styles.topBar}>
                 <View style={{ width: 24, height: 24 }}></View>
                 <Text style={styles.pageTitle}>About Influmart</Text>
@@ -17,7 +20,7 @@ export default function AboutUs() {
             </View>
             <ScrollView style={styles.ScrollView}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={require('../assets/about us.png')} />
+                    <Image style={[styles.image,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]} source={require('../assets/about us.png')} />
                 </View>
                 <View style={{ padding: Padding.p_base }}>
                     <Text style={styles.title}>Our mission is to make work life better every day</Text>
@@ -79,8 +82,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     image: {
-        width: 320,
-        height: 260
+        width: "100%",
+        height: "auto"
     },
     title: {
         fontSize: FontSize.size_3xl,
