@@ -2,12 +2,14 @@ import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View, Text,TouchableOpacity } from "react-native";
 import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/core";
 
 const Depth1Frame3 = ({ contactUs, sanFranciscoCA, contactinflumartcom }) => {
+  const navigation=useNavigation()
   return (
     <View style={styles.depth1Frame5}>
       <View style={styles.depth2Frame0}>
-        <TouchableOpacity style={styles.depth3Frame0}>
+        <TouchableOpacity style={styles.depth3Frame0} onPress={()=>{contactUs=="Contact us"?navigation.navigate("InfluencerContactUsPage",{navigate:"Homepage"}):navigation.navigate("AboutUs")}}>
           <Image
             style={styles.depth4Frame0}
             contentFit="cover"
