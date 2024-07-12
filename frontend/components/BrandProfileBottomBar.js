@@ -13,6 +13,8 @@ const getStyleValue = (key, value) => {
 const BrandProfileBottomBar = ({
   depth5Frame0,
   depth5Frame01,
+  postImage,
+  myNetwork,
   search,
   depth5Frame02,
   myBrands,
@@ -197,6 +199,66 @@ const BrandProfileBottomBar = ({
           </View>
         </TouchableOpacity >
 
+        <TouchableOpacity onPress={() => navigation.navigate('CollabForm')}>
+          <View
+            style={[
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame3Style,
+            ]}
+          >
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={postImage}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame13,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame13Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, profileStyle]}>
+                  Post
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CollabPost')}>
+          <View
+            style={[
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame3Style,
+            ]}
+          >
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={myNetwork}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame13,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame13Style,
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, profileStyle]}>
+                  My Network
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => handleProfileClick()}>
 
           <View

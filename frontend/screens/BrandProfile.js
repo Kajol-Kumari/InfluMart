@@ -243,6 +243,8 @@ const BrandProfile = ({ route, navigation }) => {
         depth5Frame0={require("../assets/depth-5-frame-01.png")}
         depth5Frame01={require("../assets/depth-5-frame-02.png")}
         search="Influencer"
+        myNetwork={require("../assets/depth-5-frame-030.png")}
+        postImage={require("../assets/depth-5-frame-029.png")}
         depth5Frame02={require("../assets/depth-5-frame-03.png")}
         myBrands="Brands"
         depth5Frame03={require("../assets/depth-5-frame-04.png")}
