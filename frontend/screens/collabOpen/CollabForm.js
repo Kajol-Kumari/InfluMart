@@ -1,20 +1,40 @@
 import * as React from "react";
 import { ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
-import {useNavigation} from '@react-navigation/core'
-const CollabForm = () => {
-  const navigation=useNavigation()
+import { createCollabPost } from "../../controller/collabOpenController";
+import { useAlert } from "../../util/AlertContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const CollabForm = ({navigation}) => {
+  const [collabPostData, setCollabPostData] = React.useState({
+    campaignType: '',
+    earningCapacity: '',
+    campaignTimelines: '',
+    minEligibilityCriteria: '',
+    postInfo: '',
+    productReviewInstructions: '',
+    campaignSteps: '',
+    brandName: '',
+    numberOfInfluencers: '',
+    brandDescription: '',
+  });
+  const {showAlert} = useAlert()
+  const handleInputChange = (field, value) => {
+    setCollabPostData({ ...collabPostData, [field]: value });
+  };
   const handleBackPress = () => {
     navigation.navigate("BrandProfile")
-  };
+  }
 
-  const handleNextPress = () => {
-    console.log("Next button pressed");
+  const handleNextPress = async () => {
+    const brandId = await AsyncStorage.getItem("brandId")
+    const data = {...collabPostData,brandId:brandId}
+    await createCollabPost(data, showAlert,navigation);
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={handleBackPress}>
+        <TouchableOpacity onPress={()=>navigation.navigate("BrandProfile")}>
           <Image
             style={styles.backButton}
             source={require("../../assets/depth-4-frame-07.png")}
@@ -28,6 +48,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Fashion, Beauty, Lifestyle"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('campaignType', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -36,6 +57,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="$1,000 - $2,000"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('earningCapacity', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -44,6 +66,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="June 14, 2023 - June 20, 2023"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('campaignTimelines', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -52,6 +75,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="100,000 followers"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('minEligibilityCriteria', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -60,6 +84,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Instagram, Facebook, Twitter"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('postInfo', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -69,6 +94,7 @@ const CollabForm = () => {
           placeholder="Details about product tagging"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('productReviewInstructions', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -78,6 +104,7 @@ const CollabForm = () => {
           placeholder="Steps to follow for the campaign"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('campaignSteps', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -86,12 +113,13 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Brand Name"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('brandName', text)}
         />
       </View>
       <View style={styles.imageContainer}>
         <Image
           style={styles.brandImage}
-          source={"../../assets/depth-4-frame-15.png"}
+          source={""}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -100,6 +128,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="5"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('numberOfInfluencers', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -109,6 +138,7 @@ const CollabForm = () => {
           placeholder="Description of the brand"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('brandDescription', text)}
         />
       </View>
       <View style={styles.footer}>

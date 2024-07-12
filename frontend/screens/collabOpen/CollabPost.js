@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity,Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/core'
+import { getAllCollabPosts } from '../../controller/collabOpenController';
+import { useAlert } from '../../util/AlertContext';
 
-const CollabPost = () => {
-  const [selectedFooterItem, setSelectedFooterItem] = useState('Home');
-  const navigation=useNavigation()
+const CollabPost = ({navigation}) => {
+  const [selectedFooterItem, setSelectedFooterItem] = useState('My Network');
+  const [data,setData] = useState([])
+  const {showAlert} = useAlert()
+  useEffect(()=>{
+    const getData = async () =>{
+      await getAllCollabPosts(setData,showAlert)
+    }
 
+    getData()
+  },[])
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -33,20 +41,15 @@ const CollabPost = () => {
       </View>
 
       <ScrollView style={styles.posts}>
-        {[
-          { title: 'Looking for a co-founder in the fintech space', name: 'Athena G.', degree: '1st Degree' },
-          { title: 'Seeking to collaborate with non-profit organizations', name: 'Jocelyn W.', degree: '2nd Degree' },
-          { title: 'Looking for a full-time artist to join my team', name: 'Linda R.', degree: '3rd Degree' },
-          { title: 'Looking for a co-founder in the fintech space', name: 'Athena G.', degree: '1st Degree' },
-        ].map((post, index) => (
+        {data?.map((post, index) => (
           <Pressable onPress={()=>{navigation.navigate("CampaignDetail")}}>
-            <View key={index} style={styles.postCard}>
-              <View style={styles.postContent}>
-                <Text style={styles.postTitle}>{post.title}</Text>
-                <Text style={styles.postName}>{post.name}</Text>
-                <Text style={styles.postDegree}>{post.degree}</Text>
-              </View>
-              <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
+          <View key={index} style={styles.postCard}>
+            <View style={styles.postContent}>
+              <Text style={styles.postTitle}>{post.brandName}</Text>
+              <Text style={styles.postName}>{post.campaignType}</Text>
+              <Text style={styles.postDegree}>{`${post.numberOfInfluencers} Influencers needed`}</Text>
+            </View>
+            <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
             </View>
           </Pressable>
         ))}
@@ -54,13 +57,13 @@ const CollabPost = () => {
 
       <View style={styles.footer}>
         {[
-          { name: 'Home', icon: 'home' },
-          { name: 'My Network', icon: 'users' },
-          { name: 'Post', icon: 'plus-square' },
-          { name: 'Notification', icon: 'bell' },
-          { name: 'You', icon: 'user' },
+          { name: 'Home', icon: 'home', navigate: "BrandProfile" },
+          { name: 'My Network', icon: 'users', navigate: "CollabPost" },
+          { name: 'Post', icon: 'plus-square', navigate:"CollabForm" },
+          { name: 'Notification', icon: 'bell', navigate:"CollabPost" },
+          { name: 'You', icon: 'user', navigate: "BrandProfile" },
         ].map((item, index) => (
-          <TouchableOpacity key={index} style={styles.footerItem} onPress={() => setSelectedFooterItem(item.name)}>
+          <TouchableOpacity key={index} style={styles.footerItem} onPress={() => navigation.navigate(item.navigate)}>
             <Icon name={item.icon} size={24} color={selectedFooterItem === item.name ? '#000' : '#555'} />
             <Text style={[styles.footerItemText, selectedFooterItem === item.name && styles.footerItemTextSelected]}>
               {item.name}
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
+    overflow: "hidden"
   },
   postName: {
     fontSize: 14,
