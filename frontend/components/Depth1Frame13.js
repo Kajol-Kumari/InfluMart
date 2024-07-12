@@ -22,7 +22,7 @@ const Depth1Frame13 = ({ active }) => {
       navigation.navigate('AdminPanel')
     if (tab == "network")
       //navigation for partnership icon
-      navigation.navigate('UserProfile')
+      navigation.navigate('CollabPost')
     if (tab == "profile")
       navigation.navigate('Analytics')
   }

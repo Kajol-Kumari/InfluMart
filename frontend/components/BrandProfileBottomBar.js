@@ -126,13 +126,44 @@ const BrandProfileBottomBar = ({
       navigation.navigate('BrandProfile')
     } else if (influencer) {
       navigation.navigate('UserProfile')
-    }else{
+    } else {
       navigation.navigate('BrandorInfluencer')
     }
   }
   return (
-    <View style={[styles.depth1Frame13, depth1Frame13Style,style]}>
+    <View style={[styles.depth1Frame13, depth1Frame13Style, style]}>
       <View style={styles.depth2Frame0}>
+        <TouchableOpacity onPress={() => navigation.navigate('CollabForm')}>
+
+          <View
+            style={[
+              styles.depth3Frame1,
+              styles.depth3FrameLayout,
+              depth3Frame1Style,
+            ]}
+          >
+            <View style={[styles.depth4Frame01, styles.depth4FrameFlexBox]}>
+              <Image
+                style={styles.depth5Frame0}
+                contentFit="cover"
+                source={require('../assets/post_icon.png')}
+              />
+            </View>
+            <View
+              style={[
+                styles.depth4Frame11,
+                styles.depth4FrameSpaceBlock,
+                depth4Frame11Style
+              ]}
+            >
+              <View style={styles.depth5Frame01}>
+                <Text style={[styles.search, styles.homeTypo, searchStyle]}>
+                  Post
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('InfluencersList')}>
 
           <View
@@ -241,6 +272,7 @@ const styles = StyleSheet.create({
   },
   depth4FrameFlexBox: {
     height: 32,
+    justifyContent:"center",
     alignItems: "center",
     flexDirection: "row",
   },
@@ -307,7 +339,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 54,
     justifyContent: "space-evenly",
-    gap:20
+    gap: 20
   },
   depth1Frame13: {
     backgroundColor: Color.colorWhite,
@@ -319,8 +351,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_base,
     paddingTop: Padding.p_5xs,
     paddingBottom: Padding.p_xs,
-    position:"absolute",
-    bottom:0
+    position: "absolute",
+    bottom: 0
   },
 });
 

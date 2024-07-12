@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/core'
 
 const CollabPost = () => {
   const [selectedFooterItem, setSelectedFooterItem] = useState('Home');
+  const navigation=useNavigation()
 
   return (
     <View style={styles.container}>
@@ -37,14 +39,16 @@ const CollabPost = () => {
           { title: 'Looking for a full-time artist to join my team', name: 'Linda R.', degree: '3rd Degree' },
           { title: 'Looking for a co-founder in the fintech space', name: 'Athena G.', degree: '1st Degree' },
         ].map((post, index) => (
-          <View key={index} style={styles.postCard}>
-            <View style={styles.postContent}>
-              <Text style={styles.postTitle}>{post.title}</Text>
-              <Text style={styles.postName}>{post.name}</Text>
-              <Text style={styles.postDegree}>{post.degree}</Text>
+          <Pressable onPress={()=>{navigation.navigate("CampaignDetail")}}>
+            <View key={index} style={styles.postCard}>
+              <View style={styles.postContent}>
+                <Text style={styles.postTitle}>{post.title}</Text>
+                <Text style={styles.postName}>{post.name}</Text>
+                <Text style={styles.postDegree}>{post.degree}</Text>
+              </View>
+              <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
             </View>
-            <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
 
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   searchInput: {
-    flex: 1,    
+    flex: 1,
   },
   categories: {
     padding: 16,

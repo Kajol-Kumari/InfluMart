@@ -1,9 +1,10 @@
 import * as React from "react";
 import { ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
-
+import {useNavigation} from '@react-navigation/core'
 const CollabForm = () => {
+  const navigation=useNavigation()
   const handleBackPress = () => {
-    console.log("Back button pressed");
+    navigation.navigate("BrandProfile")
   };
 
   const handleNextPress = () => {
