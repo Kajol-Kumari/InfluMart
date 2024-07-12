@@ -6,6 +6,7 @@ const CampaignDetail = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
+        <View style={{width:24,height:24}}></View>
         <Text style={styles.campaignDetails}>Campaign Details</Text>
         <TouchableOpacity style={styles.shareIcon}>
           <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-0.png")} />
