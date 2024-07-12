@@ -10,9 +10,11 @@ import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
 
 const Homepage = ({route,navigation}) => {
   const [searchValue, setSearchValue] = React.useState("")
-
+  const[viewWidth,setViewWidth]=React.useState(0)
   return (
-    <View style={styles.homepage}>
+    <View style={styles.homepage} onLayout={(evt)=>{
+      setViewWidth(evt.nativeEvent.layout.width)
+    }}>
       <View style={[styles.depth0Frame0, styles.frameLayout1]}>
         <Depth1Frame4 onChange={(value) => {
           setSearchValue(value)
@@ -22,9 +24,9 @@ const Homepage = ({route,navigation}) => {
             <View style={styles.frameLayout}>
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
                 <Image
-                  style={[styles.depth4Frame0]}
+                  style={[styles.depth4Frame0,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]}
                   contentFit="cover"
-                  source={require("../assets/depth-4-frame-01.png")}
+                  source={require("../assets/home-page-cover.png")}
                 />
               </View>
             </View>
@@ -112,7 +114,7 @@ const Homepage = ({route,navigation}) => {
           <Depth1Frame2
             brands="Brands"
             depth3Frame1={require("../assets/depth-3-frame-1.png")}
-            to={"BrandsAssosciated"}
+            to={"BrandService"}
           />
           <Depth1Frame2
             brands="Influencers"
@@ -120,7 +122,7 @@ const Homepage = ({route,navigation}) => {
             propBackgroundColor="#fff"
             propFontFamily="Lexend-Regular"
             propColor="#121217"
-            to={"InfluencersList"}
+            to={"InfluencerService"}
           />
           <View style={styles.depth1Frame7}>
             <View style={styles.depth2Frame05}>
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
   },
   frameLayout: {
-    height: 218,
+    height: "auto",
     width: "100%",
   },
   depth1FrameSpaceBlock: {
@@ -206,12 +208,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth4Frame0: {
-    width: "100%",
-    height: 320
+    width: "100%"
   },
   depth3Frame0: {
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    display:'flex',
+    flexDirection:"row",
+    justifyContent:"center"
   },
   welcomeToInflumart: {
     fontSize: FontSize.size_9xl,

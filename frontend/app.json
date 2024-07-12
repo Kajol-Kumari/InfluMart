@@ -3,9 +3,9 @@
     "name": "influmart",
     "slug": "influmart",
     "description": "One point solution for influencers-brands.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
-    "icon": "./assets/influmart-icon.jpeg",
+    "icon": "./assets/influmart_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -27,7 +27,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.navig8succes.influmart"
+      "package": "com.navig8succes.influmart",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
