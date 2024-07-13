@@ -1,62 +1,85 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { Image } from "expo-image";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { sendCollabOpenRequest } from '../../controller/collabOpenController';
+import { useAlert } from '../../util/AlertContext';
 
-const CampaignDetail = () => {
+const CampaignDetail = ({route,navigation}) => {
+  const { data } = route.params;
+  const {showAlert} = useAlert()
+  console.log(data)
+
+  const handleApply = async () => {
+    const influencerId = await AsyncStorage.getItem('influencerId');
+    await sendCollabOpenRequest(influencerId,data.brandId,showAlert,navigation);
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <View style={{width:24,height:24}}></View>
-        <Text style={styles.campaignDetails}>Campaign Details</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("CollabPost")}>
+          <Text style={styles.campaignDetails}>Campaign Details</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.shareIcon}>
           <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-0.png")} />
         </TouchableOpacity>
       </View>
       <Image style={styles.mainImage} source={"../../assets/collab/depth-4-frame-0.png"} />
-      <Text style={styles.title}>Sneaker Brand X - Campaign 2023</Text>
+      <Text style={styles.title}>{data?.brandName}</Text>
       <Text style={styles.description}>
-        We're looking for influencers to promote our new line of sneakers. The campaign is open to all genders and ages.
+        {data.brandDescription}
       </Text>
+      <Text style={styles.description}>{data?.category!=[]?JSON.parse(data.category[0]).join(","):""}</Text>
       <Text style={styles.sectionHeader}>Requirements</Text>
 
       <View style={styles.requirement}>
         <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
-          <Text style={styles.requirementTitle}>Content</Text>
-          <Text style={styles.requirementDetail}>Post on Instagram</Text>
-          <Text style={styles.requirementDetail}>Create 1 in-feed post and 1 story</Text>
+          <Text style={styles.requirementTitle}>Campaign Type</Text>
+          <Text style={styles.requirementDetail}>{data?.campaignType}</Text>
         </View>
-        <Text style={styles.requirementPoints}>10</Text>
       </View>
 
       <View style={styles.requirement}>
         <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
-          <Text style={styles.requirementTitle}>Disclosure</Text>
-          <Text style={styles.requirementDetail}>Sponsored</Text>
-          <Text style={styles.requirementDetail}>Must include #sponsored</Text>
+          <Text style={styles.requirementTitle}>Campaign Steps</Text>
+          <Text style={styles.requirementDetail}>{data?.campaignSteps}</Text>
         </View>
-        <Text style={styles.requirementPoints}>10% off</Text>
       </View>
 
       <View style={styles.requirement}>
         <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
-          <Text style={styles.requirementTitle}>Branding</Text>
-          <Text style={styles.requirementDetail}>Mention</Text>
-          <Text style={styles.requirementDetail}>Tag @brandx</Text>
+          <Text style={styles.requirementTitle}>Campaign Timeline</Text>
+          <Text style={styles.requirementDetail}>{data?.campaignTimelines}</Text>
         </View>
-        <Text style={styles.requirementPoints}>10</Text>
       </View>
 
       <View style={styles.requirement}>
         <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
-          <Text style={styles.requirementTitle}>CTA</Text>
-          <Text style={styles.requirementDetail}>Link in Bio</Text>
-          <Text style={styles.requirementDetail}>Include swipe up link</Text>
+          <Text style={styles.requirementTitle}>Minimum Eligibility</Text>
+          <Text style={styles.requirementDetail}>{data?.minEligibilityCriteria}</Text>
         </View>
-        <Text style={styles.requirementPoints}>10% off</Text>
+      </View>
+
+      <View style={styles.requirement}>
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
+        <View style={styles.textContainer}>
+          <Text style={styles.requirementTitle}>Review Instructions</Text>
+          <Text style={styles.requirementDetail}>{data.productReviewInstructions}</Text>
+        </View>
+      </View>
+
+      <View style={styles.requirement}>
+        <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
+        <View style={styles.textContainer}>
+          <Text style={styles.requirementTitle}>Open Positions</Text>
+          <Text style={styles.requirementDetail}>{data?.numberOfInfluencers}</Text>
+        </View>
       </View>
 
       <Text style={styles.sectionHeader}>Compensation</Text>
@@ -65,21 +88,22 @@ const CampaignDetail = () => {
         <Image style={styles.icon} source={require("../../assets/collab/depth-4-frame-01.png")} />
         <View style={styles.textContainer}>
           <Text style={styles.requirementTitle}>Base Fee</Text>
-          <Text style={styles.requirementDetail}>$500</Text>
+          <Text style={styles.requirementDetail}>{`$ ${data.earningCapacity}`}</Text>
         </View>
       </View>
 
       <View style={styles.requirement}>
         <Image style={styles.icon} source={require("../../assets/collab/depth-5-frame-01.png")} />
         <View style={styles.textContainer}>
-          <Text style={styles.requirementTitle}>Bonus</Text>
-          <Text style={styles.requirementDetail}>Free products</Text>
+          <Text style={styles.requirementTitle}>Compensation Type</Text>
+          <Text style={styles.requirementDetail}>{data?.compensationType?data?.compensationType:"N/A"}</Text>
         </View>
       </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.applyNow}>Apply Now</Text>
-      </View>
+      <TouchableOpacity onPress={()=>handleApply()}>
+        <View style={styles.footer}> 
+          <Text style={styles.applyNow}>Apply Now</Text>
+        </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
