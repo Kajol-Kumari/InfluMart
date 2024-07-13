@@ -58,12 +58,7 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     type: mongoose.Schema.Types.ObjectId,
     ref: "Conversation"
   }],
-  },
-  {
-    toJSON: { getters: true },
-    toObject: { getters: true },
-  }
-);
+  });
 
 const InfluencerSignupRequest = mongoose.model(
   "influencer",
