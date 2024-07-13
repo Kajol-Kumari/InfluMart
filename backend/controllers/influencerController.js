@@ -69,9 +69,29 @@ exports.signup = async (req, res) => {
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(influencerData.password, 10);
     //data
-    const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
-    const instaData = await InstagramData(influencerData.instaProfile)
-    const ytData = await YoutubeData(influencerData.youtubeChannel)
+    // const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
+    // const instaData = await InstagramData(influencerData.instaProfile)
+    // const ytData = await YoutubeData(influencerData.youtubeChannel)
+    try {
+      instaData = await InstagramData(influencerData.instaProfile);
+    } catch (error) {
+      console.error("Error fetching Instagram data:", error);
+      instaData = {};
+    }
+
+    try {
+      fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`);
+    } catch (error) {
+      console.error("Error fetching Facebook data:", error);
+      fbData = {};
+    }
+
+    try {
+      ytData = await YoutubeData(influencerData.youtubeChannel);
+    } catch (error) {
+      console.error("Error fetching Youtube data:", error);
+      ytData = {};
+    }
     _fbData = fbData;
     _instaData = instaData;
     _ytData = ytData;
