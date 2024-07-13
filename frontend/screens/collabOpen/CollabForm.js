@@ -6,7 +6,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Color} from '../../GlobalStyles'
 
 const CollabForm = ({navigation}) => {
-
   const [collabPostData, setCollabPostData] = React.useState({
     campaignType: '',
     earningCapacity: '',
@@ -23,6 +22,13 @@ const CollabForm = ({navigation}) => {
   const handleInputChange = (field, value) => {
     setCollabPostData({ ...collabPostData, [field]: value });
   };
+  const handleBackPress = async () => {
+    const brandId = await AsyncStorage.getItem("brandId")
+    if(brandId)
+      navigation.navigate("BrandProfile")
+    else
+      navigation.navigate("UserProfile")
+  }
 
   const handleNextPress = async () => {
     const brandId = await AsyncStorage.getItem("brandId")
@@ -33,13 +39,14 @@ const CollabForm = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={()=>navigation.navigate("BrandProfile")}>
+        <TouchableOpacity onPress={handleBackPress}>
           <Image
             style={styles.backButton}
             source={require("../../assets/depth-4-frame-07.png")}
           />
         </TouchableOpacity>
         <Text style={styles.headerText}>Create a Campaign</Text>
+        <View style={{width:24,height:24}}></View>
       </View>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Campaign Type</Text>
@@ -156,6 +163,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    justifyContent:"space-between",
     alignItems: 'center',
     padding: 20,
   },

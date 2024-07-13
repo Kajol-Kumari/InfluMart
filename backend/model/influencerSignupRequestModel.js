@@ -16,10 +16,8 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     phoneNo: {
       country: String,
       number: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed, // Change to Mixed type
         required: true,
-        set: encrypt, // Encrypt phone number before saving
-        get: decrypt, // Decrypt phone number when retrieving
       },
     },
     gender: {
@@ -54,10 +52,12 @@ const influencerSignupRequestSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-    conversations: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Conversation"
-  }],
+    conversations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Conversation",
+      },
+    ],
   },
   {
     toJSON: { getters: true },
