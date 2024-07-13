@@ -1,13 +1,39 @@
 import * as React from "react";
 import { ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { createCollabPost } from "../../controller/collabOpenController";
+import { useAlert } from "../../util/AlertContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Color} from '../../GlobalStyles'
 
-const CollabForm = () => {
-  const handleBackPress = () => {
-    console.log("Back button pressed");
+const CollabForm = ({navigation}) => {
+  const [collabPostData, setCollabPostData] = React.useState({
+    campaignType: '',
+    earningCapacity: '',
+    campaignTimelines: '',
+    minEligibilityCriteria: '',
+    postInfo: '',
+    productReviewInstructions: '',
+    campaignSteps: '',
+    brandName: '',
+    numberOfInfluencers: '',
+    brandDescription: '',
+  });
+  const {showAlert} = useAlert()
+  const handleInputChange = (field, value) => {
+    setCollabPostData({ ...collabPostData, [field]: value });
   };
+  const handleBackPress = async () => {
+    const brandId = await AsyncStorage.getItem("brandId")
+    if(brandId)
+      navigation.navigate("BrandProfile")
+    else
+      navigation.navigate("UserProfile")
+  }
 
-  const handleNextPress = () => {
-    console.log("Next button pressed");
+  const handleNextPress = async () => {
+    const brandId = await AsyncStorage.getItem("brandId")
+    const data = {...collabPostData,brandId:brandId}
+    await createCollabPost(data, showAlert,navigation);
   };
 
   return (
@@ -20,6 +46,7 @@ const CollabForm = () => {
           />
         </TouchableOpacity>
         <Text style={styles.headerText}>Create a Campaign</Text>
+        <View style={{width:24,height:24}}></View>
       </View>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Campaign Type</Text>
@@ -27,6 +54,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Fashion, Beauty, Lifestyle"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('campaignType', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -35,6 +63,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="$1,000 - $2,000"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('earningCapacity', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -43,6 +72,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="June 14, 2023 - June 20, 2023"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('campaignTimelines', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -51,6 +81,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="100,000 followers"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('minEligibilityCriteria', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -59,6 +90,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Instagram, Facebook, Twitter"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('postInfo', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -68,6 +100,7 @@ const CollabForm = () => {
           placeholder="Details about product tagging"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('productReviewInstructions', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -77,6 +110,7 @@ const CollabForm = () => {
           placeholder="Steps to follow for the campaign"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('campaignSteps', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -85,12 +119,13 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="Brand Name"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('brandName', text)}
         />
       </View>
       <View style={styles.imageContainer}>
         <Image
           style={styles.brandImage}
-          source={"../../assets/depth-4-frame-15.png"}
+          source={""}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -99,6 +134,7 @@ const CollabForm = () => {
           style={styles.input}
           placeholder="5"
           placeholderTextColor="#4F7096"
+          onChangeText={(text) => handleInputChange('numberOfInfluencers', text)}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -108,6 +144,7 @@ const CollabForm = () => {
           placeholder="Description of the brand"
           placeholderTextColor="#4F7096"
           multiline={true}
+          onChangeText={(text) => handleInputChange('brandDescription', text)}
         />
       </View>
       <View style={styles.footer}>
@@ -126,6 +163,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    justifyContent:"space-between",
     alignItems: 'center',
     padding: 20,
   },
@@ -176,7 +214,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    backgroundColor: '#1a78e6',
+    backgroundColor: Color.colorRoyalblue,
     padding: 15,
     borderRadius: 10,
     marginHorizontal: 20,

@@ -32,20 +32,19 @@ export const InfluencerContactUsStyles = {
     flex: 1,
   },
   contactBlock: {
-    width: 390,
-    height: 480,
+    width: 320,
+    height: 410,
     margin: "auto",
     borderWidth: 2,
   },
   contactBackground: {
-    width: 390,
-    height: 480,
-    flex: 1,
+    width: "100%",
+    height: 380
   },
   contactContent: {
     position: "absolute",
-    left: 16,
-    top: 370,
+    top: 280,
+    paddingHorizontal:Padding.p_xs
   },
   blockSpacing: {
     paddingBottom: Padding.p_5xs,
@@ -86,6 +85,7 @@ export const InfluencerContactUsStyles = {
     color: Color.colorWhite,
     marginTop: 8,
     alignSelf: "stretch",
+    width:"100%"
   },
   textCommon: {
     textAlign: "left",

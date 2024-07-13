@@ -39,12 +39,13 @@ const postSubscription = async (req, res) => {
       transactionDate: isFree ? null : transactionDate, // Set transactionDate to null if it's a free subscription
     });
     await newSubscription.save();
+    console.log("Subscription created successfully");
     res.status(201).json({ message: "Subscription created successfully" });
   } catch (error) {
     console.log(error)
     res
       .status(400)
-      .json({ message: "Error creating subscription", error: error.message });
+      .json({ message: "Error creating subscription", error: error });
   }
 };
 

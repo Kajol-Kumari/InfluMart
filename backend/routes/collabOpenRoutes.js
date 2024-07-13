@@ -5,7 +5,7 @@ const { postCollabOpen, getAllCollabOpen, sendCollabOpenRequest, allCollabOpenRe
 const brandAuthenticationMiddleware = require('../middleware/brands/brandAuthenticationMiddleware');
 const influencerAuthenticationMiddleware = require('../middleware/influencers/influencerAuthenticationMiddleware');
 
-router.post('/collab-open',brandAuthenticationMiddleware, postCollabOpen);
+router.post('/collab-post',brandAuthenticationMiddleware, postCollabOpen);
 
 router.get('/get-collab-open',getAllCollabOpen)
 

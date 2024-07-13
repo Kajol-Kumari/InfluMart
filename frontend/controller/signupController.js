@@ -106,7 +106,7 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
   data.append("influencerName", payload.name);
   data.append("category",JSON.stringify(payload.selected));
   data.append("phoneNo[country]",payload.country);
-  data.append("phoneNo[number]",payload.number);
+  data.append("phoneNo[number]", payload.number.toString());
   data.append("gender",payload.gender)
   if (payload.profileUrl && payload.profileUrl.uri) {
     // For web, handle base64 string as a Blob
@@ -136,6 +136,7 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
     if (response.status === 201) {
       navigation.navigate("InfluencerAccountSuccess");
     } else {
+      console.log(_data);
       showAlert("Influencer SignUp Error", _data.message);
     }
   } catch (error) {
@@ -154,9 +155,11 @@ const InfluencerVerify = async (payload, navigation, showAlert) => {
     if (response.status === 200) {
       showAlert("Influencer SignUp Error", data.message);
     } else if (response.status === 201) {
+      console.log(data);
       navigation.navigate("PlanChooseInterface", { payload });
     }
   } catch (error) {
+    console.log(error);
     showAlert("Influencer SignUp Error", "Something went wrong");
   }
 };

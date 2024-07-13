@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   depth3Frame05: {
-    backgroundColor: "#1a80e6",
+    backgroundColor: Color.colorRoyalblue,
     paddingHorizontal: 20,
     paddingVertical: 0,
     minWidth: 84,

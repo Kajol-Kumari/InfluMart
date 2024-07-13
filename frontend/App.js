@@ -51,6 +51,9 @@ import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import CollabPost from "./screens/CollabPost";
 import CampaignDetail from "./screens/CampaignDetail";
 import CollabForm from "./screens/CollabForm";
+import AboutUs from "./screens/AboutUs";
+import BrandService from './screens/BrandService'
+import InfluencerService from './screens/InfluencerService'
 import { CLIENT_URL } from "@env";
 import { SocketContextProvider } from "./util/SocketContext";
 
@@ -384,6 +387,20 @@ const App = () => {
                   component={CollabForm}
                   options={{ headerShown: false }}
                 />                
+                  name="AboutUs"
+                  component={AboutUs}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="BrandService"
+                  component={BrandService}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="InfluencerService"
+                  component={InfluencerService}
+                  options={{ headerShown: false }}
+                />
               </Stack.Navigator>
             ) : null}
           </NavigationContainer>

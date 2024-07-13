@@ -16,7 +16,6 @@ const collabOpeningSchema = new mongoose.Schema({
   compensationType: {
     type: String,
     enum: ['Barter', 'Cashback', 'Payout', 'Voucher'],
-    required: true
   },
   numberOfInfluencers: Number,
   brandDescription: String,
