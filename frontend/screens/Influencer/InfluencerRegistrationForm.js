@@ -390,7 +390,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.sectionHeaderText}>
                 Content and age restriction
               </Text>
-              <Text style={styles.madantoryText}>*</Text>
             </View>
           </View>
           <HeadingDescToggle
@@ -409,7 +408,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           <View style={styles.sectionHeader}>
             <View style={styles.labelWrapper}>
               <Text style={styles.sectionHeaderText}>Industry association</Text>
-              <Text style={styles.madantoryText}>*</Text>
             </View>
           </View>
           <HeadingDescToggle

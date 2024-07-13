@@ -75,7 +75,7 @@ export const BrandProfileStyles = {
     color: "black",
   },
   messageButton: {
-    backgroundColor: "#0D7DF2",
+    backgroundColor: Color.colorRoyalblue,
   },
   followButtonText: {
     fontWeight: "bold",
