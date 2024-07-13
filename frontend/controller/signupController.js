@@ -106,7 +106,7 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
   data.append("influencerName", payload.name);
   data.append("category",JSON.stringify(payload.selected));
   data.append("phoneNo[country]",payload.country);
-  data.append("phoneNo[number]",payload.number);
+  data.append("phoneNo[number]", String(payload.number));
   data.append("gender",payload.gender)
   if (payload.profileUrl && payload.profileUrl.uri) {
     // For web, handle base64 string as a Blob
