@@ -22,7 +22,7 @@ const Depth1Frame13 = ({ active }) => {
       navigation.navigate('AdminPanel')
     if (tab == "network")
       //navigation for partnership icon
-      navigation.navigate('UserProfile')
+      navigation.navigate('CollabPost',{navigation})
     if (tab == "profile")
       navigation.navigate('Analytics')
   }
@@ -93,7 +93,7 @@ const Depth1Frame13 = ({ active }) => {
             </View>
             <View style={[styles.depth4Frame13, styles.depth4FrameSpaceBlock]}>
               <View style={styles.depth5Frame01}>
-                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "network" ? "#fff" : "#ccc"}` }]}>Network</Text>
+                <Text style={[styles.home, styles.homeTypo, { color: `${activeTab == "network" ? "#fff" : "#ccc"}` }]}>Opportunity</Text>
               </View>
             </View>
           </View>
