@@ -18,8 +18,8 @@ const influencerSignupRequestSchema = new mongoose.Schema(
       number: {
         type: String,
         required: true,
-        // set: encrypt, // Encrypt phone number before saving
-        // get: decrypt, // Decrypt phone number when retrieving
+        set: encrypt, // Encrypt phone number before saving
+        get: decrypt, // Decrypt phone number when retrieving
       },
     },
     gender: {
