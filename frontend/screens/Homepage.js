@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ScrollView, Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Image, StyleSheet, View, Text, TouchableOpacity, Pressable } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Depth1Frame4 from "../components/Depth1Frame4";
 import Depth1Frame3 from "../components/Depth1Frame3";
@@ -7,51 +7,142 @@ import Depth1Frame2 from "../components/Depth1Frame2";
 import Depth1Frame1 from "../components/Depth1Frame1";
 import Depth1Frame from "../components/Depth1Frame";
 import { Color, Padding, FontSize, Border, FontFamily } from "../GlobalStyles";
+import { LinearGradient } from 'expo-linear-gradient'
+import ImageWithFallback from '../util/ImageWithFallback'
+import {useAlert} from '../util/AlertContext'
+import {getTopAccounts} from '../controller/homeController'
 
-const Homepage = ({route,navigation}) => {
+const Homepage = ({ route, navigation }) => {
   const [searchValue, setSearchValue] = React.useState("")
-  const[viewWidth,setViewWidth]=React.useState(0)
+  const [viewWidth, setViewWidth] = React.useState(0)
+  const showAlert=useAlert()
+  const[topAccounts,setTopAccounts]=React.useState([])
+
+  React.useEffect(()=>{
+    async function fetchData(){
+      const res=await getTopAccounts(showAlert)
+      setTopAccounts(res)
+    }
+    fetchData()
+  },[])
+
+  const data = {
+    features: [
+      {
+        title: "Find Influencers",
+        desc: "Filter and sort based on campaign needs"
+      },
+      {
+        title: "Analyze Influencers",
+        desc: "Make data-driven decisions"
+      },
+      {
+        title: "Influencer Database",
+        desc: "Curate lists and manage relationships"
+      },
+      {
+        title: "Recruit Influencers",
+        desc: "Find influencers interested in your brand"
+      },
+      {
+        title: "Influencer Outreach",
+        desc: "Data-driven communications"
+      },
+      {
+        title: "Manage Campaigns",
+        desc: "Complete oversight from start to finish"
+      }
+    ],
+    ourPlatform: [
+      {
+        title: "Influencer Discover",
+        desc: "Find the influencers that work for you"
+      },
+      {
+        title: "Influencer Relationship Management",
+        desc: "Your processes in one central hub"
+      },
+      {
+        title: "Campaign Manager",
+        desc: "We help your team do more"
+      }
+    ]
+  }
+
   return (
-    <View style={styles.homepage} onLayout={(evt)=>{
+    <View style={styles.homepage} onLayout={(evt) => {
       setViewWidth(evt.nativeEvent.layout.width)
     }}>
       <View style={[styles.depth0Frame0, styles.frameLayout1]}>
         <Depth1Frame4 onChange={(value) => {
           setSearchValue(value)
         }} />
-        <ScrollView style={{marginBottom:80}}>
+        <ScrollView style={{ marginBottom: 80 }}>
           <View style={styles.frameLayout}>
             <View style={styles.frameLayout}>
               <View style={[styles.depth3Frame0, styles.frameLayout]}>
                 <Image
-                  style={[styles.depth4Frame0,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]}
+                  style={[styles.depth4Frame0, { height: viewWidth <= 375 ? 450 : viewWidth <= 550 ? 550 : viewWidth <= 768 ? 400 : 600 }]}
                   contentFit="cover"
                   source={require("../assets/home-page-cover.png")}
                 />
+                <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
+                  <Text
+                    style={[
+                      styles.welcomeToInflumart,
+                      styles.welcomeToInflumartFlexBox,
+                    ]}
+                  >
+                    Welcome to Influmart
+                  </Text>
+                  <Text
+                    style={[styles.anOnboardingPlatform, styles.registrationLayout]}
+                  >
+                    The world's premier marketplace for social media accounts.
+                  </Text>
+                  <TouchableOpacity style={{ width: 160 }} onPress={() => navigation.navigate('Homepage')}>
+                    <View style={[styles.getstartedbtn]}>
+                      <Text
+                        style={[
+                          styles.brandRegistration, { fontSize: 14 }
+                        ]}
+                      >
+                        Get Started
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </LinearGradient>
               </View>
             </View>
           </View>
-          <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[
-                  styles.welcomeToInflumart,
-                  styles.welcomeToInflumartFlexBox,
-                ]}
-              >
-                Welcome to Influmart
-              </Text>
-            </View>
-          </View>
-          <View style={[styles.depth1Frame3, styles.depth1FrameSpaceBlock]}>
-            <View style={styles.depth2Frame01}>
-              <Text
-                style={[styles.anOnboardingPlatform, styles.registrationLayout]}
-              >
-                An onboarding platform for brands and influencers. Join the best
-                brands and influencers in the world.
-              </Text>
-            </View>
+          <View style={styles.whyInflumart} >
+            <Text
+              style={[
+                styles.welcomeToInflumart,
+                styles.welcomeToInflumartFlexBox,
+                {
+                  color: "#000"
+                }
+              ]}
+            >
+              Why Influmart?
+            </Text>
+            <Text
+              style={[styles.anOnboardingPlatform, styles.registrationLayout, { color: Color.colorGray_200 }]}
+            >
+              We offer the best social media accounts in the world.
+            </Text>
+            <TouchableOpacity style={{ width: 160 }} onPress={() => navigation.navigate('Homepage')}>
+              <View style={[styles.getstartedbtn]}>
+                <Text
+                  style={[
+                    styles.brandRegistration, { fontSize: 14 }
+                  ]}
+                >
+                  Learn More
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.depth1Frame4}>
             <View style={styles.depth2Frame03}>
@@ -92,48 +183,69 @@ const Homepage = ({route,navigation}) => {
               </View>
             </View>
           </View>
-          <Depth1Frame3
-            contactUs="Contact us"
-            sanFranciscoCA="San Francisco, CA"
-            contactinflumartcom="contact@influmart.com"
-          />
-          <Depth1Frame3
-            contactUs="About"
-            sanFranciscoCA="Learn more"
-            contactinflumartcom="Get started"
-          />
           <View style={styles.depth1Frame7}>
-            <View style={styles.depth2Frame04}>
-              <View style={styles.depth2Frame01}>
-                <Text style={[styles.services, styles.registrationTypo]}>
-                  Services
-                </Text>
-              </View>
-            </View>
+            <Text style={[styles.subtitle]}>
+              Features
+            </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {
+                data?.features?.map((feature, index) => (
+                  <Feature key={index} feature={feature} />
+                ))
+              }
+            </ScrollView>
           </View>
-          <Depth1Frame2
-            brands="Brands"
-            depth3Frame1={require("../assets/depth-3-frame-1.png")}
-            to={"BrandService"}
-          />
-          <Depth1Frame2
-            brands="Influencers"
-            depth3Frame1={require("../assets/depth-3-frame-1.png")}
-            propBackgroundColor="#fff"
-            propFontFamily="Lexend-Regular"
-            propColor="#121217"
-            to={"InfluencerService"}
-          />
           <View style={styles.depth1Frame7}>
-            <View style={styles.depth2Frame05}>
-              <View style={styles.depth2Frame01}>
-                <Text style={[styles.services, styles.registrationTypo]}>
-                  Recent Highlights
-                </Text>
-              </View>
-            </View>
+            <Text style={[styles.subtitle]}>
+              Our platform
+            </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {
+                data?.ourPlatform?.map((feature, index) => (
+                  <Feature key={index} feature={feature} />
+                ))
+              }
+            </ScrollView>
           </View>
-          <Depth1Frame1 />
+          <View style={styles.depth1Frame7}>
+            <Text style={[styles.subtitle]}>
+              Who we serve
+            </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <Pressable style={[styles.whoweservebox]}>
+                <Text style={styles.whoweservetitle}>FOR BRAND</Text>
+                <Text style={styles.whoweserve}>Save Time. Get Results.</Text>
+                <Text style={styles.whoweservedesc}>We offer tools designed to grow with your brand and support your influencer marketing strategy every step of the way.</Text>
+                <View style={{display:"flex",flexDirection:"row",gap:8}}>
+                  <Text style={styles.learnmoretext}>Learn more</Text>
+                  <Image style={{width:24,height:24}} source={require('../assets/depth-3-frame-1.png')}/>
+                </View>
+              </Pressable>
+              <Pressable style={[styles.whoweservebox]}>
+                <Text style={styles.whoweservetitle}>FOR INFLUENCER</Text>
+                <Text style={styles.whoweserve}>Robust Tools to Boost Client Reach.</Text>
+                <Text style={styles.whoweservedesc}>Your clients want results, and we can help you deliver. Access helpful tools to explore new influencer profiles and improve ROI.</Text>
+                <View style={{display:"flex",flexDirection:"row",gap:8}}>
+                  <Text style={styles.learnmoretext}>Learn more</Text>
+                  <Image style={{width:24,height:24}} source={require('../assets/depth-3-frame-1.png')}/>
+                </View>
+              </Pressable>
+            </ScrollView>
+          </View>
+          <View style={styles.depth1Frame7}>
+            <Text style={[styles.subtitle]}>
+              Top Accounts
+            </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {
+                topAccounts&&topAccounts?.map((account,index)=>{
+                  return(
+                    <AccountProfile account={account} key={index}/>
+                  )
+                })
+              }
+            </ScrollView>
+          </View>
         </ScrollView>
         <Depth1Frame
           depth5Frame0={require("../assets/depth-5-frame-01.png")}
@@ -148,6 +260,27 @@ const Homepage = ({route,navigation}) => {
     </View>
   );
 };
+
+const Feature = ({ feature }) => {
+  return (
+    <Pressable style={styles.featureContainer}>
+      <Image contentFit="cover"
+        source={require("../assets/home-page-cover.png")} style={styles.featureImage} />
+      <Text style={styles.featureName}>{feature?.title}</Text>
+      <Text style={styles.featureDesc}>{feature?.desc}</Text>
+    </Pressable>
+  )
+}
+
+const AccountProfile=({account})=>{
+  return(
+    <Pressable style={styles.accountProfileContainer}>
+      <ImageWithFallback imageStyle={styles.accountProfile} image={account?.profileUrl}/>
+      <Text style={styles.featureName}>@{account?.name}</Text>
+      <Text style={styles.whoweservetitle}>{account?.accountType}</Text>
+    </Pressable>
+  )
+}
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -170,7 +303,7 @@ const styles = StyleSheet.create({
   },
   welcomeToInflumartFlexBox: {
     textAlign: "left",
-    color: Color.colorGray_500,
+    color: Color.colorWhite,
   },
   registrationLayout: {
     lineHeight: 24,
@@ -187,7 +320,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   frameBg1: {
-    backgroundColor: Color.colorMediumslateblue,
+    backgroundColor: Color.colorRoyalblue,
     overflow: "hidden",
   },
   registrationTypo: {
@@ -213,9 +346,9 @@ const styles = StyleSheet.create({
   depth3Frame0: {
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
-    display:'flex',
-    flexDirection:"row",
-    justifyContent:"center"
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent: "center"
   },
   welcomeToInflumart: {
     fontSize: FontSize.size_9xl,
@@ -235,7 +368,7 @@ const styles = StyleSheet.create({
   anOnboardingPlatform: {
     fontFamily: FontFamily.lexendRegular,
     textAlign: "left",
-    color: Color.colorGray_500,
+    color: Color.colorWhite,
   },
   depth1Frame3: {
     height: 'auto',
@@ -255,7 +388,7 @@ const styles = StyleSheet.create({
     height: 24,
   },
   depth4Frame01: {
-    backgroundColor: Color.colorMediumslateblue,
+    backgroundColor: Color.colorRoyalblue,
     overflow: "hidden",
   },
   influencerRegistration: {
@@ -297,10 +430,10 @@ const styles = StyleSheet.create({
     height: 23,
   },
   depth1Frame7: {
-    height: 47,
-    paddingTop: Padding.p_base,
-    paddingBottom: Padding.p_5xs,
-    flexDirection: "row",
+    height: "auto",
+    paddingVertical: Padding.p_base,
+    flexDirection: "column",
+    gap: 12,
     paddingHorizontal: Padding.p_base,
     width: '100%',
   },
@@ -324,6 +457,107 @@ const styles = StyleSheet.create({
   bottomBar: {
     position: "absolute",
     bottom: 0
+  },
+  overlay: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: Padding.p_base,
+    gap: 16,
+    paddingBottom: 40
+  },
+  whyInflumart: {
+    width: "100%",
+    height: "auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    paddingHorizontal: Padding.p_base,
+    gap: 16,
+    paddingVertical: 48
+  },
+  getstartedbtn: {
+    width: "auto",
+    paddingHorizontal: Padding.p_base,
+    paddingVertical: Padding.p_xs,
+    backgroundColor: Color.colorRoyalblue,
+    borderRadius: Border.br_base
+  },
+  subtitle: {
+    letterSpacing: 0,
+    textAlign: "left",
+    fontFamily: FontFamily.lexendBold,
+    fontWeight: "700",
+    fontSize: FontSize.size_lg
+  },
+  featureImage: {
+    width: "100%",
+    height: 150,
+    borderRadius: Border.br_xs
+  },
+  featureName: {
+    marginTop: 8,
+    fontFamily: FontFamily.lexendMedium,
+    fontSize: 16,
+    width: "100%"
+  },
+  featureDesc: {
+    fontFamily: FontFamily.lexendRegular,
+    fontSize: 14,
+    color: Color.colorSlategray_300,
+    width: "100%"
+  },
+  featureContainer: {
+    width: 300,
+    paddingHorizontal: Padding.p_xs,
+    gap: 6,
+    paddingVertical: Padding.p_base,
+    height: "auto",
+    marginEnd: Padding.p_xl
+  },
+  whoweservetitle: {
+    fontFamily: FontFamily.lexendRegular,
+    color: Color.colorRoyalblue,
+    fontSize: FontSize.size_xs
+  },
+  whoweserve: {
+    fontFamily: FontFamily.lexendMedium,
+    fontSize: FontSize.size_3xl
+  },
+  whoweservedesc: {
+    fontFamily: FontFamily.manropeRegular,
+    fontSize: FontSize.size_base,
+    fontWeight: 100,
+    lineHeight: 24
+  },
+  whoweservebox: {
+    backgroundColor:Color.colorWhitesmoke_500,
+    padding:Padding.p_xl,
+    borderRadius:Border.br_base,
+    width:320,
+    gap:14,
+    paddingVertical:40,
+    marginEnd:40
+  },
+  learnmoretext:{
+    fontFamily: FontFamily.manropeRegular,
+    fontSize: FontSize.size_base,
+    fontWeight: 600,
+  },
+  accountProfileContainer:{
+    width:200,
+    height:"auto",
+    marginHorizontal:Padding.p_base,
+    gap:6
+  },
+  accountProfile:{
+    width:200,
+    height:200,
+    borderRadius:Border.br_base
   }
 });
 

@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity 
 import { createCollabPost } from "../../controller/collabOpenController";
 import { useAlert } from "../../util/AlertContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Color} from '../../GlobalStyles'
 
 const CollabForm = ({navigation}) => {
 
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    backgroundColor: '#1a78e6',
+    backgroundColor: Color.colorRoyalblue,
     padding: 15,
     borderRadius: 10,
     marginHorizontal: 20,
