@@ -60,7 +60,7 @@ const InstagramData = async (instagramId) => {
     return store
   } catch (error) {
     console.log(error);
-    return {}
+    return {error: error}
   }
 };
 
@@ -130,7 +130,7 @@ const YoutubeData = async (youtubeId) => {
     return final
   } catch (error) {
     console.log(error);
-    return {}
+    return {error: error}
   }
 };
 
@@ -162,6 +162,7 @@ const YoutubeStats = async (store) =>{
     return final
   } catch (error) {
     console.error(error);
+    return {error: error}
   }
 }
 
@@ -192,7 +193,7 @@ const facebookData = async (facebookUrl) => {
     return store
   } catch (error) {
     console.log(error);
-    return {}
+    return {error: error}
   }
 };
 

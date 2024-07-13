@@ -29,7 +29,7 @@ exports.createOrder = async (req, res) => {
 // Verify payment
 exports.verifyPayment = (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-
+  console.log(razorpay_order_id , razorpay_payment_id , razorpay_signature);
   const body = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = crypto
     .createHmac('sha256', RAZORPAY_SECRET_KEY)
@@ -40,6 +40,7 @@ exports.verifyPayment = (req, res) => {
 
   if (isAuthentic) {
     // Payment is successful, you can mark it as completed in your database
+    console.log('Payment verified successfully');
     res.status(200).json({ message: 'Payment verified successfully' });
   } else {
     res.status(400).json({ message: 'Invalid signature' });

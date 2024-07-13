@@ -28,6 +28,7 @@ const subscribe = async (subscribeData,payload,navigation) => {
       throw new Error(data.message);
     }
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
