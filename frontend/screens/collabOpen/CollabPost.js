@@ -44,7 +44,7 @@ const CollabPost = ({ navigation }) => {
 
         <View style={styles.posts}>
           {data?.map((post, index) => (
-            <Pressable key={index} onPress={() => { navigation.navigate("CampaignDetail") }}>
+            <Pressable key={index} onPress={() => { navigation.navigate("CampaignDetail",{data:post}) }}>
               <View style={styles.postCard}>
                 <View style={styles.postContent}>
                   <Text style={styles.postTitle}>{post.brandName}</Text>
@@ -63,7 +63,7 @@ const CollabPost = ({ navigation }) => {
           { name: 'My Network', icon: require("../../assets/network_icon_light.png"), navigate: "CollabPost" },
           { name: 'Post', icon: require("../../assets/post_icon.png"), navigate: "CollabForm" },
           { name: 'Notification', icon: require("../../assets/notification_icon_light.png"), navigate: "CollabPost" },
-          { name: 'You', icon: require("../../assets/depth-5-frame-04.png"), navigate: "BrandProfile" },
+          { name: 'You', icon: require("../../assets/depth-5-frame-04.png"), navigate: "UserProfile" },
         ].map((item, index) => (
           <TouchableOpacity key={index} style={styles.footerItem} onPress={() => navigation.navigate(item.navigate)}>
             <Image style={{ width: 24, height: 24 }} source={item.icon} />

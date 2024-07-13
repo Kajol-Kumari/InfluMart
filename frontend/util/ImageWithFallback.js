@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
 const ImageWithFallback = ({ image, imageStyle }) => {
+  console.log("image",image)
   const [imageSource, setImageSource] = useState({ uri: image });
   const [imageLoaded, setImageLoaded] = useState(true);
   const fallbackImages = [
