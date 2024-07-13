@@ -42,7 +42,9 @@ exports.verifyUser = async (req,res) =>{
 // Signup an influencer
 exports.signup = async (req, res) => {
   const influencerData = req.body;
-
+  let _fbData = {};
+  let _instaData = {};
+  let _ytData = {};
   try {
     // Check if a user with the same mail already exists
     const existingMail = await InfluencerSignupRequest.findOne({
@@ -70,6 +72,9 @@ exports.signup = async (req, res) => {
     const fbData = await facebookData(`https://www.facebook.com/${influencerData.facebookProfile}`)
     const instaData = await InstagramData(influencerData.instaProfile)
     const ytData = await YoutubeData(influencerData.youtubeChannel)
+    _fbData = fbData;
+    _instaData = instaData;
+    _ytData = ytData;
     const track = trackingData();
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({
@@ -89,10 +94,10 @@ exports.signup = async (req, res) => {
     console.log(err);
     if (err.name === "MongoError" && err.code === 11000) {
       // Handle the unique constraint violation error
-      res.status(400).json({ message: "Username already exists", error: err, fbData: fbData, instaData: instaData, ytData: ytData });
+      res.status(400).json({ message: "Username already exists", error: err, fbData: _fbData, instaData: _instaData, ytData: _ytData });
     } else {
       console.error("Error saving influencer data:", err);
-      res.status(500).json({ message: "Failed to save influencer data", error:err, fbData: fbData, instaData: instaData, ytData: ytData });
+      res.status(500).json({ message: "Failed to save influencer data", error:err, fbData: _fbData, instaData: _instaData, ytData: _ytData });
     }
   }
 };
