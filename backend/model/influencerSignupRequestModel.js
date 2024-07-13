@@ -16,10 +16,20 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     phoneNo: {
       country: String,
       number: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed, // Change to Mixed type
         required: true,
-        set: encrypt, // Encrypt phone number before saving
-        get: decrypt, // Decrypt phone number when retrieving
+        set: function (val) {
+          // Encrypt the value before saving
+          return encrypt(val.toString());
+        },
+        get: function (val) {
+          // Decrypt the value when retrieving
+          try {
+            return decrypt(val);
+          } catch (error) {
+            return val; // Return the encrypted value if decryption fails
+          }
+        },
       },
     },
     gender: {
@@ -54,11 +64,18 @@ const influencerSignupRequestSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-    conversations: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Conversation"
-  }],
-  });
+    conversations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Conversation",
+      },
+    ],
+  },
+  {
+    toJSON: { getters: true },
+    toObject: { getters: true },
+  }
+);
 
 const InfluencerSignupRequest = mongoose.model(
   "influencer",
