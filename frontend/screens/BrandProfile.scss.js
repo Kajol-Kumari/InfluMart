@@ -1,4 +1,4 @@
-import {Color, Padding} from '../GlobalStyles';
+import {Color, Padding,FontFamily,FontSize} from '../GlobalStyles';
 
 export const BrandProfileStyles = {
   container: {
@@ -159,5 +159,31 @@ export const BrandProfileStyles = {
   bottomBar: {
     position: "absolute",
     bottom: 0
-  }
+  },
+  depth1Frame2: {
+    height: 60,
+    paddingTop: Padding.p_xl,
+    paddingBottom: Padding.p_xs,
+    flexDirection: "row",
+  },
+  depth1FrameSpaceBlock: {
+    paddingHorizontal: Padding.p_base,
+    width: 390,
+  },
+  depth2Frame01: {
+    width: "auto",
+    height: 28,
+  },
+  depth3Frame01: {
+    alignSelf: "stretch",
+  },
+  collaborationRequests: {
+    fontSize: FontSize.size_3xl,
+    letterSpacing: 0,
+    lineHeight: 28,
+    fontWeight: "700",
+    fontFamily: FontFamily.beVietnamProBold,
+    color: "black",
+    textAlign: "left",
+  },
 };

@@ -34,7 +34,7 @@ const brandSchema = new mongoose.Schema({
     type: String,
     default: "N/A",
   },
-  notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Request" }],
+  notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "CollabOpenRequest" }],
   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
   profileUrl: {
     type: String,
