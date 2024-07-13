@@ -109,7 +109,7 @@ const Homepage = ({ route, navigation }) => {
                   >
                     The world's premier marketplace for social media accounts.
                   </Text>
-                  <TouchableOpacity style={{ width: 160 }} onPress={() => navigation.navigate('Homepage')}>
+                  <TouchableOpacity style={{ width: 160 }} onPress={() => navigation.navigate('BrandorInfluencer')}>
                     <View style={[styles.getstartedbtn]}>
                       <Text
                         style={[
