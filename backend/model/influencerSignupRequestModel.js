@@ -18,18 +18,6 @@ const influencerSignupRequestSchema = new mongoose.Schema(
       number: {
         type: mongoose.Schema.Types.Mixed, // Change to Mixed type
         required: true,
-        set: function (val) {
-          // Encrypt the value before saving
-          return encrypt(val.toString());
-        },
-        get: function (val) {
-          // Decrypt the value when retrieving
-          try {
-            return decrypt(val);
-          } catch (error) {
-            return val; // Return the encrypted value if decryption fails
-          }
-        },
       },
     },
     gender: {
