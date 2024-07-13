@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 const mongoose = require("mongoose");
 const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
+const { encrypt, decrypt } = require("../utils/encryption");
 
 
 exports.verifyUser = async (req,res) =>{
@@ -76,10 +77,15 @@ exports.signup = async (req, res) => {
     _instaData = instaData;
     _ytData = ytData;
     const track = trackingData();
+    const encryptedPhoneNo = encrypt(influencerData.phoneNo.number)
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({
       ...influencerData,
       password: hashedPassword,
+      phoneNo:{
+        country:influencerData.phoneNo.country,
+        number: encryptedPhoneNo
+      },
       instaData: [instaData],
       fbData: [fbData],
       ytData: [ytData],
@@ -158,7 +164,7 @@ exports.getProfile = async (req, res) => {
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
     }
-    console.log(influencer);
+    influencer.phoneNo.number = decrypt(influencer.phoneNo.number)
     res.status(200).json({ influencer });
   } catch (err) {
     console.error("Error getting influencer profile:", err);
