@@ -1,9 +1,9 @@
-import { API_ENDPOINT } from "@env";
+//import { API_ENDPOINT } from "@env";
 import { Platform } from "react-native";
 import RazorpayCheckout from 'react-native-razorpay';
 import { RAZORPAY_KEY_ID } from "@env";
 import { subscribe } from "./subscriptionController";
-
+const API_ENDPOINT = "http://192.168.73.76:3000";
 export const createOrder = async ({ amount, currency, receipt }) => {
   try {
     const response = await fetch(`${API_ENDPOINT}/api/payment/create-order`, {
@@ -176,6 +176,7 @@ const handlePaymentWeb = async (
           "Your payment has been processed successfully."
         );
       } catch (error) {
+        console.log(error);
         showAlert("Payment Failed", "Your payment could not be verified.");
         throw error;
       }

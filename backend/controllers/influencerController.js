@@ -86,12 +86,13 @@ exports.signup = async (req, res) => {
     await influencer.save();
     res.status(201).json({ message: "Influencer signed up successfully" });
   } catch (err) {
+    console.log(err);
     if (err.name === "MongoError" && err.code === 11000) {
       // Handle the unique constraint violation error
-      res.status(400).json({ message: "Username already exists" });
+      res.status(400).json({ message: "Username already exists", error: err, fbData: fbData, instaData: instaData, ytData: ytData });
     } else {
       console.error("Error saving influencer data:", err);
-      res.status(500).json({ message: "Failed to save influencer data" });
+      res.status(500).json({ message: "Failed to save influencer data", error:err, fbData: fbData, instaData: instaData, ytData: ytData });
     }
   }
 };
@@ -147,12 +148,12 @@ exports.getProfile = async (req, res) => {
     // const influencerObjectId = new mongoose.Types.ObjectId(influencerId);
     const influencer = await InfluencerSignupRequest.findById(
       influencerId
-    ).select("-password -phoneNo");
+    ).select("-password");
 
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
     }
-
+    console.log(influencer);
     res.status(200).json({ influencer });
   } catch (err) {
     console.error("Error getting influencer profile:", err);
