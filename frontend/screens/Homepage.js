@@ -30,41 +30,50 @@ const Homepage = ({ route, navigation }) => {
     features: [
       {
         title: "Find Influencers",
-        desc: "Filter and sort based on campaign needs"
+        desc: "Filter and sort based on campaign needs",
+        image:require("../assets/home-page-cover.png")
       },
       {
         title: "Analyze Influencers",
-        desc: "Make data-driven decisions"
+        desc: "Make data-driven decisions",
+        image:require("../assets/feature2.png")
       },
       {
         title: "Influencer Database",
-        desc: "Curate lists and manage relationships"
+        desc: "Curate lists and manage relationships",
+        image:require("../assets/feature3.jpg")
       },
       {
         title: "Recruit Influencers",
-        desc: "Find influencers interested in your brand"
+        desc: "Find influencers interested in your brand",
+        image:require("../assets/feature4.jpg")
       },
       {
         title: "Influencer Outreach",
-        desc: "Data-driven communications"
+        desc: "Data-driven communications",
+        image:require("../assets/feature5.jpg")
       },
       {
         title: "Manage Campaigns",
-        desc: "Complete oversight from start to finish"
+        desc: "Complete oversight from start to finish",
+        image:require("../assets/feature6.jpg")
       }
     ],
     ourPlatform: [
       {
         title: "Influencer Discover",
-        desc: "Find the influencers that work for you"
+        desc: "Find the influencers that work for you",
+        image:require("../assets/feature7.jpg")
       },
       {
         title: "Influencer Relationship Management",
-        desc: "Your processes in one central hub"
+        desc: "Your processes in one central hub",
+        image:require("../assets/feature8.jpg")
       },
       {
         title: "Campaign Manager",
-        desc: "We help your team do more"
+        desc: "We help your team do more",
+        image:require("../assets/feature9.jpg")
       }
     ]
   }
@@ -114,35 +123,6 @@ const Homepage = ({ route, navigation }) => {
                 </LinearGradient>
               </View>
             </View>
-          </View>
-          <View style={styles.whyInflumart} >
-            <Text
-              style={[
-                styles.welcomeToInflumart,
-                styles.welcomeToInflumartFlexBox,
-                {
-                  color: "#000"
-                }
-              ]}
-            >
-              Why Influmart?
-            </Text>
-            <Text
-              style={[styles.anOnboardingPlatform, styles.registrationLayout, { color: Color.colorGray_200 }]}
-            >
-              We offer the best social media accounts in the world.
-            </Text>
-            <TouchableOpacity style={{ width: 160 }} onPress={() => navigation.navigate('Homepage')}>
-              <View style={[styles.getstartedbtn]}>
-                <Text
-                  style={[
-                    styles.brandRegistration, { fontSize: 14 }
-                  ]}
-                >
-                  Learn More
-                </Text>
-              </View>
-            </TouchableOpacity>
           </View>
           <View style={styles.depth1Frame4}>
             <View style={styles.depth2Frame03}>
@@ -216,19 +196,11 @@ const Homepage = ({ route, navigation }) => {
                 <Text style={styles.whoweservetitle}>FOR BRAND</Text>
                 <Text style={styles.whoweserve}>Save Time. Get Results.</Text>
                 <Text style={styles.whoweservedesc}>We offer tools designed to grow with your brand and support your influencer marketing strategy every step of the way.</Text>
-                <View style={{display:"flex",flexDirection:"row",gap:8}}>
-                  <Text style={styles.learnmoretext}>Learn more</Text>
-                  <Image style={{width:24,height:24}} source={require('../assets/depth-3-frame-1.png')}/>
-                </View>
               </Pressable>
               <Pressable style={[styles.whoweservebox]}>
                 <Text style={styles.whoweservetitle}>FOR INFLUENCER</Text>
                 <Text style={styles.whoweserve}>Robust Tools to Boost Client Reach.</Text>
                 <Text style={styles.whoweservedesc}>Your clients want results, and we can help you deliver. Access helpful tools to explore new influencer profiles and improve ROI.</Text>
-                <View style={{display:"flex",flexDirection:"row",gap:8}}>
-                  <Text style={styles.learnmoretext}>Learn more</Text>
-                  <Image style={{width:24,height:24}} source={require('../assets/depth-3-frame-1.png')}/>
-                </View>
               </Pressable>
             </ScrollView>
           </View>
@@ -265,7 +237,7 @@ const Feature = ({ feature }) => {
   return (
     <Pressable style={styles.featureContainer}>
       <Image contentFit="cover"
-        source={require("../assets/home-page-cover.png")} style={styles.featureImage} />
+        source={feature?.image} style={styles.featureImage} />
       <Text style={styles.featureName}>{feature?.title}</Text>
       <Text style={styles.featureDesc}>{feature?.desc}</Text>
     </Pressable>
@@ -415,13 +387,15 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   depth2Frame03: {
-    height: 108,
+    height: "auto",
     alignItems: "center",
     width: "100%",
+    marginTop:40,
+    paddingBottom:30
   },
   depth1Frame4: {
     height: 132,
-    paddingVertical: Padding.p_xs,
+    paddingVertical:30,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
