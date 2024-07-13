@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    backgroundColor: Color.colorMediumslateblue,
+    backgroundColor: Color.colorRoyalblue,
     padding: 15,
     borderRadius: 10,
     marginHorizontal: 20,
