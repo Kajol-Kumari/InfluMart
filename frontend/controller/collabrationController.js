@@ -1,7 +1,7 @@
-import { API_ENDPOINT } from "@env";
+//import { API_ENDPOINT } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
+const API_ENDPOINT = "http://localhost:3000";
 const getBrandCollaborations = async (brandId, showAlert) => {
   const token = await AsyncStorage.getItem("token");
   try {

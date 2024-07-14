@@ -100,7 +100,12 @@ const BrandProfile = ({ route, navigation }) => {
             </TouchableOpacity>
             <View style={[styles.profileContainer]}>
               <View style={styles.profileImageContainer}>
-                {brand?.profileUrl || (
+                {brand?.profileUrl==null?(
+                  <ImageWithFallback
+                    imageStyle={styles.profileImage}
+                    image={brand?.profileUrl}
+                  />
+                ):brand?.profileUrl&&(
                   <ImageWithFallback
                     imageStyle={styles.profileImage}
                     image={brand?.profileUrl}
