@@ -175,6 +175,7 @@ const getMessages = async (conversationId,userId,userType, setMessages, showAler
         createdAt: message.createdAt,
         sender:{
           name: userId===message.sender._id? "You": message.sender?.brandName || message.sender?.influencerName,
+          profileUrl: message.sender?.profileUrl ? `${API_ENDPOINT}/${message.sender?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : null
         },
         timeAgo: timeStampFormatter(message.createdAt)
       }));

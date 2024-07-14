@@ -48,7 +48,15 @@ const InfluencerContactUs = ({ route, navigation }) => {
             </View>
           </View>
         </TouchableOpacity>
-        <Image style={[styles.contactBackground,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]} source={require('../../../../assets/contact us.png')} />
+        {/* Image is not displaying */}
+        <View style={styles.contactBlock}>
+            <ImageBackground
+              style={[styles.contactBackground,{height:viewWidth<=375?150:viewWidth<=550?180:viewWidth<=768?250:410}]}
+              resizeMode="cover"
+              source={require("../../../../assets/contact_us.png")}
+            >
+            </ImageBackground>
+        </View>
         <View>
           <InfoBlock
             title="Email"

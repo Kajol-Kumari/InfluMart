@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
   whoweservedesc: {
     fontFamily: FontFamily.manropeRegular,
     fontSize: FontSize.size_base,
-    fontWeight: 100,
+    fontWeight: "100",
     lineHeight: 24
   },
   whoweservebox: {
@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
   learnmoretext:{
     fontFamily: FontFamily.manropeRegular,
     fontSize: FontSize.size_base,
-    fontWeight: 600,
+    fontWeight: "600",
   },
   accountProfileContainer:{
     width:200,

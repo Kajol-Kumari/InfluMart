@@ -38,7 +38,6 @@ const InboxInterface = () => {
       let data;
       const _influencer = await AsyncStorage.getItem('influencerId')
       const _brand = await AsyncStorage.getItem('brandId')
-      console.log(_influencer, _brand)
       if (_influencer) {
         id = _influencer;
         data = await getAllConversations(id, 'influencer', setConversations, showAlert)
@@ -102,7 +101,21 @@ const InboxInterface = () => {
             // <View key={index}>
             <TouchableOpacity key={index} onPress={() => navigation.navigate("ChatInterface", { name: message?.name, image: message?.profileUrl, conversationId: message?.conversationId, userId: userId, userType: userType, receiverId: message?.receiverId })}>
               <View style={styles.messageContainer}>
-                <ImageWithFallback image={message?.profileUrl} imageStyle={styles.messageImage} key={index} />
+              {message?.profileUrl == null ? (
+                  <ImageWithFallback
+                    imageStyle={styles.messageImage}
+                    image={message?.profileUrl}
+                    key={index}
+                  />
+                ) : (
+                  message?.profileUrl && (
+                    <ImageWithFallback
+                      imageStyle={styles.messageImage}
+                      image={isNaN(message?.profileUrl)==false?`${message?.profileUrl}`:message?.profileUrl}
+                      key={index}
+                    />
+                  )
+                )}
                 <View style={styles.messageContent}>
                   <Text style={styles.messageTitle}>{message?.name}</Text>
                   <Text style={styles.messageStatus}>{message?.lastUpdate}</Text>
