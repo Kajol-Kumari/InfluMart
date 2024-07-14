@@ -8,75 +8,100 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { TosAndPpStyles } from "./TosPP.scss";
-const TosScreen = ({route,navigation}) => {
+const TosScreen = ({ route, navigation }) => {
   const navigate = route.params?.navigate;
   const content = [
     {
       subheading: "Contact Information:",
       bulletPoints: [
-        "Email: influmart@gmail.com",
-        "Address: [Your Company Address Here]",
+        "Email: influmart.social@influmart.in",
+        "Address: Bengaluru, karnataka, India",
       ],
     },
     {
       heading: "1. Acceptance of Terms",
       content:
-        "By accessing and using Influmart, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.",
+        "By accessing or using Influmart, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services.",
     },
     {
       heading: "2. Description of Service",
       content:
-        "Influmart provides a platform for influencers and brands to connect and collaborate. Our services include but are not limited to facilitating communication, project management, and payment processing between influencers and brands.",
+        "Influmart is a platform connecting influencers and brands for collaborative marketing opportunities. Our services include profile creation, campaign management, communication facilitation, and secure payment processing between parties.",
     },
     {
       heading: "3. User Accounts",
       content:
-        "To use certain features of Influmart, you must register and create an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.",
+        "You must register to use Influmart. You are responsible for maintaining the confidentiality of your account and password. Users must provide accurate, current, and complete information during registration and keep their profile information updated.",
     },
     {
       heading: "4. User Conduct",
       content:
-        "You agree to use Influmart only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the platform. Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within Influmart.",
+        "Users must not engage in any activity that: violates laws or regulations; infringes on intellectual property rights; is fraudulent, false, or misleading; harasses or discriminates against others; distributes malware or viruses; or interferes with the proper functioning of Influmart.",
     },
     {
-      heading: "5. Intellectual Property",
+      heading: "5. Content Ownership and Licensing",
       content:
-        "All content, trademarks, and data on this site, including but not limited to software, databases, text, graphics, icons, hyperlinks, private information, designs, and agreements, are the property of or licensed to Influmart and as such are protected from infringement by local and international legislation and treaties.",
+        "Users retain ownership of their content posted on Influmart. By posting content, you grant Influmart a non-exclusive, worldwide, royalty-free license to use, modify, publicly perform, publicly display, reproduce, and distribute such content on and through Influmart.",
     },
     {
-      heading: "6. Privacy Policy",
+      heading: "6. Influencer Responsibilities",
       content:
-        "We respect your privacy and are committed to protecting your personal information. Our Privacy Policy explains how we collect, use, and disclose information about you.",
+        "Influencers must disclose their relationship with brands as per applicable advertising standards and laws. They are responsible for the accuracy of their reported metrics and for delivering agreed-upon services to brands.",
     },
     {
-      heading: "7. Payment Terms",
+      heading: "7. Brand Responsibilities",
       content:
-        "Influmart facilitates payments between influencers and brands. By using our payment services, you agree to our Payment Terms, which are incorporated herein by reference.",
+        "Brands must provide clear campaign briefs, adhere to agreed-upon terms with influencers, and make timely payments for services rendered. They are responsible for ensuring their products and promotional content comply with all applicable laws and regulations.",
     },
     {
-      heading: "8. Termination",
+      heading: "8. Payment Terms",
       content:
-        "We reserve the right to terminate or suspend your account and access to Influmart at our sole discretion, without notice, for conduct that we believe violates these Terms of Service or is harmful to other users of Influmart, us, or third parties, or for any other reason.",
+        "Influmart facilitates payments between influencers and brands. We may charge service fees for transactions. All fees are non-refundable. Users are responsible for all applicable taxes related to their use of Influmart.",
     },
     {
-      heading: "9. Limitation of Liability",
+      heading: "9. Dispute Resolution",
       content:
-        "Influmart shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (a) your use or inability to use the platform; (b) any unauthorized access to or use of our servers and/or any personal information stored therein.",
+        "In the event of a dispute between users, Influmart will provide a resolution process. Users agree to attempt to resolve disputes through our internal processes before pursuing external legal action.",
     },
     {
-      heading: "10. Governing Law",
+      heading: "10. Intellectual Property",
       content:
-        "These Terms of Service shall be governed by and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law principles.",
+        "The Influmart platform, including its original content, features, and functionality, is owned by Influmart and protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.",
     },
     {
-      heading: "11. Changes to Terms",
+      heading: "11. Privacy and Data Protection",
       content:
-        "We reserve the right, at our sole discretion, to modify or replace these Terms of Service at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.",
+        "Our Privacy Policy, incorporated herein by reference, explains how we collect, use, and protect your personal information. By using Influmart, you consent to our data practices as described in our Privacy Policy.",
     },
     {
-      heading: "12. Contact Us",
+      heading: "12. Limitation of Liability",
       content:
-        "If you have any questions about these Terms of Service, please contact us at influmart@gmail.com.",
+        "Influmart shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the service. Our liability to you for any cause whatsoever shall not exceed the amount paid by you to Influmart.",
+    },
+    {
+      heading: "13. Indemnification",
+      content:
+        "You agree to indemnify and hold Influmart harmless from any claims, losses, liability, damages, and/or costs (including attorney fees) arising from your violation of these Terms of Service or your use of Influmart's services.",
+    },
+    {
+      heading: "14. Termination",
+      content:
+        "We may terminate or suspend your account and access to Influmart immediately, without prior notice or liability, for any reason, including breach of these Terms of Service. Upon termination, your right to use Influmart will immediately cease.",
+    },
+    {
+      heading: "15. Changes to Terms",
+      content:
+        "We reserve the right to modify these Terms of Service at any time. We will notify users of any material changes via email or through the platform. Your continued use of Influmart after changes constitute acceptance of those changes.",
+    },
+    {
+      heading: "16. Governing Law",
+      content:
+        "These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts located in Bengaluru, Karnataka, India.",
+    },
+    {
+      heading: "17. Contact Information",
+      content:
+        "For any questions about these Terms of Service, please contact us at influmart.social@influmart.in.",
     },
   ];
 
