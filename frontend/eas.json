@@ -12,11 +12,5 @@
       }
     }
   },
-  "submit": {
-    "production": {
-      "android" : {
-        "serviceAccountKeyPath" : "../../verdant-bond-253217-6d3d66c4adf5.json"
-      }
-    }
-  }
+  "submit": {}
 }
