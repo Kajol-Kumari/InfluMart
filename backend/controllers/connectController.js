@@ -130,12 +130,12 @@ const getMessages = async (req, res) => {
           {
             path: 'receiver',
             model: 'influencer',
-            select: 'influencerName',
+            select: 'influencerName profileUrl',
           },
           {
             path: 'sender',
             model: 'Brand',
-            select: 'brandName',
+            select: 'brandName profileUrl',
           },
         ],
       });
@@ -146,12 +146,12 @@ const getMessages = async (req, res) => {
           {
             path: 'sender',
             model: 'influencer',
-            select: 'influencerName',
+            select: 'influencerName profileUrl',
           },
           {
             path: 'receiver',
             model: 'Brand',
-            select: 'brandName',
+            select: 'brandName profileUrl',
           },
         ],
       });
