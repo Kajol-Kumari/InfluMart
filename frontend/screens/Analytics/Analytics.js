@@ -82,7 +82,7 @@ const Analytics = ({ route, navigation }) => {
             setSocialData(data);
             const sortedPosts = data?.instaData[
               data?.instaData.length - 1
-            ].lastPosts.sort((a, b) => b.likes - a.likes);
+            ]?.lastPosts?.sort((a, b) => b.likes - a.likes);
             const popularPosts = sortedPosts?.slice(0, 2);
             let popular = popularPosts?.map((post) => ({
               title: post.text,

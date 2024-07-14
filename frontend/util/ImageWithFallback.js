@@ -17,7 +17,9 @@ const ImageWithFallback = ({ image, imageStyle }) => {
     require('../assets/influencer10.jpg'),
   ];
   useEffect(()=>{
-    if(!image){
+    if(!image || image == null || image == undefined){
+        handleError()
+    }else if(!isNaN(image)){
         handleError()
     }
   },[image])

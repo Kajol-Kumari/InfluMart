@@ -1,4 +1,3 @@
-// LineChart.js
 import React from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View, Text, StyleSheet } from "react-native";
@@ -12,28 +11,44 @@ const chartConfig = {
   backgroundGradientTo: "#FFFFFF",
   backgroundGradientToOpacity: 0,
   color: (opacity = 0.5) => `rgba(99, 112, 135, ${opacity})`,
-  strokeWidth: 5, // thicker line
+  strokeWidth: 5,
   barPercentage: 0.5,
-  useShadowColorFromDataset: false, // optional
+  useShadowColorFromDataset: false,
   propsForBackgroundLines: {
-    strokeDasharray: "", // This will remove the grid lines (no dash array)
-    strokeWidth: 0, // Ensure no stroke width for background lines
+    strokeDasharray: "",
+    strokeWidth: 0,
   },
-  hideLegend: true, // Hide legend if not needed
-  decimalPlaces: 0, // Removes decimal places from values
+  hideLegend: true,
+  decimalPlaces: 0,
   hideHorizontalGridLines: true,
   hideVerticalGridLines: true,
 };
 
 const MyLineChart = ({ tracking, data, title }) => {
 
+  const isValidData = (data) => {
+    return data.every((point) => !isNaN(point));
+  };
+
+  const validatedData = data.map(point => 
+    point !== undefined && point !== " " ? Number(point) : 0
+  );
+
+  if (!isValidData(validatedData)) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>Data Not Available</Text>
+      </View>
+    );
+  }
+
   const chartData = {
     labels: tracking,
     datasets: [
       {
-        data: data,
-        color: (opacity = 1) => `rgba(99, 112, 135, ${opacity})`, // line color
-        strokeWidth: 6, // thicker line
+        data: validatedData,
+        color: (opacity = 1) => `rgba(99, 112, 135, ${opacity})`,
+        strokeWidth: 6,
       },
     ],
   };
@@ -42,7 +57,7 @@ const MyLineChart = ({ tracking, data, title }) => {
     <View>
       <LineChart
         data={chartData}
-        width={450}
+        width={screenWidth}
         height={220}
         formatYLabel={formatNumber}
         chartConfig={chartConfig}
@@ -52,5 +67,16 @@ const MyLineChart = ({ tracking, data, title }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  errorContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 220,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 16,
+  },
+});
 
 export default MyLineChart;
