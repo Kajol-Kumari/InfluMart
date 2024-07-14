@@ -23,7 +23,6 @@ import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrat
 import PlanChooseInterface from "./screens/Influencer/PlanChooseInterface";
 import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
-import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
 import FilterUI from "./screens/FiltersUI";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
@@ -56,6 +55,8 @@ import { SocketContextProvider } from "./util/SocketContext";
 import CollabPost from "./screens/collabOpen/CollabPost";
 import CampaignDetail from "./screens/collabOpen/CampaignDetail";
 import CollabForm from "./screens/collabOpen/CollabForm";
+import BrandProfile from "./screens/BrandProfile/BrandProfile";
+import BrandCollabRequestPage from "./screens/BrandProfile/components/BrandCollabRequestPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -264,7 +265,11 @@ const App = () => {
                   component={BrandProfile}
                   options={{ headerShown: false }}
                 />
-                
+                <Stack.Screen
+                  name="BrandCollabRequestPage"
+                  component={BrandCollabRequestPage}
+                  options={{ headerShown: false }}
+                />
                 <Stack.Screen
                   name="CollabPost"
                   component={CollabPost}

@@ -144,7 +144,7 @@ const acceptCollabOpen = async (requestId, showAlert, navigation) => {
     );
     if (response.status === 200) {
       showAlert('Success', 'Request accepted and message sent');
-      navigation.navigate('Conversations'); // Navigate to the conversations screen or appropriate screen
+      navigation.navigate('BrandProfile'); 
     } else {
       showAlert('Error', response.data.message);
     }
@@ -169,6 +169,7 @@ const rejectCollabOpen = async (requestId, showAlert) => {
     );
     if (response.status === 200) {
       showAlert('Success', 'Request rejected successfully');
+      navigation.navigate('BrandProfile');
     } else {
       showAlert('Error', response.data.message);
     }

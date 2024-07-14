@@ -64,7 +64,7 @@ const InboxInterface = () => {
       {loading&&<Loader loading={loading}/>}
       <View style={styles.headerContainer}>
         <View style={styles.headerContent}>
-          <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <View style={styles.headerTitleContainer}>
               <Text style={styles.headerTitle}>Inbox</Text>
             </View>

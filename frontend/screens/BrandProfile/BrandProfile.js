@@ -12,18 +12,19 @@ import {
   getBrandCollaborationAnalytics,
   getBrandCollaborations,
   getBrandMinimumRequirements,
-} from "../controller/collabrationController";
-import { useAlert } from "../util/AlertContext";
+} from "../../controller/collabrationController";
+import { useAlert } from "../../util/AlertContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { formatNumber } from "../helpers/GraphData";
+import { formatNumber } from "../../helpers/GraphData";
 import { BrandProfileStyles } from "./BrandProfile.scss";
-import { getBrandProfile } from "../controller/brandController";
-import BrandProfileBottomBar from "../components/BrandProfileBottomBar";
-import ImageWithFallback from "../util/ImageWithFallback";
-import Loader from "../shared/Loader";
-import ProductCard from "./UserProfile/ProductCard";
-import { getAllCollabOpenRequests } from "../controller/collabOpenController";
-import {Padding, Color} from '../GlobalStyles';
+import { getBrandProfile } from "../../controller/brandController";
+import BrandProfileBottomBar from "../../components/BrandProfileBottomBar";
+import ImageWithFallback from "../../util/ImageWithFallback";
+import Loader from "../../shared/Loader";
+import { getAllCollabOpenRequests } from "../../controller/collabOpenController";
+import { Padding, Color } from "../../GlobalStyles";
+import BrandProductCard from "./components/BrandProductCard";
+import { useIsFocused } from "@react-navigation/core";
 
 const BrandProfile = ({ route, navigation }) => {
   const clickedId = route?.params?.clickedId;
@@ -37,7 +38,7 @@ const BrandProfile = ({ route, navigation }) => {
   const [brand, setBrand] = useState(null);
   const [loading, setLoading] = useState(false);
   const [requests, setRequests] = useState(null);
-
+  const isFocused = useIsFocused();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -59,9 +60,9 @@ const BrandProfile = ({ route, navigation }) => {
 
   useEffect(() => {
     if (brandId && token) {
-      setLoading(true)
-      
-      getAllCollabOpenRequests(brandId,setRequests, showAlert)
+      setLoading(true);
+
+      getAllCollabOpenRequests(brandId, setRequests, showAlert);
 
       getBrandCollaborationAnalytics(brandId, showAlert)
         .then((data) => setAnalytics(data))
@@ -84,7 +85,7 @@ const BrandProfile = ({ route, navigation }) => {
       else getBrandProfile(brandId, showAlert).then((data) => setBrand(data));
       setLoading(false);
     }
-  }, [brandId, token, clickedId]);
+  }, [brandId, token, clickedId,isFocused]);
 
   return (
     <View style={{ width: "100%", height: "100%" }}>
@@ -142,7 +143,7 @@ const BrandProfile = ({ route, navigation }) => {
             <View showsVerticalScrollIndicator={false}>
               {requests != null &&
                 requests?.map((item, index) => (
-                  <ProductCard
+                  <BrandProductCard
                     key={index}
                     imageSource={item.imageSource}
                     postTitle={item.postTitle}
@@ -159,9 +160,7 @@ const BrandProfile = ({ route, navigation }) => {
             </View>
           ) : (
             <View style={{ width: "100%", padding: Padding.p_base }}>
-              <Text style={{ color: "black" }}>
-                No request found.
-              </Text>
+              <Text style={{ color: "black" }}>No request found.</Text>
             </View>
           )}
 
@@ -172,7 +171,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.insightIcon}
                   resizeMode="cover"
-                  source={require("../assets/growth.png")}
+                  source={require("../../assets/growth.png")}
                 />
               </View>
               <View style={styles.insightDetails}>
@@ -190,7 +189,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.insightIcon}
                   resizeMode="cover"
-                  source={require("../assets/growth.png")}
+                  source={require("../../assets/growth.png")}
                 />
               </View>
               <View style={styles.insightDetails}>
@@ -210,7 +209,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.insightIcon}
                   resizeMode="cover"
-                  source={require("../assets/growth.png")}
+                  source={require("../../assets/growth.png")}
                 />
               </View>
               <View style={styles.insightDetails}>
@@ -232,7 +231,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.requirementIcon}
                   resizeMode="cover"
-                  source={require("../assets/Mini-follower.png")}
+                  source={require("../../assets/Mini-follower.png")}
                 />
               </View>
               <View style={styles.requirementDetails}>
@@ -249,7 +248,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.requirementIcon}
                   resizeMode="cover"
-                  source={require("../assets/likes.png")}
+                  source={require("../../assets/likes.png")}
                 />
               </View>
               <View style={styles.requirementDetails}>
@@ -266,7 +265,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.requirementIcon}
                   resizeMode="cover"
-                  source={require("../assets/post-frequency.png")}
+                  source={require("../../assets/post-frequency.png")}
                 />
               </View>
               <View style={styles.requirementDetails}>
@@ -289,7 +288,7 @@ const BrandProfile = ({ route, navigation }) => {
                 <Image
                   style={styles.collabIcon}
                   resizeMode="cover"
-                  source={require("../assets/collab_count.png")}
+                  source={require("../../assets/collab_count.png")}
                 />
               </View>
               <Text style={styles.collabCount}>
@@ -302,14 +301,14 @@ const BrandProfile = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <BrandProfileBottomBar
-        depth5Frame0={require("../assets/depth-5-frame-01.png")}
-        depth5Frame01={require("../assets/depth-5-frame-02.png")}
+        depth5Frame0={require("../../assets/depth-5-frame-01.png")}
+        depth5Frame01={require("../../assets/depth-5-frame-02.png")}
         search="Influencer"
-        myNetwork={require("../assets/depth-5-frame-030.png")}
-        postImage={require("../assets/depth-5-frame-029.png")}
-        depth5Frame02={require("../assets/depth-5-frame-03.png")}
+        myNetwork={require("../../assets/depth-5-frame-030.png")}
+        postImage={require("../../assets/depth-5-frame-029.png")}
+        depth5Frame02={require("../../assets/depth-5-frame-03.png")}
         myBrands="Brands"
-        depth5Frame03={require("../assets/depth-5-frame-04.png")}
+        depth5Frame03={require("../../assets/depth-5-frame-04.png")}
         style={styles.bottomBar}
       />
     </View>
