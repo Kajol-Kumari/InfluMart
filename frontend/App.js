@@ -38,8 +38,8 @@ import InfluencerDeleteAccountPage from "./screens/Influencer/Settings/Support/I
 import InfluencerContactUs from "./screens/Influencer/Settings/Support/InfluencerContactUs";
 import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/InfluencerHelpCenter";
 import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
-import TosScreen from "./screens/TosAndPp/TosScreen";
-import PPScreen from "./screens/TosAndPp/PPScreen";
+import TosScreen from "./screens/TermsAndPrivacy/TermsOfService";
+import PPScreen from "./screens/TermsAndPrivacy/PrivacyPolicy";
 import UserProfile from "./screens/UserProfile/UserProfile";
 import BrandAdminPanel from "./screens/Brand/BrandAdminPanel";
 import BrandLogOutPage from "./screens/Brand/Settings/BrandLogout";
