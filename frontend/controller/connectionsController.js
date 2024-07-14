@@ -1,8 +1,8 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import { API_ENDPOINT } from '@env';
+import { API_ENDPOINT } from '@env';
 import {timeStampFormatter} from '../helpers/GraphData'
-const API_ENDPOINT = "http://localhost:3000";
+
 const sendRequest = async (senderId, receiverId, showAlert) => {
   const token = await AsyncStorage.getItem('token');
   try {
