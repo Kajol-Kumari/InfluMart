@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { API_ENDPOINT } from "@env";
-
 const getTopAccounts = async (showAlert) => {
     const token = await AsyncStorage.getItem("token")
     try {
