@@ -2,7 +2,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API_ENDPOINT} from "@env"
 
-
 const createCollabPost = async (collabPostData, showAlert,navigation) => {
   const token = await AsyncStorage.getItem('token');
   try {
@@ -144,7 +143,7 @@ const acceptCollabOpen = async (requestId, showAlert, navigation) => {
     );
     if (response.status === 200) {
       showAlert('Success', 'Request accepted and message sent');
-      navigation.navigate('Conversations'); // Navigate to the conversations screen or appropriate screen
+      navigation.navigate('BrandProfile'); 
     } else {
       showAlert('Error', response.data.message);
     }
@@ -169,6 +168,7 @@ const rejectCollabOpen = async (requestId, showAlert) => {
     );
     if (response.status === 200) {
       showAlert('Success', 'Request rejected successfully');
+      navigation.navigate('BrandProfile');
     } else {
       showAlert('Error', response.data.message);
     }
