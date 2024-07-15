@@ -75,6 +75,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const price = route.params?.price;
   const { showAlert } = useAlert();
   const photo = route.params?.photo;
+  const isCompleted=route.params?.isCompleted||{addSocialProfile:false,addProfilePhoto:false,addSocialFollowers:false,pricePerPost:false}
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [openCountryCode, setOpenCountryCode] = useState(false);
@@ -328,13 +329,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   photo,
                   social,
+                  isCompleted
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addSocialProfile?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -349,13 +351,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   social,
                   photo,
+                  isCompleted
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addProfilePhoto?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -375,13 +378,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   social,
                   photo,
                   follower,
+                  isCompleted
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addSocialFollowers?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -430,13 +434,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   photo,
                   price,
+                  isCompleted
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.pricePerPost?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>

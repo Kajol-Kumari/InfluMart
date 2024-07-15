@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "start",
+    justifyContent: "center",
   },
   trendingContainer: {
     paddingHorizontal: Padding.p_base,
