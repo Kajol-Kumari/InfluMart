@@ -22,26 +22,28 @@ const PlanDetails = ({ duration, price, suggested }) => (
   </View>
 );
 
-const CheckoutButton = ({ onPress }) => (
-  <TouchableOpacity style={styles.checkoutButton} onPress={onPress}>
+const CheckoutButton = () => (
+  <View style={styles.checkoutButton}>
     <Image
       style={styles.buttonIcon}
       contentFit="cover"
       source={require("../assets/depth-6-frame-01.png")}
     />
     <Text style={styles.checkoutText}>Checkout this plan</Text>
-  </TouchableOpacity>
+  </View>
 );
 
-const PlanBox = ({duration,select,plan,suggested=false,setSelect,price}) => {
+const PlanBox = ({ duration, select, plan, suggested = false, setSelect, price }) => {
   const handleCheckout = () => {
-    setSelect({duration:duration,price:price,plan:plan})
+    setSelect({ duration: duration, price: price, plan: plan })
   };
   return (
-    <View style={[styles.container, select?.duration==duration && styles.activeContainer ]}>
-      <PlanDetails duration={duration} price={`$ ${price}`} suggested={suggested} />
-      <CheckoutButton onPress={handleCheckout} />
-    </View>
+    <TouchableOpacity onPress={handleCheckout}>
+      <View style={[styles.container, select?.duration == duration && styles.activeContainer]}>
+        <PlanDetails duration={duration} price={`$ ${price}`} suggested={suggested} />
+        <CheckoutButton/>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: Color.colorGainsboro_200,
     borderWidth: 1,
-    width: 358,
+    width: 328,
     height: 178,
     padding: Padding.p_5xl,
     borderRadius: Border.br_xs,
@@ -70,9 +72,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   planTextContainer: {
-    width:"100%",
+    width: "100%",
     flexDirection: "row",
-    justifyContent:"space-between",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   planDuration: {
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontFamily: FontFamily.workSansBold,
     color: Color.colorGray_300,
-    width:"68%"
+    width: "auto"
   },
   suggestedTag: {
     backgroundColor: Color.colorDodgerblue,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     borderColor: Color.colorGainsboro_200,
     padding: Padding.p_base,
     borderRadius: Border.br_xs,
-    width:"65%"
+    width: "65%"
   },
   buttonIcon: {
     width: 20,

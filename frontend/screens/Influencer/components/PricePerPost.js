@@ -54,6 +54,7 @@ const PricePerPost = ({ route, navigation }) => {
   const social = route.params?.social
   const follower = route.params?.follower
   const photo = route.params?.photo
+  const isCompleted=route.params?.isCompleted
   React.useEffect(() => {
     if (route.params?.price) {
       const { ig, yt, tr, tt } = route.params.price;
@@ -68,7 +69,7 @@ const PricePerPost = ({ route, navigation }) => {
       <View style={styles.pricePerPostContainer}>
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("InfluencerRegistrationForm",{social,follower,photo})}
+            onPress={() => navigation.navigate("InfluencerRegistrationForm",{social,follower,photo,isCompleted})}
           >
             <Image
               style={styles.headerIcon}
@@ -121,7 +122,7 @@ const PricePerPost = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("InfluencerRegistrationForm", {
               price: { ig: instagram, yt: youtube, tr: twitter, tt: tiktok },
-              social,follower,photo
+              social,follower,photo,isCompleted:{...isCompleted,pricePerPost:true}
             })
           }
         >
