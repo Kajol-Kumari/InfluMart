@@ -20,11 +20,6 @@ const Depth1Frame4 = ({ onChange }) => {
             }} style={styles.SearchBar} placeholder="Search anything" /> :
             <>
               <TouchableOpacity style={[styles.depth3Frame0, styles.depth3FrameLayout]}>
-                <Image
-                  style={styles.depth4Frame0}
-                  contentFit="cover"
-                  source={require("../assets/depth-4-frame-0.png")}
-                />
               </TouchableOpacity>
               <View style={[styles.depth3Frame1, styles.frameFlexBox]}>
                 <View style={styles.depth4Frame01}>

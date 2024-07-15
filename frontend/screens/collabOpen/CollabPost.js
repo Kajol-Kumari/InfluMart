@@ -1,69 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Image } from 'expo-image'
 import { getAllCollabPosts } from '../../controller/collabOpenController';
 import { useAlert } from '../../util/AlertContext';
+import {Padding} from '../../GlobalStyles'
 
-const CollabPost = ({navigation}) => {
+const CollabPost = ({ navigation }) => {
   const [selectedFooterItem, setSelectedFooterItem] = useState('My Network');
-  const [data,setData] = useState([])
-  const {showAlert} = useAlert()
-  useEffect(()=>{
-    const getData = async () =>{
-      await getAllCollabPosts(setData,showAlert)
+  const [data, setData] = useState([])
+  const { showAlert } = useAlert()
+  useEffect(() => {
+    const getData = async () => {
+      await getAllCollabPosts(setData, showAlert)
     }
 
     getData()
-  },[])
-
+  }, [])
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Home</Text>
-        <Icon name="bell" size={24} color="#000" />
+        <Image source={require("../../assets/notification_icon_light.png")} style={{ width: 28, height: 28 }} />
       </View>
-
-      <View style={styles.searchContainer}>
-        <View style={styles.searchInputContainer}>
-          <Icon name="search" size={20} color="#888" style={styles.searchIcon} />
-          <TextInput style={styles.searchInput} placeholder="Find" />
-        </View>
-      </View>
-
-      <View style={styles.categories}>
-        <Text style={styles.categoryTitle}>Categories</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {['Business', 'Non-profit', 'Art', 'Technology'].map((category, index) => (
-            <View key={index} style={styles.categoryTag}>
-              <Text>{category}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
-
-      <ScrollView style={styles.posts}>
-        {data?.map((post, index) => (
-          <View key={index} style={styles.postCard}>
-            <View style={styles.postContent}>
-              <Text style={styles.postTitle}>{post.brandName}</Text>
-              <Text style={styles.postName}>{post.campaignType}</Text>
-              <Text style={styles.postDegree}>{`${post.numberOfInfluencers} Influencers needed`}</Text>
-            </View>
-            <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
+      <ScrollView>
+        <View style={styles.searchContainer}>
+          <View style={styles.searchInputContainer}>
+            <Icon name="search" size={20} color="#888" style={styles.searchIcon} />
+            <TextInput style={styles.searchInput} placeholder="Find" />
           </View>
-        ))}
-      </ScrollView>
+        </View>
 
+        <View style={styles.categories}>
+          <Text style={styles.categoryTitle}>Categories</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {['Business', 'Non-profit', 'Art', 'Technology'].map((category, index) => (
+              <View key={index} style={styles.categoryTag}>
+                <Text>{category}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        <View style={styles.posts}>
+          {data?.map((post, index) => (
+            <Pressable key={index} onPress={() => { navigation.navigate("CampaignDetail",{data:post}) }}>
+              <View style={styles.postCard}>
+                <View style={styles.postContent}>
+                  <Text style={styles.postTitle}>{post.brandName}</Text>
+                  <Text style={styles.postName}>{post.campaignType}</Text>
+                  <Text style={styles.postDegree}>{`${post.numberOfInfluencers} Influencers needed`}</Text>
+                </View>
+                <Image style={styles.postImage} source={{ uri: 'https://via.placeholder.com/130x65' }} />
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
       <View style={styles.footer}>
         {[
-          { name: 'Home', icon: 'home', navigate: "BrandProfile" },
-          { name: 'My Network', icon: 'users', navigate: "CollabPost" },
-          { name: 'Post', icon: 'plus-square', navigate:"CollabForm" },
-          { name: 'Notification', icon: 'bell', navigate:"CollabPost" },
-          { name: 'You', icon: 'user', navigate: "BrandProfile" },
+          { name: 'Home', icon: require("../../assets/depth-5-frame-01.png"), navigate: "BrandProfile" },
+          { name: 'My Network', icon: require("../../assets/network_icon_light.png"), navigate: "CollabPost" },
+          { name: 'Post', icon: require("../../assets/post_icon.png"), navigate: "CollabForm" },
+          { name: 'Notification', icon: require("../../assets/notification_icon_light.png"), navigate: "CollabPost" },
+          { name: 'You', icon: require("../../assets/depth-5-frame-04.png"), navigate: "UserProfile" },
         ].map((item, index) => (
           <TouchableOpacity key={index} style={styles.footerItem} onPress={() => navigation.navigate(item.navigate)}>
-            <Icon name={item.icon} size={24} color={selectedFooterItem === item.name ? '#000' : '#555'} />
+            <Image style={{ width: 24, height: 24 }} source={item.icon} />
             <Text style={[styles.footerItemText, selectedFooterItem === item.name && styles.footerItemTextSelected]}>
               {item.name}
             </Text>
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   searchInput: {
-    flex: 1,    
+    flex: 1,
   },
   categories: {
     padding: 16,
@@ -142,11 +145,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 2,
-    height: 97,
+    height: "auto",
+    paddingHorizontal:Padding.p_base
   },
   postContent: {
     flex: 1,
-    padding: 16,
+    paddingVertical: 16,
   },
   postTitle: {
     fontSize: 16,
@@ -180,6 +184,7 @@ const styles = StyleSheet.create({
   footerItemText: {
     fontSize: 12,
     color: '#555',
+    marginTop: 6
   },
   footerItemTextSelected: {
     color: '#000',
