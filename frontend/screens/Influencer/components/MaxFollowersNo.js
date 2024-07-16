@@ -35,6 +35,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
   const price = route.params?.price;
   const social = route.params?.social;
   const photo = route.params?.photo
+  const isCompleted=route.params?.isCompleted
   useEffect(() => {
     if (route.params?.follower) {
       const { platform, value } = route.params.follower;
@@ -51,7 +52,8 @@ const MaxFollowersNo = ({ route, navigation }) => {
               navigation.navigate("InfluencerRegistrationForm", {
                 price,
                 social,
-                photo
+                photo,
+                isCompleted
               })
             }
           >
@@ -102,7 +104,8 @@ const MaxFollowersNo = ({ route, navigation }) => {
             follower: { platform: platform, value: value },
             price,
             social,
-            photo
+            photo,
+            isCompleted:{...isCompleted,addSocialFollowers:true}
           })
         }
       >

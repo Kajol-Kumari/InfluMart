@@ -67,7 +67,7 @@ const AddHandles = ({ route, navigation }) => {
   const [facebook, setFacebook] = useState("");
   const [youtube, setYoutube] = useState("");
   const [tiktok, setTiktok] = useState("");
-  const { price, follower, photo } = route.params || {};
+  const { price, follower, photo,isCompleted } = route.params || {};
   const user = route.params?.user;
 
   useEffect(() => {
@@ -157,6 +157,7 @@ const AddHandles = ({ route, navigation }) => {
                   price,
                   follower,
                   photo,
+                  isCompleted
                 })
               }
             >
@@ -228,6 +229,7 @@ const AddHandles = ({ route, navigation }) => {
               price,
               follower,
               photo,
+              isCompleted:{...isCompleted,addSocialProfile:true}
             })
           }
         >

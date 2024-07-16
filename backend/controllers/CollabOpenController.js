@@ -32,7 +32,8 @@ const postCollabOpen = async (req, res) => {
         campaignSteps,
         compensationType,
         numberOfInfluencers,
-        brandDescription
+        brandDescription,
+        photoUrl: req.file?.path
       });
   
       await collabOpening.save();

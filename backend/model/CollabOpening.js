@@ -7,7 +7,10 @@ const collabOpeningSchema = new mongoose.Schema({
     required: true
   },
   campaignType: String,
-  earningCapacity: String,
+  earningCapacity: {
+    min: Number,
+    max: Number
+  },
   campaignTimelines: String,
   minEligibilityCriteria: String,
   postInfo: String,
@@ -19,6 +22,7 @@ const collabOpeningSchema = new mongoose.Schema({
   },
   numberOfInfluencers: Number,
   brandDescription: String,
+  photoUrl: String,
   createdAt: {
     type: Date,
     default: Date.now
