@@ -77,16 +77,16 @@ const CollabPost = ({ navigation }) => {
                     style={styles.postDegree}
                   >{`${post.numberOfInfluencers} Influencers needed`}</Text>
                 </View>
-                {data?.imageSource == null ? (
+                {post?.imageSource == null ? (
                   <ImageWithFallback
                     imageStyle={styles.postImage}
-                    image={data?.imageSource}
+                    image={post?.imageSource}
                   />
                 ) : (
-                  data?.imageSource && (
+                  post?.imageSource && (
                     <ImageWithFallback
                       imageStyle={styles.postImage}
-                      image={data?.imageSource}
+                      image={post?.imageSource}
                     />
                   )
                 )}
