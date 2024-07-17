@@ -1,8 +1,10 @@
 import { API_ENDPOINT } from "@env";
 import { Platform } from "react-native";
-import RazorpayCheckout from 'react-native-razorpay';
+import RazorpayCheckout from "react-native-razorpay";
 import { RAZORPAY_KEY_ID } from "@env";
 import { subscribe } from "./subscriptionController";
+import { createCollabPost } from "./collabOpenController";
+
 export const createOrder = async ({ amount, currency, receipt }) => {
   try {
     const response = await fetch(`${API_ENDPOINT}/api/payment/create-order`, {
@@ -25,7 +27,12 @@ export const createOrder = async ({ amount, currency, receipt }) => {
   }
 };
 
-export const handlePayment = async (subscription, payload,navigation,showAlert) => {
+export const handlePayment = async (
+  subscription,
+  payload,
+  navigation,
+  showAlert
+) => {
   // Call backend to create order
   const order = await createOrder({
     amount: parseInt(subscription?.amount), // Amount in INR
@@ -35,20 +42,31 @@ export const handlePayment = async (subscription, payload,navigation,showAlert) 
   if (!order || !order.id) {
     showAlert("Error", "Failed to create order");
     console.error("Failed to create order");
-    throw new Error({message:"Failed to create order"});
+    throw new Error({ message: "Failed to create order" });
   }
   try {
     let res;
     if (Platform.OS === "web") {
-      res = await handlePaymentWeb(order, payload,subscription,navigation,showAlert);
+      res = await handlePaymentWeb(
+        order,
+        payload,
+        subscription,
+        navigation,
+        showAlert
+      );
     } else {
-      res = await handlePaymentMobile(order, payload,subscription,navigation,showAlert);
+      res = await handlePaymentMobile(
+        order,
+        payload,
+        subscription,
+        navigation,
+        showAlert
+      );
     }
     return res;
   } catch (error) {
     throw error;
   }
-  
 };
 
 export const verifyPayment = async (paymentData) => {
@@ -73,7 +91,13 @@ export const verifyPayment = async (paymentData) => {
   }
 };
 
-const handlePaymentMobile = async (order, payload, subscription, navigation, showAlert) => {
+const handlePaymentMobile = async (
+  order,
+  payload,
+  subscription,
+  navigation,
+  showAlert
+) => {
   const options = {
     description: "Connects influencer with brands",
     image: "https://imgur.com/g63XWcL.jpg", // App logo
@@ -100,14 +124,18 @@ const handlePaymentMobile = async (order, payload, subscription, navigation, sho
 
       try {
         await verifyPayment(paymentData);
-        const _subs = {
-          ...subscription,
-          paymentMode: JSON.stringify({
-            razorpay_order_id: data.razorpay_order_id,
-            razorpay_payment_id: data.razorpay_payment_id,
-          }),
-        };
-        await subscribe(_subs, payload, navigation);
+        if (subscription?.notSave == true) {
+          await createCollabPost(payload, showAlert, navigation);
+        } else {
+          const _subs = {
+            ...subscription,
+            paymentMode: JSON.stringify({
+              razorpay_order_id: data.razorpay_order_id,
+              razorpay_payment_id: data.razorpay_payment_id,
+            }),
+          };
+          await subscribe(_subs, payload, navigation);
+        }
         showAlert(
           "Payment Successful",
           "Your payment has been processed successfully."
@@ -147,10 +175,10 @@ const handlePaymentWeb = async (
     currency: "INR",
     name: "Influmart",
     description: "Connects influencer with brands",
-    image: "https://imgur.com/g63XWcL.jpg",  // App logo
+    image: "https://imgur.com/g63XWcL.jpg", // App logo
     order_id: order.id,
     prefill: {
-      email: payload.email,
+      email: payload?.email || "N/A",
       name: order.receipt,
     },
     theme: { color: "#1A80E5" },
@@ -162,14 +190,18 @@ const handlePaymentWeb = async (
       };
       try {
         await verifyPayment(paymentData);
-        const _subs = {
-          ...subscription,
-          paymentMode: JSON.stringify({
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-          }),
-        };
-        await subscribe(_subs, payload, navigation);
+        if (subscription?.notSave == true) {
+          await createCollabPost(payload, showAlert, navigation);
+        } else {
+          const _subs = {
+            ...subscription,
+            paymentMode: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+            }),
+          };
+          await subscribe(_subs, payload, navigation);
+        }
         showAlert(
           "Payment Successful",
           "Your payment has been processed successfully."

@@ -32,7 +32,8 @@ const postCollabOpen = async (req, res) => {
         campaignSteps,
         compensationType,
         numberOfInfluencers,
-        brandDescription
+        brandDescription,
+        photoUrl: req.file?.path
       });
   
       await collabOpening.save();
@@ -62,6 +63,9 @@ const getAllCollabOpen =  async (req, res) => {
     // Send a apply/connection request
 const sendCollabOpenRequest = async (req, res) => {
   const { influencerId, brandId } = req.body;
+  const isRequestExist=await CollabOpenRequest.findOne({sender:influencerId,receiver:brandId})
+  if(isRequestExist)
+    return res.status(500).json({message:'Request already exists'})
   const request = new CollabOpenRequest({ sender: influencerId, receiver: brandId });
   await request.save();
   await Brand.findByIdAndUpdate(brandId, {

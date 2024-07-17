@@ -1,20 +1,20 @@
-import {Color, Padding} from '../GlobalStyles';
+import { Color, Padding, FontFamily, FontSize } from "../../GlobalStyles";
 
 export const BrandProfileStyles = {
   container: {
     flex: 1,
     backgroundColor: Color.colorWhitesmoke_100,
-    paddingBottom:40
+    marginBottom: 40,
   },
   header: {
-    paddingTop:24,
-    marginBottom:16
+    paddingTop: 24,
+    marginBottom: 16,
   },
   headerContent: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal:Padding.p_base,
+    paddingHorizontal: Padding.p_base,
   },
   backArrow: {
     width: 24,
@@ -26,15 +26,15 @@ export const BrandProfileStyles = {
     marginLeft: 10,
   },
   profileContainer: {
-    width:"100%",
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
     marginTop: 20,
-    paddingHorizontal:Padding.p_base,
-    boxSizing:"border-box"
+    paddingHorizontal: Padding.p_base,
+    boxSizing: "border-box",
   },
   profileImageContainer: {
-    width:"100%",
+    width: "100%",
   },
   profileImage: {
     width: 128,
@@ -42,26 +42,26 @@ export const BrandProfileStyles = {
     borderRadius: 64,
   },
   profileInfoContainer: {
-    width:"100%",
+    width: "100%",
     flex: 1,
   },
   brandName: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
-    marginTop:20
+    marginTop: 20,
   },
   brandDetails: {
     color: "#4A709C",
     marginTop: 5,
   },
   actionButtons: {
-    width:"100%",
-    display:"flex",
+    width: "100%",
+    display: "flex",
     flexDirection: "row",
-    justifyContent:"center",
+    justifyContent: "center",
     marginTop: 20,
-    gap: 12
+    gap: 12,
   },
   button: {
     justifyContent: "center",
@@ -87,7 +87,7 @@ export const BrandProfileStyles = {
   },
   section: {
     padding: 16,
-    paddingTop:0,
+    paddingTop: 0,
     marginTop: 20,
   },
   sectionTitle: {
@@ -158,6 +158,32 @@ export const BrandProfileStyles = {
   },
   bottomBar: {
     position: "absolute",
-    bottom: 0
-  }
+    bottom: 0,
+  },
+  depth1Frame2: {
+    height: 60,
+    paddingTop: Padding.p_xl,
+    paddingBottom: Padding.p_xs,
+    flexDirection: "row",
+  },
+  depth1FrameSpaceBlock: {
+    paddingHorizontal: Padding.p_base,
+    width: 390,
+  },
+  depth2Frame01: {
+    width: "auto",
+    height: 28,
+  },
+  depth3Frame01: {
+    alignSelf: "stretch",
+  },
+  collaborationRequests: {
+    fontSize: FontSize.size_3xl,
+    letterSpacing: 0,
+    lineHeight: 28,
+    fontWeight: "700",
+    fontFamily: FontFamily.beVietnamProBold,
+    color: "black",
+    textAlign: "left",
+  },
 };

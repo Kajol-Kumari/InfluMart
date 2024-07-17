@@ -1,21 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {
-  FontSize,
-  Color,
-  Border,
-  FontFamily,
-  Padding,
-} from "../../GlobalStyles";
+import { Border, Color, FontFamily, FontSize, Padding } from "../../../GlobalStyles";
+
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
   return { [key]: value === "unset" ? undefined : value };
 };
 
-const ProductCard = ({
+const BrandProductCard = ({
   imageSource,
   postTitle,
   postDate,
@@ -49,14 +44,12 @@ const ProductCard = ({
     () => getStyleValue("width", buttonWidth),
     [buttonWidth]
   );
-  const[viewWidth,setViewWidth]=useState(0)
+
   return (
-    <View style={[styles.card, cardStyle]} onLayout={(evt)=>{
-      setViewWidth(evt.nativeEvent.layout.width)
-    }}>
+    <View style={[styles.card, cardStyle]}>
       <View style={styles.cardContent}>
         <Image style={styles.image} contentFit="cover" source={imageSource} />
-        <View style={{width:viewWidth<=468?"60%":"100%"}}>
+        <View>
           <View style={[styles.textContainer, postTitleStyle]}>
             <Text style={styles.postTitle}>{postTitle}</Text>
           </View>
@@ -70,10 +63,10 @@ const ProductCard = ({
       </View>
       <TouchableOpacity
         style={[styles.buttonContainer, buttonStyle]}
-        onPress={() => navigation.navigate("FriendRequestPage",{name: postTitle,requestId: id})}
+        onPress={() => navigation.navigate("BrandCollabRequestPage",{name: postTitle,requestId: id})}
       >
         <View style={styles.button}>
-          <Text style={styles.buttonText}>{viewWidth<=468?"View":"View Request"}</Text>
+          <Text style={styles.buttonText}>View Request</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -82,7 +75,7 @@ const ProductCard = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Color.colorBlack,
+    backgroundColor: Color.colorWhitesmoke_300,
     width: 390,
     height: 96,
     flexDirection: "row",
@@ -90,6 +83,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     justifyContent: "space-between",
+    borderWidth: 1,
+    borderColor: Color.colorWhitesmoke_400,
+    borderRadius: Border.br_base,
+    paddingHorizontal: Padding.p_base,
   },
   cardContent: {
     flexDirection: "row",
@@ -107,28 +104,27 @@ const styles = StyleSheet.create({
   postTitle: {
     fontSize: FontSize.size_base,
     lineHeight: 24,
-    color: Color.colorWhite,
     fontFamily: FontFamily.beVietnamProMedium,
     fontWeight: "500",
   },
   postDate: {
     fontSize: FontSize.size_sm,
     lineHeight: 21,
-    color: Color.colorLightgray,
+    color: Color.colorSlategray_300,
     fontFamily: FontFamily.beVietnamProRegular,
   },
   productName: {
     fontSize: FontSize.size_sm,
     lineHeight: 21,
-    color: Color.colorLightgray,
+    color: Color.colorSlategray_300,
     fontFamily: FontFamily.beVietnamProRegular,
   },
   buttonContainer: {
     height: 32,
-    width: "auto",
+    width: 126,
   },
   button: {
-    backgroundColor: Color.colorDarkslategray_200,
+    backgroundColor: Color.colorRoyalblue,
     borderRadius: Border.br_base,
     alignItems: "center",
     justifyContent: "center",
@@ -144,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductCard;
+export default  BrandProductCard;

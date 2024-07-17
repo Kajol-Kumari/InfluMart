@@ -23,7 +23,6 @@ import InfluencerRegistrationForm from "./screens/Influencer/InfluencerRegistrat
 import PlanChooseInterface from "./screens/Influencer/PlanChooseInterface";
 import LoginPageBrand from "./screens/login/LoginPageBrands";
 import BrandAssosciated from "./screens/BrandsAssosciated";
-import BrandProfile from "./screens/BrandProfile";
 import AdminPanel from "./screens/AdminPanel";
 import FilterUI from "./screens/FiltersUI";
 import BrandAccountSignupDataPreview from "./screens/BrandAccountSignupDataPreview";
@@ -39,8 +38,8 @@ import InfluencerDeleteAccountPage from "./screens/Influencer/Settings/Support/I
 import InfluencerContactUs from "./screens/Influencer/Settings/Support/InfluencerContactUs";
 import InfluencerHelpCenter from "./screens/Influencer/Settings/Support/InfluencerHelpCenter";
 import InfluencerManageAccount from "./screens/Influencer/Settings/InfluencerAccountManage";
-import TosScreen from "./screens/TosAndPp/TosScreen";
-import PPScreen from "./screens/TosAndPp/PPScreen";
+import TosScreen from "./screens/TermsAndPrivacy/TermsOfService";
+import PPScreen from "./screens/TermsAndPrivacy/PrivacyPolicy";
 import UserProfile from "./screens/UserProfile/UserProfile";
 import BrandAdminPanel from "./screens/Brand/BrandAdminPanel";
 import BrandLogOutPage from "./screens/Brand/Settings/BrandLogout";
@@ -52,10 +51,16 @@ import CollabPost from "./screens/CollabPost";
 import CampaignDetail from "./screens/CampaignDetail";
 import CollabForm from "./screens/CollabForm";
 import AboutUs from "./screens/AboutUs";
-import BrandService from './screens/BrandService'
-import InfluencerService from './screens/InfluencerService'
+import BrandService from "./screens/BrandService";
+import InfluencerService from "./screens/InfluencerService";
 import { CLIENT_URL } from "@env";
 import { SocketContextProvider } from "./util/SocketContext";
+import CollabPost from "./screens/collabOpen/CollabPost";
+import CampaignDetail from "./screens/collabOpen/CampaignDetail";
+import CollabForm from "./screens/collabOpen/CollabForm";
+import BrandProfile from "./screens/BrandProfile/BrandProfile";
+import BrandCollabRequestPage from "./screens/BrandProfile/components/BrandCollabRequestPage";
+import CollabOpenPayment from "./screens/collabOpen/CollabOpenPayment";
 
 
 const Stack = createNativeStackNavigator();
@@ -265,20 +270,30 @@ const App = () => {
                   component={BrandProfile}
                   options={{ headerShown: false }}
                 />
-                
+                <Stack.Screen
+                  name="BrandCollabRequestPage"
+                  component={BrandCollabRequestPage}
+                  options={{ headerShown: false }}
+                />
                 <Stack.Screen
                   name="CollabPost"
                   component={CollabPost}
                   options={{ headerShown: false }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                   name="CampaignDetail"
                   component={CampaignDetail}
                   options={{ headerShown: false }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                   name="CollabForm"
                   component={CollabForm}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                  name="CollabOpenPayment"
+                  component={CollabOpenPayment}
                   options={{ headerShown: false }}
                 />
 

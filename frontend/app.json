@@ -3,7 +3,7 @@
     "name": "influmart",
     "slug": "influmart",
     "description": "One point solution for influencers-brands.",
-    "version": "1.1.0",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/influmart_icon.png",
     "userInterfaceStyle": "light",
@@ -20,15 +20,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.navig8succes.influmart"
+      "bundleIdentifier": "com.influmart.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.navig8succes.influmart",
-      "versionCode": 2
+      "package": "com.influmart.app",
+      "versionCode": 6,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,10 +42,10 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "5cef1daf-5c31-4ca0-9670-4086925e3079"
+        "projectId": "abaa333a-85b0-439d-879f-db89ac029eab"
       }
     },
-    "owner": "navig8succes",
+    "owner": "influmart",
     "scheme": "influmart"
   }
 }

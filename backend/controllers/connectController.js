@@ -9,6 +9,9 @@ const { getReceiverSocketId } = require("../socket/socket");
 // Send a connection request
 const sendRequest = async (req, res) => {
   const { senderId, receiverId } = req.body;
+  const isRequestExists=await Request.findOne({sender:senderId,receiver:receiverId});
+  if(isRequestExists)
+    return res.status(500).json({message:"Request already exists"})
   const request = new Request({ sender: senderId, receiver: receiverId });
   await request.save();
   await InfluencerSignupRequest.findByIdAndUpdate(receiverId, {
@@ -130,12 +133,12 @@ const getMessages = async (req, res) => {
           {
             path: 'receiver',
             model: 'influencer',
-            select: 'influencerName',
+            select: 'influencerName profileUrl',
           },
           {
             path: 'sender',
             model: 'Brand',
-            select: 'brandName',
+            select: 'brandName profileUrl',
           },
         ],
       });
@@ -146,12 +149,12 @@ const getMessages = async (req, res) => {
           {
             path: 'sender',
             model: 'influencer',
-            select: 'influencerName',
+            select: 'influencerName profileUrl',
           },
           {
             path: 'receiver',
             model: 'Brand',
-            select: 'brandName',
+            select: 'brandName profileUrl',
           },
         ],
       });

@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     height: 32,
     alignItems: "center",
     flexDirection: "row",
+    width:"auto"
   },
   depth4FrameSpaceBlock: {
     marginTop: 4,
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   depth4Frame0: {
     paddingHorizontal: 0,
     paddingVertical: Padding.p_9xs,
-    width: 24,
+    width: "auto",
   },
   home: {
     color: Color.colorLightgray,
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
   },
   depth3Frame0: {
     alignItems: "center",
-    width: 62,
+    width: "auto",
     height: 72,
   },
   depth4Frame01: {
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   depth3Frame1: {
-    width: 77,
+    width: "auto",
   },
   depth4Frame12: {
     width: 'auto',
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   depth3Frame2: {
-    width: 62,
+    width: "auto",
   },
   depth4Frame13: {
     height: 'auto',
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
   depth2Frame0: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     height: 72,
   },
   depth1Frame8: {

@@ -33,9 +33,7 @@ export const InfluencerContactUsStyles = {
   },
   contactBlock: {
     width: 320,
-    height: 410,
     margin: "auto",
-    borderWidth: 2,
   },
   contactBackground: {
     width: "100%",
