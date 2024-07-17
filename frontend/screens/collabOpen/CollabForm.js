@@ -96,7 +96,7 @@ const CollabForm = ({ navigation }) => {
       campaignTimelines: `${startDate.toDateString()} - ${endDate.toDateString()}`,
       campaignType: JSON.stringify(selected),
     };
-    await createCollabPost(data, showAlert, navigation);
+    navigation.navigate("CollabOpenPayment", { payload: data });
   };
 
   const formatDate = (date) => {
@@ -357,11 +357,11 @@ const CollabForm = ({ navigation }) => {
           onChangeText={(text) => handleInputChange("brandDescription", text)}
         />
       </View>
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={handleNextPress}>
+      <TouchableOpacity onPress={handleNextPress}>
+        <View style={styles.footer}>
           <Text style={styles.footerText}>Next: Review & Publish</Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

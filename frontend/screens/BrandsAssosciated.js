@@ -45,11 +45,11 @@ const BrandAssosciated = ({ active }) => {
   }
 
   const filteredBrands = brands.filter((brand) => {
-    const searchTerm = searchValue.toLowerCase();
+    const searchTerm = searchValue?.toLowerCase();
     return (
-      brand?.brandName?.toLowerCase().includes(searchTerm) ||
-      brand.name.toLowerCase().includes(searchTerm) ||
-      brand.category.toLowerCase().includes(searchTerm)
+      (brand?.brandName?.toLowerCase()?.includes(searchTerm) || '') ||
+      (brand?.name?.toLowerCase()?.includes(searchTerm) || '') ||
+      (brand?.category?.toLowerCase()?.includes(searchTerm) || '')
     );
   });
 
@@ -71,9 +71,7 @@ const BrandAssosciated = ({ active }) => {
               {
                 isSearchBarOpen ?
                   <TextInput
-                    onChange={(e) => {
-                      setSearchValue(e.target.value);
-                    }}
+                    onChangeText={(text) => setSearchValue(text)}
                     style={styles.SearchBar}
                     placeholder="Search anything"
                   />
@@ -201,7 +199,7 @@ const styles = StyleSheet.create({
     width: 24,
   },
   depth3Frame0: {
-    width: 48,
+    width: 32,
     alignItems: "center",
     flexDirection: "row",
     height: 48,
@@ -313,7 +311,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 20,
     justifyContent: "center",
-    paddingHorizontal: "2%"
+    paddingHorizontal: "2%",
+    marginBottom:60
   },
   depth4Frame019: {
     paddingHorizontal: 0,
@@ -393,7 +392,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   SearchBar: {
-    width: "80%",
+    width: "75%",
     paddingVertical: Padding.p_smi,
     paddingHorizontal: Padding.p_base,
     fontSize: FontSize.size_base,

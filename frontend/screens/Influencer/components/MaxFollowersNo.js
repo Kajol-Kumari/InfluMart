@@ -36,6 +36,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
   const social = route.params?.social;
   const photo = route.params?.photo
   const isCompleted=route.params?.isCompleted
+  const redirect=route.params?.redirect
   useEffect(() => {
     if (route.params?.follower) {
       const { platform, value } = route.params.follower;
@@ -49,7 +50,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
         <View style={styles.addAccountButton}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("InfluencerRegistrationForm", {
+              navigation.navigate(redirect, {
                 price,
                 social,
                 photo,
@@ -100,7 +101,7 @@ const MaxFollowersNo = ({ route, navigation }) => {
       <TouchableOpacity
         style={styles.confirmButton}
         onPress={() =>
-          navigation.navigate("InfluencerRegistrationForm", {
+          navigation.navigate(redirect, {
             follower: { platform: platform, value: value },
             price,
             social,

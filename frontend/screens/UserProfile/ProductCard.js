@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -49,12 +49,14 @@ const ProductCard = ({
     () => getStyleValue("width", buttonWidth),
     [buttonWidth]
   );
-
+  const[viewWidth,setViewWidth]=useState(0)
   return (
-    <View style={[styles.card, cardStyle]}>
+    <View style={[styles.card, cardStyle]} onLayout={(evt)=>{
+      setViewWidth(evt.nativeEvent.layout.width)
+    }}>
       <View style={styles.cardContent}>
         <Image style={styles.image} contentFit="cover" source={imageSource} />
-        <View>
+        <View style={{width:viewWidth<=468?"60%":"100%"}}>
           <View style={[styles.textContainer, postTitleStyle]}>
             <Text style={styles.postTitle}>{postTitle}</Text>
           </View>
@@ -71,7 +73,7 @@ const ProductCard = ({
         onPress={() => navigation.navigate("FriendRequestPage",{name: postTitle,requestId: id})}
       >
         <View style={styles.button}>
-          <Text style={styles.buttonText}>View Request</Text>
+          <Text style={styles.buttonText}>{viewWidth<=468?"View":"View Request"}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: 32,
-    width: 126,
+    width: "auto",
   },
   button: {
     backgroundColor: Color.colorDarkslategray_200,

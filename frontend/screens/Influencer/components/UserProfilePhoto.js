@@ -19,6 +19,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
   const follower = route.params?.follower;
   const price = route.params?.price;
   const isCompleted=route.params?.isCompleted
+  const redirect=route.params?.redirect
   const [photo, setPhoto] = useState(null);
   useEffect(() => {
     if (route.params) {
@@ -84,7 +85,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("InfluencerRegistrationForm", {
+              navigation.navigate(redirect, {
                 social,
                 price,
                 follower,
@@ -140,7 +141,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.confirmButtonContainer}>
-        <TouchableOpacity style={styles.confirmButton} onPress={()=>navigation.navigate("InfluencerRegistrationForm", {social,price,follower,photo,isCompleted:{...isCompleted,addProfilePhoto:true}})}>
+        <TouchableOpacity style={styles.confirmButton} onPress={()=>navigation.navigate(redirect, {social,price,follower,photo,isCompleted:{...isCompleted,addProfilePhoto:true}})}>
           <Text style={styles.confirmButtonText}>Confirm</Text>
         </TouchableOpacity>
       </View>
