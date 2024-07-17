@@ -146,7 +146,6 @@ const BrandRegistrationForm = ({ route, navigation }) => {
                       value={email}
                       onChangeText={setEmail}
                       placeholder="Email"
-                      keyboardType="email-address"
                       autoCapitalize="none"
                     />
                   </View>

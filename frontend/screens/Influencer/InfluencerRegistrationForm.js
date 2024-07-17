@@ -329,7 +329,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   photo,
                   social,
-                  isCompleted
+                  isCompleted,
+                  redirect:"InfluencerRegistrationForm"
                 })
               }
             >
@@ -351,7 +352,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   social,
                   photo,
-                  isCompleted
+                  isCompleted,
+                  redirect:"InfluencerRegistrationForm"
                 })
               }
             >
@@ -378,7 +380,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   social,
                   photo,
                   follower,
-                  isCompleted
+                  isCompleted,
+                  redirect:"InfluencerRegistrationForm"
                 })
               }
             >
@@ -434,7 +437,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   follower,
                   photo,
                   price,
-                  isCompleted
+                  isCompleted,
+                  redirect:"InfluencerRegistrationForm"
                 })
               }
             >
