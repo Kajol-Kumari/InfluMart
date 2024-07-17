@@ -115,7 +115,7 @@ const sendCollabOpenRequest = async (influencerId, brandId, showAlert,navigation
     }
   } catch (error) {
     console.log(error);
-    showAlert('Error', 'Something went wrong');
+    showAlert('Collab Open Request Error', error.response.data.message);
   }
 };
 

@@ -22,7 +22,7 @@ const sendRequest = async (senderId, receiverId, showAlert) => {
     }
   } catch (error) {
     console.log(error);
-    showAlert("Error", "Something went wrong");
+    showAlert("Collabration Request Error",error.response.data.message);
   }
 };
 
