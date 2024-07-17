@@ -4,7 +4,7 @@ export const BrandProfileStyles = {
   container: {
     flex: 1,
     backgroundColor: Color.colorWhitesmoke_100,
-    paddingBottom: 40,
+    marginBottom: 40,
   },
   header: {
     paddingTop: 24,

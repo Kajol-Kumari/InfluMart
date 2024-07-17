@@ -215,7 +215,7 @@ const UserProfile = ({ navigation }) => {
                       cardWidth="100%"
                       postTitleWidth="auto"
                       postDateWidth="auto"
-                      productNameWidth="auto"
+                      productNameWidth="90%"
                       buttonWidth="auto"
                     />
                   ))}

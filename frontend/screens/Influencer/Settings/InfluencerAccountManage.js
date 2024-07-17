@@ -58,6 +58,7 @@ const InfluencerManageAccount = ({ route, navigation }) => {
   const photo = route.params?.photo;
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const isCompleted=route.params?.isCompleted||{addSocialProfile:false,addProfilePhoto:false,addSocialFollowers:false,pricePerPost:false}
 
   useEffect(() => {
     if (
@@ -142,13 +143,15 @@ const InfluencerManageAccount = ({ route, navigation }) => {
                   follower,
                   photo,
                   social,
+                  isCompleted,
+                  redirect:"InfluencerManageAccountPage"
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addSocialProfile?require(`../../../assets/green_tick.png`):require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -160,14 +163,16 @@ const InfluencerManageAccount = ({ route, navigation }) => {
                   price,
                   follower,
                   social,
-                  photo
+                  photo,
+                  redirect:"InfluencerManageAccountPage",
+                  isCompleted
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addProfilePhoto?require(`../../../assets/green_tick.png`):require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -175,13 +180,13 @@ const InfluencerManageAccount = ({ route, navigation }) => {
             <Text style={styles.sectionHeaderText}>Add Social Followers</Text>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("MaxFollowersNo", { price, social, photo, follower })
+                navigation.navigate("MaxFollowersNo", { price, social, photo, follower,isCompleted,redirect:"InfluencerManageAccountPage" })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.addSocialFollowers?require(`../../../assets/green_tick.png`):require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>
@@ -189,13 +194,13 @@ const InfluencerManageAccount = ({ route, navigation }) => {
             <Text style={styles.sectionHeaderText}>Price per post</Text>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("PricePerPost", { social, follower, photo, price })
+                navigation.navigate("PricePerPost", { social, follower, photo, price,isCompleted,redirect:"InfluencerManageAccountPage" })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={require(`../../../assets/depth-3-frame-11.png`)}
+                source={isCompleted?.pricePerPost?require(`../../../assets/green_tick.png`):require(`../../../assets/depth-3-frame-11.png`)}
               />
             </TouchableOpacity>
           </View>

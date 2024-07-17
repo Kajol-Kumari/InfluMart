@@ -23,6 +23,7 @@ const FormField = ({
   account,
   handleVerify,
   isVerified,
+  redirect
 }) => {
   return (
     <View style={styles.formField}>
@@ -67,7 +68,7 @@ const AddHandles = ({ route, navigation }) => {
   const [facebook, setFacebook] = useState("");
   const [youtube, setYoutube] = useState("");
   const [tiktok, setTiktok] = useState("");
-  const { price, follower, photo,isCompleted } = route.params || {};
+  const { price, follower, photo,isCompleted,redirect } = route.params || {};
   const user = route.params?.user;
 
   useEffect(() => {
@@ -153,7 +154,7 @@ const AddHandles = ({ route, navigation }) => {
           <View style={styles.headerIcon}>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("InfluencerRegistrationForm", {
+                navigation.navigate(redirect, {
                   price,
                   follower,
                   photo,
@@ -218,7 +219,7 @@ const AddHandles = ({ route, navigation }) => {
         <TouchableOpacity
           style={styles.confirmButton}
           onPress={() =>
-            navigation.navigate("InfluencerRegistrationForm", {
+            navigation.navigate(redirect, {
               social: {
                 ig: instagram,
                 tw: twitter,
