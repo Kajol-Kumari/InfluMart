@@ -48,8 +48,8 @@ import BrandManageAccount from "./screens/Brand/Settings/BrandAccountManage";
 import ForgotPasswordPage from "./screens/login/ForgotPasswordPage";
 import ResetPasswordPage from "./screens/login/ResetPasswordPage";
 import AboutUs from "./screens/AboutUs";
-import BrandService from './screens/BrandService'
-import InfluencerService from './screens/InfluencerService'
+import BrandService from "./screens/BrandService";
+import InfluencerService from "./screens/InfluencerService";
 import { CLIENT_URL } from "@env";
 import { SocketContextProvider } from "./util/SocketContext";
 import CollabPost from "./screens/collabOpen/CollabPost";
@@ -57,6 +57,7 @@ import CampaignDetail from "./screens/collabOpen/CampaignDetail";
 import CollabForm from "./screens/collabOpen/CollabForm";
 import BrandProfile from "./screens/BrandProfile/BrandProfile";
 import BrandCollabRequestPage from "./screens/BrandProfile/components/BrandCollabRequestPage";
+import CollabOpenPayment from "./screens/collabOpen/CollabOpenPayment";
 
 const Stack = createNativeStackNavigator();
 
@@ -275,14 +276,20 @@ const App = () => {
                   component={CollabPost}
                   options={{ headerShown: false }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                   name="CampaignDetail"
                   component={CampaignDetail}
                   options={{ headerShown: false }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                   name="CollabForm"
                   component={CollabForm}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                  name="CollabOpenPayment"
+                  component={CollabOpenPayment}
                   options={{ headerShown: false }}
                 />
 

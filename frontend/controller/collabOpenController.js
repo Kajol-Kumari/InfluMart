@@ -46,11 +46,11 @@ const createCollabPost = async (collabPostData, showAlert,navigation) => {
       navigation.navigate('BrandProfile');
       showAlert('Success', 'Collaboration post created successfully');
     } else {
-      showAlert('Error', response.data.message);
+      throw new Error(response.data.message);
     }
   } catch (error) {
     console.log(error);
-    showAlert('Error', 'Something went wrong');
+    throw error
   }
 };
 
