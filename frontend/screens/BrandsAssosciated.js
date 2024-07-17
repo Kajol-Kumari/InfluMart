@@ -45,11 +45,11 @@ const BrandAssosciated = ({ active }) => {
   }
 
   const filteredBrands = brands.filter((brand) => {
-    const searchTerm = searchValue.toLowerCase();
+    const searchTerm = searchValue?.toLowerCase();
     return (
-      brand?.brandName?.toLowerCase().includes(searchTerm) ||
-      brand.name.toLowerCase().includes(searchTerm) ||
-      brand.category.toLowerCase().includes(searchTerm)
+      (brand?.brandName?.toLowerCase()?.includes(searchTerm) || '') ||
+      (brand?.name?.toLowerCase()?.includes(searchTerm) || '') ||
+      (brand?.category?.toLowerCase()?.includes(searchTerm) || '')
     );
   });
 
@@ -71,9 +71,7 @@ const BrandAssosciated = ({ active }) => {
               {
                 isSearchBarOpen ?
                   <TextInput
-                    onChange={(e) => {
-                      setSearchValue(e.target.value);
-                    }}
+                    onChangeText={(text) => setSearchValue(text)}
                     style={styles.SearchBar}
                     placeholder="Search anything"
                   />
