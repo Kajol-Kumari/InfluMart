@@ -11,8 +11,12 @@ import { LinearGradient } from 'expo-linear-gradient'
 import ImageWithFallback from '../util/ImageWithFallback'
 import {useAlert} from '../util/AlertContext'
 import {getTopAccounts} from '../controller/homeController'
+import Chat from '../components/Chat/Chat';
 
 const Homepage = ({ route, navigation }) => {
+
+  
+
   const [searchValue, setSearchValue] = React.useState("")
   const [viewWidth, setViewWidth] = React.useState(0)
   const showAlert=useAlert()
@@ -218,6 +222,16 @@ const Homepage = ({ route, navigation }) => {
               }
             </ScrollView>
           </View>
+          <View style={styles.container}>
+      <View style={styles.chatContainer}>
+        <Text style={styles.subtitle}>
+          Community Chat
+        </Text>
+        <Chat />
+      </View>
+      {/* Other content of your homepage */}
+    </View>
+          
         </ScrollView>
         <Depth1Frame
           depth5Frame0={require("../assets/depth-5-frame-01.png")}
@@ -228,9 +242,15 @@ const Homepage = ({ route, navigation }) => {
           depth5Frame03={require("../assets/depth-5-frame-04.png")}
           style={styles.bottomBar}
         />
+        {/* Chat component section */}
+        {/* <View style={styles.depth1Frame7}>
+            <Chat />
+          </View> */}
+          
       </View>
     </View>
   );
+  
 };
 
 const Feature = ({ feature }) => {
@@ -255,6 +275,22 @@ const AccountProfile=({account})=>{
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 40, // Adjust as needed
+  },
+  chatContainer: {
+    marginBottom: 20,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  subtitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
   scrollContainer: {
     flexGrow: 1,
     width: "100%",
