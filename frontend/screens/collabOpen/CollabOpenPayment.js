@@ -37,7 +37,7 @@ const CollabOpenPayment = ({ route, navigation }) => {
       <View style={styles.innerContainer}>
         <TouchableOpacity
           style={{ width: "100%" }}
-          onPress={() => navigation.navigate("BrandProfile")}
+          onPress={() => navigation.goBack()}
         >
           <Depth1Frame7
             depth4Frame0={require("../../assets/depth-4-frame-019.png")}
