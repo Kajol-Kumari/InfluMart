@@ -23,7 +23,7 @@ import Loader from '../../shared/Loader';
 
 const PlanChooseInterface = ({ route, navigation }) => {
   const [plans, setPlans] = useState(false);
-  const payload = {userName:"testing",email:"qwertyu@gmail.com"} //route.params?.payload;
+  const payload = route.params?.payload;
   const [planData, setPlanData] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { showAlert } = useAlert();
