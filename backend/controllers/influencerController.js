@@ -8,6 +8,8 @@ const InfluencerSignupRequest = require("../model/influencerSignupRequestModel")
 const mongoose = require("mongoose");
 const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
 const { encrypt, decrypt } = require("../utils/encryption");
+const { refundPayment } = require("./paymentController");
+const { deleteSubscription } = require("./subscriptionController");
 
 
 exports.verifyUser = async (req,res) =>{
@@ -97,13 +99,12 @@ exports.signup = async (req, res) => {
     await influencer.save();
     res.status(201).json({ message: "Influencer signed up successfully" });
   } catch (err) {
-    console.log(err);
-    if (err.name === "MongoError" && err.code === 11000) {
-      // Handle the unique constraint violation error
-      res.status(400).json({ message: "Username already exists", error: err, fbData: _fbData, instaData: _instaData, ytData: _ytData });
-    } else {
-      console.error("Error saving influencer data:", err);
-      res.status(500).json({ message: "Failed to save influencer data", error:err, fbData: _fbData, instaData: _instaData, ytData: _ytData });
+    try {
+      await refundPayment(influencerData?.paymentId, influencerData?.amount);
+      await deleteSubscription(influencerData?.subscriptionId);
+      res.status(400).json({ message: 'Account creation failed, refund initiated' });
+    } catch (refundError) {
+      res.status(500).json({ message: 'Account creation failed, refund failed. Can you please contact Us.', error: refundError });
     }
   }
 };

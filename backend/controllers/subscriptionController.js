@@ -40,7 +40,7 @@ const postSubscription = async (req, res) => {
     });
     await newSubscription.save();
     console.log("Subscription created successfully");
-    res.status(201).json({ message: "Subscription created successfully" });
+    res.status(201).json({ message: "Subscription created successfully", newSubscription });
   } catch (error) {
     console.log(error)
     res
@@ -59,6 +59,14 @@ const getPayment = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ message: "Unable to find UPI URL" });
+  }
+};
+
+const deleteSubscription = async (subscriptionId) => {
+  try {
+    await Subscription.findByIdAndDelete(subscriptionId);
+  } catch (error) {
+    throw new Error("Error deleting subscription");
   }
 };
 
@@ -97,4 +105,4 @@ const subscriptionPlans = (req, res) => {
 
 
 
-module.exports = { postSubscription, getSubscription, getPayment, subscriptionPlans };
+module.exports = { postSubscription, getSubscription, getPayment, subscriptionPlans, deleteSubscription };

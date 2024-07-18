@@ -29,7 +29,6 @@ exports.createOrder = async (req, res) => {
 // Verify payment
 exports.verifyPayment = (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-  console.log(razorpay_order_id , razorpay_payment_id , razorpay_signature);
   const body = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = crypto
     .createHmac('sha256', RAZORPAY_SECRET_KEY)
@@ -44,5 +43,16 @@ exports.verifyPayment = (req, res) => {
     res.status(200).json({ message: 'Payment verified successfully' });
   } else {
     res.status(400).json({ message: 'Invalid signature' });
+  }
+};
+
+exports.refundPayment = async (paymentId, amount) => {
+  try {
+    const refund = await razorpayInstance?.payments?.refund(paymentId, {
+      amount: amount * 100,
+    });
+    return refund;
+  } catch (error) {
+    throw error;
   }
 };

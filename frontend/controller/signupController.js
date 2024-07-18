@@ -86,28 +86,31 @@ const BrandSignUp = async (payload, navigation, showAlert) => {
 
 const InfluencerSignUp = async (payload, navigation, showAlert) => {
   const data = new FormData();
-  data.append("userName", payload.userName);
-  data.append("email", payload.email);
-  data.append("password", payload.password);
-  data.append("industryAssociation", payload.industryAssociation);
-  data.append("location", payload.location);
-  data.append("over18", payload.over18);
-  data.append("agreedToTerms", payload.agreedToTerms);
-  data.append("social", JSON.stringify(payload.social));
-  data.append("follower", JSON.stringify(payload.follower));
-  data.append("price", JSON.stringify(payload.price));
-  data.append("firstName", payload.userName);
-  data.append("nickName", payload.userName);
+  data.append("userName", payload?.userName);
+  data.append("email", payload?.email);
+  data.append("password", payload?.password);
+  data.append("industryAssociation", payload?.industryAssociation);
+  data.append("location", payload?.location);
+  data.append("over18", payload?.over18);
+  data.append("agreedToTerms", payload?.agreedToTerms);
+  data.append("social", JSON.stringify(payload?.social));
+  data.append("follower", JSON.stringify(payload?.follower));
+  data.append("price", JSON.stringify(payload?.price));
+  data.append("firstName", payload?.userName);
+  data.append("nickName", payload?.userName);
   data.append("instaProfile", payload?.instaProfile);
-  data.append("facebookProfile", payload.social?.fb);
-  data.append("linkedInProfile", payload.social?.linkedIn);
-  data.append("twitterProfile", payload.social?.tr);
-  data.append("youtubeChannel", payload.social?.yt);
-  data.append("influencerName", payload.name);
-  data.append("category",JSON.stringify(payload.selected));
-  data.append("phoneNo[country]",payload.country);
-  data.append("phoneNo[number]", payload.number.toString());
-  data.append("gender",payload.gender)
+  data.append("facebookProfile", payload?.social?.fb);
+  data.append("linkedInProfile", payload?.social?.linkedIn);
+  data.append("twitterProfile", payload?.social?.tr);
+  data.append("youtubeChannel", payload?.social?.yt);
+  data.append("influencerName", payload?.name);
+  data.append("category",JSON.stringify(payload?.selected));
+  data.append("phoneNo[country]",payload?.country);
+  data.append("phoneNo[number]", payload?.number?.toString());
+  data.append("gender",payload?.gender)
+  data.append("paymentId",payload?.paymentId)
+  data.append("subscriptionId",payload?.subscriptionId)
+  data.append("amount",payload?.amount)
   if (payload.profileUrl && payload.profileUrl.uri) {
     // For web, handle base64 string as a Blob
     if (Platform.OS === "web") {
@@ -135,13 +138,11 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
     const _data = await response.data;
     if (response.status === 201) {
       navigation.navigate("InfluencerAccountSuccess");
-    } else {
-      console.log(_data);
-      showAlert("Influencer SignUp Error", _data.message);
     }
   } catch (error) {
     console.log(error);
-    showAlert("Influencer SignUp Error", "Something went wrong");
+    showAlert("Influencer SignUp Error", error?.response?.data?.message||"Something went wrong");
+    navigation.navigate("InfluencerRegistrationForm")
   }
 };
 
