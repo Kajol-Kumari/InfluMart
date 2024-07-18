@@ -3,7 +3,7 @@
     "name": "influmart",
     "slug": "influmart",
     "description": "One point solution for influencers-brands.",
-    "version": "1.2.5",
+    "version": "1.2.7",
     "orientation": "portrait",
     "icon": "./assets/influmart_icon.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.influmart.app",
-      "versionCode": 9,
+      "versionCode": 11,
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ]

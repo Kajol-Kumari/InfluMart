@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-    backgroundColor: '#2196F3',
+    backgroundColor: '#1a5ce6',
     borderRadius: 5,
     padding: 10,
     marginTop: 10,
