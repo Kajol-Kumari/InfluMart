@@ -242,10 +242,7 @@ const Homepage = ({ route, navigation }) => {
           depth5Frame03={require("../assets/depth-5-frame-04.png")}
           style={styles.bottomBar}
         />
-        {/* Chat component section */}
-        {/* <View style={styles.depth1Frame7}>
-            <Chat />
-          </View> */}
+        
           
       </View>
     </View>
