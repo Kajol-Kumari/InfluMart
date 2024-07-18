@@ -22,7 +22,9 @@ const subscribe = async (subscribeData,payload,navigation) => {
   try {
     const response = await axios.post(`${API_ENDPOINT}/subscriptions/subscription`, subscribeData);
     if (response.status === 201) {
-      navigation.navigate("InfluencerConfirmAccount", { payload });
+      const data = await response.data?.newSubscription;
+      const forRefund = {paymentId:JSON.parse(data.paymentMode).razorpay_payment_id,subscriptionId:data._id, amount:data.amount};
+      navigation.navigate("InfluencerConfirmAccount", { payload:{...payload,...forRefund} });
     } else {
       const data = await response.data;
       throw new Error(data.message);
