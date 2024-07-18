@@ -4,10 +4,13 @@ import './Chat.css';
 
 const socket = io('http://localhost:5000'); // Adjust the URL as needed
 
-const Chat = () => {
+const Chat = ({ isLoggedIn }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+
   useEffect(() => {
+    if (!isLoggedIn) return;
+
     // Simulate receiving initial dummy messages
     const initialMessages = [
       'Hello!',
@@ -26,25 +29,22 @@ const Chat = () => {
     return () => {
       socket.off('message');
     };
-  }, []);
-
-  useEffect(() => {
-    
-    socket.on('message', (message) => {
-      setMessages(prevMessages => [...prevMessages, message]);
-    });
-
-    return () => {
-      socket.off('message');
-    };
-  }, []);
+  }, [isLoggedIn]);
 
   const sendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
+      // Emitting message to the server
       socket.emit('sendMessage', message, () => setMessage(''));
+
+      // Adding sent message to the local state for immediate UI update
+      setMessages((prevMessages) => [...prevMessages, message]);
     }
   };
+
+  if (!isLoggedIn) {
+    return <div>Please log in to access the chat feature.</div>;
+  }
 
   return (
     <div className="chat-container">
