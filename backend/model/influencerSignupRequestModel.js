@@ -22,7 +22,7 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other"], // Set the enum constraint to restrict the values to the specified ones
+      enum: ["Male", "Female", "Other","Not prefer to say"], // Set the enum constraint to restrict the values to the specified ones
     },
     location: String,
     price: [],

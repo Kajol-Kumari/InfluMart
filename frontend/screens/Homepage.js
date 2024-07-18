@@ -83,7 +83,7 @@ const Homepage = ({ route, navigation }) => {
       setViewWidth(evt.nativeEvent.layout.width)
     }}>
       <View style={[styles.depth0Frame0, styles.frameLayout1]}>
-        <Depth1Frame4 onChange={(value) => {
+        <Depth1Frame4 isSearch={true} onChange={(value) => {
           setSearchValue(value)
         }} />
         <ScrollView style={{ marginBottom: 80 }}>

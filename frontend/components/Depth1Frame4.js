@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import { FontSize, FontFamily, Color, Padding,Border } from "../GlobalStyles";
 
-const Depth1Frame4 = ({ onChange }) => {
+const Depth1Frame4 = ({ onChange, isSearch }) => {
   const [isSearchBarOpen, setIsSearchBarOpen] = React.useState(false)
 
   const handleSearch = () => {
@@ -31,7 +31,7 @@ const Depth1Frame4 = ({ onChange }) => {
             </>
 
         }
-        <TouchableOpacity onPress={handleSearch} style={styles.depth3FrameLayout}>
+        {isSearch ?<View style={styles.depth3FrameLayout}></View>: <TouchableOpacity onPress={handleSearch} style={styles.depth3FrameLayout}>
           <View style={[styles.depth4Frame02, styles.depth3FrameLayout]}>
             <Image
               style={styles.depth4Frame0}
@@ -39,7 +39,7 @@ const Depth1Frame4 = ({ onChange }) => {
               source={require("../assets/depth-5-frame-0.png")}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     </View>
   );
