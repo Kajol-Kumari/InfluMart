@@ -141,6 +141,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       setAgreedToTerms(false);
       setIndustryAssociation(false);
       setLocation("");
+      setName("")
+      setMobileNumber("")
+      setSelected([])
     }
   }, [route.params]);
   const handleSelectPlan = async () => {
