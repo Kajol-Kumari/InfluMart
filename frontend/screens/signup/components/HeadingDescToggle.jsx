@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import SwitchToggle from "react-native-switch-toggle";
-import { Color, Padding, FontFamily, FontSize, Border } from "../../../GlobalStyles";
+import {
+  Color,
+  Padding,
+  FontFamily,
+  FontSize,
+  Border,
+} from "../../../GlobalStyles";
 
-const HeadingDescToggle = ({ heading, desc=null, toggleOn, setToggleOn }) => {
-
+const HeadingDescToggle = ({
+  heading,
+  desc = null,
+  toggleOn,
+  setToggleOn,
+  require,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.heading}>{heading}</Text>
+        <View style={styles.labelWrapper}>
+          <Text style={styles.heading}>{heading}</Text>
+          {require && <Text style={styles.madantoryText}>*</Text>}
+        </View>
         {desc && <Text style={styles.description}>{desc}</Text>}
       </View>
       <SwitchToggle
@@ -35,9 +49,18 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 10,
   },
+  madantoryText: {
+    fontWeight: "700",
+    color: "#f00",
+  },
+  labelWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 8,
+  },
   textContainer: {
     flex: 1,
-    paddingEnd:4
+    paddingEnd: 4,
   },
   heading: {
     fontSize: FontSize.size_base,
