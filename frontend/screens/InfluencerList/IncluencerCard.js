@@ -60,6 +60,7 @@ const InfluencerCard = ({
                 <Text style={styles.insightText}>INSIGHT</Text>
                 <Text style={styles.google}>{kylieCosmetics}</Text>
                 <Text style={styles.insightText}>{beauty}</Text>
+                <Text style={[styles.insightText,{color:Color.colorGainsboro_300,marginVertical:4}]}>@{userName}</Text>
               </LinearGradient>
             </View>
             <View style={styles.statisticsContainer}>

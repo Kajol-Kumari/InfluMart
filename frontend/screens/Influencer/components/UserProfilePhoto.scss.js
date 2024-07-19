@@ -50,8 +50,10 @@ export const UserProfilePhotoStyles = {
   tipTitle: {
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.beVietnamProMedium,
-    color: Color.colorGray,
+    color: Color.colorSlategray_300,
     marginBottom: Padding.p_5xs,
+    textAlign:"center",
+    marginTop:60
   },
   tipDescription: {
     fontSize: FontSize.size_sm,
@@ -60,7 +62,7 @@ export const UserProfilePhotoStyles = {
     lineHeight: FontSize.size_base,
   },
   buttonContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
     marginTop: Padding.p_base,
     gap: Padding.p_base,
@@ -74,13 +76,13 @@ export const UserProfilePhotoStyles = {
     alignItems: "center",
     paddingHorizontal: Padding.p_base,
     marginHorizontal: Padding.p_2xs,
-    width:"50%"
+    width:"100%"
   },
   uploadButton: {
     backgroundColor: "#F0F2F5",
   },
   takePhotoButton: {
-    backgroundColor: "#1a80e6",
+    backgroundColor: Color.colorRoyalblue
   },
   buttonText: {
     fontSize: FontSize.size_base,
@@ -101,8 +103,8 @@ export const UserProfilePhotoStyles = {
   },
   confirmButtonContainer: {
     margin: "auto",
-    width: "90%",
-    marginTop: "10%",
+    width: "100%",
+    marginTop: 100,
   },
   confirmButton: {
     height: 40,
@@ -121,4 +123,39 @@ export const UserProfilePhotoStyles = {
     lineHeight: 21,
     textAlign: "left",
   },
+  avatarsContainer:{
+    width:"100%",
+    paddingVertical:40,
+    height:"auto",
+    paddingHorizontal:Padding.p_base
+  },
+  avatarContainer:{
+    padding:20,
+    width:190,
+    borderRadius:Border.br_base,
+    marginEnd:16
+  },
+  selectedAvatar:{
+    borderWidth:2,
+    backgroundColor:Color.colorWhitesmoke_400,
+    borderColor:Color.colorGainsboro_300,
+  },
+  avatarImage:{
+    width:150,
+    height:150
+  },
+  divider:{
+    width:"100%",
+    height:1,
+    backgroundColor:Color.colorGainsboro_300,
+    marginVertical:12
+  },
+  orText:{
+    position:"absolute",
+    left:"50%",
+    top:-10,
+    color:Color.colorDimgray,
+    backgroundColor:"#fff",
+    paddingHorizontal:8
+  }
 };
