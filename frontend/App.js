@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import { AlertProvider } from "./util/AlertContext";
 
+
 // Import all your screens here
 import Homepage from "./screens/Homepage";
 import BrandorInfluencer from "./screens/BrandorInfluencer";
@@ -70,6 +71,8 @@ const linking = {
     },
   },
 };
+
+
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
   const [initialRoute, setInitialRoute] = React.useState("Login");
