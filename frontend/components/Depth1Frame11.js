@@ -40,8 +40,8 @@ const Depth1Frame11 = ({ onChange, style }) => {
         </TouchableOpacity>
         {isSearchBarOpen ? (
           <TextInput
-            onChange={(e) => {
-              onChange(e.target.value);
+            onChangeText={(text) => {
+              onChange(text);
             }}
             style={styles.SearchBar}
             placeholder="Search anything"
