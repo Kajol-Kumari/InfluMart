@@ -18,7 +18,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MultipleSelectList from "../../shared/MultiSelect";
 import { CountryPicker } from "react-native-country-codes-picker";
 import DropDown from "../../shared/DropDown";
-import Loader from '../../shared/Loader'
+import Loader from "../../shared/Loader";
+import PlaceSearchBar from "../../shared/PlaceSearchBar";
 
 const FormField = ({
   label,
@@ -75,13 +76,19 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const price = route.params?.price;
   const { showAlert } = useAlert();
   const photo = route.params?.photo;
-  const isCompleted=route.params?.isCompleted||{addSocialProfile:false,addProfilePhoto:false,addSocialFollowers:false,pricePerPost:false}
+  const isCompleted = route.params?.isCompleted || {
+    addSocialProfile: false,
+    addProfilePhoto: false,
+    addSocialFollowers: false,
+    pricePerPost: false,
+  };
   const [isFormValid, setIsFormValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [openCountryCode, setOpenCountryCode] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
   const [mobileNoVerified, setMobileNoVerified] = useState(false);
-  const[loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -103,7 +110,18 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       key: "female",
       value: "Female",
     },
+    {
+      key: "other",
+      value: "Other",
+    },
+    {
+      key: "not prefer to say",
+      value: "Not prefer to say",
+    },
   ];
+  const handlePlaceSelected = (details) => {
+    setLocation(details);
+  };
   useEffect(() => {
     if (
       name &&
@@ -141,13 +159,13 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       setAgreedToTerms(false);
       setIndustryAssociation(false);
       setLocation("");
-      setName("")
-      setMobileNumber("")
-      setSelected([])
+      setName("");
+      setMobileNumber("");
+      setSelected([]);
     }
   }, [route.params]);
   const handleSelectPlan = async () => {
-    setLoading(true)
+    setLoading(true);
     const payload = {
       email,
       password,
@@ -168,12 +186,12 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
     };
     console.log("payload", payload);
     await InfluencerVerify(payload, navigation, showAlert);
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
     <View style={{ width: "100%", height: "100%" }}>
-      {loading&&<Loader loading={loading}/>}
+      {loading && <Loader loading={loading} />}
       <ScrollView style={{ backgroundColor: Color.colorWhite }}>
         <View style={styles.influencerRegistrationForm}>
           <TouchableOpacity
@@ -212,13 +230,14 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                     <DropDown
                       name={gender}
                       items={genderData}
+                      placeholder={"Gender"}
                       icon={"none"}
                       dropDownOptionStyle={{
                         width: "100%",
                         paddingVertical: 16,
                       }}
                       dropDownContainerStyle={{ width: "100%" }}
-                      dropDownItemsStyle={{ width: "100%"}}
+                      dropDownItemsStyle={{ width: "100%" }}
                       titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                       selectedValue={setGender}
                     />
@@ -280,9 +299,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                     source={require("../../assets/verified_symbol.png")}
                   />
                 ) : (
-                  <TouchableOpacity
-                    onPress={() => setMobileNoVerified(true)}
-                  >
+                  <TouchableOpacity onPress={() => setMobileNoVerified(true)}>
                     <Image
                       style={{ width: 28, height: 28 }}
                       source={require("../../assets/verify_symbol.png")}
@@ -333,14 +350,18 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   photo,
                   social,
                   isCompleted,
-                  redirect:"InfluencerRegistrationForm"
+                  redirect: "InfluencerRegistrationForm",
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={isCompleted?.addSocialProfile?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
+                source={
+                  isCompleted?.addSocialProfile
+                    ? require(`../../assets/green_tick.png`)
+                    : require(`../../assets/depth-3-frame-11.png`)
+                }
               />
             </TouchableOpacity>
           </View>
@@ -356,14 +377,18 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   social,
                   photo,
                   isCompleted,
-                  redirect:"InfluencerRegistrationForm"
+                  redirect: "InfluencerRegistrationForm",
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={isCompleted?.addProfilePhoto?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
+                source={
+                  isCompleted?.addProfilePhoto
+                    ? require(`../../assets/green_tick.png`)
+                    : require(`../../assets/depth-3-frame-11.png`)
+                }
               />
             </TouchableOpacity>
           </View>
@@ -384,14 +409,18 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   photo,
                   follower,
                   isCompleted,
-                  redirect:"InfluencerRegistrationForm"
+                  redirect: "InfluencerRegistrationForm",
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={isCompleted?.addSocialFollowers?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
+                source={
+                  isCompleted?.addSocialFollowers
+                    ? require(`../../assets/green_tick.png`)
+                    : require(`../../assets/depth-3-frame-11.png`)
+                }
               />
             </TouchableOpacity>
           </View>
@@ -413,6 +442,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             desc="You need to agree to the terms of service."
             toggleOn={agreedToTerms}
             setToggleOn={setAgreedToTerms}
+            require={true}
           />
 
           <View style={styles.sectionHeader}>
@@ -441,22 +471,35 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   photo,
                   price,
                   isCompleted,
-                  redirect:"InfluencerRegistrationForm"
+                  redirect: "InfluencerRegistrationForm",
                 })
               }
             >
               <Image
                 style={styles.icon}
                 contentFit="cover"
-                source={isCompleted?.pricePerPost?require(`../../assets/green_tick.png`):require(`../../assets/depth-3-frame-11.png`)}
+                source={
+                  isCompleted?.pricePerPost
+                    ? require(`../../assets/green_tick.png`)
+                    : require(`../../assets/depth-3-frame-11.png`)
+                }
               />
             </TouchableOpacity>
           </View>
-          <FormField
-            label={"Location"}
-            value={location}
-            setValue={setLocation}
-          />
+          <View style={[styles.fieldContainer]}>
+            <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+              <Text style={styles.fieldLabel}>Location</Text>
+              <Text style={styles.madantoryText}>*</Text>
+            </View>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Text style={styles.textInput}>{location||"Search for location"}</Text>
+              <PlaceSearchBar
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                handlePlaceSelected={handlePlaceSelected}
+              />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             onPress={handleSelectPlan}
             disabled={!isFormValid}

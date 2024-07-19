@@ -12,6 +12,7 @@ function DropDown({
   dropDownOptionStyle,
   titleStyle,
   dropDownContainerStyle,
+  placeholder,
 }) {
   const [showElements, setShowElement] = useState(false);
   const [currentValue, setCurrentValue] = useState(undefined);
@@ -43,7 +44,7 @@ function DropDown({
           style={[styles.dropDownSelect, dropDownOptionStyle]}
         >
           {icon == "none" ? "" : <Image source={icon} style={styles.icon} />}
-          <Text style={[styles.dropDownTitle, titleStyle]}>{name}</Text>
+          <Text style={[styles.dropDownTitle, titleStyle]}>{name||placeholder}</Text>
           <Image
             style={styles.arrowAndCloseIcon}
             source={
