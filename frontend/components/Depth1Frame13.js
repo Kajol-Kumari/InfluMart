@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   depth4Frame1: {
-    width: 35,
+    width: "auto",
     height: 18,
     marginTop: 4,
   },
