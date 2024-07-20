@@ -35,8 +35,8 @@ export const handlePayment = async (
 ) => {
   // Call backend to create order
   const order = await createOrder({
-    amount: parseInt(subscription?.amount), // Amount in INR
-    currency: "INR",
+    amount: parseInt(subscription?.amount)*payload?.price?.currency?.subunits, 
+    currency: payload?.price?.currency?.currency,
     receipt: subscription?.userName,
   });
   if (!order || !order.id) {
@@ -101,7 +101,7 @@ const handlePaymentMobile = async (
   const options = {
     description: "Connects influencer with brands",
     image: "https://imgur.com/g63XWcL.jpg", // App logo
-    currency: "INR",
+    currency: payload?.price?.currency?.currency,
     key: RAZORPAY_KEY_ID,
     amount: order.amount, // Amount in paise
     name: "Influmart",
@@ -172,7 +172,7 @@ const handlePaymentWeb = async (
   const options = {
     key: RAZORPAY_KEY_ID,
     amount: order.amount, // Amount in paise
-    currency: "INR",
+    currency: payload?.price?.currency?.currency,
     name: "Influmart",
     description: "Connects influencer with brands",
     image: "https://imgur.com/g63XWcL.jpg", // App logo

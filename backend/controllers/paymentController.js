@@ -13,7 +13,7 @@ exports.createOrder = async (req, res) => {
 
   try {
     const options = {
-      amount: amount * 100, // amount in the smallest currency unit i.e paise for 500 rupees, the input should be 50000(500*100) paise
+      amount: amount,
       currency,
       receipt,
     };
@@ -49,7 +49,7 @@ exports.verifyPayment = (req, res) => {
 exports.refundPayment = async (paymentId, amount) => {
   try {
     const refund = await razorpayInstance?.payments?.refund(paymentId, {
-      amount: amount * 100,
+      amount: amount,
     });
     return refund;
   } catch (error) {

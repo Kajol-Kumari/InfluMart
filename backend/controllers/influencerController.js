@@ -6,13 +6,17 @@ const jwt = require("jsonwebtoken"); // For generating JSON Web Tokens
 const bcrypt = require("bcrypt"); // For password hashing
 const InfluencerSignupRequest = require("../model/influencerSignupRequestModel");
 const mongoose = require("mongoose");
-const { facebookData, InstagramData, YoutubeData, trackingData } = require("../utils/influencerAnalytics");
+const {
+  facebookData,
+  InstagramData,
+  YoutubeData,
+  trackingData,
+} = require("../utils/influencerAnalytics");
 const { encrypt, decrypt } = require("../utils/encryption");
 const { refundPayment } = require("./paymentController");
 const { deleteSubscription } = require("./subscriptionController");
 
-
-exports.verifyUser = async (req,res) =>{
+exports.verifyUser = async (req, res) => {
   const influencerData = req.body;
   try {
     // Check if a user with the same mail already exists
@@ -34,13 +38,13 @@ exports.verifyUser = async (req,res) =>{
       // If an influencer with the same userName exists, return a 400 Bad Request response
       return res.status(200).json({ message: "Username is already in use" });
     }
-    if(!existingInfluencer && !existingMail){
-      return res.status(201).json({message:"User doesn't exist"})
+    if (!existingInfluencer && !existingMail) {
+      return res.status(201).json({ message: "User doesn't exist" });
     }
-  }catch(err){
-    return res.status(500).json({message:"Something Went Wrong"});
+  } catch (err) {
+    return res.status(500).json({ message: "Something Went Wrong" });
   }
-}
+};
 
 // Signup an influencer
 exports.signup = async (req, res) => {
@@ -79,14 +83,14 @@ exports.signup = async (req, res) => {
     _instaData = instaData;
     _ytData = ytData;
     const track = trackingData();
-    const encryptedPhoneNo = encrypt(influencerData.phoneNo.number)
+    const encryptedPhoneNo = encrypt(influencerData.phoneNo.number);
     // Create a new InfluencerSignupRequest with the hashed password
     const influencer = new InfluencerSignupRequest({
       ...influencerData,
       password: hashedPassword,
-      phoneNo:{
-        country:influencerData.phoneNo.country,
-        number: encryptedPhoneNo
+      phoneNo: {
+        country: influencerData.phoneNo.country,
+        number: encryptedPhoneNo,
       },
       instaData: [instaData],
       fbData: [fbData],
@@ -100,11 +104,20 @@ exports.signup = async (req, res) => {
     res.status(201).json({ message: "Influencer signed up successfully" });
   } catch (err) {
     try {
-      await refundPayment(influencerData?.paymentId, influencerData?.amount);
+      const _amount =
+        parseInt(influencerData?.amount) *
+        JSON.parse(influencerData.price)[0]?.currency.subunits;
+      await refundPayment(influencerData?.paymentId, _amount);
       await deleteSubscription(influencerData?.subscriptionId);
-      res.status(400).json({ message: 'Account creation failed, refund initiated' });
+      res
+        .status(400)
+        .json({ message: "Account creation failed, refund initiated" });
     } catch (refundError) {
-      res.status(500).json({ message: 'Account creation failed, refund failed. Can you please contact Us.', error: refundError });
+      res.status(500).json({
+        message:
+          "Account creation failed, refund failed. Can you please contact Us.",
+        error: refundError,
+      });
     }
   }
 };
@@ -165,7 +178,7 @@ exports.getProfile = async (req, res) => {
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
     }
-    influencer.phoneNo.number = decrypt(influencer.phoneNo.number)
+    influencer.phoneNo.number = decrypt(influencer.phoneNo.number);
     res.status(200).json({ influencer });
   } catch (err) {
     console.error("Error getting influencer profile:", err);
@@ -186,7 +199,11 @@ exports.getSocialData = async (req, res) => {
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
     }
-    res.status(200).json({ instaData: influencer.instaData, fbData: influencer.fbData, ytData: influencer.ytData});
+    res.status(200).json({
+      instaData: influencer.instaData,
+      fbData: influencer.fbData,
+      ytData: influencer.ytData,
+    });
   } catch (err) {
     console.error("Error getting influencer profile:", err);
     res.status(500).json({ message: "Failed to retrieve profile" });
@@ -226,7 +243,9 @@ exports.deleteProfile = async (req, res) => {
   const influencerId = req.params.id; // Get the influencer's ID from the request parameters
 
   try {
-    const influencer = await InfluencerSignupRequest.findByIdAndDelete(influencerId);
+    const influencer = await InfluencerSignupRequest.findByIdAndDelete(
+      influencerId
+    );
 
     if (!influencer) {
       return res.status(404).json({ message: "Influencer not found" });
@@ -244,81 +263,136 @@ exports.getAllProfiles = async (req, res) => {
   try {
     const influencers = await InfluencerSignupRequest.find(
       {},
-      { category: 1, influencerName: 1, profileUrl: 1, _id: 1,userName:1,ytData:1,instaData:1,fbData:1 }
+      {
+        category: 1,
+        influencerName: 1,
+        profileUrl: 1,
+        _id: 1,
+        userName: 1,
+        ytData: 1,
+        instaData: 1,
+        fbData: 1,
+      }
     );
-    res.status(200).json({influencers});
+    res.status(200).json({ influencers });
   } catch (err) {
     console.error("Error getting all influencer profiles:", err);
     res.status(500).json({ message: "Failed to retrieve profiles" });
   }
 };
 
-
 exports.filterInfluencers = async (req, res) => {
   try {
     const filters = req.body;
     const query = {};
     console.log("Filters: ", filters); // Log the filters
-    if (filters.location && filters.location.trim() !== '') query.location = filters.location;
+    if (filters.location && filters.location.trim() !== "")
+      query.location = filters.location;
 
-    if (filters.category && filters.category.length > 0) query.category = { $in: JSON.stringify(filters.category) };
+    if (filters.category && filters.category.length > 0)
+      query.category = { $in: JSON.stringify(filters.category) };
 
-    if (filters.price && filters.price.min != null && filters.price.max != null) {
+    if (
+      filters.price &&
+      filters.price.min != null &&
+      filters.price.max != null
+    ) {
       query.price = {
         $elemMatch: {
           $or: [
-            { 'price.ig': { $gte: filters.price.min, $lte: filters.price.max } },
-            { 'price.yt': { $gte: filters.price.min, $lte: filters.price.max } },
-            { 'price.tr': { $gte: filters.price.min, $lte: filters.price.max } },
-            { 'price.tt': { $gte: filters.price.min, $lte: filters.price.max } }
-          ]
-        }
+            {
+              "price.ig": { $gte: filters.price.min, $lte: filters.price.max },
+            },
+            {
+              "price.yt": { $gte: filters.price.min, $lte: filters.price.max },
+            },
+            {
+              "price.tr": { $gte: filters.price.min, $lte: filters.price.max },
+            },
+            {
+              "price.tt": { $gte: filters.price.min, $lte: filters.price.max },
+            },
+          ],
+        },
       };
     }
 
-    if (filters.followers && filters.followers.min != null && filters.followers.max != null) {
-      query['instaData.followers'] = { $gte: filters.followers.min };
+    if (
+      filters.followers &&
+      filters.followers.min != null &&
+      filters.followers.max != null
+    ) {
+      query["instaData.followers"] = { $gte: filters.followers.min };
     }
 
-    if (filters.likes && filters.likes.min != null && filters.likes.max != null) {
-      query['instaData.avgLikes'] = { $gte: filters.likes.min };
+    if (
+      filters.likes &&
+      filters.likes.min != null &&
+      filters.likes.max != null
+    ) {
+      query["instaData.avgLikes"] = { $gte: filters.likes.min };
     }
 
-    if (filters.engagementRate && filters.engagementRate.min != null && filters.engagementRate.max != null) {
-      query['instaData.avgER'] = { $gte: filters.engagementRate.min*0.001, $lte: filters.engagementRate.max*0.001 };
+    if (
+      filters.engagementRate &&
+      filters.engagementRate.min != null &&
+      filters.engagementRate.max != null
+    ) {
+      query["instaData.avgER"] = {
+        $gte: filters.engagementRate.min * 0.001,
+        $lte: filters.engagementRate.max * 0.001,
+      };
     }
 
-    if (filters.audienceAge && filters.audienceAge.min != null && filters.audienceAge.max != null) {
-      query['instaData.ages'] = {
+    if (
+      filters.audienceAge &&
+      filters.audienceAge.min != null &&
+      filters.audienceAge.max != null
+    ) {
+      query["instaData.ages"] = {
         $elemMatch: {
-          percent: { $gte: filters.audienceAge.min }
-        }
+          percent: { $gte: filters.audienceAge.min },
+        },
       };
     }
 
-    if (filters.gender && filters.gender.trim() !== '') query.gender = filters.gender;
+    if (filters.gender && filters.gender.trim() !== "")
+      query.gender = filters.gender;
 
-    if (filters.tags && filters.tags.trim() !== '') query.tags = { $in: [filters.tags] };
+    if (filters.tags && filters.tags.trim() !== "")
+      query.tags = { $in: [filters.tags] };
 
-    if (filters.reachability && filters.reachability.min != null && filters.reachability.max != null) {
-      query['instaData.membersReachability'] = {
+    if (
+      filters.reachability &&
+      filters.reachability.min != null &&
+      filters.reachability.max != null
+    ) {
+      query["instaData.membersReachability"] = {
         $elemMatch: {
-          percent: { $gte: filters.reachability.min*0.001 }
-        }
+          percent: { $gte: filters.reachability.min * 0.001 },
+        },
       };
     }
 
-    if (filters.avgComments && filters.avgComments.min != null && filters.avgComments.max != null) {
-      query['instaData.avgComments'] = { $gte: filters.avgComments.min };
+    if (
+      filters.avgComments &&
+      filters.avgComments.min != null &&
+      filters.avgComments.max != null
+    ) {
+      query["instaData.avgComments"] = { $gte: filters.avgComments.min };
     }
 
-    if (filters.viewCount && filters.viewCount.min != null && filters.viewCount.max != null) {
-      query['ytData.viewCount'] = { $gte: filters.viewCount.min };
+    if (
+      filters.viewCount &&
+      filters.viewCount.min != null &&
+      filters.viewCount.max != null
+    ) {
+      query["ytData.viewCount"] = { $gte: filters.viewCount.min };
     }
 
     if (filters.cities && filters.cities.length > 0) {
-      query['instaData.memberCities'] = {
-        $elemMatch: { name: { $in: filters.cities } }
+      query["instaData.memberCities"] = {
+        $elemMatch: { name: { $in: filters.cities } },
       };
     }
 
