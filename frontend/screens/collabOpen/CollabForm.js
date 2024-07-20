@@ -19,6 +19,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import MultipleSelectList from "../../shared/MultiSelect";
+import MultiDropDown from "../../shared/MultiDropDown";
 
 const CollabForm = ({ navigation }) => {
   const [collabPostData, setCollabPostData] = React.useState({
@@ -98,7 +99,6 @@ const CollabForm = ({ navigation }) => {
     };
     navigation.navigate("CollabOpenPayment", { payload: data });
   };
-
   const formatDate = (date) => {
     const options = { month: "long", day: "2-digit", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
@@ -133,15 +133,24 @@ const CollabForm = ({ navigation }) => {
         <Text style={styles.headerText}>Create a Campaign</Text>
         <View style={{ width: 24, height: 24 }}></View>
       </View>
-      <View style={styles.inputGroup}>
+      <View style={[styles.inputGroup, { height: "auto", zIndex: 12 }]}>
         <Text style={styles.label}>Campaign Type</Text>
-        <MultipleSelectList
-          setSelected={(val) => setSelected(val)}
-          data={data}
-          save="value"
-          selectedval={selected}
-          setSelectedVal={setSelected}
+        <MultiDropDown
+          name={selected?.join(", ")}
+          items={data}
+          placeholder={"Select option"}
+          icon={"none"}
+          dropDownOptionStyle={{
+            width: "100%",
+            paddingVertical: 16,
+          }}
+          dropDownContainerStyle={{ width: "100%" }}
+          dropDownItemsStyle={{ width: "100%", top: "100%" }}
+          titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+          selectedValue={selected}
+          setSelectedValues={setSelected}
         />
+
       </View>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Earning Capacity</Text>
@@ -260,7 +269,7 @@ const CollabForm = ({ navigation }) => {
               status={location.includes("facebook") ? "checked" : "unchecked"}
               onPress={() => handleCheckboxChange("facebook")}
             />
-            <Text style={styles.rad}>Facebook</Text>
+            <Text style={styles.radioButtonLabel}>Facebook</Text>
           </View>
         </View>
       </View>
@@ -327,7 +336,7 @@ const CollabForm = ({ navigation }) => {
           onValueChange={(value) => setCampansationType(value)}
           value={campansationType}
         >
-          <View style={{ flex: 1, flexDirection: "row", gap: 10 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, flexDirection: "row", gap: 10 }}>
             <View style={styles.radioButton}>
               <RadioButton value="Payout" />
               <Text style={styles.radioButtonLabel}>Payout</Text>
@@ -344,7 +353,7 @@ const CollabForm = ({ navigation }) => {
               <RadioButton value="Voucher" />
               <Text style={styles.radioButtonLabel}>Voucher</Text>
             </View>
-          </View>
+          </ScrollView>
         </RadioButton.Group>
       </View>
       <View style={styles.inputGroup}>
@@ -411,7 +420,7 @@ const styles = StyleSheet.create({
   inputGroup: {
     paddingHorizontal: 20,
     marginBottom: 20,
-    zIndex: -10,
+    zIndex: 1,
   },
   label: {
     fontSize: 16,
