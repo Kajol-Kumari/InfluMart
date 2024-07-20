@@ -52,6 +52,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
       readImage(`../../../assets/avatars/avatar${selectedAvatarIndex + 1}.png`, function (base64) {
         setPhoto({ name: `avatar${selectedAvatarIndex}`, uri: base64, type: "image/png" })
         setSelectedImage(base64)
+        console.log(base64)
       });
     }
   }, [selectedAvatarIndex])
@@ -66,6 +67,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
     }
     setPhoto(result);
     setSelectedImage(result.uri);
+    console.log(result.uri)
     setSelectedAvatarIndex("")
   };
 
@@ -146,7 +148,7 @@ const UserProfilePhoto = ({ route, navigation }) => {
           <Image
             source={{ uri: selectedImage }}
             style={styles.selectedImage}
-            contentFit="cover"
+            contentFit="contain"
           />
         </View>
       )}
