@@ -82,7 +82,7 @@ const allCollabOpenRequests = async (req, res) => {
     populate: {
       path: "sender",
       model: "influencer",
-      options: { select: "influencerName category profileUrl" }
+      options: { select: "influencerName category profileUrl isSelectedImage" }
     },
   });
   res.status(200).json({ user: user?.notifications });

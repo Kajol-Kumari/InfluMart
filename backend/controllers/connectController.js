@@ -133,7 +133,7 @@ const getMessages = async (req, res) => {
           {
             path: 'receiver',
             model: 'influencer',
-            select: 'influencerName profileUrl',
+            select: 'influencerName profileUrl isSelectedImage',
           },
           {
             path: 'sender',
@@ -149,7 +149,7 @@ const getMessages = async (req, res) => {
           {
             path: 'sender',
             model: 'influencer',
-            select: 'influencerName profileUrl',
+            select: 'influencerName profileUrl isSelectedImage',
           },
           {
             path: 'receiver',
@@ -206,7 +206,7 @@ const getAllConversations = async (req, res) => {
             path: 'participants',
             match: { _id: { $ne: userId } }, // Exclude the current user
             model: 'influencer',
-            select: 'influencerName profileUrl'
+            select: 'influencerName profileUrl isSelectedImage'
           },
           {
             path: 'messages',

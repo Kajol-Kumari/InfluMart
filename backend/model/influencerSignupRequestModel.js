@@ -41,6 +41,7 @@ const influencerSignupRequestSchema = new mongoose.Schema(
     industryAssociation: { type: Boolean, default: false },
     over18: { type: Boolean, default: false },
     profileUrl: { type: String, default: "" },
+    isSelectedImage: { type: Boolean, default: false },
     brand: { type: mongoose.Schema.Types.ObjectId, ref: "Brand" },
     notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Request" }],
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
