@@ -96,9 +96,8 @@ exports.signup = async (req, res) => {
       fbData: [fbData],
       ytData: [ytData],
       tracked: track,
-      profileUrl: req.file?.path,
+      profileUrl: influencerData?.isSelectedImage ?  influencerData.profileUrl : req.file?.path,
     });
-
     // Save the influencer data to the database
     await influencer.save();
     res.status(201).json({ message: "Influencer signed up successfully" });
@@ -272,6 +271,7 @@ exports.getAllProfiles = async (req, res) => {
         ytData: 1,
         instaData: 1,
         fbData: 1,
+        isSelectedImage: 1,
       }
     );
     res.status(200).json({ influencers });
@@ -285,7 +285,6 @@ exports.filterInfluencers = async (req, res) => {
   try {
     const filters = req.body;
     const query = {};
-    console.log("Filters: ", filters); // Log the filters
     if (filters.location && filters.location.trim() !== "")
       query.location = filters.location;
 

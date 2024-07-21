@@ -71,8 +71,8 @@ const UserProfile = ({ navigation }) => {
           },
           {
             heading: "Price per Post",
-            content: influencer.price.fb
-              ? formatNumber(influencer.price[0].fb)
+            content: influencer?.price[0]?.fb
+              ? formatNumber(influencer?.price[0]?.fb)
               : "N/A",
           },
         ];
@@ -146,8 +146,8 @@ const UserProfile = ({ navigation }) => {
           },
           {
             heading: "Price per Post",
-            content: `$ ${influencer.price[0].ig
-              ? formatNumber(influencer.price[0].ig)
+            content: `$ ${influencer?.price[0]?.ig
+              ? formatNumber(influencer?.price[0]?.ig)
               : "N/A"
               }`,
           },
@@ -172,8 +172,8 @@ const UserProfile = ({ navigation }) => {
           },
           {
             heading: "Price per Video",
-            content: influencer.price[0].yt
-              ? formatNumber(influencer.price[0].yt)
+            content: influencer?.price[0]?.yt
+              ? formatNumber(influencer?.price[0]?.yt)
               : "N/A",
           },
         ];
@@ -190,6 +190,7 @@ const UserProfile = ({ navigation }) => {
             image={influencer?.profileUrl}
             username={influencer?.influencerName}
             category={influencer?.category}
+            isSelectedImage={influencer.isSelectedImage}
           />}
           <View style={[styles.depth1Frame2, styles.depth1FrameSpaceBlock]}>
             <View style={styles.depth2Frame01}>

@@ -124,16 +124,16 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   };
   useEffect(() => {
     if (
-      name &&
-      mobileNumber &&
+      //name &&
+      //mobileNumber &&
       email &&
       password &&
-      username &&
-      location &&
-      agreedToTerms &&
-      social &&
-      follower &&
-      price
+      username //&&
+      //location &&
+      //agreedToTerms &&
+      //social &&
+      //follower &&
+      //price
     ) {
       setIsFormValid(true);
     } else {
@@ -184,7 +184,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       selected,
       gender,
     };
-    console.log("payload", payload);
     await InfluencerVerify(payload, navigation, showAlert);
     setLoading(false);
   };

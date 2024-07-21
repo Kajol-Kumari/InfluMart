@@ -134,7 +134,7 @@ const getAllCollabOpenRequests = async (userId, setRequests, showAlert) => {
     if (response.status === 200) {
       const data = response.data.user;
         const formatData = data.map((item) => ({
-            imageSource: item?.sender?.profileUrl
+            imageSource: item?.sender?.isSelectedImage ? item?.sender?.profileUrl : item?.sender?.profileUrl
               ? {
                   uri: `${API_ENDPOINT}/${item?.sender?.profileUrl?.replace(
                     /\\/g,

@@ -153,6 +153,7 @@ const Analytics = ({ route, navigation }) => {
               username={influencer?.influencerName}
               location={influencer?.location}
               category={influencer?.category}
+              isSelectedImage={influencer.isSelectedImage}
             />}
             <View style={styles.recentContainer}>
               <Text style={styles.recentText}>Frequently used hashtags</Text>
