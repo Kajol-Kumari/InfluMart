@@ -104,25 +104,30 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
   data.append("twitterProfile", payload?.social?.tr);
   data.append("youtubeChannel", payload?.social?.yt);
   data.append("influencerName", payload?.name);
-  data.append("category",JSON.stringify(payload?.selected));
-  data.append("phoneNo[country]",payload?.country);
+  data.append("category", JSON.stringify(payload?.selected));
+  data.append("phoneNo[country]", payload?.country);
   data.append("phoneNo[number]", payload?.number?.toString());
-  data.append("gender",payload?.gender)
-  data.append("paymentId",payload?.paymentId)
-  data.append("subscriptionId",payload?.subscriptionId)
-  data.append("amount",payload?.amount)
+  data.append("gender", payload?.gender);
+  data.append("paymentId", payload?.paymentId);
+  data.append("subscriptionId", payload?.subscriptionId);
+  data.append("amount", payload?.amount);
   if (payload.profileUrl && payload.profileUrl.uri) {
     // For web, handle base64 string as a Blob
-    if (Platform.OS === "web") {
-      const blob = await (await fetch(payload.profileUrl.uri)).blob();
-      data.append("image", blob, payload.profileUrl.name);
+    if (payload.profileUrl.isSelected) {
+      data.append("profileUrl", payload.profileUrl.file);
+      data.append("isSelectedImage", true);
     } else {
-      // For mobile platforms
-      data.append("image", {
-        uri: payload.profileUrl.uri,
-        name: payload.profileUrl.name,
-        type: payload.profileUrl.type,
-      });
+      if (Platform.OS === "web") {
+        const blob = await (await fetch(payload.profileUrl.uri)).blob();
+        data.append("image", blob, payload.profileUrl.name);
+      } else {
+        // For mobile platforms
+        data.append("image", {
+          uri: payload.profileUrl.uri,
+          name: payload.profileUrl.name,
+          type: payload.profileUrl.type,
+        });
+      }
     }
   }
   try {
@@ -141,8 +146,11 @@ const InfluencerSignUp = async (payload, navigation, showAlert) => {
     }
   } catch (error) {
     console.log(error);
-    showAlert("Influencer SignUp Error", error?.response?.data?.message||"Something went wrong");
-    navigation.navigate("InfluencerRegistrationForm")
+    showAlert(
+      "Influencer SignUp Error",
+      error?.response?.data?.message || "Something went wrong"
+    );
+    navigation.navigate("InfluencerRegistrationForm");
   }
 };
 
@@ -156,7 +164,6 @@ const InfluencerVerify = async (payload, navigation, showAlert) => {
     if (response.status === 200) {
       showAlert("Influencer SignUp Error", data.message);
     } else if (response.status === 201) {
-      console.log(data);
       navigation.navigate("PlanChooseInterface", { payload });
     }
   } catch (error) {

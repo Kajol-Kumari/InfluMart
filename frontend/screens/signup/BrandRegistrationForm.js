@@ -16,6 +16,7 @@ import { signupStyles } from "./SignUpStyles.scss";
 import { useAlert } from "../../util/AlertContext";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import the icon component
 import Loader from '../../shared/Loader'
+import MultiDropDown from '../../shared/MultiDropDown'
 
 const BrandRegistrationForm = ({ route, navigation }) => {
   const [name, setName] = useState("");
@@ -23,7 +24,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [selected, setSelected] = useState([]);
-  const[loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
   const { showAlert } = useAlert();
   const payload = route.params?.payload;
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
@@ -44,6 +45,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
     setUsername("");
     setSelected([]);
   }, []);
+
 
   // Listen for navigation focus to clear form data
   useEffect(() => {
@@ -82,7 +84,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.scrollView}>
-      {loading&&<Loader loading={loading}/>}
+      {loading && <Loader loading={loading} />}
       <View style={styles.brandregistrationform}>
         <View style={[styles.depth0Frame0, styles.frameLayout2]}>
           <TouchableOpacity onPress={() => navigation.navigate("Homepage")}>
@@ -188,29 +190,6 @@ const BrandRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-          <View style={styles.depth1Frame2}>
-            <View style={[styles.depth2Frame02, styles.frameLayout]}>
-              <View style={styles.frameLayout}>
-                <View style={styles.depth4Frame02}>
-                  <Text style={[styles.email, styles.emailTypo]}>
-                    Brand Type
-                  </Text>
-                  <Text style={styles.mandatoryText}>*</Text>
-                </View>
-                <View>
-                  <View>
-                    <MultipleSelectList
-                      setSelected={(val) => setSelected(val)}
-                      data={data}
-                      save="value"
-                      selectedval={selected}
-                      setSelectedVal={setSelected}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
           <View style={styles.depth1Frame6}>
             <View style={[styles.depth2Frame06]}>
               <View style={styles.frameLayout}>
@@ -225,6 +204,37 @@ const BrandRegistrationForm = ({ route, navigation }) => {
                       value={username}
                       onChangeText={setUsername}
                       placeholder="Username"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={[styles.depth1Frame2,{height:"auto"}]}>
+            <View style={[styles.depth2Frame02, styles.frameLayout,{height:"auto"}]}>
+              <View style={[styles.frameLayout,{height:"auto"}]}>
+                <View style={styles.depth4Frame02}>
+                  <Text style={[styles.email, styles.emailTypo]}>
+                    Brand Type
+                  </Text>
+                  <Text style={styles.mandatoryText}>*</Text>
+                </View>
+                <View>
+                  <View>
+                    <MultiDropDown
+                      name={selected?.join(", ")}
+                      items={data}
+                      placeholder={"Select option"}
+                      icon={"none"}
+                      dropDownOptionStyle={{
+                        width: "100%",
+                        paddingVertical: 16,
+                      }}
+                      dropDownContainerStyle={{ width: "100%" }}
+                      dropDownItemsStyle={{ width: "100%", top: -470 }}
+                      titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+                      selectedValue={selected}
+                      setSelectedValues={setSelected}
                     />
                   </View>
                 </View>

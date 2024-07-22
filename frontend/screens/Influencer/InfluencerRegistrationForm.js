@@ -20,6 +20,7 @@ import { CountryPicker } from "react-native-country-codes-picker";
 import DropDown from "../../shared/DropDown";
 import Loader from "../../shared/Loader";
 import PlaceSearchBar from "../../shared/PlaceSearchBar";
+import MultiDropDown from "../../shared/MultiDropDown";
 
 const FormField = ({
   label,
@@ -124,16 +125,16 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   };
   useEffect(() => {
     if (
-      name &&
-      mobileNumber &&
+      //name &&
+      //mobileNumber &&
       email &&
       password &&
-      username &&
-      location &&
-      agreedToTerms &&
-      social &&
-      follower &&
-      price
+      username //&&
+      //location &&
+      //agreedToTerms &&
+      //social &&
+      //follower &&
+      //price
     ) {
       setIsFormValid(true);
     } else {
@@ -184,7 +185,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
       selected,
       gender,
     };
-    console.log("payload", payload);
     await InfluencerVerify(payload, navigation, showAlert);
     setLoading(false);
   };
@@ -218,7 +218,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             setShowPassword={setShowPassword}
           />
           <FormField label="Username" value={username} setValue={setUsername} />
-          <View style={styles.depth1Frame2}>
+          <View style={[styles.depth1Frame2, { zIndex: 15 }]}>
             <View style={[styles.depth2Frame02, styles.frameLayout]}>
               <View style={styles.frameLayout}>
                 <View style={styles.depth4Frame02}>
@@ -309,9 +309,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-          <View style={styles.depth1Frame2}>
-            <View style={[styles.depth2Frame02, styles.frameLayout]}>
-              <View style={styles.frameLayout}>
+          <View style={[styles.depth1Frame2,{height:"auto"}]}>
+            <View style={[styles.depth2Frame02, styles.frameLayout,{height:"auto"}]}>
+              <View style={[styles.frameLayout,{height:"auto"}]}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>
                     Influencer Type
@@ -320,12 +320,20 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                 </View>
                 <View>
                   <View>
-                    <MultipleSelectList
-                      setSelected={(val) => setSelected(val)}
-                      data={data}
-                      save="value"
-                      selectedval={selected}
-                      setSelectedVal={setSelected}
+                    <MultiDropDown
+                      name={selected?.join(", ")}
+                      items={data}
+                      placeholder={"Select option"}
+                      icon={"none"}
+                      dropDownOptionStyle={{
+                        width: "100%",
+                        paddingVertical: 16,
+                      }}
+                      dropDownContainerStyle={{ width: "100%" }}
+                      dropDownItemsStyle={{ width: "100%", top: "100%" }}
+                      titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
+                      selectedValue={selected}
+                      setSelectedValues={setSelected}
                     />
                   </View>
                 </View>
@@ -492,7 +500,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.madantoryText}>*</Text>
             </View>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Text style={styles.textInput}>{location||"Search for location"}</Text>
+              <Text style={styles.textInput}>{location || "Search for location"}</Text>
               <PlaceSearchBar
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}

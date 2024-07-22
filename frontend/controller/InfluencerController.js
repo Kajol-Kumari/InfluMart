@@ -15,7 +15,7 @@ const GetInfluencerProfile = async (influencerId, setProfile, showAlert) => {
     );
     const data = await response.data?.influencer
     if (response.status === 200) {
-      let newData = {...data, profileUrl: data.profileUrl.includes("uploads")
+      let newData = {...data, profileUrl: data.isSelectedImage? data.profileUrl :data.profileUrl.includes("uploads")
           ? `${API_ENDPOINT}/${data.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,category: (() => {
             try {
@@ -46,7 +46,7 @@ const GetAllInfluencerProfile = async (setProfile) => {
     if (response.status === 200) {
       const newData = data.map((influencer) => ({
         ...influencer,
-        profileUrl: influencer.profileUrl && influencer.profileUrl.includes("uploads")
+        profileUrl: influencer.isSelectedImage? influencer?.profileUrl : influencer.profileUrl && influencer.profileUrl.includes("uploads")
           ? `${API_ENDPOINT}/${influencer.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,
         category: (() => {

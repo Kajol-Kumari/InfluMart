@@ -31,49 +31,49 @@ const Homepage = ({ route, navigation }) => {
       {
         title: "Find Influencers",
         desc: "Filter and sort based on campaign needs",
-        image:require("../assets/home-page-cover.png")
+        image: require("../assets/home-page-cover.png")
       },
       {
         title: "Analyze Influencers",
         desc: "Make data-driven decisions",
-        image:require("../assets/feature2.png")
+        image: require("../assets/feature2.png")
       },
       {
         title: "Influencer Database",
         desc: "Curate lists and manage relationships",
-        image:require("../assets/feature3.jpg")
+        image: require("../assets/feature3.jpg")
       },
       {
         title: "Recruit Influencers",
         desc: "Find influencers interested in your brand",
-        image:require("../assets/feature4.jpg")
+        image: require("../assets/feature4.jpg")
       },
       {
         title: "Influencer Outreach",
         desc: "Data-driven communications",
-        image:require("../assets/feature5.jpg")
+        image: require("../assets/feature5.jpg")
       },
       {
         title: "Manage Campaigns",
         desc: "Complete oversight from start to finish",
-        image:require("../assets/feature6.jpg")
+        image: require("../assets/feature6.jpg")
       }
     ],
     ourPlatform: [
       {
         title: "Influencer Discover",
         desc: "Find the influencers that work for you",
-        image:require("../assets/feature7.jpg")
+        image: require("../assets/feature7.jpg")
       },
       {
         title: "Influencer Relationship Management",
         desc: "Your processes in one central hub",
-        image:require("../assets/feature8.jpg")
+        image: require("../assets/feature8.jpg")
       },
       {
         title: "Campaign Manager",
         desc: "We help your team do more",
-        image:require("../assets/feature9.jpg")
+        image: require("../assets/feature9.jpg")
       }
     ]
   }
@@ -124,46 +124,7 @@ const Homepage = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-          <View style={styles.depth1Frame4}>
-            <View style={styles.depth2Frame03}>
-              <View style={styles.depth3FrameLayout}>
-                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('BrandRegistrationForm')}>
-                  <View style={[styles.depth4Frame01, styles.depth4FrameLayout]}>
-                    <View style={[styles.depth5Frame0, styles.frameBg1]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.brandRegistration
-                          ]}
-                        >
-                          Brand Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.depth3Frame1, styles.depth3FrameLayout]}>
-                <TouchableOpacity style={{ width: "100%" }} onPress={() => navigation.navigate('InfluencerRegistrationForm')}>
-                  <View style={[styles.depth4Frame02, styles.frameBg]}>
-                    <View style={[styles.depth5Frame01, styles.frameBg]}>
-                      <View style={styles.depth2Frame01}>
-                        <Text
-                          style={[
-                            styles.influencerRegistration,
-                            styles.registrationTypo,
-                          ]}
-                        >
-                          Influencer Registration
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <View style={styles.depth1Frame7}>
+          <View style={[styles.depth1Frame7, { marginTop: 32 }]}>
             <Text style={[styles.subtitle]}>
               Features
             </Text>
@@ -244,10 +205,10 @@ const Feature = ({ feature }) => {
   )
 }
 
-const AccountProfile=({account})=>{
-  return(
+const AccountProfile = ({ account }) => {
+  return (
     <Pressable style={styles.accountProfileContainer}>
-      <ImageWithFallback imageStyle={styles.accountProfile} image={account?.profileUrl}/>
+      <ImageWithFallback imageStyle={styles.accountProfile} image={account?.profileUrl} />
       <Text style={styles.featureName}>@{account?.name}</Text>
       <Text style={styles.whoweservetitle}>{account?.accountType}</Text>
     </Pressable>
@@ -390,12 +351,12 @@ const styles = StyleSheet.create({
     height: "auto",
     alignItems: "center",
     width: "100%",
-    marginTop:40,
-    paddingBottom:30
+    marginTop: 40,
+    paddingBottom: 30
   },
   depth1Frame4: {
     height: 132,
-    paddingVertical:30,
+    paddingVertical: 30,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -509,29 +470,29 @@ const styles = StyleSheet.create({
     lineHeight: 24
   },
   whoweservebox: {
-    backgroundColor:Color.colorWhitesmoke_500,
-    padding:Padding.p_xl,
-    borderRadius:Border.br_base,
-    width:320,
-    gap:14,
-    paddingVertical:40,
-    marginEnd:40
+    backgroundColor: Color.colorWhitesmoke_500,
+    padding: Padding.p_xl,
+    borderRadius: Border.br_base,
+    width: 320,
+    gap: 14,
+    paddingVertical: 40,
+    marginEnd: 40
   },
-  learnmoretext:{
+  learnmoretext: {
     fontFamily: FontFamily.manropeRegular,
     fontSize: FontSize.size_base,
     fontWeight: "600",
   },
-  accountProfileContainer:{
-    width:200,
-    height:"auto",
-    marginHorizontal:Padding.p_base,
-    gap:6
+  accountProfileContainer: {
+    width: 200,
+    height: "auto",
+    marginHorizontal: Padding.p_base,
+    gap: 6
   },
-  accountProfile:{
-    width:200,
-    height:200,
-    borderRadius:Border.br_base
+  accountProfile: {
+    width: 200,
+    height: 200,
+    borderRadius: Border.br_base
   }
 });
 
