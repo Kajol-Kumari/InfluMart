@@ -42,6 +42,7 @@ const CollabForm = ({ navigation }) => {
   const [endDate, setEndDate] = React.useState(new Date());
   const [showStartPicker, setShowStartPicker] = React.useState(false);
   const [showEndPicker, setShowEndPicker] = React.useState(false);
+  const[campaignTypeDropDown,setCampaignTypeDropdown]=React.useState(false)
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -149,6 +150,8 @@ const CollabForm = ({ navigation }) => {
           titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
           selectedValue={selected}
           setSelectedValues={setSelected}
+          close={campaignTypeDropDown}
+          setClose={setCampaignTypeDropdown}
         />
 
       </View>
@@ -283,6 +286,7 @@ const CollabForm = ({ navigation }) => {
           onChangeText={(text) =>
             handleInputChange("productReviewInstructions", text)
           }
+          onFocus={()=>{setCampaignTypeDropdown(false)}}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -293,6 +297,7 @@ const CollabForm = ({ navigation }) => {
           placeholderTextColor="#4F7096"
           multiline={true}
           onChangeText={(text) => handleInputChange("campaignSteps", text)}
+          onFocus={()=>{setCampaignTypeDropdown(false)}}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -302,6 +307,7 @@ const CollabForm = ({ navigation }) => {
           placeholder="Brand Name"
           placeholderTextColor="#4F7096"
           onChangeText={(text) => handleInputChange("brandName", text)}
+          onFocus={()=>{setCampaignTypeDropdown(false)}}
         />
       </View>
       <TouchableOpacity onPress={() => handleImagePick("library")}>
@@ -328,6 +334,7 @@ const CollabForm = ({ navigation }) => {
           onChangeText={(text) =>
             handleInputChange("numberOfInfluencers", text)
           }
+          onFocus={()=>{setCampaignTypeDropdown(false)}}
         />
       </View>
       <View style={styles.inputGroup}>
@@ -364,6 +371,7 @@ const CollabForm = ({ navigation }) => {
           placeholderTextColor="#4F7096"
           multiline={true}
           onChangeText={(text) => handleInputChange("brandDescription", text)}
+          onFocus={()=>{setCampaignTypeDropdown(false)}}
         />
       </View>
       <TouchableOpacity onPress={handleNextPress}>

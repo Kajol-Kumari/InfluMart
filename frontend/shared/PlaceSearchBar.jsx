@@ -1,7 +1,9 @@
 import { TextInput, FlatList, TouchableOpacity, Text, View, Modal, Button, StyleSheet, SafeAreaView } from "react-native";
-import { GOOGLE_API_KEY } from "@env";
+import { GOOGLE_API_KEY, CLIENT_URL } from "@env";
 import React, { useState, useCallback } from "react";
 import { debounce } from "lodash";
+import { Image } from "expo-image";
+import { Border, Color, Padding } from '../GlobalStyles'
 
 const GooglePlacesInput = ({ setData, setModalVisible }) => {
   const [query, setQuery] = useState("");
@@ -42,6 +44,9 @@ const GooglePlacesInput = ({ setData, setModalVisible }) => {
           onChangeText={handleInputChange}
           placeholder="Search"
         />
+        <TouchableOpacity style={styles.closeBtn} onPress={()=>{setModalVisible(false)}}>
+          <Image source={require('../assets/depth-4-frame-016.png')} style={styles.closeIcon} />
+        </TouchableOpacity>
       </View>
       <FlatList
         data={predictions}
@@ -65,21 +70,15 @@ const PlaceSearchBar = ({
   handlePlaceSelected,
 }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
+    <SafeAreaView style={[styles.container,{display:modalVisible?"flex":"none"}]}>
+      <View style={styles.popup}>
         <View style={styles.modalContainer}>
-          <Button title="Close" onPress={() => setModalVisible(false)} />
           <GooglePlacesInput
             setData={handlePlaceSelected}
             setModalVisible={setModalVisible}
           />
         </View>
-      </Modal>
+      </View>
     </SafeAreaView>
   );
 };
@@ -89,23 +88,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    width: "100%"
   },
   item: {
     padding: 10,
   },
+  popup: {
+    width: "100%",
+    height: 350,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderTopWidth: 3,
+    borderLeftWidth: 3,
+    borderRightWidth: 3,
+    borderColor: "#ccc"
+  },
   modalContainer: {
+    width: "100%",
     flex: 1,
-    marginTop: 50,
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
+    height: "auto"
   },
   searchContainer: {
-    flex: 1,
     width: "100%",
-    minWidth: 300,
-    paddingTop: 10,
-    margin: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 100,
+    paddingHorizontal: Padding.p_base
   },
   textInput: {
     height: 50,
@@ -113,8 +128,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#ddd",
     fontSize: 18,
-    width: "100%",
-    minWidth: 300,
+    width: "80%",
   },
   listView: {
     backgroundColor: "#fff",
@@ -126,6 +140,19 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: "row",
   },
+  closeBtn: {
+    backgroundColor: Color.colorRoyalblue,
+    width: 40,
+    height: 40,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: Border.br_5xs
+  },
+  closeIcon: {
+    width: 24, height: 24,
+    transform: [{ rotate: "45deg" }]
+  }
 });
 
 export default PlaceSearchBar;
