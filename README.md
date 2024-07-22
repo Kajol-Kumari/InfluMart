@@ -1,5 +1,8 @@
 ## Tech Stack
 
+PS: This repo doesnot belong to KAJOL KUMARI...SHE JUST USED MINE REPO. #GSSOC Take some action 
+
+
 - ReactNative
 - NodeJS
 - ExpressJS
