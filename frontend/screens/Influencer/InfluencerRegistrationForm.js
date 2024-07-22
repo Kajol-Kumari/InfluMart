@@ -125,16 +125,16 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   };
   useEffect(() => {
     if (
-      //name &&
-      //mobileNumber &&
+      name &&
+      mobileNumber &&
       email &&
       password &&
-      username //&&
-      //location &&
-      //agreedToTerms &&
-      //social &&
-      //follower &&
-      //price
+      username &&
+      //location &&  // In production, location is mandatory. But for testing, it is optional. in production, uncomment this line
+      agreedToTerms &&
+      social &&
+      follower &&
+      price
     ) {
       setIsFormValid(true);
     } else {

@@ -19,7 +19,7 @@ import { useAlert } from "../../util/AlertContext";
 import Loader from "../../shared/Loader";
 import ImageWithFallback from "../../util/ImageWithFallback";
 
-const SenderMessage = ({ name, profileUrl, content, timeAgo }) => {
+const SenderMessage = ({ name, profileUrl, content, timeAgo, isSelectedImage }) => {
   return (
     <View style={styles.senderContainer}>
       <View style={styles.senderMessageContainer}>
@@ -31,12 +31,14 @@ const SenderMessage = ({ name, profileUrl, content, timeAgo }) => {
         <ImageWithFallback
           imageStyle={styles.profileImage}
           image={profileUrl}
+          isSelectedImage={isSelectedImage}
         />
       ) : (
         profileUrl && (
           <ImageWithFallback
             imageStyle={styles.profileImage}
             image={isNaN(profileUrl)==false?`${profileUrl}`:profileUrl}
+            isSelectedImage={isSelectedImage}
           />
         )
       )}
@@ -44,19 +46,21 @@ const SenderMessage = ({ name, profileUrl, content, timeAgo }) => {
   );
 };
 
-const ReceiverMessage = ({ name, profileUrl, content, timeAgo }) => {
+const ReceiverMessage = ({ name, profileUrl, content, timeAgo, isSelectedImage }) => {
   return (
     <View style={styles.receiverContainer}>
       {profileUrl == null || profileUrl == undefined ? (
         <ImageWithFallback
           imageStyle={styles.profileImage}
           image={profileUrl}
+          isSelectedImage={isSelectedImage}
         />
       ) : (
         profileUrl && (
           <ImageWithFallback
             imageStyle={styles.profileImage}
             image={isNaN(profileUrl)==false?`${profileUrl}`:profileUrl}
+            isSelectedImage={isSelectedImage}
           />
         )
       )}
@@ -70,7 +74,7 @@ const ReceiverMessage = ({ name, profileUrl, content, timeAgo }) => {
 };
 
 const ChatInterface = ({ route, navigation }) => {
-  const { name, image, conversationId, userId, userType, receiverId } =
+  const { name, image, conversationId, userId, userType, receiverId, isSelectedImage } =
     route.params;
   const [messages, setMessages] = useState([]);
   const { socket } = useSocketContext();
@@ -124,6 +128,8 @@ const ChatInterface = ({ route, navigation }) => {
                   name={message?.sender?.name}
                   content={message?.content}
                   timeAgo={message?.timeAgo}
+                  profileUrl={message?.sender?.profileUrl}
+                  isSelectedImage={message?.sender?.isSelectedImage}
                 />
               ) : (
                 <ReceiverMessage
@@ -131,6 +137,8 @@ const ChatInterface = ({ route, navigation }) => {
                   name={message?.sender?.name}
                   content={message?.content}
                   timeAgo={message?.timeAgo}
+                  profileUrl={message?.sender?.profileUrl}
+                  isSelectedImage={message?.sender?.isSelectedImage}
                 />
               )
             )}
@@ -138,7 +146,7 @@ const ChatInterface = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <View style={styles.bottomBar}>
-        <MessageInput setNewMessage={handleSend} profileUrl={isNaN(image)==false?`${image}`:image} />
+        <MessageInput setNewMessage={handleSend} profileUrl={isNaN(image)==false?`${image}`:image} isSelectedImage={isSelectedImage} />
       </View>
     </View>
   );

@@ -208,11 +208,12 @@ const UserProfile = ({ navigation }) => {
                   requests?.map((item, index) => (
                     <ProductCard
                       key={index}
-                      imageSource={item.imageSource}
-                      postTitle={item.postTitle}
-                      postDate={item.postDate}
-                      productName={item.productName}
-                      id={item.requestId}
+                      imageSource={item?.imageSource}
+                      postTitle={item?.postTitle}
+                      postDate={item?.postDate}
+                      isSelectedImage={item?.isSelectedImage}
+                      productName={item?.productName}
+                      id={item?.requestId}
                       cardWidth="100%"
                       postTitleWidth="auto"
                       postDateWidth="auto"

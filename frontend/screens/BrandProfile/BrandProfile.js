@@ -104,11 +104,13 @@ const BrandProfile = ({ route, navigation }) => {
                   <ImageWithFallback
                     imageStyle={styles.profileImage}
                     image={brand?.profileUrl}
+                    isSelectedImage={brand?.isSelectedImage}
                   />
                 ):brand?.profileUrl&&(
                   <ImageWithFallback
                     imageStyle={styles.profileImage}
                     image={brand?.profileUrl}
+                    isSelectedImage={brand?.isSelectedImage}
                   />
                 )}
               </View>
@@ -150,11 +152,12 @@ const BrandProfile = ({ route, navigation }) => {
                 requests?.map((item, index) => (
                   <BrandProductCard
                     key={index}
-                    imageSource={item.imageSource}
-                    postTitle={item.postTitle}
-                    postDate={item.postDate}
-                    productName={item.productName}
-                    id={item.requestId}
+                    imageSource={item?.imageSource}
+                    isSelectedImage={item?.isSelectedImage}
+                    postTitle={item?.postTitle}
+                    postDate={item?.postDate}
+                    productName={item?.productName}
+                    id={item?.requestId}
                     cardWidth="100%"
                     postTitleWidth="auto"
                     postDateWidth="auto"

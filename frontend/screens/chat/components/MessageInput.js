@@ -4,7 +4,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../../../GlobalStyles";
 import ImageWithFallback from "../../../util/ImageWithFallback";
 
-const MessageInput = ({setNewMessage,profileUrl}) => {
+const MessageInput = ({setNewMessage,profileUrl,isSelectedImage}) => {
   const [message, setMessage] = useState("");
   const handleSend = () => {
     setNewMessage(message);
@@ -16,7 +16,8 @@ const MessageInput = ({setNewMessage,profileUrl}) => {
       <ImageWithFallback
         imageStyle={styles.profileImage}
         contentFit="cover"
-        image={profileUrl||require("../../../assets/depth-2-frame-0.png")}
+        image={profileUrl}
+        isSelectedImage={isSelectedImage}
       />
       <View style={[styles.inputWrapper, styles.flexRow]}>
         <View style={styles.inputContainer}>

@@ -28,7 +28,7 @@ const allRequests = async (req, res) => {
     populate: {
       path: "sender",
       model: "Brand",
-      options: { select: "name category profileUrl" }
+      options: { select: "name category profileUrl isSelectedImage" }
     },
   });
   res.status(200).json({ user: user?.notifications });
@@ -138,7 +138,7 @@ const getMessages = async (req, res) => {
           {
             path: 'sender',
             model: 'Brand',
-            select: 'brandName profileUrl',
+            select: 'brandName profileUrl isSelectedImage',
           },
         ],
       });
@@ -154,7 +154,7 @@ const getMessages = async (req, res) => {
           {
             path: 'receiver',
             model: 'Brand',
-            select: 'brandName profileUrl',
+            select: 'brandName profileUrl isSelectedImage',
           },
         ],
       });
@@ -190,7 +190,7 @@ const getAllConversations = async (req, res) => {
             path: 'participants',
             match: { _id: { $ne: userId } }, // Exclude the current user
             model: 'Brand',
-            select: 'brandName category profileUrl'
+            select: 'brandName category profileUrl isSelectedImage'
           },
           {
             path: 'messages',

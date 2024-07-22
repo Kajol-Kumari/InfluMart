@@ -40,15 +40,16 @@ const getAllRequests = async (userId, setRequests, showAlert) => {
     if (response.status === 200) {
         const data = response.data.user;
         const formatData = data.map((item) => ({
-            imageSource: item?.sender?.profileUrl
+            imageSource: item?.sender?.isSelectedImage? item?.sender?.profileUrl : item?.sender?.profileUrl?.includes("uploads")
               ? {
                   uri: `${API_ENDPOINT}/${item?.sender?.profileUrl?.replace(
                     /\\/g,
                     "/"
                   ).replace("uploads/", "")}`,
                 }
-              : require("../assets/blank-profile.png"),
+              : null,
             postTitle: item?.sender?.name,
+            isSelectedImage: item?.sender?.isSelectedImage,
             postDate: new Date(item?.requestedAt)?.toLocaleDateString(),
             productName: JSON.parse(item?.sender?.category)?.slice(0, 2)?.join(", "),
             requestId: item?._id,
@@ -175,7 +176,8 @@ const getMessages = async (conversationId,userId,userType, setMessages, showAler
         createdAt: message.createdAt,
         sender:{
           name: userId===message.sender._id? "You": message.sender?.brandName || message.sender?.influencerName,
-          profileUrl: message.sender?.profileUrl ? `${API_ENDPOINT}/${message.sender?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : null
+          isSelectedImage: message.sender?.isSelectedImage,
+          profileUrl: message?.sender?.isSelectedImage? message?.sender?.profileUrl : message.sender?.profileUrl ? `${API_ENDPOINT}/${message.sender?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : null
         },
         timeAgo: timeStampFormatter(message.createdAt)
       }));
@@ -208,8 +210,9 @@ const getAllConversations = async (userId, userType, setConversations, showAlert
         const lastMessage = conversation.messages.length > 0 ? conversation.messages[0] : null;
         return {
           name: userType === 'influencer' ? participant?.brandName : participant?.influencerName,
-          profileUrl: participant?.profileUrl ? `${API_ENDPOINT}/${participant?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : require("../assets/blank-profile.png"),
+          profileUrl: participant.isSelectedImage? participant.profileUrl : participant?.profileUrl.includes("uploads") ? `${API_ENDPOINT}/${participant?.profileUrl?.replace(/\\/g, "/")?.replace("uploads/", "")}` : null,
           lastMessage: lastMessage ? lastMessage.content : '',
+          isSelectedImage: participant.isSelectedImage,
           lastUpdate: lastMessage ? new Date(lastMessage?.createdAt).toLocaleString() : new Date(conversation?.updatedAt).toLocaleString(),
           conversationId: conversation?._id,
           receiverId: participant?._id

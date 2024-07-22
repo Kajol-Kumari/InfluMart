@@ -45,12 +45,14 @@ const CampaignDetail = ({ route, navigation }) => {
         <ImageWithFallback
           imageStyle={styles.mainImage}
           image={data?.imageSource}
+          isSelectedImage={data?.isSelectedImage}
         />
       ) : (
         data?.imageSource && (
           <ImageWithFallback
             imageStyle={styles.mainImage}
             image={data?.imageSource}
+            isSelectedImage={data?.isSelectedImage}
           />
         )
       )}
