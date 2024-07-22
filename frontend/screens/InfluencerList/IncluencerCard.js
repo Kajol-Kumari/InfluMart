@@ -22,7 +22,8 @@ const InfluencerCard = ({
   beauty,
   influencerId,
   userName,
-  statistics
+  statistics,
+  isSelectedImage
 }) => {
   const { showAlert } = useAlert()
   const navigation = useNavigation()
@@ -39,9 +40,6 @@ const InfluencerCard = ({
     }
     getData()
   })
-  React.useEffect(() => {
-    console.log(statistics)
-  }, [])
   const handleClick = async () => {
     if (navigate) {
       navigation.navigate("Analytics", { influencerId })
@@ -54,7 +52,7 @@ const InfluencerCard = ({
       <View style={styles.cardContent}>
         <TouchableOpacity onPress={() => handleClick()}>
           <View style={styles.imageContainer}>
-            <ImageWithFallback image={depth5Frame0} imageStyle={styles.image} />
+            <ImageWithFallback image={depth5Frame0} imageStyle={styles.image} isSelectedImage={isSelectedImage} />
             <View style={styles.overlayContainer}>
               <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
                 <Text style={styles.insightText}>INSIGHT</Text>

@@ -50,9 +50,9 @@ const UserProfilePhoto = ({ route, navigation }) => {
   useEffect(() => {
     if (selectedAvatarIndex !== "") {
       readImage(`../../../assets/avatars/avatar${selectedAvatarIndex + 1}.png`, function (base64) {
-        setPhoto({ name: `avatar${selectedAvatarIndex}`, uri: base64, type: "image/png" })
+        setPhoto({ name: `avatar${selectedAvatarIndex}`, uri: base64, type: "image/png", isSelected: true, file: `avatar${selectedAvatarIndex + 1}` });
         setSelectedImage(base64)
-        console.log(base64)
+        console.log(selectedAvatarIndex,`avatar${selectedAvatarIndex + 1}`)
       });
     }
   }, [selectedAvatarIndex])
@@ -129,8 +129,6 @@ const UserProfilePhoto = ({ route, navigation }) => {
               social,
               price,
               follower,
-              photo,
-              isCompleted
             })
           }
         >
