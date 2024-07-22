@@ -14,6 +14,7 @@ import { BrandSignUp } from "../controller/signupController";
 import { BrandAccountSignupDataPreviewStyles } from "./BrandAccountSignupDataPreview.scss";
 import { handleImageSelection } from "../util/imagePickerUtil";
 import Loader from "../shared/Loader";
+import avatarImages from "../constants/Avatars";
 
 const BrandAccountSignupDataPreview = ({ route, navigation }) => {
   const payload = route.params?.payload;
@@ -157,36 +158,6 @@ const BrandAccountSignupDataPreview = ({ route, navigation }) => {
     }
   }, [selectedAvatarIndex]);
 
-  const avatarImages = [
-    { imageUrl: require("../assets/avatars/avatar1.png") },
-    { imageUrl: require("../assets/avatars/avatar2.png") },
-    { imageUrl: require("../assets/avatars/avatar3.png") },
-    { imageUrl: require("../assets/avatars/avatar4.png") },
-    { imageUrl: require("../assets/avatars/avatar5.png") },
-    { imageUrl: require("../assets/avatars/avatar6.png") },
-    { imageUrl: require("../assets/avatars/avatar7.png") },
-    { imageUrl: require("../assets/avatars/avatar8.png") },
-    { imageUrl: require("../assets/avatars/avatar9.png") },
-    { imageUrl: require("../assets/avatars/avatar10.png") },
-    { imageUrl: require("../assets/avatars/avatar11.png") },
-    { imageUrl: require("../assets/avatars/avatar12.png") },
-    { imageUrl: require("../assets/avatars/avatar13.png") },
-    { imageUrl: require("../assets/avatars/avatar14.png") },
-    { imageUrl: require("../assets/avatars/avatar15.png") },
-    { imageUrl: require("../assets/avatars/avatar16.png") },
-    { imageUrl: require("../assets/avatars/avatar17.png") },
-    { imageUrl: require("../assets/avatars/avatar18.png") },
-    { imageUrl: require("../assets/avatars/avatar19.png") },
-    { imageUrl: require("../assets/avatars/avatar20.png") },
-    { imageUrl: require("../assets/avatars/avatar21.png") },
-    { imageUrl: require("../assets/avatars/avatar22.png") },
-    { imageUrl: require("../assets/avatars/avatar23.png") },
-    { imageUrl: require("../assets/avatars/avatar24.png") },
-    { imageUrl: require("../assets/avatars/avatar25.png") },
-    { imageUrl: require("../assets/avatars/avatar26.png") },
-    { imageUrl: require("../assets/avatars/avatar27.png") },
-    { imageUrl: require("../assets/avatars/avatar28.png") },
-  ];
   return (
     <ScrollView style={styles.container}>
       {loading && <Loader loading={loading} />}

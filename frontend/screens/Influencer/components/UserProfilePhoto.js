@@ -11,6 +11,7 @@ import { Image } from "expo-image";
 import { UserProfilePhotoStyles } from "./UserProfilePhoto.scss";
 import { useAlert } from "../../../util/AlertContext";
 import { handleImageSelection } from "../../../util/imagePickerUtil";
+import avatarImages from "../../../constants/Avatars";
 
 const UserProfilePhoto = ({ route, navigation }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -79,37 +80,6 @@ const UserProfilePhoto = ({ route, navigation }) => {
     }
     setSelectedAvatarIndex("")
   };
-
-  const avatarImages = [
-    { imageUrl: require('../../../assets/avatars/avatar1.png') },
-    { imageUrl: require('../../../assets/avatars/avatar2.png') },
-    { imageUrl: require('../../../assets/avatars/avatar3.png') },
-    { imageUrl: require('../../../assets/avatars/avatar4.png') },
-    { imageUrl: require('../../../assets/avatars/avatar5.png') },
-    { imageUrl: require('../../../assets/avatars/avatar6.png') },
-    { imageUrl: require('../../../assets/avatars/avatar7.png') },
-    { imageUrl: require('../../../assets/avatars/avatar8.png') },
-    { imageUrl: require('../../../assets/avatars/avatar9.png') },
-    { imageUrl: require('../../../assets/avatars/avatar10.png') },
-    { imageUrl: require('../../../assets/avatars/avatar11.png') },
-    { imageUrl: require('../../../assets/avatars/avatar12.png') },
-    { imageUrl: require('../../../assets/avatars/avatar13.png') },
-    { imageUrl: require('../../../assets/avatars/avatar14.png') },
-    { imageUrl: require('../../../assets/avatars/avatar15.png') },
-    { imageUrl: require('../../../assets/avatars/avatar16.png') },
-    { imageUrl: require('../../../assets/avatars/avatar17.png') },
-    { imageUrl: require('../../../assets/avatars/avatar18.png') },
-    { imageUrl: require('../../../assets/avatars/avatar19.png') },
-    { imageUrl: require('../../../assets/avatars/avatar20.png') },
-    { imageUrl: require('../../../assets/avatars/avatar21.png') },
-    { imageUrl: require('../../../assets/avatars/avatar22.png') },
-    { imageUrl: require('../../../assets/avatars/avatar23.png') },
-    { imageUrl: require('../../../assets/avatars/avatar24.png') },
-    { imageUrl: require('../../../assets/avatars/avatar25.png') },
-    { imageUrl: require('../../../assets/avatars/avatar26.png') },
-    { imageUrl: require('../../../assets/avatars/avatar27.png') },
-    { imageUrl: require('../../../assets/avatars/avatar28.png') },
-  ]
 
   return (
     <ScrollView style={styles.userProfilePhoto}>
