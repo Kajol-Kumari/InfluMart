@@ -13,9 +13,10 @@ function MultiDropDown({
     dropDownContainerStyle,
     placeholder,
     selectedValues,
-    setSelectedValues
+    setSelectedValues,
+    close,
+    setClose
 }) {
-    const [showElements, setShowElement] = useState(false);
     const [currentValues, setCurrentValues] = useState(selectedValues || []);
 
     useEffect(()=>{
@@ -23,7 +24,7 @@ function MultiDropDown({
     },[currentValues])
 
     function handleOpen() {
-        setShowElement(!showElements);
+        setClose(!close)
     }
 
     function handleSelect(value) {
@@ -48,14 +49,14 @@ function MultiDropDown({
                     <Image
                         style={styles.arrowAndCloseIcon}
                         source={
-                            showElements
+                            close
                                 ? require("../assets/multiselect/close.png")
                                 : require("../assets/depth-3-frame-2.png")
                         }
                     />
                 </Pressable>
             </View>
-            <ScrollView style={[styles.dropDownItemsContainer, dropDownItemsStyle, { display: `${showElements ? "flex" : "none"}` }]}>
+            <ScrollView style={[styles.dropDownItemsContainer, dropDownItemsStyle, { display: `${close ? "flex" : "none"}` }]}>
                 {items.length > 0 && items ? (
                     <View style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                         {items.map(({ key, value }) => {

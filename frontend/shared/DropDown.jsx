@@ -13,8 +13,9 @@ function DropDown({
   titleStyle,
   dropDownContainerStyle,
   placeholder,
+  showElements,
+  setShowElement
 }) {
-  const [showElements, setShowElement] = useState(false);
   const [currentValue, setCurrentValue] = useState(undefined);
   const [selectedKey, setSelectedKey] = useState("");
 

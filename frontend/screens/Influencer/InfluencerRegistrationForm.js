@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Pressable,
 } from "react-native";
 import InfluPrice from "../signup/components/InfluPrice";
 import HeadingDescToggle from "../signup/components/HeadingDescToggle";
@@ -30,6 +31,8 @@ const FormField = ({
   showPassword,
   setShowPassword,
   style,
+  setInfluTypeDropdown,
+  setGenderDropdown
 }) => (
   <View style={[styles.fieldContainer, style]}>
     <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
@@ -43,6 +46,10 @@ const FormField = ({
         onChangeText={setValue}
         placeholder={label}
         secureTextEntry={secureTextEntry && !showPassword}
+        onFocus={() => {
+          setInfluTypeDropdown(false)
+          setGenderDropdown(false)
+        }}
       />
       {secureTextEntry && (
         <TouchableOpacity
@@ -90,6 +97,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
   const [mobileNoVerified, setMobileNoVerified] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [influTypeDropdown, setInfluTypeDropdown] = useState(false)
+  const [genderDropdown, setGenderDropdown] = useState(false)
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -207,8 +216,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <View style={styles.headerNavigation} />
             </View>
           </TouchableOpacity>
-          <FormField label="Name" value={name} setValue={setName} />
-          <FormField label="Email" value={email} setValue={setEmail} />
+          <FormField label="Name" value={name} setValue={setName} setInfluTypeDropdown={setInfluTypeDropdown} setGenderDropdown={setGenderDropdown} />
+          <FormField label="Email" value={email} setValue={setEmail} setInfluTypeDropdown={setInfluTypeDropdown} setGenderDropdown={setGenderDropdown} />
           <FormField
             label="Password"
             value={password}
@@ -216,8 +225,10 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             secureTextEntry
             showPassword={showPassword}
             setShowPassword={setShowPassword}
+            setInfluTypeDropdown={setInfluTypeDropdown}
+            setGenderDropdown={setGenderDropdown}
           />
-          <FormField label="Username" value={username} setValue={setUsername} />
+          <FormField label="Username" value={username} setValue={setUsername} setInfluTypeDropdown={setInfluTypeDropdown} setGenderDropdown={setGenderDropdown} />
           <View style={[styles.depth1Frame2, { zIndex: 15 }]}>
             <View style={[styles.depth2Frame02, styles.frameLayout]}>
               <View style={styles.frameLayout}>
@@ -240,6 +251,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                       dropDownItemsStyle={{ width: "100%" }}
                       titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                       selectedValue={setGender}
+                      showElements={genderDropdown}
+                      setShowElement={setGenderDropdown}
                     />
                   </View>
                 </View>
@@ -291,6 +304,10 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                     onChangeText={setMobileNumber}
                     placeholder={"Mobile Number"}
                     keyboardType="phone-pad"
+                    onFocus={() => {
+                      setInfluTypeDropdown(false)
+                      setGenderDropdown(false)
+                    }}
                   />
                 </View>
                 {mobileNoVerified ? (
@@ -309,9 +326,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-          <View style={[styles.depth1Frame2,{height:"auto"}]}>
-            <View style={[styles.depth2Frame02, styles.frameLayout,{height:"auto"}]}>
-              <View style={[styles.frameLayout,{height:"auto"}]}>
+          <View style={[styles.depth1Frame2, { height: "auto" }]}>
+            <View style={[styles.depth2Frame02, styles.frameLayout, { height: "auto" }]}>
+              <View style={[styles.frameLayout, { height: "auto" }]}>
                 <View style={styles.depth4Frame02}>
                   <Text style={[styles.email, styles.emailTypo]}>
                     Influencer Type
@@ -334,6 +351,8 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                       titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                       selectedValue={selected}
                       setSelectedValues={setSelected}
+                      close={influTypeDropdown}
+                      setClose={setInfluTypeDropdown}
                     />
                   </View>
                 </View>
@@ -351,7 +370,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.desc}>Atleast one field is mandatory</Text>
             </View>
             <TouchableOpacity
-              onPress={() =>
+              onPress={() => {
+                setInfluTypeDropdown(false);
+                setGenderDropdown(false)
                 navigation.navigate("InfluencerSocialHandles", {
                   price,
                   follower,
@@ -360,6 +381,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   isCompleted,
                   redirect: "InfluencerRegistrationForm",
                 })
+              }
               }
             >
               <Image
@@ -378,7 +400,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.sectionHeaderText}>Add Profile Photo</Text>
             </View>
             <TouchableOpacity
-              onPress={() =>
+              onPress={() => {
+                setInfluTypeDropdown(false)
+                setGenderDropdown(false)
                 navigation.navigate("UserProfilePhoto", {
                   price,
                   follower,
@@ -387,6 +411,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   isCompleted,
                   redirect: "InfluencerRegistrationForm",
                 })
+              }
               }
             >
               <Image
@@ -410,7 +435,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() =>
+              onPress={() => {
+                setInfluTypeDropdown(false)
+                setGenderDropdown(false)
                 navigation.navigate("MaxFollowersNo", {
                   price,
                   social,
@@ -419,6 +446,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   isCompleted,
                   redirect: "InfluencerRegistrationForm",
                 })
+              }
               }
             >
               <Image
@@ -472,7 +500,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
               <Text style={styles.desc}>Atleast one field is mandatory</Text>
             </View>
             <TouchableOpacity
-              onPress={() =>
+              onPress={() => {
+                setGenderDropdown(false)
+                setInfluTypeDropdown(false)
                 navigation.navigate("PricePerPost", {
                   social,
                   follower,
@@ -481,6 +511,7 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
                   isCompleted,
                   redirect: "InfluencerRegistrationForm",
                 })
+              }
               }
             >
               <Image
@@ -501,11 +532,6 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             </View>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Text style={styles.textInput}>{location || "Search for location"}</Text>
-              <PlaceSearchBar
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                handlePlaceSelected={handlePlaceSelected}
-              />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -542,6 +568,9 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
           setCountryCode(item.dial_code);
           setOpenCountryCode(false);
         }}
+        onBackdropPress={() => {
+          setOpenCountryCode(false)
+        }}
         style={{
           modal: {
             height: 300,
@@ -549,6 +578,11 @@ const InfluencerRegistrationForm = ({ route, navigation }) => {
             maxWidth: "100%",
           },
         }}
+      />
+      <PlaceSearchBar
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        handlePlaceSelected={handlePlaceSelected}
       />
     </View>
   );

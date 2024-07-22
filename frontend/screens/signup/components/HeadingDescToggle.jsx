@@ -41,7 +41,6 @@ const HeadingDescToggle = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Padding.p_xs,
     paddingVertical: Padding.p_xs,
     flexDirection: "row",
     alignItems: "center",

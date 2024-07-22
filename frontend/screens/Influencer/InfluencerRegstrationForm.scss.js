@@ -111,7 +111,6 @@ export const InfluencerRegistrationFormStyles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: Padding.p_xs,
   },
   icon: {
     width: 28,
@@ -171,5 +170,5 @@ export const InfluencerRegistrationFormStyles = {
     marginTop: 5,
     fontFamily: FontFamily.plusJakartaSansRegular,
     color: Color.colorSlategray_100,
-  },
+  }
 };

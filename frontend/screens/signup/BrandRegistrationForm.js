@@ -28,6 +28,7 @@ const BrandRegistrationForm = ({ route, navigation }) => {
   const { showAlert } = useAlert();
   const payload = route.params?.payload;
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const[brandTypeDropdown,setBrandTypeDropdown]=useState(false)
   const data = [
     { key: "grocery", value: "Grocery" },
     { key: "electronics", value: "Electronics" },
@@ -235,6 +236,8 @@ const BrandRegistrationForm = ({ route, navigation }) => {
                       titleStyle={{ paddingStart: 12, color: "#4F7A94" }}
                       selectedValue={selected}
                       setSelectedValues={setSelected}
+                      close={brandTypeDropdown}
+                      setClose={setBrandTypeDropdown}
                     />
                   </View>
                 </View>
