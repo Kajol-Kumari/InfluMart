@@ -40,6 +40,7 @@ const brandSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  isSelectedImage: { type: Boolean, default: false },
   resetPasswordToken: {
     type: String,
     default: null,

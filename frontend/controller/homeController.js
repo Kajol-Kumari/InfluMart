@@ -13,7 +13,7 @@ const getTopAccounts = async (showAlert) => {
         let data = await response.data.brands;
         res = data?.slice(0, 5)?.map((brand) => {
             return {
-                profileUrl: brand.profileUrl.includes("uploads")
+                profileUrl: brand.isSelectedImage ? brand.profileUrl : brand.profileUrl.includes("uploads")
                     ? `${API_ENDPOINT}/${brand.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
                     : null,
                 name: brand.name,
@@ -24,7 +24,7 @@ const getTopAccounts = async (showAlert) => {
         data = await response.data?.influencers;
         res = [...res, ...data?.slice(0, 5)?.map((influencer) => {
             return {
-                profileUrl: influencer?.profileUrl.includes("uploads")
+                profileUrl: influencer?.isSelectedImage ? influencer?.profileUrl : influencer?.profileUrl.includes("uploads")
                     ? `${API_ENDPOINT}/${influencer?.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
                     : null,
                 name: influencer?.influencerName,

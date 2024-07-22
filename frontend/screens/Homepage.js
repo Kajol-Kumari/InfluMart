@@ -208,7 +208,7 @@ const Feature = ({ feature }) => {
 const AccountProfile = ({ account }) => {
   return (
     <Pressable style={styles.accountProfileContainer}>
-      <ImageWithFallback imageStyle={styles.accountProfile} image={account?.profileUrl} />
+      <ImageWithFallback imageStyle={styles.accountProfile} image={account?.profileUrl} isSelectedImage={account?.isSelectedImage} />
       <Text style={styles.featureName}>@{account?.name}</Text>
       <Text style={styles.whoweservetitle}>{account?.accountType}</Text>
     </Pressable>

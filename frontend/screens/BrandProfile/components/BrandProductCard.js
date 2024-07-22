@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../../../GlobalStyles";
+import ImageWithFallback from "../../../util/ImageWithFallback";
 
 
 const getStyleValue = (key, value) => {
@@ -21,6 +22,7 @@ const BrandProductCard = ({
   postDateWidth,
   productNameWidth,
   buttonWidth,
+  isSelectedImage
 }) => {
   const navigation = useNavigation();
 
@@ -48,7 +50,7 @@ const BrandProductCard = ({
   return (
     <View style={[styles.card, cardStyle]}>
       <View style={styles.cardContent}>
-        <Image style={styles.image} contentFit="cover" source={imageSource} />
+        <ImageWithFallback image={imageSource} isSelectedImage={isSelectedImage} imageStyle={styles.image} />
         <View>
           <View style={[styles.textContainer, postTitleStyle]}>
             <Text style={styles.postTitle}>{postTitle}</Text>

@@ -99,7 +99,7 @@ const BrandAssosciated = ({ active }) => {
                 return (
                   <TouchableOpacity key={index} onPress={() => { console.log(brand?.profileUrl) }}>
                     <View style={styles.depth2FrameLayout} >
-                      <ImageWithFallback imageStyle={styles.depth4Frame03} image={brand?.profileUrl} />
+                      <ImageWithFallback imageStyle={styles.depth4Frame03} image={brand?.profileUrl} isSelectedImage={brand?.isSelectedImage} />
                       <View style={styles.overlayContainer}>
                         <LinearGradient style={styles.overlay} colors={['transparent', '#000']}>
                           <Text style={styles.insightText}>INSIGHT</Text>

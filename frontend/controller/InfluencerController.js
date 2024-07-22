@@ -102,7 +102,7 @@ const FilterInfluencerProfile = async (filters,navigation) => {
     if (response.status === 200){
       const newData = data.map((influencer) => ({
         ...influencer,
-        profileUrl: influencer.profileUrl && influencer.profileUrl.includes("uploads")
+        profileUrl: influencer?.isSelectedImage ? influencer?.profileUrl : influencer?.profileUrl?.includes("uploads")
           ? `${API_ENDPOINT}/${influencer.profileUrl.replace(/\\/g, '/').replace('uploads/', '')}`
           : null,
         category: (() => {

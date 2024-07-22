@@ -9,6 +9,7 @@ import {
   FontFamily,
   Padding,
 } from "../../GlobalStyles";
+import ImageWithFallback from "../../util/ImageWithFallback";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -20,6 +21,7 @@ const ProductCard = ({
   postTitle,
   postDate,
   productName,
+  isSelectedImage,
   cardWidth,
   id,
   postTitleWidth,
@@ -55,7 +57,7 @@ const ProductCard = ({
       setViewWidth(evt.nativeEvent.layout.width)
     }}>
       <View style={styles.cardContent}>
-        <Image style={styles.image} contentFit="cover" source={imageSource} />
+        <ImageWithFallback image={imageSource} imageStyle={styles.image} isSelectedImage={isSelectedImage} />
         <View style={{width:viewWidth<=468?"60%":"100%"}}>
           <View style={[styles.textContainer, postTitleStyle]}>
             <Text style={styles.postTitle}>{postTitle}</Text>

@@ -42,27 +42,32 @@ const verifyOTP = async (otp, payload, navigation, showAlert) => {
 
 const BrandSignUp = async (payload, navigation, showAlert) => {
   const data = new FormData();
-  data.append("name", payload.name);
-  data.append("email", payload.email);
-  data.append("password", payload.password);
-  data.append("brandName", payload.brandName);
-  data.append("category", JSON.stringify(payload.category));
-  data.append("location", payload.location || "");
-  data.append("website", payload.website || "");
-  data.append("description", payload.description || "");
+  data.append("name", payload?.name);
+  data.append("email", payload?.email);
+  data.append("password", payload?.password);
+  data.append("brandName", payload?.brandName);
+  data.append("category", JSON.stringify(payload?.category));
+  data.append("location", payload?.location || "");
+  data.append("website", payload?.website || "");
+  data.append("description", payload?.description || "");
 
   if (payload.image && payload.image.uri) {
-    // For web, handle base64 string as a Blob
-    if (Platform.OS === "web") {
-      const blob = await (await fetch(payload.image.uri)).blob();
-      data.append("image", blob, payload.image.name);
+    if (payload?.image?.isSelected) {
+      data.append("profileUrl", payload?.image?.file);
+      data.append("isSelectedImage", true);
     } else {
-      // For mobile platforms
-      data.append("image", {
-        uri: payload.image.uri,
-        name: payload.image.name,
-        type: payload.image.type,
-      });
+      // For web, handle base64 string as a Blob
+      if (Platform.OS === "web") {
+        const blob = await (await fetch(payload.image.uri)).blob();
+        data.append("image", blob, payload.image.name);
+      } else {
+        // For mobile platforms
+        data.append("image", {
+          uri: payload.image.uri,
+          name: payload.image.name,
+          type: payload.image.type,
+        });
+      }
     }
   }
 
