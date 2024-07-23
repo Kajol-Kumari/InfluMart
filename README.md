@@ -1,6 +1,5 @@
 ## Tech Stack
-
-PS: This repo doesnot belong to KAJOL KUMARI...SHE JUST USED MY IDEA AND USED HER NAME . #GSSOC Take some action 
+Removing all all th codes as this project will be discontinued and this repo will be retried once gssoc ends
 
 
 
